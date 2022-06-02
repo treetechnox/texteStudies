@@ -1,0 +1,54 @@
+<br>
+<div [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }"  class="">
+  <form #myform="ngForm">
+    <div class="card text-center w-50">
+      <div class="card-header"
+           style=
+             "font-weight: 700;
+             font-size: 1.2rem;
+              color:white;
+             background-color: #428bca">{{'LOGIN.CARD-HEADER' | translate}}</div>
+      <div class="card-body">
+        <div class="row-cols-1">
+          <div class="col">
+            <mat-form-field >
+              <mat-label>{{'LOGIN.USERNAME.LABEL' | translate}}</mat-label>
+              <input matInput placeholder="{{'LOGIN.USERNAME.PLACEHOLDER' | translate}}" required="required"
+                     [(ngModel)]="user.username"  name="user"><!--[(ngModel)]="user.username" -->
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field>
+              <mat-label>{{'LOGIN.PASSWORD.LABEL' | translate}}</mat-label>
+              <input matInput placeholder="{{'LOGIN.PASSWORD.PLACEHOLDER' | translate}}" required="required"
+                     [(ngModel)]="user.password"  type="password" name="password"><!--[(ngModel)]="user.passeword" -->
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row" >
+          <div class="col" style="align-self: center">
+            <div class="form-group">
+              <button type="submit" mat-raised-button
+                      matTooltip="{{'LOGIN.CONNECT' | translate}}"
+                      class="btn btn-success"
+                      (click)="onLogin()" [disabled]="!myform.form.valid">
+                <i class="fa fa-user-o fa-2x" aria-hidden="true"></i>
+              </button>
+              <div *ngIf="isLoading"
+                   id="pause" class="d-flex align-items-center justify-content-center">
+                <div id="spinner"></div>
+              </div>
+            </div>
+            <div >
+              <mat-error *ngIf="!message_erreur">
+                {{'LOGIN.MAT-ERROR' | translate}}
+              </mat-error>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+  </form>
+</div>

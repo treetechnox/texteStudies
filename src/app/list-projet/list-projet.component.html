@@ -1,0 +1,181 @@
+<div class="jumbotron mycustom-jumbotron" align="{{app.localStorageItem('lge') === 'fr' ? 'left' : 'right' }}"
+     [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }">
+  <br/>
+  <div class="entete" style="text-align: center"><span>APERCU DE DOCUMENT</span></div>
+<!--
+<button >open</button>-->
+  <div class="pdf-container">
+    <ngx-extended-pdf-viewer
+      [src]="'assets/example.pdf'"
+      [useBrowserLocale]="true"
+      [textLayer]="true"
+      [showHandToolButton]="true"
+      [showPresentationModeButton]="true"
+      [(page)]="page"
+      [(pageLabel)]="pageLabel"
+      height="70vh"
+    >
+    </ngx-extended-pdf-viewer>
+  </div>
+  <br/>
+
+<br/>
+
+</div>
+<div class="jumbotron mycustom-jumbotron" align="{{app.localStorageItem('lge') === 'fr' ? 'left' : 'right' }}"
+     [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }">
+  <br>
+  <div class="entete" style="text-align: center"><span>LA LISTE DES PROJETS DES TEXTES</span></div>
+  <br>
+  <button class="btn btn-primary" (click)="onAddProjet()">AJOUTER PROJET TEXTE<!--{{'LIST-ORGANISMES.ADD.BUTTON'|translate}}--></button>
+  <!--  {{'LIST-MOUVEMENTS.BUTTON' | translate}}-->
+  <br />
+  <br />
+
+  <mat-form-field class="example-full-width">
+    <mat-label>RECHERCHE SIMPLE D'UN TEXTE</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. sommaire d'un texte donné" #input>
+  </mat-form-field>
+
+  <mat-accordion class="example-headers-align" multi>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          RECHERCHE AVANCE
+        </mat-panel-title>
+        <mat-panel-description>
+          <div *ngIf="isAdmin(); else user">
+            PHASE / SECTEUR / MINISTERE
+          </div>
+          <ng-template #user>
+            PHASE / MINISTERE
+          </ng-template>
+
+          <mat-icon>search</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <form name="lefiltre">
+        <br/>
+        <div class="col" ><!--dir="{{direction}}"-->
+          <mat-form-field class="example-full-width">
+            <mat-label>PHASE<!--{{ 'ADD-MOUVEMENT.ETAT' | translate }}--></mat-label>
+            <mat-select  name="phase" (selectionChange)="onGetPhase($event)"><!--[disabled]="!authService.isAdmin()"-->
+              <mat-option></mat-option>
+              <mat-option *ngFor="let phse of phases; let i=index" [value]="phse">
+                {{phse?.libelleFr}}
+              </mat-option>
+            </mat-select>
+            <mat-error>{{ 'ADD-MOUVEMENT.ETAT.MAT-ERROR' | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div *ngIf="isAdmin()" class="col" ><!--dir="{{app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'}}"-->
+          <mat-form-field class="example-full-width">
+            <mat-label>SECTEUR<!--{{ 'ADD-MOUVEMENT.ETAT' | translate }}--></mat-label>
+            <mat-select  name="secteur" (selectionChange)="onGetSecteur($event)"><!--[disabled]="!authService.isAdmin()"-->
+              <mat-option></mat-option>
+              <mat-option *ngFor="let sct of secteurs; let i=index" [value]="sct">
+                {{sct?.libelleFr}}
+              </mat-option>
+            </mat-select>
+            <mat-error>{{ 'ADD-MOUVEMENT.ETAT.MAT-ERROR' | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col" ><!--dir="{{app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'}}"-->
+          <mat-form-field class="example-full-width">
+            <mat-label>MINISTERES<!--{{ 'ADD-MOUVEMENT.ETAT' | translate }}--></mat-label>
+            <mat-select  name="ministere" (selectionChange)="onGetMinistere($event)"><!--[disabled]="!authService.isAdmin()"-->
+              <mat-option></mat-option>
+              <mat-option *ngFor="let mnst of ministeres; let i=index" [value]="mnst">
+                {{mnst?.libelleFr}}
+              </mat-option>
+            </mat-select>
+            <mat-error>{{ 'ADD-MOUVEMENT.ETAT.MAT-ERROR' | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+        <button mat-button color="primary" (click)="OnFilter()">FILTRER</button>
+      </form>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+
+  <br/>
+  <br/>
+  <div class="mat-elevation-z8 ">
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> N° </th>
+        <td mat-cell *matCellDef="let element; let i=index;"> {{element.id}} </td>
+      </ng-container>
+      <ng-container matColumnDef="sommaireAr">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> SOMMAIRE AR </th>
+        <td mat-cell *matCellDef="let element"> {{element.sommaireAr}} </td>
+      </ng-container>
+      <ng-container matColumnDef="sommaireFr">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> SOMMAIRE FR </th>
+        <td mat-cell *matCellDef="let element"> {{element.sommaireFr}} </td>
+      </ng-container>
+      <ng-container matColumnDef="refer">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> REFER </th>
+        <td mat-cell *matCellDef="let element"> {{element.refer}} </td>
+      </ng-container>
+      <ng-container matColumnDef="details">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> DETAILS </th>
+        <td mat-cell *matCellDef="let element"> <i class="fa fa-arrow-circle-down fa-2x"></i> </td>
+      </ng-container>
+      <ng-container>
+        <th> DETAILS  </th>
+        <td><i class="fa fa-arrow-circle-down"></i></td>
+      </ng-container>
+
+
+
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+          <div class="example-element-detail"
+               [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+
+            <div class="example-element-description example-full-width">
+              <div class=""><!--{{ app.localStorageItem('lge') === 'fr' ? 'MODIFIER ' :  ' تعديل : ' }}-->
+                <button mat-raised-button matTooltip="MODIFIER"
+                        class="btn btn-primary spacer" (click)="onEditTexte(element.id)">
+                  MODIFIER LE TEXTE
+                </button>
+                <br/>
+                <app-list-mouvement
+                  class="make-gold"
+                  [texteId]="element.id"></app-list-mouvement>
+              </div>
+              <!--<ul>
+                <br>
+                <div >
+                  <div [ngStyle]="{'text-align':app.localStorageItem('lge') === 'fr' ? 'left' : 'right' }">
+                    <mat-label class="spacer">
+                      {{app.localStorageItem('lge') === 'fr'?'LISTE DES FONCTIONS PAR ORGANISME SELSECTIONNEES:': 'قائمة وظائف الهيئة المختارة : '}}
+                    </mat-label>
+                  </div>
+                </div>
+              </ul>-->
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+          class="example-element-row"
+          [class.example-expanded-row]="expandedElement === element"
+          (click)="expandedElement = expandedElement === element ? null : element">
+      </tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[15, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+  </div>
+  <br/>
+
+</div>
+

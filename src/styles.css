@@ -1,1 +1,385 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* You can add global styles to this file, and also import other style files *
+ */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+/*@import '~material-icons/iconfont/material-icons.css';*/
+
+.spacer{
+  margin: 5px;
+}
+
+.font-btn{
+  font-size: 10px;
+}
+
+.change-bg{
+  background: dodgerblue !important;
+}
+
+.change-font-color{
+  color: white;
+}
+/*.dropdown:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-item:hover {
+  color: lightgreen;
+}*/
+
+.jumbotron{
+  padding-bottom: 10px !important;
+  padding-top: 10px !important;
+  margin-bottom: 0px !important;
+}
+
+.diplay-flx{
+  display: flex;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+/*.bg {
+  !* The image used *!
+  background-image: url(app/algflag.jpg);
+  !* Full height *!
+  height: 100%;
+  !* Center and scale the image nicely *!
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}*/
+
+.lists {
+  list-style: none;
+}
+
+.fill-space {
+  flex: 1 1 auto;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.example-margin {
+  margin: 0 10px;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+a:hover {
+  background-color: lightgray;
+}
+
+*:focus {
+  outline: none !important;
+  border: 0 !important;
+}
+
+.pagination-buttons {
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+.rtl-text {
+  direction: rtl;
+}
+
+.ltr-text {
+  direction: ltr;
+}
+
+.dir2rtl{
+  direction: rtl;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  scroll-behavior: smooth;
+  transition: 2s;
+}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mycustom-jumbotron {
+  background-color: #fff;
+  border:10px solid #003366;
+  margin: 5px 2rem;
+  padding: 10px;
+}
+.entete{
+  background: skyblue;
+  padding: 10PX;
+  margin: 10PX;
+  color: darkslateblue;
+  font:italic small-caps bold 20px/40px 'El Messiri', sans-serif;
+  border-radius: 5PX;
+}
+
+.footer
+{
+  position:absolute;
+  color: #efefef;
+  padding: 10px;
+  bottom:0;
+  width:100%;
+  height:50px;   /* Height of the footer */
+  background: dodgerblue !important;
+}
+
+body {
+  font-family: Roboto, Arial, sans-serif;
+  background:#5bc0de;
+  margin: 0;
+}
+
+/*
+.mat-calendar-body-selected {
+  background-color: #428bca;
+  color:#efefef;
+}*/
+
+
+mat-expansion-panel:first-child mat-expansion-panel-header {
+  background-color:#f0ad4e;
+  font-weight: bold;
+}
+
+mat-card{
+  background-color: #efefef;
+}
+
+#footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: #1E90FF !important;
+  clear: both;
+  color: #efefef;
+  height: 50px;
+  margin-top: 0px;
+}
+
+#footer p{
+  padding: 10px;
+}
+
+#recherche{
+  padding: 10px;
+  background-color : lightblue;
+  font: italic small-caps bold 20px/20px Georgia, serif;
+}
+nav{
+  background-color: #1E90FF;
+}
+.malist{
+  color: rgba(255,255,255,0.9);
+}
+
+#sect1 {
+  background-image: url("assets/cool-background.png");
+  background-position: center;
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  bottom: 0;
+}
+
+.myflex{
+  display: flex;
+  justify-content: center;
+}
+
+.mybigtexte{
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 5px;
+  /*box-shadow: rgba(255, 255, 255, 0.2) 0px 7px 29px 0px;>*/
+  box-shadow:
+    rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px,
+    rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px,
+    rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  text-align: center;
+  /*border: 15px solid rgba(255,255,255,.3);*/
+  border-radius: 5px;
+  background-color: #87CEEB;
+  color: #483D8B;
+  padding: 10px 100px;
+}
+
+.mytexte{
+  /*  width: 50%;*/
+  font-size: .8rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 5px;
+  box-shadow:
+    rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px,
+    rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px,
+    rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  border-radius: 5px;
+  background-color: #87CEEB;
+  color: #483D8B;
+  padding: 10px 100px;
+}
+
+.mysubtexte{
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 5px;
+  border: 1px solid #ccc;
+  background-color: #E9ECEF;
+}
+
+.simple-border{
+  border: 3px solid #5bc0de;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+  width: 100%;
+}
+
+
+/* LA LISTE DES COULEURS AVEC LES DIFFERENTES PHASES */
+.is-all{
+  font-weight: 500;
+  display: inline-block;
+  min-width: 1em; /* em unit */
+  padding: .3em; /* em unit */
+  border-radius: 5%;
+  font-size: 15px;
+  text-align: center;
+  color: #ffffff;
+}
+.is-initiation{
+  background: #ff8000;
+}
+
+.is-distribution{
+  background: #29527a;
+}
+
+.is-telex{
+  background: #29527a;
+}
+
+.is-reunion{
+  background: #ff00ff;
+}
+
+.is-conseil-gov{
+  background: #0000ff;
+}
+
+.is-conseil-mnstr{
+  background: #0000ff;
+}
+
+.is-parlement{
+  background: #0000ff;
+}
+
+.is-pour-signature{
+  background: #00ffff;
+}
+
+.is-signe{
+  background: #00ff00;
+}
+
+.is-pour-publication{
+  background: #00ffff;
+}
+
+.is-publie{
+  background: 	#00ff00;
+}
+
+.is-aprobat{
+  background: #00ff00;
+}
+
+.is-aprobat-obsrv{
+  background: #00ffff;
+}
+
+.is-nouv-lecture{
+  background: #ff8000;
+}
+
+.make-gold {
+  background-color: gold
+}
+.make-zibra {
+  background-color: #edf2f3
+}
+
+
+
+/**************    LOADING SPINNER *****************/
+
+#spinner {
+  -webkit-animation: frames 1s infinite linear;
+  animation: frames 1s infinite linear;
+  background: transparent;
+  border: 1.75vw solid #fff;
+  border-radius: 100%;
+  border-top-color: #1a5fdf;
+  width: 20vw;
+  height: 20vw;
+  opacity: 0.6;
+  padding: 0;
+  position: absolute;
+  z-index: 999;
+}
+@keyframes frames {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+#pause {
+  display: block;
+  background: rgba(0, 0, 0, 0.66) no-repeat 0 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+}
+
