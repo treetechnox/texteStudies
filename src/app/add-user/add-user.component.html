@@ -1,1 +1,178 @@
-<p>add-user works!</p>
+<br>
+<form class="add-border text-dark"><!--[formGroup]="myForm" -->
+  <div class="card text-center w-50">
+    <div class="card-header">{{'SIGNUP.CARD-HEADER' |translate}}</div>
+    <div class="card-body">
+      <div class="row-cols-1 example-full-width" *ngIf="localStorageItem('lge') === 'ar'"><!--[ngClass]="{'dir2rtl':localStorageItem('lge') === 'ar'}"-->
+        <div class="example-full-width" dir="rtl">
+          <mat-form-field>
+            <mat-label>{{'SIGNUP.LASTNAME.LABEL' |translate}}</mat-label>
+            <input matInput placeholder="{{'SIGNUP.LASTNAME.PLACEHOLDER' |translate}}" required="required"
+                   [(ngModel)]="user.nom" name="lastname"
+                   [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }"
+            ><!---->
+          </mat-form-field>
+        </div>
+        <div class="example-full-width"  dir="rtl">
+          <mat-form-field>
+            <mat-label>{{'SIGNUP.FIRSTNAME.LABEL' |translate}}</mat-label>
+            <input matInput placeholder="{{'SIGNUP.FIRSTNAME.PLACEHOLDER' |translate}}" required="required"
+                   [(ngModel)]="user.prenom" name="firstname"
+                   [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }"
+            ><!---->
+          </mat-form-field>
+        </div>
+        <div class="example-full-width"  dir="rtl">
+          <mat-form-field>
+            <mat-label>{{'SIGNUP.USERNAME.LABEL' |translate}}</mat-label>
+            <input matInput placeholder="{{'SIGNUP.USERNAME.PLACEHOLDER' |translate}}" required="required"
+                   [(ngModel)]="user.username" name="username"
+                   [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }"
+            ><!---->
+          </mat-form-field>
+        </div>
+        <div  class="example-full-width"  dir="rtl">
+          <mat-form-field>
+            <mat-label>{{'SIGNUP.ROLE.LABEL' |translate}}</mat-label>
+            <mat-select placeholder="{{'SIGNUP.ROLE.PLACEHOLDER' |translate}}" required="required"
+                        [(ngModel)]="user.role" name="role"
+                        [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }">
+              <mat-option value=""></mat-option>
+              <mat-option value="ADMIN">ADMIN</mat-option>
+              <mat-option value="USER">USER</mat-option>
+            </mat-select>
+            <mat-error>{{'SIGNUP.ROLE.MAT-ERROR' |translate}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div  class="example-full-width"   dir="rtl">
+          <mat-form-field>
+            <input matInput placeholder="{{'SIGNUP.PASSWORDNEW.PLACEHOLDER' |translate}}"
+                   [(ngModel)]="user.password" name="password" required
+                   [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }">
+            <!--<mat-error *ngIf="myForm.hasError('required', 'passwords')">
+              {{'SIGNUP.MAT-ERROR.NEWPASSWORD' |translate}}
+            </mat-error>-->
+          </mat-form-field>
+        </div>
+        <div  class="example-full-width" dir="rtl">
+          <mat-form-field>
+            <input matInput placeholder="{{'SIGNUP.PASSWORDCONFIRM.PLACEHOLDER' |translate}}"
+                   name="confirmpassword"
+                   [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }">
+            <!--<mat-error *ngIf="myForm.hasError('notSame')">
+              {{'SIGNUP.MAT-ERROR.CONFIRM' |translate}}
+            </mat-error>-->
+          </mat-form-field>
+        </div>
+
+      </div>
+
+
+
+      <div class="row-cols-1" *ngIf="localStorageItem('lge') === 'fr'"><!--[ngClass]="{'dir2rtl':localStorageItem('lge') === 'ar'}"-->
+        <div class="example-full-width"  dir="ltr">
+          <mat-form-field>
+            <mat-label>{{'SIGNUP.LASTNAME.LABEL' |translate}}</mat-label>
+            <input matInput placeholder="{{'SIGNUP.LASTNAME.PLACEHOLDER' |translate}}" required="required"
+                   [(ngModel)]="user.nom" name="lastname"
+                   [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }"
+            ><!---->
+          </mat-form-field>
+        </div>
+        <div class="example-full-width"  dir="ltr">
+          <mat-form-field>
+            <mat-label>{{'SIGNUP.FIRSTNAME.LABEL' |translate}}</mat-label>
+            <input matInput placeholder="{{'SIGNUP.FIRSTNAME.PLACEHOLDER' |translate}}" required="required"
+                   [(ngModel)]="user.prenom" name="firstname"
+                   [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }"
+            ><!---->
+          </mat-form-field>
+        </div>
+        <div class="example-full-width"  dir="ltr">
+          <mat-form-field>
+            <mat-label>{{'SIGNUP.USERNAME.LABEL' |translate}}</mat-label>
+            <input matInput placeholder="{{'SIGNUP.USERNAME.PLACEHOLDER' |translate}}" required="required"
+                   [(ngModel)]="user.username" name="username"
+                   [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }"
+            ><!---->
+          </mat-form-field>
+        </div>
+        <div class="example-full-width" dir="ltr">
+          <mat-form-field>
+            <mat-label>{{'SIGNUP.ROLE.LABEL' |translate}}</mat-label>
+            <mat-select placeholder="{{'SIGNUP.ROLE.PLACEHOLDER' |translate}}" required="required"
+                        [(ngModel)]="user.role" name="role"
+                        [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }">
+              <mat-option value=""></mat-option>
+              <mat-option value="ADMIN">ADMIN</mat-option>
+              <mat-option value="USER">USER</mat-option>
+            </mat-select>
+            <mat-error>{{'SIGNUP.ROLE.MAT-ERROR' |translate}}</mat-error>
+          </mat-form-field>
+        </div>
+        <div  class="example-full-width" dir="ltr">
+          <mat-form-field>
+            <mat-label>{{'SIGNUP.SECTEUR.LABEL' |translate}}</mat-label>
+            <mat-select placeholder="{{'SIGNUP.SECTEUR.PLACEHOLDER' |translate}}"
+                        [(ngModel)]="user.secteur" name="secteur"
+                        [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }"><!--required="required"-->
+              <mat-option></mat-option>
+              <mat-option *ngFor="let secteur of secteurs" [value]="secteur">
+                {{secteur.libelleFr}}
+              </mat-option>
+            </mat-select>
+            <mat-error>{{'SIGNUP.SECTEUR.MAT-ERROR' |translate}}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="example-full-width" dir="ltr">
+          <mat-form-field>
+            <input matInput placeholder="{{'SIGNUP.PASSWORDNEW.PLACEHOLDER' |translate}}"
+                   [(ngModel)]="user.password" name="password" required
+                   [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }">
+            <!--<mat-error *ngIf="myForm.hasError('required', 'passwords')">
+              {{'SIGNUP.MAT-ERROR.NEWPASSWORD' |translate}}
+            </mat-error>-->
+          </mat-form-field>
+        </div>
+        <div class="example-full-width" dir="ltr">
+          <mat-form-field>
+            <input matInput placeholder="{{'SIGNUP.PASSWORDCONFIRM.PLACEHOLDER' |translate}}"
+                   name="confirmPassword"
+                   [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }">
+            <!--<mat-error *ngIf="myForm.hasError('notSame')">
+              {{'SIGNUP.MAT-ERROR.CONFIRM' |translate}}
+            </mat-error>-->
+          </mat-form-field>
+        </div>
+
+      </div>
+      <div class="row" >
+        <div class="col" style="align-self: center">
+          <div class="form-group">
+            <button type="submit" mat-raised-button
+                    matTooltip="AJOUTER UTILISATEUR"
+                    class="btn btn-success"
+                    (click)="saveUser()"><!--[disabled]="!myform.form.valid"-->
+              <i class="fa fa-user-o fa-2x" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col" style="align-self: center">
+          <div class="form-group">
+            <button (click)="onLogout()" mat-raised-button
+                    matTooltip="LOGIN"
+                    class="btn btn-dark"><!--[disabled]="!myform.form.valid"-->
+              <i class="fa fa-undo fa-2x" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+
+</form>
+<!--<div class="jumbotron text-dark">
+</div>-->
+

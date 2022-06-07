@@ -20,8 +20,12 @@ export class TexteService {
     // @ts-ignore
     return this.http.get(this.url);
   }
-  getAllTextesByMinistere(ministere:string):Observable<any[]>{
-    console.log(this.url1);
+  getAllMouvementsByMinistere(ministere:string):Observable<any[]>{
+    console.log(`${this.url1}mimo/${ministere}`);
+    // @ts-ignore
+    return this.http.get(`${this.url1}mimo/${ministere}`);
+  }getAllTextesByMinistere(ministere:string):Observable<any[]>{
+    console.log(`${this.url1}mimo/${ministere}/textes`);
     // @ts-ignore
     return this.http.get(`${this.url1}mimo/${ministere}/textes`);
   }

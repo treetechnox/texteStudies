@@ -1,1 +1,41 @@
-<p>add-secteur works!</p>
+<br>
+<div class="add-border jumbotron text-dark">
+  <div class="container">
+    <div [hidden]="submitted">
+      <button mat-raised-button
+              matTooltip="RETOUR"
+              class="btn btn-dark"
+              [routerLink]="'/lessecteurs'">
+        <i class="fa fa-hand-o-left fa-2x"></i>
+      </button>
+      <form>
+        <div class="row" [ngStyle]="{
+                  direction:
+                    app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'
+                }">
+          <h5 >AJOUTER UNE SECTEUR</h5><!--{{ 'ADD-MOUVEMENT.H5' | translate }}-->
+        </div>
+        <div [ngStyle]="{direction:app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'}">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder=" تسمية القطاع" type="text" [(ngModel)]="secteur.libelleAr" name="secteur"/><!--required-->
+          </mat-form-field>
+        </div>
+        <div [ngStyle]="{direction:app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'}">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder=" libelle Secteur" type="text" [(ngModel)]="secteur.libelleFr" name="secteur"/><!--required-->
+          </mat-form-field>
+        </div>
+        <!--<button type="submit" class="btn btn-success">AJOUTER MOUVEMENT</button>-->
+        <div class="form-group">
+          <button type="submit" class="btn btn-success" (click)="onSubmitSave()">AJOUTER</button>
+        </div>
+      </form>
+    </div>
+
+    <div [hidden]="!submitted">
+      <h4>LE SECTEUR EST AJOUTE AVEC SUCCES!</h4>
+      <!-- <button class="btn btn-success" (click)="newEmployee()">Add</button> -->
+    </div>
+
+  </div>
+</div>

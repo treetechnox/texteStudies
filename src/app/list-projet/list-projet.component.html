@@ -1,9 +1,9 @@
-<div class="jumbotron mycustom-jumbotron" align="{{app.localStorageItem('lge') === 'fr' ? 'left' : 'right' }}"
+<!--<div class="jumbotron mycustom-jumbotron" align="{{app.localStorageItem('lge') === 'fr' ? 'left' : 'right' }}"
      [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }">
   <br/>
   <div class="entete" style="text-align: center"><span>APERCU DE DOCUMENT</span></div>
-<!--
-<button >open</button>-->
+&lt;!&ndash;
+<button >open</button>&ndash;&gt;
   <div class="pdf-container">
     <ngx-extended-pdf-viewer
       [src]="'assets/example.pdf'"
@@ -20,10 +20,14 @@
   <br/>
 
 <br/>
-
 </div>
-<div class="jumbotron mycustom-jumbotron" align="{{app.localStorageItem('lge') === 'fr' ? 'left' : 'right' }}"
+-->
+
+<br/>
+
+<div class="jumbotron mycustom-jumbotron"
      [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }">
+
   <br>
   <div class="entete" style="text-align: center"><span>LA LISTE DES PROJETS DES TEXTES</span></div>
   <br>
@@ -69,7 +73,7 @@
             <mat-error>{{ 'ADD-MOUVEMENT.ETAT.MAT-ERROR' | translate }}</mat-error>
           </mat-form-field>
         </div>
-        <div *ngIf="isAdmin()" class="col" ><!--dir="{{app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'}}"-->
+        <div *ngIf="isAdmin()" class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
           <mat-form-field class="example-full-width">
             <mat-label>SECTEUR<!--{{ 'ADD-MOUVEMENT.ETAT' | translate }}--></mat-label>
             <mat-select  name="secteur" (selectionChange)="onGetSecteur($event)"><!--[disabled]="!authService.isAdmin()"-->
@@ -81,7 +85,7 @@
             <mat-error>{{ 'ADD-MOUVEMENT.ETAT.MAT-ERROR' | translate }}</mat-error>
           </mat-form-field>
         </div>
-        <div class="col" ><!--dir="{{app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'}}"-->
+        <div class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
           <mat-form-field class="example-full-width">
             <mat-label>MINISTERES<!--{{ 'ADD-MOUVEMENT.ETAT' | translate }}--></mat-label>
             <mat-select  name="ministere" (selectionChange)="onGetMinistere($event)"><!--[disabled]="!authService.isAdmin()"-->

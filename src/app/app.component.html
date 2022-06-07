@@ -6,55 +6,114 @@
     SUIVI DES PROJETS DES TEXTES
   </h3>
 </div>-->
-<nav class="navbar navbar-expand-lg bg-light">
+<nav *ngIf="authService.isAuthenticated == true" class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" [routerLink]="'/lesprojets'">
+      <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+    </a>
+    <button class="navbar-toggler"
+            type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+            TEXTES
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/lesprojets'">
+              LISTE DES PROJETS DES TEXTES
+            </a></li>
+            <li><a class="dropdown-item" [routerLink]="'/lajoutprojet'">
+              AJOUTER PROJET DE TEXTE</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <!--<li><a class="dropdown-item" href="#">Something else here</a></li>-->
           </ul>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <li class="nav-item dropdown" *ngIf="isAdmin()">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             NATURES
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">LISTE DES NATURES DES TEXTES</a></li>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
+            <li><a class="dropdown-item" [routerLink]="'/lesnatures'">
+              LISTE DES NATURES DES TEXTES</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" [routerLink]="'/lajoutnature'">AJOUTER NATURE DE TEXTE</a></li>
           </ul>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+        <li class="nav-item dropdown" *ngIf="isAdmin()">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            PHASES
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+            <li><a class="dropdown-item" [routerLink]="'/lesphases'">LISTE DES PHASES</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/lajoutphase'">AJOUTER PHASE</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isAdmin()">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            MINISTERES
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
+            <li><a class="dropdown-item" [routerLink]="'/lesministeres'">LISTE DES MINISTERES</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" [routerLink]="'/lajoutministere'">AJOUTER MINISTERE</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isAdmin()">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ "HOME.SECTEURS" | translate }}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown4">
+            <li><a class="dropdown-item" [routerLink]="'/lessecteurs'">{{
+              "HOME.SECTEURS.LIST" | translate
+              }}</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" [routerLink]="'/lajoutsecteur'">{{
+              "HOME.SECTEURS.AJOUT" | translate
+              }}</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isAdmin()">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown5" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ "HOME.UTILISATEURS" | translate }}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown5">
+            <li><a class="dropdown-item" [routerLink]="'/lesusers'">{{
+              "HOME.UTILISATEURS.LIST" | translate
+              }}</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" [routerLink]="'/signup'">{{
+              "HOME.UTILISATEURS.AJOUT" | translate
+              }}</a></li>
           </ul>
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <div class="d-flex">
+        <span style="margin: 2px;"></span>
+        <button class="dcnx btn btn-outline-light" type="submit"
+                matTooltip="DECONNEXION"
+          (click)="onLogout()"
+                style="background-color: #ee8488;"
+        >
+          <div class="dcnx">
+            <i class="dcnx-elt fa fa-sign-out fa-2x" aria-hidden="true"></i
+            ><span class="dcnx-elt">{{
+            authService.userAuthenticated?.username
+            }}</span>
+          </div>
+
+        </button>
+      </div>
     </div>
   </div>
 </nav>
-<nav
+<!--<nav
   class="navbar navbar-expand-lg navbar-dark bg-primary"
   *ngIf="authService.isAuthenticated == true"
   [ngStyle]="{ direction: localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }"
@@ -75,7 +134,7 @@
     style="margin-left: 15px;margin-right: 15px;"
   >
     <i class="fa fa-refresh fa-2x" aria-hidden="true"></i
-    ><!---->
+    >&lt;!&ndash;&ndash;&gt;
   </button>
   <button
     mat-button
@@ -105,18 +164,18 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-          <!--{{ "HOME.REUNIONS" | translate }}--> TEXTES
+          &lt;!&ndash;{{ "HOME.REUNIONS" | translate }}&ndash;&gt; TEXTES
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <!--<a class="dropdown-item" [routerLink]="'/lesreservations'">{{
+          &lt;!&ndash;<a class="dropdown-item" [routerLink]="'/lesreservations'">{{
             "HOME.REUNIONS.LIST" | translate
-            }}</a>-->
+            }}</a>&ndash;&gt;
           <a class="dropdown-item" [routerLink]="'/lesprojets'">
-            <!--{{"HOME.REUNIONS.LIST" | translate}}-->
+            &lt;!&ndash;{{"HOME.REUNIONS.LIST" | translate}}&ndash;&gt;
             LISTE DES PROJETS DES TEXTES
           </a>
           <a class="dropdown-item" [routerLink]="'/lajoutprojet'">
-            <!--{{"HOME.REUNIONS.AJOUT" | translate}}-->
+            &lt;!&ndash;{{"HOME.REUNIONS.AJOUT" | translate}}&ndash;&gt;
             AJOUTER PROJET DE TEXTE
           </a>
           <div class="dropdown-divider"></div>
@@ -133,11 +192,11 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-          <!--{{ "HOME.REUNIONS" | translate }}--> NATURES
+          &lt;!&ndash;{{ "HOME.REUNIONS" | translate }}&ndash;&gt; NATURES
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" [routerLink]="'/lesnatures'">
-            <!--{{"HOME.REUNIONS.LIST" | translate}}-->
+            &lt;!&ndash;{{"HOME.REUNIONS.LIST" | translate}}&ndash;&gt;
             LISTE DES NATURES DES TEXTES
           </a>
           <a class="dropdown-item" [routerLink]="'/lajoutnature'">
@@ -159,15 +218,15 @@
           aria-expanded="false"
         >
           PHASES
-          <!--{{ "HOME.SALLES" | translate }}-->
+          &lt;!&ndash;{{ "HOME.SALLES" | translate }}&ndash;&gt;
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <!-- <a class="dropdown-item" [routerLink]="'/'">{{'HOME.ORGANISMES.LIST' | translate}}</a>-->
+          &lt;!&ndash; <a class="dropdown-item" [routerLink]="'/'">{{'HOME.ORGANISMES.LIST' | translate}}</a>&ndash;&gt;
 
-          <a class="dropdown-item" [routerLink]="'/lesphases'">LISTE DES PHASES</a><!--{{"HOME.SALLES.LIST" | translate}}-->
-          <a class="dropdown-item" [routerLink]="'/lajoutphase'">AJOUTER PHASE</a><!--{{"HOME.SALLES.AJOUT" | translate}}-->
+          <a class="dropdown-item" [routerLink]="'/lesphases'">LISTE DES PHASES</a>&lt;!&ndash;{{"HOME.SALLES.LIST" | translate}}&ndash;&gt;
+          <a class="dropdown-item" [routerLink]="'/lajoutphase'">AJOUTER PHASE</a>&lt;!&ndash;{{"HOME.SALLES.AJOUT" | translate}}&ndash;&gt;
           <div class="dropdown-divider"></div>
-          <!--<a class="dropdown-item" href="#">Something else here</a>-->
+          &lt;!&ndash;<a class="dropdown-item" href="#">Something else here</a>&ndash;&gt;
         </div>
       </li>
       <li class="nav-item dropdown" *ngIf="isAdmin()">
@@ -181,15 +240,15 @@
           aria-expanded="false"
         >
           MINISTERES
-          <!--{{ "HOME.SALLES" | translate }}-->
+          &lt;!&ndash;{{ "HOME.SALLES" | translate }}&ndash;&gt;
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <!-- <a class="dropdown-item" [routerLink]="'/'">{{'HOME.ORGANISMES.LIST' | translate}}</a>-->
+          &lt;!&ndash; <a class="dropdown-item" [routerLink]="'/'">{{'HOME.ORGANISMES.LIST' | translate}}</a>&ndash;&gt;
 
-          <a class="dropdown-item" [routerLink]="'/lesministeres'">LISTE DES MINISTERES</a><!--{{"HOME.SALLES.LIST" | translate}}-->
-          <a class="dropdown-item" [routerLink]="'/lajoutministere'">AJOUTER MINISTERE</a><!--{{"HOME.SALLES.AJOUT" | translate}}-->
+          <a class="dropdown-item" [routerLink]="'/lesministeres'">LISTE DES MINISTERES</a>&lt;!&ndash;{{"HOME.SALLES.LIST" | translate}}&ndash;&gt;
+          <a class="dropdown-item" [routerLink]="'/lajoutministere'">AJOUTER MINISTERE</a>&lt;!&ndash;{{"HOME.SALLES.AJOUT" | translate}}&ndash;&gt;
           <div class="dropdown-divider"></div>
-          <!--<a class="dropdown-item" href="#">Something else here</a>-->
+          &lt;!&ndash;<a class="dropdown-item" href="#">Something else here</a>&ndash;&gt;
         </div>
       </li>
       <li class="nav-item dropdown" *ngIf="isAdmin()">
@@ -212,7 +271,7 @@
             "HOME.SECTEURS.AJOUT" | translate
             }}</a>
           <div class="dropdown-divider"></div>
-          <!--<a class="dropdown-item" href="#">Something else here</a>-->
+          &lt;!&ndash;<a class="dropdown-item" href="#">Something else here</a>&ndash;&gt;
         </div>
       </li>
       <li class="nav-item dropdown" *ngIf="isAdmin()">
@@ -235,10 +294,10 @@
             "HOME.UTILISATEURS.AJOUT" | translate
             }}</a>
           <div class="dropdown-divider"></div>
-          <!--<a class="dropdown-item" href="#">Something else here</a>-->
+          &lt;!&ndash;<a class="dropdown-item" href="#">Something else here</a>&ndash;&gt;
         </div>
       </li>
-      <!--<li>
+      &lt;!&ndash;<li>
         <button
           (click)="actualiser()"
           mat-raised-button
@@ -248,7 +307,7 @@
           <i class="fa fa-refresh fa-2x" aria-hidden="true"></i
           >&lt;!&ndash;&ndash;&gt;
         </button>
-      </li>-->
+      </li>&ndash;&gt;
     </ul>
 
     <ul
@@ -267,7 +326,7 @@
           (click)="onLogout()"
         >
           <i class="fa fa-sign-out fa-2x" aria-hidden="true"></i
-          ><!--window.location.reload();-->
+          >&lt;!&ndash;window.location.reload();&ndash;&gt;
         </button>
       </li>
       <li>
@@ -284,7 +343,7 @@
       </li>
     </ul>
   </div>
-</nav>
+</nav>-->
 
 <main role="main"  class="wrapper"  id="sect1" >
 

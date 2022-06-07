@@ -44,7 +44,31 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   box-sizing: border-box;
 }
 
+table{
+  width: 100%;
+  font-weight: bold;
+}
 
+.dcnx {
+  display: flex;
+}
+
+.dcnx-elt{
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: white;
+  font-size: 1.2rem;
+  justify-content: center;align-content: center;
+}
+
+.dcnx-elt:hover {
+   color: #1E90FF;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255, 255, 255);
+  font-size: 16px;
+  font-weight: 500;
+}
 /*.bg {
   !* The image used *!
   background-image: url(app/algflag.jpg);
@@ -192,8 +216,8 @@ mat-card{
   background-color : lightblue;
   font: italic small-caps bold 20px/20px Georgia, serif;
 }
-nav{
-  background-color: #1E90FF;
+.navbar{
+  margin-bottom: -5px;
 }
 .malist{
   color: rgba(255,255,255,0.9);
@@ -383,3 +407,9 @@ nav{
   z-index: 1000;
 }
 
+/**
+use direction
+**/
+
+.rtl{direction:rtl;}
+.ltr{direction:ltr;}

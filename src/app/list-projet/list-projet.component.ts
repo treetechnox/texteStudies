@@ -254,7 +254,12 @@ export class ListProjetComponent implements AfterViewInit {
     this.mouvement.phase = this.phase
     this.mouvement.secteur= this.secteur;
     /* this.mouvementService.ge*/
-    this.mouvement.mouvementMinistere;
+
+
+
+/*    this.mouvement.mouvementMinistere;
+
+    this.texteService.getAllMouvementsByMinistere(this.ministere.id).subscribe(value => )*/
 
 
     console.log(this.mouvement);

@@ -1,1 +1,41 @@
-<p>add-nature works!</p>
+<br><br>
+<div class="jumbotron mycustom-jumbotron text-dark">
+  <div class="container">
+    <div [hidden]="submitted">
+      <button mat-raised-button
+              matTooltip="RETOUR"
+              class="btn btn-dark"
+              [routerLink]="'/lesnatures'">
+        <i class="fa fa-hand-o-left fa-2x"></i>
+      </button>
+      <form>
+        <div class="row" [ngStyle]="{
+                  direction:
+                    app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'
+                }">
+          <h5 >AJOUTER UNE NATURE DE TEXTE</h5><!--{{ 'ADD-MOUVEMENT.H5' | translate }}-->
+        </div>
+        <div [ngStyle]="{direction:app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'}">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder=" تسمية النوع" type="text" [(ngModel)]="nature.libelleAr" name="naturear"/><!--required-->
+          </mat-form-field>
+        </div>
+        <div [ngStyle]="{direction:app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'}">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder=" libelle nature" type="text" [(ngModel)]="nature.libelleFr" name="naturefr"/><!--required-->
+          </mat-form-field>
+        </div>
+        <!--<button type="submit" class="btn btn-success">AJOUTER MOUVEMENT</button>-->
+        <div class="form-group">
+          <button type="submit" class="btn btn-success" (click)="onSubmitSaveNature()">AJOUTER</button>
+        </div>
+      </form>
+    </div>
+
+    <div [hidden]="!submitted">
+      <h4>LE SECTEUR EST AJOUTE AVEC SUCCES!</h4>
+      <!-- <button class="btn btn-success" (click)="newEmployee()">Add</button> -->
+    </div>
+
+  </div>
+</div>

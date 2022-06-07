@@ -52,11 +52,11 @@ export class ReservationService {
     return this.http.get(`${this.url_base}/reservationByDate/${date}`);
   }
 
-  getReservationsByUtilisateur(utilisateurId):Observable<any>{
+  getReservationsByUtilisateur(utilisateurId:any):Observable<any>{
     return this.http.get(`${this.url_base}/reservations/ByUtilisateur/${utilisateurId}`);
   }
 
-  getReservationById(resId):Observable<any>{
+  getReservationById(resId:number):Observable<any>{
     return this.http.get(`${this.url_base}/reservation/${resId}`)
   }
 
@@ -65,7 +65,7 @@ export class ReservationService {
     return this.http.post(`${this.url_base}/reservations/utilisateur/${reservation.utilisateur.id}/salle/${reservation.salle.id}`,reservation);
   }
 
-  updateReunion(reservationId, reservation: Reservation): Observable<any>{
+  updateReunion(reservationId:number, reservation: Reservation): Observable<any>{
     return this.http.put(`${this.url_base}/reservations/${reservationId}/modifierDisabledReservation`,reservation);
   }
 

@@ -98,8 +98,8 @@ import { EditSecteurComponent } from './edit-secteur/edit-secteur.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { ListNatureComponent } from './list-nature/list-nature.component';
 import { ListMinistereComponent } from './list-ministere/list-ministere.component';
-import { ListPhaseComponent } from './list-phase/list-phase.component';
-import { ListSecteurComponent } from './list-secteur/list-secteur.component';
+import { ListPhasesComponent } from './list-phase/list-phase.component';
+import { ListSecteursComponent } from './list-secteur/list-secteurs.component';
 import { ListUserComponent } from './list-user/list-user.component';
 import { EditProjetComponent } from './edit-projet/edit-projet.component';
 import { EditTexteComponent } from './edit-texte/edit-texte.component';
@@ -124,6 +124,7 @@ import { ListMouvementComponent } from './list-mouvement/list-mouvement.componen
 import { EditTexteComponent } from './edit-texte/edit-texte.component';*/
 
 import { PdfViewerModule, PdfViewerComponent } from 'ng2-pdf-viewer';
+
 
 
 
@@ -161,8 +162,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     EditUserComponent,
     ListNatureComponent,
     ListMinistereComponent,
-    ListPhaseComponent,
-    ListSecteurComponent,
+    ListPhasesComponent,
+    ListSecteursComponent,
     ListUserComponent,
     EditProjetComponent,
     EditTexteComponent,
@@ -368,6 +369,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     },
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DIALOG_DATA, useValue: [] },
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
     PdfViewerComponent,
   ],
   bootstrap: [ AppComponent ],

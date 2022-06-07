@@ -1,5 +1,5 @@
 <br>
-<div class="add-border jumbotron text-dark">
+<div class="add-border jumbotron mycustom-jumbotron">
   <div class="container">
     <div [hidden]="submitted">
       <button mat-raised-button
@@ -9,18 +9,18 @@
         <i class="fa fa-hand-o-left fa-2x"></i>
       </button>
       <form>
-        <div class="row" [ngStyle]="{
+        <div class="row" ><!--[ngStyle]="{
                   direction:
                     app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'
-                }">
+                }"-->
           <h5 >AJOUTER UNE SECTEUR</h5><!--{{ 'ADD-MOUVEMENT.H5' | translate }}-->
         </div>
-        <div [ngStyle]="{direction:app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'}">
+        <div ><!--[ngStyle]="{direction:app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'}"-->
           <mat-form-field class="example-full-width">
             <input matInput placeholder=" تسمية القطاع" type="text" [(ngModel)]="ministere.libelleAr" name="secteur"/><!--required-->
           </mat-form-field>
         </div>
-        <div [ngStyle]="{direction:app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'}">
+        <div ><!--[ngStyle]="{direction:app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'}"-->
           <mat-form-field class="example-full-width">
             <input matInput placeholder=" libelle Secteur" type="text" [(ngModel)]="ministere.libelleFr" name="secteur"/><!--required-->
           </mat-form-field>

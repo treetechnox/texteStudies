@@ -5,10 +5,10 @@ import {AddUserComponent} from './add-user/add-user.component';
 import {ListUserComponent} from './list-user/list-user.component';
 import {EditUserComponent} from './edit-user/edit-user.component';
 import {AddSecteurComponent} from './add-secteur/add-secteur.component';
-import {ListSecteurComponent} from './list-secteur/list-secteur.component';
+import {ListSecteursComponent} from "./list-secteur/list-secteurs.component";
 import {EditSecteurComponent} from "./edit-secteur/edit-secteur.component";
 import {AddPhaseComponent} from './add-phase/add-phase.component';
-import {ListPhaseComponent} from './list-phase/list-phase.component';
+import {ListPhasesComponent} from './list-phase/list-phase.component';
 import {AddMinistereComponent} from './add-ministere/add-ministere.component';
 import {ListMinistereComponent} from './list-ministere/list-ministere.component';
 import {AddProjetComponent} from './add-projet/add-projet.component';
@@ -29,8 +29,8 @@ const routes: Routes = [{ path: '', redirectTo : 'login', pathMatch : 'full' },
   { path: 'lesprojets', component : ListProjetComponent/*, canActivate:[AuthGuard]*/},
   //{ path: 'lesreservations', component : ListReservationsComponent},
   //{ path: 'lessalles', component : ListSallesComponent},
-  { path: 'lessecteurs', component : ListSecteurComponent},
-  { path: 'lesphases', component : ListPhaseComponent},
+  { path: 'lessecteurs', component : ListSecteursComponent},
+  { path: 'lesphases', component : ListPhasesComponent},
   { path: 'lesnatures', component : ListNatureComponent},
   { path: 'lesministeres', component : ListMinistereComponent},
   { path: 'lesusers', component : ListUserComponent},

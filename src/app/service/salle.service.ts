@@ -22,7 +22,7 @@ export class SalleService {
     return this.http.get(`${this.url}filteredSalle/${libelle}`);
   }
 
-  getSalleById(salleId):Observable<any>{
+  getSalleById(salleId:number):Observable<any>{
     return this.http.get(`${this.url}salle/${salleId}`)
   }
 
