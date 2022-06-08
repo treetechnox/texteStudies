@@ -26,7 +26,7 @@ export class ListSecteursComponent implements OnInit {
   //organisme: Organisme = new Organisme();
 
   displayedColumns: string[] = ['id', 'libelleAr','libelleFr', 'operations'];
-  dataSource!: MatTableDataSource<Secteur>;
+  dataSource: any;
   //organismes : Organisme[]= new Array();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -45,7 +45,7 @@ export class ListSecteursComponent implements OnInit {
       this.secteurs = value;
       /*this.secteurs = value._embedded.secteurs;*/
       console.log(this.secteurs);
-      this.dataSource != new MatTableDataSource(this.secteurs);
+      this.dataSource = new MatTableDataSource(this.secteurs);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })

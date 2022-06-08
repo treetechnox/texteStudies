@@ -26,10 +26,17 @@ export class MouvementService {
     return this.http.get(`${this.url}mouvement/${id}`);
   }
 
+  getAllMouvementsByMinistere(ministere:string):Observable<any[]>{
+    console.log(`${this.url}mimo/${ministere}`);
+    // @ts-ignore
+    return this.http.get(`${this.url1}mimo/${ministere}`);
+  }
+
   /*GET ALL MINISTERES BY THE FIRST MOUVEMENT OF THE PROJECT TEXTE */
   getTopMouvementByTexteId(texteId:number):Observable<any>{
+    console.log(`${texteId}`);
     console.log(`${this.url}top/mouvement/${texteId}`);
-    return this.http.get(`${this.url}top/mouvement/${texteId}`);
+    return this.http.get(`${this.url}top/mouvement/${texteId}/`);
   }
 
   getMouvementByTexteId(id: any):Observable<any>{
@@ -43,6 +50,12 @@ export class MouvementService {
   updateMouvement(mouvementId:number,mouvement:any):Observable<any>{
     //console.log(`${this.url1}/secteur/${secteurId}`,secteur)
     return this.http.put(`${this.url}mouvement/${mouvementId}`,mouvement);
+  }
+
+  getRelationBetweenMouvementMinistere(mouvementId:number,ministereId:number):Observable<any>{
+    ///relation/mouvement/{mouvementId}/ministere/{ministereId}
+    console.log(`${this.url2}relation/mouvement/${mouvementId}/ministere/${ministereId}`);
+    return this.http.get(`${this.url2}relation/mouvement/${mouvementId}/ministere/${ministereId}`);
   }
 
   //mouvement/{mouvementId}/ministere/{ministereId}

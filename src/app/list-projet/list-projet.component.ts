@@ -57,6 +57,11 @@ export class ListProjetComponent implements AfterViewInit {
 
   phase:Phase = new Phase();
   phases:Phase[] = [];
+  mouvementMinistere:MouvementMinistere=new class implements MouvementMinistere {
+    id!: number;
+    ministere!: Ministere;
+    mouvement!: Mouvement;
+  }
 
   secteur:Secteur = new Secteur();
   secteurs:Secteur[] = [];
@@ -253,6 +258,16 @@ export class ListProjetComponent implements AfterViewInit {
   OnFilter() {
     this.mouvement.phase = this.phase
     this.mouvement.secteur= this.secteur;
+    /*this.mouvementService.getAllMouvementsByMinistere(this.ministere.id).subscribe()*/
+    this.mouvementService.getRelationBetweenMouvementMinistere(this.mouvement.id,this.ministere.id).subscribe(value => {
+      this.mouvementMinistere = value;
+    },error => console.log(error))
+    this.mouvement.mouvementMinistere = this.mouvementMinistere
+    console.log(    this.mouvement.phase,
+      this.mouvement.secteur,this.mouvement.mouvementMinistere)
+
+
+
     /* this.mouvementService.ge*/
 
 
@@ -278,6 +293,7 @@ export class ListProjetComponent implements AfterViewInit {
   onGetMinistere(event: any) {
     this.ministere=event.value;
     console.log(this.ministere);
+
   }
 
   isAdmin() {

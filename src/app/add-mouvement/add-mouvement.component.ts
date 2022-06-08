@@ -166,39 +166,6 @@ export class AddMouvementComponent implements OnInit {
     this._adapter.setLocale('fr');
   }
 
-  /*verifierTexte(nomfr: string, prenomfr: string) {
-    this.texteExist = false;
-    this.texteService.getTexteBySommaireArFr(nomfr, prenomfr).subscribe(value => {
-        this.texteExist = true;
-        this.texte = value;
-      }, error1 => console.log('N existe pas'+error1)
-    );
-  }*/
-
-  /*saveTexte() {
-    this.texte.nature = this.nature;
-    console.log(this.texte);
-    this.texteService.saveTexte(this.texte)
-      .subscribe(data => {
-        console.log(data);
-        this.texte = data;
-        this.mouvement.texte = this.texte
-        //this.sauvgarderMouvement(this.texte.id);
-
-        this.onSubmitSaveMouvement();
-        this.router.navigateByUrl('/lajoutprojet', { skipLocationChange: true }).then(() => {
-          this.router.navigate(['lesprojets']).then((r) => console.log(r));
-        });
-        //this.router.navigateByUrl(`/lestextes`);
-
-        this._snackBar.open('LE Texte A ETE AJOUTE', 'AJOUTER', {
-          duration: 2000,
-        });
-        //window.location.reload();
-      }, error1 => console.log(error1));
-
-  }*/
-
   onAjoutMouvement() {
     this.router.navigateByUrl('lestextes/' + this.texte.id + '/mouvements/ajoutmouvement').then(r => console.log(r));
   }
@@ -214,6 +181,21 @@ export class AddMouvementComponent implements OnInit {
     this.mouvementService.saveMouvement(this.texteId,this.mouvement).subscribe(value => {
       console.log(value)
       this.mouvement=value;
+      //this.mouvementMinistere.mouvement = this.mouvement;
+      console.log(this.ministeres);
+
+      this.ministeres.forEach(slcmins => {
+        console.log(slcmins);
+        //this.mouvementMinistere.ministere = slcmins;
+        this.mouvementService.saveMouvementMinistere(this.mouvement.id,slcmins.id).subscribe(minmouv => {
+          console.log(minmouv);
+        })
+      })
+
+    },error => console.log(error))
+    /*this.mouvementService.saveMouvement(this.texteId,this.mouvement).subscribe(value => {
+      console.log(value)
+      this.mouvement=value;
       this.router.navigateByUrl('/lajoutprojet', { skipLocationChange: true }).then(() => {
         this.router.navigate(['lesprojets']).then((r) => console.log(r));
       });
@@ -224,7 +206,7 @@ export class AddMouvementComponent implements OnInit {
       this.texteService.updateTexte(this.texteId,this.texte ).subscribe(value1 => {
         console.log(value1);
       })
-    })
+    })*/
   }
 
   reloadTexte() {}
