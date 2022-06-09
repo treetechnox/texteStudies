@@ -256,6 +256,7 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
       .subscribe(data => {
         console.log(data);
         this.texte = data;
+        this.mouvement.isactive = true;
         this.onSubmitSaveMouvement(this.texte,this.mouvement);
         this.router.navigateByUrl('/lajoutprojet', { skipLocationChange: true }).then(() => {
           this.router.navigate(['lesprojets']).then((r) => console.log(r));

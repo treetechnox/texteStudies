@@ -48,4 +48,9 @@ export class TexteService {
   getTexteBySommaireArFr(nomfr: string, prenomfr: string):Observable<any> {
     return this.http.get(`${this.url}`);
   }
+
+  getTexteByMouvementId(mouvementId:any):Observable<any>{
+    console.log(`${this.url}mouvement/${mouvementId}`);
+    return this.http.get(`${this.url}mouvement/${mouvementId}`)
+  }
 }

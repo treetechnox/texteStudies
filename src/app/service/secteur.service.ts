@@ -21,6 +21,12 @@ export class SecteurService {
     return this.http.get(this.url);
   }
 
+  ///topDesc/mouvement_secteur/{texteId}
+  getSecteurByLastMouvement(texteId:number):Observable<any>{
+    console.log(`${this.url}topDesc/mouvement_secteur/${texteId}`);
+    return this.http.get(`${this.url}topDesc/mouvement_secteur/${texteId}`);
+  }
+
   getSecteurById(id: any):Observable<any>{
     return this.http.get(`${this.url}secteur/${id}`);
   }

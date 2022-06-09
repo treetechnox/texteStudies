@@ -42,7 +42,7 @@ export class AddSecteurComponent implements OnInit {
         duration: 2000,
       });
     });
-    //window.location.reload();//this.location.back();
+    window.location.reload();//this.location.back();
   }
 
 }

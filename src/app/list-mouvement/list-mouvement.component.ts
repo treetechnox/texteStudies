@@ -33,7 +33,7 @@ export class ListMouvementComponent implements OnInit {
 
 
 
-  displayedColumns: string[] = ['id','libelleAr','libelleFr','date'];
+  displayedColumns: string[] = ['id','libelleAr','libelleFr','date','etat','operations'];
 
   //organismes : Organisme[]= new Array();
 
@@ -60,6 +60,7 @@ export class ListMouvementComponent implements OnInit {
     this.mouvementService.getMouvementByTexteId(this.texteId).subscribe(value => {
       //console.log(value);
       this.mouvements = value;
+      console.log(this.mouvements);
       this.dataSource = new MatTableDataSource(this.mouvements);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

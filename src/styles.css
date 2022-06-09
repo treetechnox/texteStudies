@@ -160,6 +160,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: darkslateblue;
   font:italic small-caps bold 20px/40px 'El Messiri', sans-serif;
   border-radius: 5PX;
+  font-size:1.5rem;text-align: center
 }
 
 .footer
@@ -187,7 +188,16 @@ body {
 
 
 mat-expansion-panel:first-child mat-expansion-panel-header {
-  background-color:#f0ad4e;
+  background-color: #4eebf0;
+  font-weight: bold;
+}
+.mat-expansion-panel-body {
+  padding: 0 24px 16px;
+  background: beige;
+}
+
+mat-expansion-panel:first-child mat-expansion-panel-header:hover {
+  background-color: #4eebf0;
   font-weight: bold;
 }
 
@@ -368,6 +378,12 @@ mat-card{
   background-color: #edf2f3
 }
 
+.make-true{
+  color: #00ff00;
+}
+.make-false{
+  color: #ee8488;
+}
 
 
 /**************    LOADING SPINNER *****************/

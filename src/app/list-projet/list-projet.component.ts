@@ -68,6 +68,7 @@ export class ListProjetComponent implements AfterViewInit {
 
   dataSource: MatTableDataSource<Texte> = new MatTableDataSource<Texte>();
   textes : Texte[]= new Array();
+  textes1 : Texte[]= new Array();
   expandedElement: Texte | null | undefined;
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort: MatSort | undefined;
@@ -256,30 +257,37 @@ export class ListProjetComponent implements AfterViewInit {
   }
 
   OnFilter() {
+    // @ts-ignore
+    this.mouvements=[];
+
+    this.textes=[];
+    this.textes1=[];
+
+    this.dataSource = new MatTableDataSource();
     this.mouvement.phase = this.phase
     this.mouvement.secteur= this.secteur;
-    /*this.mouvementService.getAllMouvementsByMinistere(this.ministere.id).subscribe()*/
-    this.mouvementService.getRelationBetweenMouvementMinistere(this.mouvement.id,this.ministere.id).subscribe(value => {
-      this.mouvementMinistere = value;
-    },error => console.log(error))
-    this.mouvement.mouvementMinistere = this.mouvementMinistere
-    console.log(    this.mouvement.phase,
-      this.mouvement.secteur,this.mouvement.mouvementMinistere)
 
+    this.mouvementService.getFilter(this.mouvement.phase.id,this.mouvement.secteur.id,this.ministere.id)
+      .subscribe(value => {
+       /* this.mouvements=value._embedded.mouvements.sort((a,b) => a.id.rendered.localeCompare(b.id.rendered));*/
+      this.mouvements = value._embedded.mouvements;
+      console.log(this.mouvements);
 
+      this.mouvements.forEach(value1 => {
+        this.texteService.getTexteByMouvementId(value1.id).subscribe(texte=>{
 
-    /* this.mouvementService.ge*/
-
-
-
-/*    this.mouvement.mouvementMinistere;
-
-    this.texteService.getAllMouvementsByMinistere(this.ministere.id).subscribe(value => )*/
-
-
+          if (!this.textes1.some((item) => item.id == texte.id)) {
+            this.textes1.push(texte);
+          }
+          /*
+          this.textes1.indexOf(texte.id) === -1 ? this.textes1.push(texte) : console.log("This item already exists");*/
+          this.textes = this.textes1;
+          this.dataSource= new MatTableDataSource(this.textes);
+          console.log(this.textes)
+        })
+      })
+    });
     console.log(this.mouvement);
-
-
   }
 
   onGetPhase(event: any) {

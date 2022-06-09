@@ -8,11 +8,12 @@ import {Mouvement} from '../Mouvement';
 })
 export class MouvementService {
 
-  url:string;
+  url:string;url1:string;
   url2:string;
 
   constructor(private http:HttpClient) {
     this.url='http://localhost:8083/mouvements/';
+    this.url1='http://localhost:8083/mouvements';
     this.url2='http://localhost:8083/mouvements_ministeres/';
   }
 
@@ -39,7 +40,14 @@ export class MouvementService {
     return this.http.get(`${this.url}top/mouvement/${texteId}/`);
   }
 
+  getTopMouvementByTexteIdDesc(texteId:number):Observable<any>{
+    console.log(`${texteId}`);
+    console.log(`${this.url}topDesc/mouvement/${texteId}`);
+    return this.http.get(`${this.url}topDesc/mouvement/${texteId}/`);
+  }
+
   getMouvementByTexteId(id: any):Observable<any>{
+    console.log(`${this.url}texte/${id}`);
     return this.http.get(`${this.url}texte/${id}`);
   }
 
@@ -47,6 +55,12 @@ export class MouvementService {
     console.log(`${this.url}textes/${texteTd}`,mouvement);
     return this.http.post(`${this.url}textes/${texteTd}`,mouvement);
   }
+
+// /active_mouvement/{id}
+  updateMouvementIsActive(mouvementId:number,mouvement:any):Observable<any>{
+    return this.http.put(`${this.url}active_mouvement/${mouvementId}`,mouvement);
+  }
+
   updateMouvement(mouvementId:number,mouvement:any):Observable<any>{
     //console.log(`${this.url1}/secteur/${secteurId}`,secteur)
     return this.http.put(`${this.url}mouvement/${mouvementId}`,mouvement);
@@ -68,4 +82,17 @@ export class MouvementService {
   /*getTexteBySommaireArFr(nomfr: string, prenomfr: string):Observable<any> {
     return this.http.get(`${this.url}`);
   }*/
+  getFilter(phaseId: number, secteurId: number | undefined, ministereId: number):Observable<any> {
+    let sub_url = '?';
+    if(phaseId>0)
+      sub_url+=`&phase=${phaseId}`;
+    // @ts-ignore
+    if(secteurId>0)
+      sub_url+=`&secteur=${secteurId}`;
+    if(ministereId>0)
+      sub_url+=`&mouvementMinisteres.ministere=${ministereId}`;
+    console.log(`${this.url1}${sub_url}`);
+
+    return this.http.get(`${this.url1}${sub_url}`);
+  }
 }

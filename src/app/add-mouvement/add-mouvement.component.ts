@@ -81,11 +81,18 @@ export class AddMouvementComponent implements OnInit {
               private dialog: MatDialog, private _snackBar: MatSnackBar, public app: AppComponent,
               @Inject(MAT_DIALOG_DATA) public texteId: number
               /*private location: Location ,*/ /*private detailService: DetailService*/) {
+
+    if (this.selsect===null){
+      this.secteurService.getSecteurByLastMouvement(this.texteId).subscribe(sect =>{
+        this.selsect = sect;
+      })
+    }
     /*      console.log(this.selsect);*/
     //;
 
     /*this.authService.userAuthenticated.secteur?alert('secteur existe !!! '):alert('secteur n\'existe pas !!! ');
     this.secteur = this.authService.userAuthenticated.secteur;*/
+    console.log(this.selsect);
   }
   datePipe!: DatePipe;
 
@@ -176,7 +183,23 @@ export class AddMouvementComponent implements OnInit {
 
   onSubmitSaveMouvement() {
     /*this.mouvement.mouvementMinistere*/
+
+
+    this.mouvementService.getTopMouvementByTexteIdDesc(this.texteId).subscribe(topmouve => {
+      topmouve.isactive = false;
+      this.mouvementService.updateMouvementIsActive(topmouve.id,topmouve).subscribe(updatedmouve => {
+        console.log(updatedmouve);
+      })
+    })
+
+    if(this.mouvement.phase.libelleFr = 'TEXTE PUBLIE'){
+      this.texteService.updateTexte(this.texteId,this.texte).subscribe(value => {
+        console.log(value);
+      })
+    }
+
     this.mouvement.secteur = this.selsect
+    this.mouvement.isactive = true;
     console.log(this.mouvement);
     this.mouvementService.saveMouvement(this.texteId,this.mouvement).subscribe(value => {
       console.log(value)
@@ -191,22 +214,8 @@ export class AddMouvementComponent implements OnInit {
           console.log(minmouv);
         })
       })
-
+      window.location.reload();
     },error => console.log(error))
-    /*this.mouvementService.saveMouvement(this.texteId,this.mouvement).subscribe(value => {
-      console.log(value)
-      this.mouvement=value;
-      this.router.navigateByUrl('/lajoutprojet', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['lesprojets']).then((r) => console.log(r));
-      });
-      this._snackBar.open('LE Texte A ETE AJOUTE', 'AJOUTER', {
-        duration: 2000,
-      });
-
-      this.texteService.updateTexte(this.texteId,this.texte ).subscribe(value1 => {
-        console.log(value1);
-      })
-    })*/
   }
 
   reloadTexte() {}

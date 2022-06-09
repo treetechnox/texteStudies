@@ -13,4 +13,5 @@ export class Mouvement{
   details!:string;
   scanpdf!:string;
   mouvementMinistere!:any;
+  isactive!:boolean;
 }

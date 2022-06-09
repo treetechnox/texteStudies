@@ -6,7 +6,7 @@
     SUIVI DES PROJETS DES TEXTES
   </h3>
 </div>-->
-<nav *ngIf="authService.isAuthenticated == true" class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav id="navbar" *ngIf="authService.isAuthenticated == true" class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
     <a class="navbar-brand" [routerLink]="'/lesprojets'">
       <i class="fa fa-home fa-2x" aria-hidden="true"></i>
