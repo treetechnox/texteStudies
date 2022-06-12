@@ -124,6 +124,7 @@ import { ListMouvementComponent } from './list-mouvement/list-mouvement.componen
 import { EditTexteComponent } from './edit-texte/edit-texte.component';*/
 
 import { PdfViewerModule, PdfViewerComponent } from 'ng2-pdf-viewer';
+import { ShowPdfComponent } from './show-pdf/show-pdf.component';
 
 
 
@@ -167,6 +168,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ListUserComponent,
     EditProjetComponent,
     EditTexteComponent,
+    ShowPdfComponent,
     /*AddUserComponent,
     ListUserComponent,
     EditUserComponent,

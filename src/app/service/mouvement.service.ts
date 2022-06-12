@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs/internal/Observable';
 import {Mouvement} from '../Mouvement';
 
@@ -24,7 +24,7 @@ export class MouvementService {
   }
 
   getMouvementById(id: any):Observable<any>{
-    return this.http.get(`${this.url}mouvement/${id}`);
+    return this.http.get(`${this.url}${id}`);
   }
 
   getAllMouvementsByMinistere(ministere:string):Observable<any[]>{
@@ -95,4 +95,25 @@ export class MouvementService {
 
     return this.http.get(`${this.url1}${sub_url}`);
   }
+
+  uploadPdfScanService(file: File, idMouvement: any) : Observable<HttpEvent<{}>>{
+      let formData : FormData = new FormData();
+    formData.append('file',file);
+    console.log(this.url+'uploadPdfScan/'+idMouvement);
+    const req = new HttpRequest('POST', this.url+'uploadPdfScan/'+idMouvement, formData,{
+      reportProgress:true,
+      responseType:'text'
+    });
+    return this.http.request(req);
+  }
+
+
+  public getPDF(mouvementId:number): Observable<Blob> {
+//const options = { responseType: 'blob' }; there is no use of this
+    let uri = `${this.url}getpdf/${mouvementId}`;
+    // this.http refers to HttpClient. Note here that you cannot use the generic get<Blob> as it does not compile: instead you "choose" the appropriate API in this way.
+    return this.http.get(uri, { responseType: 'blob' });
+  }
+
+
 }

@@ -12,6 +12,10 @@ import {MouvementService} from '../service/mouvement.service';
 import {AddMouvementComponent} from '../add-mouvement/add-mouvement.component';
 import {MinistereService} from '../service/ministere.service';
 import {Ministere} from '../Ministere';
+import {HttpEventType, HttpResponse} from "@angular/common/http";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {AddPhaseComponent} from "../add-phase/add-phase.component";
+import {ShowPdfComponent} from "../show-pdf/show-pdf.component";
 
 @Component({
   selector: 'app-list-mouvement',
@@ -23,6 +27,8 @@ export class ListMouvementComponent implements OnInit {
   @Input()
   texteId!: number;
 
+  link: any;
+
   dataSource: any;
 
   mouvement:Mouvement=new Mouvement();
@@ -31,6 +37,7 @@ export class ListMouvementComponent implements OnInit {
   ministere:Ministere=new Ministere();
   ministeres:Ministere[] = [];
 
+  etat:boolean=false;
 
 
   displayedColumns: string[] = ['id','libelleAr','libelleFr','date','etat','operations'];
@@ -39,9 +46,13 @@ export class ListMouvementComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort!: MatSort;
-  private date!: Date;
+   date!: Date;
+   progress!: number;
+   selectedFiles: any;
+   currentFileUpload: any;
 
   constructor(private mouvementService:MouvementService,
+              private _snackBar: MatSnackBar,
               private  ministereService:MinistereService,
               private dialog: MatDialog,
               private router: Router) { }
@@ -92,4 +103,82 @@ export class ListMouvementComponent implements OnInit {
   onEditNature(id:any) {
 
   }
+
+  onSelectFile(event: any,mouvementId:number) {
+    this.selectedFiles = event.target.files;
+    console.log(this.selectedFiles.item(0));
+    if(this.selectedFiles){
+      this.uploadPdf(mouvementId);
+    }
+  }
+
+  uploadPdf(mouvementId:number){
+    this.progress = 0;
+    this.currentFileUpload = this.selectedFiles.item(0);
+    console.log(this.currentFileUpload);
+    this.mouvementService.uploadPdfScanService(this.currentFileUpload, mouvementId).subscribe(event =>{
+      console.log(event);
+      if(event.type === HttpEventType.UploadProgress){
+        // @ts-ignore
+        this.progress = Math.round(100 * event.loaded/event.total);
+        this._snackBar.open('LE MOUVEMENT A ETE MODIFIE', 'MODIFIER', {
+          duration: 2000,
+        });
+        alert('le Fichier est chargé');
+      }else if(event instanceof HttpResponse){
+        console.log('Erreur au niveau de telechargement');
+      }
+    }, error1 => alert("Erreur de chargement"));
+  }
+
+  showPdf(mouvementId:number) {
+    /*const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data= mouvementId;
+    // @ts-ignore
+    dialogConfig.width = '80%';
+    dialogConfig.height = '80%';
+    this.dialog.open(ShowPdfComponent, dialogConfig);*/
+
+      this.mouvementService.getPDF(mouvementId).subscribe(mypdf => {
+        var newBlob = new Blob([mypdf],{type:"application/pdf"});
+        // @ts-ignore
+        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+          // @ts-ignore
+          window.navigator.msSaveOrOpenBlob(newBlob);
+          return;
+        }
+
+        // For other browsers:
+        // Create a link pointing to the ObjectURL containing the blob.
+        const downloadURL = URL.createObjectURL(newBlob);
+        window.open(downloadURL);
+
+
+        /**
+         * TO DOWNLOAD THE PDF
+
+
+        const data = window.URL.createObjectURL(newBlob);
+
+        this.link = document.createElement('a');
+        console.log(this.link);
+        this.link.href = data;
+        this.link.download = `${this.mouvement.scanpdf}`;
+        // this is necessary as link.click() does not work on the latest firefox
+        this.link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
+
+
+         */
+        setTimeout(() => {
+          // For Firefox it is necessary to delay revoking the ObjectURL
+          window.URL.revokeObjectURL(window.URL.createObjectURL(newBlob));
+          this.link.remove();
+        }, 100);
+      });
+
+  }
+
 }
+
