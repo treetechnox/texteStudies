@@ -19,8 +19,11 @@ import {MinistereService} from '../service/ministere.service';
 import {Ministere} from '../Ministere';
 import {AuthenticationService} from '../service/authentication.service';
 import {MatSort} from "@angular/material/sort";
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {pdfDefaultOptions} from "ngx-extended-pdf-viewer";
+import {NgForm} from "@angular/forms";
+import {AddPhaseComponent} from "../add-phase/add-phase.component";
+import {AddAvisComponent} from "../add-avis/add-avis.component";
 
 export interface MouvementMinistere{
   id: number;
@@ -293,20 +296,44 @@ export class ListProjetComponent implements AfterViewInit {
   onGetPhase(event: any) {
     this.phase=event.value;
     console.log(this.phase);
+    if (this.phase=== undefined ){
+      this.phase = new Phase();
+    }
   }
   onGetSecteur(event: any) {
     this.secteur=event.value;
     console.log(this.secteur);
+    if (this.secteur=== undefined ){
+      this.secteur = new Secteur();
+    }
   }
   onGetMinistere(event: any) {
     this.ministere=event.value;
     console.log(this.ministere);
-
+    if (this.ministere=== undefined ){
+      this.ministere = new Ministere();
+    }
   }
 
   isAdmin() {
     return this.authService.isAdmin();
   }
 
+  reset(form:NgForm) {
+    console.log(form)
+    form.reset();
+  }
+
+  ajouterAvis(texteId:number) {
+
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = false;
+      dialogConfig.autoFocus = true;
+      // @ts-ignore
+      dialogConfig.width = '400px';
+      dialogConfig.height = '330px';
+      this.dialog.open(AddAvisComponent, dialogConfig);
+
+  }
 }
 

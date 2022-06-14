@@ -106,7 +106,8 @@ table{
 }
 
 .example-margin {
-  margin: 0 10px;
+  margin: 0px 10px;
+  padding: 20px 10px;
 }
 
 .clickable {
@@ -245,7 +246,7 @@ mat-card{
 
 .myflex{
   display: flex;
-  justify-content: center;
+  justify-content: center;align-content: center;
 }
 
 .mybigtexte{

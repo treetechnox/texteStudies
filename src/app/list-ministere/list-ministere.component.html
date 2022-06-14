@@ -1,6 +1,6 @@
 <br>
 <div class="jumbotron mycustom-jumbotron">
-  <div class="text-dark" style=" text-align: center"><h5>LA LISTE DES MINISTERES</h5></div>
+  <div class="entete" style=" text-align: center"><span>LA LISTE DES MINISTERES</span></div>
   <br>
   <button type="submit" mat-raised-button
           matTooltip="{{ 'LIST-CANDIDATS.AJOUTER-BUTTON.TOOLTIP' | translate }}"
@@ -26,11 +26,11 @@
 
       <!-- libelle fr Column -->
       <ng-container matColumnDef="libelleAr">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> القطاع </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> الوزارة </th>
         <td mat-cell *matCellDef="let element"> {{element.libelleAr}} </td>
       </ng-container>
       <ng-container matColumnDef="libelleFr">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> SECTEUR </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> MINISTERE </th>
         <td mat-cell *matCellDef="let element"> {{element.libelleFr}} </td>
       </ng-container>
 
