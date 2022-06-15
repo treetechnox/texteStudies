@@ -208,16 +208,13 @@ td.mat-cell {
   box-sizing: border-box;
 }*/
 
-::ng-deep .mat-tooltip  {
+::ng-deep .mat-tooltip{
   white-space: pre-line !important;
-  background-color: darkblue;
-  font-size: 16px;
-  font-weight: 600;
+  background-color: #cbcbd0;
+  font-size: 14px;
+  font-weight: 500;
 }
 
-.my-custom-tooltip {
-  max-width: unset !important;
-}
 
 /*
 td.mat-cell, td.mat-footer-cell, th.mat-header-cell {

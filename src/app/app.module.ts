@@ -23,20 +23,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
-// import {NgxPaginationModule} from 'ngx-pagination';
-// import {FlexLayoutModule} from '@angular/flex-layout';
-import {FlexLayoutModule} from '@angular/flex-layout';/*
-import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component';
-import { ListReservationsComponent } from './list-reservations/list-reservations.component';
-import { AddReservationComponent } from './add-reservation/add-reservation.component';
-import { ListSallesComponent } from './list-salles/list-salles.component';
-import { AddSalleComponent } from './add-salle/add-salle.component';
-import { ListSecteursComponent } from './list-secteurs/list-secteurs.component';
-import { AddSecteurComponent } from './add-secteur/add-secteur.component';
-import { DisableReservationComponent } from './disable-reservation/disable-reservation.component';
-import { TraceUtilisateurComponent } from './trace-utilisateur/trace-utilisateur.component';
-import { EditSalleComponent } from './edit-salle/edit-salle.component';
-import { EditSecteurComponent } from './edit-secteur/edit-secteur.component';*/
+import {FlexLayoutModule} from '@angular/flex-layout';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -46,7 +33,6 @@ import {ObserversModule} from "@angular/cdk/observers";
 import {OverlayModule} from "@angular/cdk/overlay";
 import {PlatformModule} from "@angular/cdk/platform";
 import {PortalModule} from "@angular/cdk/portal";
-//import {ScrollDispatchModule} from '@angular/cdk/scrolling';
 import {CdkStepperModule} from "@angular/cdk/stepper";
 import {CdkTableModule} from "@angular/cdk/table";
 import {MatButtonModule} from "@angular/material/button";
@@ -103,30 +89,13 @@ import { ListSecteursComponent } from './list-secteur/list-secteurs.component';
 import { ListUserComponent } from './list-user/list-user.component';
 import { EditProjetComponent } from './edit-projet/edit-projet.component';
 import { EditTexteComponent } from './edit-texte/edit-texte.component';
-/*import { RapportJournalierComponent } from './rapport-journalier/rapport-journalier.component';
-import { AddPhaseComponent } from './add-phase/add-phase.component';
-import { ListPhasesComponent } from './list-phases/list-phases.component';
-import { AddMinistereComponent } from './add-ministere/add-ministere.component';
-import { EditMinistereComponent } from './edit-ministere/edit-ministere.component';
-import { ListMinistereComponent } from './list-ministere/list-ministere.component';
-import { AddProjetComponent } from './add-projet/add-projet.component';
-import { AddReunionComponent } from './add-reunion/add-reunion.component';
-import { EditReunionComponent } from './edit-reunion/edit-reunion.component';
-import { ListReunionComponent } from './list-reunion/list-reunion.component';
-import { ListProjetComponent } from './list-projet/list-projet.component';
-import { EditProjetComponent } from './edit-projet/edit-projet.component';
-import { AddNatureComponent } from './add-nature/add-nature.component';
-import { EditNatureComponent } from './edit-nature/edit-nature.component';
-import { ListNatureComponent } from './list-nature/list-nature.component';
-import { EditPhaseComponent } from './edit-phase/edit-phase.component';
-import { AddMouvementComponent } from './add-mouvement/add-mouvement.component';
-import { ListMouvementComponent } from './list-mouvement/list-mouvement.component';
-import { EditTexteComponent } from './edit-texte/edit-texte.component';*/
+
 
 import { PdfViewerModule, PdfViewerComponent } from 'ng2-pdf-viewer';
 import { ShowPdfComponent } from './show-pdf/show-pdf.component';
 import {TooltipModule} from "ngx-bootstrap/tooltip";
 import { AddAvisComponent } from './add-avis/add-avis.component';
+import { ListAvisComponent } from './list-avis/list-avis.component';
 
 
 
@@ -172,39 +141,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     EditTexteComponent,
     ShowPdfComponent,
     AddAvisComponent,
-    /*AddUserComponent,
-    ListUserComponent,
-    EditUserComponent,
-    ConfirmDialogComponent,
-    ListReservationsComponent,
-    AddReservationComponent,
-    ListSallesComponent,
-    AddSalleComponent,
-    ListSecteursComponent,*/
-    //AddSecteurComponent,
-    /*DisableReservationComponent,
-    TraceUtilisateurComponent,
-    EditSalleComponent,*/
-    //EditSecteurComponent,
-   /* RapportJournalierComponent,
-    AddProjetComponent,
-    AddPhaseComponent,
-    ListPhasesComponent,
-    AddMinistereComponent,
-    EditMinistereComponent,
-    ListMinistereComponent,
-    AddReunionComponent,
-    EditReunionComponent,
-    ListReunionComponent,
-    ListProjetComponent,
-    EditProjetComponent,
-    AddNatureComponent,
-    EditNatureComponent,
-    ListNatureComponent,
-    EditPhaseComponent,
-    AddMouvementComponent,
-    ListMouvementComponent,
-    EditTexteComponent,*/
+    ListAvisComponent,
   ],
     imports: [
         FormsModule,
