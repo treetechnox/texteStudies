@@ -1,6 +1,6 @@
 
 
-<br/>
+<br>
 
 <div class="jumbotron mycustom-jumbotron"
      [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }">
@@ -10,8 +10,8 @@
   <br>
   <button class="btn btn-primary" (click)="onAddProjet()">AJOUTER PROJET TEXTE<!--{{'LIST-ORGANISMES.ADD.BUTTON'|translate}}--></button>
   <!--  {{'LIST-MOUVEMENTS.BUTTON' | translate}}-->
-  <br />
-  <br />
+  <br>
+  <br>
 
   <mat-form-field class="example-full-width">
     <mat-label>RECHERCHE SIMPLE D'UN TEXTE</mat-label>
@@ -53,7 +53,10 @@
         <div *ngIf="isAdmin()" class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
           <mat-form-field class="example-full-width">
             <mat-label>SECTEUR<!--{{ 'ADD-MOUVEMENT.ETAT' | translate }}--></mat-label>
-            <mat-select  name="secteur" (selectionChange)="onGetSecteur($event)"><!--[disabled]="!authService.isAdmin()"-->
+            <mat-select
+              matTooltip="Secteur"
+              matTooltipClass="custom-tooltip"
+              name="secteur" (selectionChange)="onGetSecteur($event)"><!--[disabled]="!authService.isAdmin()"-->
               <mat-option></mat-option>
               <mat-option *ngFor="let sct of secteurs; let i=index" [value]="sct">
                 {{sct?.libelleFr}}
@@ -79,13 +82,6 @@
                 matTooltip= "FILTRE"
                 (click)="OnFilter()">
           <i class="fa fa-filter fa-2x" aria-hidden="true"></i> FILTRER
-        </button>
-        <ng-template #HtmlContent>
-          <div>Simple and <b>bold text</b></div>
-        </ng-template>
-
-        <button [tooltip]="HtmlContent" content-type="template">
-          Voir la liste des avis
         </button>
       </form>
     </mat-expansion-panel>
@@ -120,7 +116,7 @@
       </ng-container>
 
       <ng-container matColumnDef="expandedDetail">
-        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length" >
           <div class="example-element-detail"
                [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
 
@@ -138,12 +134,32 @@
                   <mat-icon>playlist_add</mat-icon>
                   AJOUTER UN AVIS
                 </button>
+
+                <!--<span tooltip="{{allAvis}}" placement="bottom" width="1500" showDelay="500">Tooltip on top</span>
+                <ng-template #HtmlContent width="1300">
+                  <div class="list-avis" *ngFor="let avs of aviss">
+                    {{avs.details}}
+                  </div>
+                </ng-template>
+
                 <button
                   mat-button color="accent"
-                  mat-raised-button >
+                  mat-raised-button
+                  [tooltip]="HtmlContent" content-type="template"
+
+                  (click)="getListAvissByTxtId(element.id)"
+                >
+                  Voir la liste des avis
                   <mat-icon>view_list</mat-icon>
-                  LIST DES AVIS
-                </button>
+                </button>-->
+                <span
+                  class="btn btn-default"
+                  matTooltip="{{allAvis}}"
+                  matTooltipClass="my-custom-tooltip"
+                  mat-raised-button >
+                  <mat-icon>view_list</mat-icon>LIST DES AVIS
+
+                </span>
 
               </div>
                 <br/>
@@ -171,7 +187,7 @@
       <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
           class="example-element-row"
           [class.example-expanded-row]="expandedElement === element"
-          (click)="expandedElement = expandedElement === element ? null : element">
+          (click)="expandedElement = expandedElement === element ? null : element;  makeDisabled(element.id)">
       </tr>
       <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
     </table>

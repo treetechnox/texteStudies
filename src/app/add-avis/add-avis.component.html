@@ -1,1 +1,48 @@
-<p>add-avis works!</p>
+<br>
+<div class="add-border jumbotron mycustom-jumbotron">
+  <div class="container">
+    <div [hidden]="submitted">
+      <button mat-raised-button
+              matTooltip="RETOUR"
+              class="btn btn-dark"
+              [routerLink]="'/leaviss'">
+        <i class="fa fa-hand-o-left fa-2x"></i>
+      </button>
+      <form>
+        <div class="row" ><!--[ngStyle]="{
+                  direction:
+                    app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'
+                }"-->
+          <h5 >AJOUTER UN AVIS</h5><!--{{ 'ADD-MOUVEMENT.H5' | translate }}-->
+        </div>
+        <div class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
+          <mat-form-field class="example-full-width">
+            <mat-label>MINISTERES<!--{{ 'ADD-MOUVEMENT.ETAT' | translate }}--></mat-label>
+            <mat-select  name="ministere" (selectionChange)="onGetMinistere($event.value)"><!--[disabled]="!authService.isAdmin()"-->
+              <mat-option></mat-option>
+              <mat-option *ngFor="let mnst of ministeres; let i=index" [value]="mnst">
+                {{mnst?.libelleFr}}
+              </mat-option>
+            </mat-select>
+            <mat-error>{{ 'ADD-MOUVEMENT.ETAT.MAT-ERROR' | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div ><!--[ngStyle]="{direction:app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'}"-->
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="الملاحظة" type="text" [(ngModel)]="avis.details" name="avis"/><!--required-->
+          </mat-form-field>
+        </div>
+        <!--<button type="submit" class="btn btn-success">AJOUTER MOUVEMENT</button>-->
+        <div class="form-group">
+          <button type="submit" class="btn btn-success" (click)="onSubmitSave()">AJOUTER</button>
+        </div>
+      </form>
+    </div>
+
+    <div [hidden]="!submitted">
+      <h4>LE SECTEUR EST AJOUTE AVEC SUCCES!</h4>
+      <!-- <button class="btn btn-success" (click)="newEmployee()">Add</button> -->
+    </div>
+
+  </div>
+</div>

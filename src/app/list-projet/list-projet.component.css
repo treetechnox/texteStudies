@@ -200,7 +200,24 @@ td.mat-cell {
   margin-left: 8px;
 }
 
+/*.list-avis{
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  color: #ee8488;
+  box-sizing: border-box;
+}*/
 
+::ng-deep .mat-tooltip  {
+  white-space: pre-line !important;
+  background-color: darkblue;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.my-custom-tooltip {
+  max-width: unset !important;
+}
 
 /*
 td.mat-cell, td.mat-footer-cell, th.mat-header-cell {

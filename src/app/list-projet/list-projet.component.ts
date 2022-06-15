@@ -24,12 +24,17 @@ import {pdfDefaultOptions} from "ngx-extended-pdf-viewer";
 import {NgForm} from "@angular/forms";
 import {AddPhaseComponent} from "../add-phase/add-phase.component";
 import {AddAvisComponent} from "../add-avis/add-avis.component";
+import {Avis} from "../Avis";
+import {AvisService} from "../service/avis.service";
+import {noAuto} from "@fortawesome/fontawesome-svg-core";
 
 export interface MouvementMinistere{
   id: number;
   mouvement:Mouvement;
   ministere:Ministere;
 }
+
+
 
 /** Constants used to fill up our data base. */
 
@@ -53,6 +58,8 @@ export class ListProjetComponent implements AfterViewInit {
 
   texte:Texte=new Texte();
 
+  allAvis:string='';
+
   mouvement:Mouvement = new Mouvement();
   mouvements:Mouvement[] = [];
   ministere:Ministere = new Ministere();
@@ -70,6 +77,9 @@ export class ListProjetComponent implements AfterViewInit {
   secteurs:Secteur[] = [];
 
   dataSource: MatTableDataSource<Texte> = new MatTableDataSource<Texte>();
+
+  avis:Avis=new Avis();
+  aviss: Avis[]=[];
   textes : Texte[]= new Array();
   textes1 : Texte[]= new Array();
   expandedElement: Texte | null | undefined;
@@ -79,69 +89,10 @@ export class ListProjetComponent implements AfterViewInit {
   public page = 1;
 
   public pageLabel!: string;
-
-  /**
-   *
-   * BEGIN OF PDF VIEWER
-   *
-   *
-  pdfSrc = "";
-  pageVariable = 1;
-  zoom = 1
-
-  nextPage() {
-    this.pageVariable++;
-  }
-  previousPage() {
-    this.pageVariable--;
-  }
-
-  plusZoom() {
-    this.zoom++;
-  }
-
-  minusZoom() {
-    if(this.zoom > 1 ) {
-      this.zoom--;
-    }
-  }
-
-  afterLoadComplete(pdf: any) {
-    console.log('after-load-complete');
-  }
-
-  pageRendered(e: CustomEvent) {
-    console.log('(page-rendered)', e);
-  }
-
-  textLayerRendered(e: CustomEvent) {
-    console.log('(text-layer-rendered)', e);
-  }
-
-  onFileSelected() {
-    let $img: any = document.querySelector('#file');
-
-    if (typeof (FileReader) !== 'undefined') {
-      let reader = new FileReader();
-
-      reader.onload = (e: any) => {
-        this.pdfSrc = e.target.result;
-      };
-
-      console.log($img.files[0])
-      reader.readAsArrayBuffer($img.files[0]);
-      console.log(reader)
-    }
-  }
-
-  *
-   *
-   * END OF PDF VIEWER
-   *
-   *
-*/
+  private disabled: boolean=false;
 
   constructor(private texteService: TexteService,
+              private avisService:AvisService,
               private mouvementService:MouvementService,
               private phaseService:PhaseService,
               private secteurService:SecteurService,
@@ -329,11 +280,38 @@ export class ListProjetComponent implements AfterViewInit {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = false;
       dialogConfig.autoFocus = true;
+      dialogConfig.data=texteId;
       // @ts-ignore
       dialogConfig.width = '400px';
       dialogConfig.height = '330px';
       this.dialog.open(AddAvisComponent, dialogConfig);
 
   }
+
+  getListAvissByTxtId(texteId:number) {
+    this.avisService.getAvisByTexte(texteId).subscribe({
+      next:value => {
+        console.log(value);
+          this.aviss = value;
+        this.aviss.forEach(value => {
+          this.allAvis+=('- '+value.ministere.libelleFr+': '+value.details+'\n');
+        })
+        console.log(this.allAvis)
+      },
+      complete:() => console.log("Avis chargées"),
+      error:err => console.log(err)
+    })
+  }
+
+  makeDisabled(texteId:number) {
+    this.aviss=[];this.allAvis='';
+    console.log(texteId,this.disabled);
+    this.disabled = false;
+    this.getListAvissByTxtId(texteId);
+
+
+  }
+
+
 }
 

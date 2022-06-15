@@ -3,7 +3,7 @@ import {Ministere} from "./Ministere";
 
 export class Avis{
   id!:number;
-  detail!:string;
+  details!:string;
   texte!:Texte ;
   ministere!:Ministere;
 }

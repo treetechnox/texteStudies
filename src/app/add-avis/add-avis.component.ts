@@ -1,4 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {AuthenticationService} from "../service/authentication.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {AppComponent} from "../app.component";
+import {Location} from "@angular/common";
+import {Avis} from "../Avis";
+import {AvisService} from "../service/avis.service";
+import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MatSelectChange} from "@angular/material/select";
+import {Ministere} from "../Ministere";
+import {MinistereService} from "../service/ministere.service";
 
 @Component({
   selector: 'app-add-avis',
@@ -7,9 +18,54 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddAvisComponent implements OnInit {
 
-  constructor() { }
+  avis: Avis = new Avis();
+  ministere: Ministere= new Ministere();
+  ministeres: Ministere[]=[];
 
-  ngOnInit(): void {
+  submitted!:boolean;
+
+
+  constructor(
+    private avisService: AvisService,
+    private ministereService:MinistereService,
+    private authService: AuthenticationService,
+    private router: Router, private route: ActivatedRoute,
+    private _snackBar: MatSnackBar,public app:AppComponent,
+    @Inject(MAT_DIALOG_DATA) public texteId: number,
+    private location: Location) { }
+
+
+  ngOnInit() {
+    this.ministereService.getAllMinisteres().subscribe({next: value => {
+        this.ministeres = value;
+      },
+      error: error => {
+        console.log(error);
+      },
+      complete: () => {
+        console.log('Request complete');
+      }})
+    this.submitted= false;
   }
 
+
+  onSubmitSave() {
+    //console.log(this.avis);
+    this.avisService.saveAvis(this.texteId,this.avis).subscribe({
+      next:value => {
+        console.log(value);
+        if(value===null) alert("vous ne pouvez pas ajouter le meme secteur deux fois !!");
+        this._snackBar.open('LA SECTEUR A ETE AJOUTE', 'FERMER', {duration: 2000})
+      },
+      complete:()=>console.log('Avis sauvgardé'),
+      error:err => console.log(err),
+    });
+    //window.location.reload();//this.location.back();
+  }
+
+  onGetMinistere($event: any) {
+    console.log($event);
+    this.ministere = $event
+    this.avis.ministere = this.ministere;
+  }
 }
