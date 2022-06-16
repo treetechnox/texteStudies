@@ -27,6 +27,7 @@ import {AddAvisComponent} from "../add-avis/add-avis.component";
 import {Avis} from "../Avis";
 import {AvisService} from "../service/avis.service";
 import {noAuto} from "@fortawesome/fontawesome-svg-core";
+import {ListAvisComponent} from "../list-avis/list-avis.component";
 
 export interface MouvementMinistere{
   id: number;
@@ -313,5 +314,15 @@ export class ListProjetComponent implements AfterViewInit {
   }
 
 
+  onShowListAvis(texteId:number) {
+    const dialogConfigList = new MatDialogConfig();
+    dialogConfigList.disableClose = false;
+    dialogConfigList.autoFocus = true;
+    dialogConfigList.data=texteId;
+    // @ts-ignore
+    dialogConfigList.width = '60%';
+    dialogConfigList.height = '50%px';
+    this.dialog.open(ListAvisComponent, dialogConfigList);
+  }
 }
 

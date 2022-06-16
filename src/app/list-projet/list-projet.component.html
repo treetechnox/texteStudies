@@ -152,14 +152,16 @@
                   Voir la liste des avis
                   <mat-icon>view_list</mat-icon>
                 </button>-->
-                <span
-                  class="btn btn-default"
+                <button
                   matTooltip="{{allAvis}}"
                   matTooltipClass="my-custom-tooltip"
-                  mat-raised-button >
+                  mat-raised-button
+                  mat-button color="accent"
+                  (click)="onShowListAvis(element.id)"
+                >
                   <mat-icon>view_list</mat-icon>LIST DES AVIS
 
-                </span>
+                </button>
 
               </div>
                 <br/>

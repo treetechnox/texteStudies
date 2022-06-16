@@ -21,6 +21,7 @@ import {EditMinistereComponent} from './edit-ministere/edit-ministere.component'
 import {EditNatureComponent} from './edit-nature/edit-nature.component';
 import {AuthGuard} from './auth.guard';
 import {EditTexteComponent} from "./edit-texte/edit-texte.component";
+import {ListAvisComponent} from "./list-avis/list-avis.component";
 
 
 
@@ -28,7 +29,7 @@ import {EditTexteComponent} from "./edit-texte/edit-texte.component";
 const routes: Routes = [{ path: '', redirectTo : 'login', pathMatch : 'full' },
   { path: 'lesprojets', component : ListProjetComponent/*, canActivate:[AuthGuard]*/},
   //{ path: 'lesreservations', component : ListReservationsComponent},
-  //{ path: 'lessalles', component : ListSallesComponent},
+  { path: 'lesavis', component : ListAvisComponent},
   { path: 'lessecteurs', component : ListSecteursComponent},
   { path: 'lesphases', component : ListPhasesComponent},
   { path: 'lesnatures', component : ListNatureComponent},
