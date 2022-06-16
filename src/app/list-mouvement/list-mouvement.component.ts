@@ -121,13 +121,15 @@ export class ListMouvementComponent implements OnInit {
       if(event.type === HttpEventType.UploadProgress){
         // @ts-ignore
         this.progress = Math.round(100 * event.loaded/event.total);
-        this._snackBar.open('LE MOUVEMENT A ETE MODIFIE', 'MODIFIER', {
+        this._snackBar.open('LE PDF A ETE AJOUTE', 'FERMER', {
           duration: 2000,
+
         });
         alert('le Fichier est chargé');
       }else if(event instanceof HttpResponse){
         console.log('Erreur au niveau de telechargement');
       }
+      window.location.reload();
     }, error1 => alert("Erreur de chargement"));
   }
 
@@ -171,11 +173,11 @@ export class ListMouvementComponent implements OnInit {
 
 
          */
-        setTimeout(() => {
+        /*setTimeout(() => {
           // For Firefox it is necessary to delay revoking the ObjectURL
           window.URL.revokeObjectURL(window.URL.createObjectURL(newBlob));
           this.link.remove();
-        }, 100);
+        }, 100);*/
       });
 
   }

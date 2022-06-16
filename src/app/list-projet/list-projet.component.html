@@ -121,7 +121,7 @@
                [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
 
             <div class="example-element-description example-full-width">
-              <div class="myflex border example-margin"><!--{{ app.localStorageItem('lge') === 'fr' ? 'MODIFIER ' :  ' تعديل : ' }}-->
+              <div class="myflex example-margin"><!--{{ app.localStorageItem('lge') === 'fr' ? 'MODIFIER ' :  ' تعديل : ' }}-->
                 <button mat-raised-button matTooltip="MODIFIER"
                         class="btn btn-primary spacer" (click)="onEditTexte(element.id)">
                   <mat-icon>edit</mat-icon>
@@ -134,24 +134,6 @@
                   <mat-icon>playlist_add</mat-icon>
                   AJOUTER UN AVIS
                 </button>
-
-                <!--<span tooltip="{{allAvis}}" placement="bottom" width="1500" showDelay="500">Tooltip on top</span>
-                <ng-template #HtmlContent width="1300">
-                  <div class="list-avis" *ngFor="let avs of aviss">
-                    {{avs.details}}
-                  </div>
-                </ng-template>
-
-                <button
-                  mat-button color="accent"
-                  mat-raised-button
-                  [tooltip]="HtmlContent" content-type="template"
-
-                  (click)="getListAvissByTxtId(element.id)"
-                >
-                  Voir la liste des avis
-                  <mat-icon>view_list</mat-icon>
-                </button>-->
                 <button
                   matTooltip="{{allAvis}}"
                   matTooltipClass="my-custom-tooltip"
@@ -164,7 +146,6 @@
                 </button>
 
               </div>
-                <br/>
                 <app-list-mouvement
                   class="make-gold"
                   [texteId]="element.id"></app-list-mouvement>

@@ -44,10 +44,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   box-sizing: border-box;
 }
 
-/*table{
+table{
   width: 100%;
   font-weight: bold;
-}*/
+}
+
+.example-container.mat-elevation-z8 {
+  overflow-x: auto;
+}
+.example-container .mat-table.mat-table {
+  min-width: 450px;
+}
 
 .dcnx {
   display: flex;

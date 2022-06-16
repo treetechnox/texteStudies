@@ -39,7 +39,7 @@
         <mat-form-field>
           <input matInput readonly [matDatepicker]="picker1" placeholder="{{'ADD-MOUVEMENT.PHASE_MOUVEMENT.DATE_ETAT' | translate}}"
                  id="date1" name="date1"
-                 [(ngModel)]="mouvement.datePhase"
+                 [(ngModel)]="date"
                  [ngModelOptions]="{standalone: true}"
                  (dateChange)="toFormattedDate($event.value)">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
@@ -47,6 +47,16 @@
         </mat-form-field>
       </div>
     </div>
+
+    <mat-form-field class="example-full-width">
+      <!--{{ 'ADD-TEXTE.PRENOMFR.PLACEHOLDER' | translate }}-->
+      <textarea matInput placeholder="LES DETAILS" required type="text"
+                [(ngModel)]="mouvement.details" name="details"
+                [ngModelOptions]="{standalone: true}"
+      ></textarea>
+      <mat-error>DETAILS!!!<!--{{ "ADD-TEXTE.PRENOMFR.ERROR" | translate }}--></mat-error>
+    </mat-form-field>
+
     <div *ngIf="mouvement.phase?.libelleFr==='TEXTE PUBLIE'">
       <h5>{{'ADD-CANDIDAT.TEXTE' | translate}}</h5>
       <div class="row" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">

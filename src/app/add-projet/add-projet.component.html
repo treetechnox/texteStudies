@@ -17,25 +17,32 @@
           </ng-template>
 
           <div class="row">
-            <mat-form-field class="example-full-width" [formGroup]="firstFormGroup">
+            <mat-form-field class="example-full-width">
               <mat-label>{{ 'ADD-MOUVEMENT.NOMINATION' | translate }}</mat-label>
-              <mat-select required name="typemouve" placeholder="{{ 'ADD-MOUVEMENT.NOMINATION' | translate }}"
+              <mat-select
+                required name="typemouve" placeholder="{{ 'ADD-MOUVEMENT.NOMINATION' | translate }}"
                           [(ngModel)]="nature"
                           (ngModelChange)="makeNominat($event)"
-                          formControlName="typeMouvementCtrl">
+                          formControlName="natureCtrl">
                 <mat-option></mat-option>
                 <mat-option *ngFor="let nat of natures ; let i=index" [value]="nat">
                   {{nat.libelleFr}}
                 </mat-option>
               </mat-select>
-              <mat-error>{{ 'ADD-MOUVEMENT.NOMINATION.MAT-ERROR' | translate }}</mat-error>
+              <!--<mat-error>{{ 'ADD-MOUVEMENT.NOMINATION.MAT-ERROR' | translate }}</mat-error>-->
+              <mat-error *ngIf="firstFormGroup.controls['natureCtrl'].hasError('required')
+              && firstFormGroup.controls['natureCtrl'].pristine">
+                INSEREZ LA NATURE DU TEXTE !!!
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="row" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
 
             <mat-form-field class="example-full-width" [formGroup]="firstFormGroup">
-              <!--{{ 'ADD-TEXTE.NOMFR.PLACEHOLDER' | translate }}--> <textarea  matInput placeholder="النص"
-                                                                                required type="text" [(ngModel)]="texte.sommaireAr" name="firstName" formControlName="sommaireArCtrl"></textarea>
+              <!--{{ 'ADD-TEXTE.NOMFR.PLACEHOLDER' | translate }}-->
+              <textarea  matInput placeholder="النص"
+                         required type="text" [(ngModel)]="texte.sommaireAr"
+                         name="firstName" formControlName="sommaireArCtrl"></textarea>
               <mat-error>{{ "ADD-TEXTE.NOMFR.ERROR" | translate }}</mat-error>
             </mat-form-field>
 
@@ -183,7 +190,7 @@
               <mat-form-field>
                 <input matInput readonly [matDatepicker]="picker1" placeholder="{{'ADD-MOUVEMENT.PHASE_MOUVEMENT.DATE_ETAT' | translate}}"
                        id="date1" name="date1"
-                       [(ngModel)]="mouvement.datePhase"
+                       [(ngModel)]="date"
                        [ngModelOptions]="{standalone: true}"
                        (dateChange)="toFormattedDate($event.value)">
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
@@ -273,6 +280,18 @@
           </div>
 
 
+
+            <mat-form-field class="example-full-width">
+              <!--{{ 'ADD-TEXTE.PRENOMFR.PLACEHOLDER' | translate }}-->
+              <textarea matInput placeholder="LES DETAILS" type="text"
+                        [(ngModel)]="mouvement.details" name="details"
+                        [ngModelOptions]="{standalone: true}"
+              ></textarea>
+              <mat-error>DETAILS!!!<!--{{ "ADD-TEXTE.PRENOMFR.ERROR" | translate }}--></mat-error>
+            </mat-form-field>
+
+
+
           <mat-form-field class="example-full-width"><!--/*selectionChange.emit($event);*/-->
             <mat-select [ngModel]="selectedValues"
                         [ngModelOptions]="{standalone: true}"
@@ -332,7 +351,6 @@
                     matTooltip= "{{'STEP.AVANCE'| translate}}">
               <i class="fa fa-arrow-circle-right fa-2x" aria-hidden="true">
                 <!----></i></button>
-
           </div>
         </form>
       </mat-step>

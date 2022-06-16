@@ -90,7 +90,7 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
   phase: Phase = new Phase();
   phases: Phase[] = [];
 
-  nature:Nature=new Nature();
+  nature!:Nature;
   natures:Nature[]=[];
   secteurs:Secteur[]=[];
   ministeres:Ministere[]=[];
@@ -102,7 +102,7 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
   //slctMinisteres: Ministere[] = [];
   submitted = false;
 
-  date!: Date;
+  date = new Date((new Date().getTime()));
 
   constructor(private _formBuilder: FormBuilder/*, private texteService: TexteService*/,
               private natureService:NatureService,
@@ -121,9 +121,9 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
+      natureCtrl: ['' , Validators.required],
       sommaireFrCtrl: ['', Validators.required],
       sommaireArCtrl: ['', Validators.required],
-      typeMouvementCtrl: ['', Validators.required],
     });
     this.secondFormGroup = this._formBuilder.group({
       etatMouvementCtrl: ['', Validators.required],
@@ -234,9 +234,11 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
     }
   }
 
-  toFormattedDate(iso: any) {
-    console.log(iso)
-    this._adapter.setLocale('fr');
+  toFormattedDate(date: any) {
+    /*console.log(iso)
+    this._adapter.setLocale('fr');*/
+    this.mouvement.datePhase = date/*formatDate(this.date.toDateString(),"dd-MM-yyyy",this.locale);*/
+    console.log(this.mouvement.datePhase)
   }
 
 

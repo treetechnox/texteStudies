@@ -19,7 +19,7 @@ import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {AppComponent} from '../app.component';
 import {MouvementMinistere} from '../add-projet/add-projet.component';
-import {DatePipe, getLocaleDirection} from '@angular/common';
+import {DatePipe, formatDate, getLocaleDirection} from '@angular/common';
 
 @Component({
   selector: 'app-add-mouvement',
@@ -29,7 +29,6 @@ import {DatePipe, getLocaleDirection} from '@angular/common';
 export class AddMouvementComponent implements OnInit {
 
   @Input() selsect:Secteur = this.authService.userAuthenticated!.secteur;
-  @Inject(LOCALE_ID) public locale!: string
   //dir: string = getLocaleDirection(this.locale);
   /** list of banks */
   //protected organismes: Ministere[] = [];
@@ -67,20 +66,22 @@ export class AddMouvementComponent implements OnInit {
 
   submitted = false;
 
-  date!: Date;
+  date = new Date((new Date().getTime()));
 
   constructor(private _formBuilder: FormBuilder/*, private texteService: TexteService*/,
               private natureService:NatureService,
+              private datePipe:DatePipe,
               private phaseService:PhaseService,
               private secteurService:SecteurService,
               private ministereService:MinistereService,
               private texteService:TexteService,
               private mouvementService: MouvementService,
-              public authService:AuthenticationService,
+              public authService:AuthenticationService,@Inject(LOCALE_ID) public locale :string,
               private router: Router, private route: ActivatedRoute, private _adapter: DateAdapter<any>,
               private dialog: MatDialog, private _snackBar: MatSnackBar, public app: AppComponent,
               @Inject(MAT_DIALOG_DATA) public texteId: number
               /*private location: Location ,*/ /*private detailService: DetailService*/) {
+
 
     if (this.selsect===null){
       this.secteurService.getSecteurByLastMouvement(this.texteId).subscribe(sect =>{
@@ -94,13 +95,16 @@ export class AddMouvementComponent implements OnInit {
     this.secteur = this.authService.userAuthenticated.secteur;*/
     console.log(this.selsect);
   }
-  datePipe!: DatePipe;
 
   ngOnInit() {
 
-    let d= new Date();
+  /*  let d= new Date();
+    //console.log(this.datePipe.transform(this.date,"yyyy-MM-dd"));
 
-    this.mouvement.datePhase = d.getDay()+'-'+d.getMonth()+'-'+d.getFullYear();
+    this.mouvement.datePhase = d.getDay()+'-'+d.getMonth()+'-'+d.getFullYear();*/
+
+
+
 
     this.texteService.getTexteById(this.texteId).subscribe(value => {
       this.texte = value;
@@ -168,9 +172,12 @@ export class AddMouvementComponent implements OnInit {
     }
   }
 
-  toFormattedDate(iso: any) {
-    console.log(iso)
-    this._adapter.setLocale('fr');
+  toFormattedDate(date: any) {
+/*    console.log(iso)
+    this._adapter.setLocale('fr');*/
+    this.mouvement.datePhase = date/*formatDate(this.date.toDateString(),"dd-MM-yyyy",this.locale);*/
+    console.log(this.mouvement.datePhase)
+
   }
 
   onAjoutMouvement() {
@@ -179,6 +186,7 @@ export class AddMouvementComponent implements OnInit {
 
   onEditMouvement() {
     this.router.navigateByUrl('lestextes/' + this.texte.id + '/mouvements').then(r => console.log(r));
+
   }
 
   onSubmitSaveMouvement() {
