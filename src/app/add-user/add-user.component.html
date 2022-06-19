@@ -40,6 +40,7 @@
               <mat-option value=""></mat-option>
               <mat-option value="ADMIN">ADMIN</mat-option>
               <mat-option value="USER">USER</mat-option>
+              <mat-option value="MINISTERE">MINISTERE</mat-option>
             </mat-select>
             <mat-error>{{'SIGNUP.ROLE.MAT-ERROR' |translate}}</mat-error>
           </mat-form-field>
@@ -103,12 +104,29 @@
             <mat-label>{{'SIGNUP.ROLE.LABEL' |translate}}</mat-label>
             <mat-select placeholder="{{'SIGNUP.ROLE.PLACEHOLDER' |translate}}" required="required"
                         [(ngModel)]="user.role" name="role"
+                        (selectionChange)="getResult($event)"
                         [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }">
               <mat-option value=""></mat-option>
               <mat-option value="ADMIN">ADMIN</mat-option>
               <mat-option value="USER">USER</mat-option>
+              <mat-option value="MINISTERE">MINISTERE</mat-option>
             </mat-select>
             <mat-error>{{'SIGNUP.ROLE.MAT-ERROR' |translate}}</mat-error>
+          </mat-form-field>
+        </div>
+        <div *ngIf="user.role === 'MINISTERE'" class="example-full-width" dir="ltr">
+          <mat-form-field>
+            <mat-label>LA LISTE DES MINISTERES</mat-label>
+            <mat-select placeholder="MINISTERE"
+                        (selectionChange)="getUserMinistere($event)"
+                        [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }">
+              <!--required="required"-->
+              <mat-option></mat-option><!--[(ngModel)]="user.secteur" name="secteur"-->
+              <mat-option *ngFor="let ministere of ministeres" [value]="ministere">
+                {{ministere.libelleFr}}
+              </mat-option>
+            </mat-select>
+            <mat-error>{{'SIGNUP.SECTEUR.MAT-ERROR' |translate}}</mat-error>
           </mat-form-field>
         </div>
         <div  class="example-full-width" dir="ltr">
@@ -116,6 +134,7 @@
             <mat-label>{{'SIGNUP.SECTEUR.LABEL' |translate}}</mat-label>
             <mat-select placeholder="{{'SIGNUP.SECTEUR.PLACEHOLDER' |translate}}"
                         [(ngModel)]="user.secteur" name="secteur"
+                        (selectionChange)="getSelection($event)"
                         [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }"><!--required="required"-->
               <mat-option></mat-option>
               <mat-option *ngFor="let secteur of secteurs" [value]="secteur">

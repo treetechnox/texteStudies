@@ -28,6 +28,7 @@ import {Avis} from "../Avis";
 import {AvisService} from "../service/avis.service";
 import {noAuto} from "@fortawesome/fontawesome-svg-core";
 import {ListAvisComponent} from "../list-avis/list-avis.component";
+import {User} from "../user";
 
 export interface MouvementMinistere{
   id: number;
@@ -92,6 +93,8 @@ export class ListProjetComponent implements AfterViewInit {
   public pageLabel!: string;
   private disabled: boolean=false;
 
+  authenticated!:User | undefined;
+
   constructor(private texteService: TexteService,
               private avisService:AvisService,
               private mouvementService:MouvementService,
@@ -102,8 +105,20 @@ export class ListProjetComponent implements AfterViewInit {
               /*private fonctionService: FonctionService,*/
               private router: Router,public app:AppComponent,
               private dialog:MatDialog) {
-    console.log(this.authService.userAuthenticated?.id);
+    this.authenticated = this.authService.userAuthenticated;
+    console.log(this.authenticated?.id);
     if (this.isAdmin()){
+      this.texteService.getAllTextes().subscribe(value => {
+        this.textes = value;
+        //console.log(this.textes);
+        this.dataSource = new MatTableDataSource(this.textes);
+        // @ts-ignore
+        this.dataSource.paginator = this.paginator;
+        // @ts-ignore
+        this.dataSource.sort = this.sort;
+      })
+    }else if (this.isMinistereUser()){
+      /*this.ministereService.getMinistereById()*/
       this.texteService.getAllTextes().subscribe(value => {
         this.textes = value;
         //console.log(this.textes);
@@ -269,6 +284,10 @@ export class ListProjetComponent implements AfterViewInit {
 
   isAdmin() {
     return this.authService.isAdmin();
+  }
+
+  isMinistereUser() {
+    return this.authService.isMinistereUser();
   }
 
   reset(form:NgForm) {

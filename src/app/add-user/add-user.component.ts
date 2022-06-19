@@ -10,6 +10,9 @@ import {AppComponent} from '../app.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Secteur} from '../Secteur';
 import {SecteurService} from '../service/secteur.service';
+import {Ministere} from "../Ministere";
+import {MinistereService} from "../service/ministere.service";
+import {MatSelectChange} from "@angular/material/select";
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -29,13 +32,15 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class AddUserComponent implements OnInit {
   user: User = new User();
   secteurs: Secteur[]=[];
+  ministeres: Ministere[]=[];
   myForm!: FormGroup;
 
   matcher = new MyErrorStateMatcher();
 
 
 
-  constructor(private userService: UserService,private secteurService:SecteurService,private authService:AuthenticationService,
+  constructor(private userService: UserService,private secteurService:SecteurService,
+              private ministereService:MinistereService,private authService:AuthenticationService,
               private router:Router,private formBuilder: FormBuilder,private _snackBar: MatSnackBar,
               public app:AppComponent) {
     /* this.myForm = this.formBuilder.group({
@@ -51,12 +56,18 @@ export class AddUserComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.ministereService.getAllMinisteres().subscribe({
+      next:  value => this.ministeres = value,
+      complete: () => console.log("ministeres chargé"),
+      error:err => console.log(err)
+  });
+
     this.secteurService.getAllSecteurs().subscribe(value => {
       // @ts-ignore
       this.secteurs = value;
       console.log(this.secteurs);
 
-    })
+    });
   }
 
   onLogout() {
@@ -119,5 +130,40 @@ export class AddUserComponent implements OnInit {
   public localStorageItem(id: string): string {
     // @ts-ignore
     return localStorage.getItem(id);
+  }
+
+  getResult($event: MatSelectChange) {
+    console.log($event.value);
+  }
+
+
+  getUserMinistere($event: MatSelectChange) {
+    let s = new String();
+    s= $event.value.libelleFr;
+
+     /*if(s.indexOf("MINISTERE DE L\'")>-1){
+       console.log(s.replace("MINISTERE DE L\'",''));
+    }else if(s.indexOf("MINISTERE DE LA")>-1){
+       console.log(s.replace("MINISTERE DE LA",''));
+     }*/
+
+    let x = s.replace(/['"]+/g, '');
+    console.log(x);
+    let y = x.replace(/\s/g,$event.value.id);
+    console.log(y.toLowerCase());
+    this.user.username = y.toLowerCase();
+    this.user.nom = y.toLowerCase();
+    this.user.prenom = y.toLowerCase();
+
+
+
+
+  }
+
+  getSelection($event: MatSelectChange) {
+    this.user.password = $event.value.libelleFr+"00"+$event.value.id;
+
+
+    console.log(this.user);
   }
 }

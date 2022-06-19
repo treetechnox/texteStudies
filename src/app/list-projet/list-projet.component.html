@@ -8,7 +8,7 @@
   <br>
   <div class="entete" style="text-align: center"><span>LA LISTE DES PROJETS DES TEXTES</span></div>
   <br>
-  <button class="btn btn-primary" (click)="onAddProjet()">AJOUTER PROJET TEXTE<!--{{'LIST-ORGANISMES.ADD.BUTTON'|translate}}--></button>
+  <button *ngIf="!isMinistereUser()" class="btn btn-primary" (click)="onAddProjet()">AJOUTER PROJET TEXTE<!--{{'LIST-ORGANISMES.ADD.BUTTON'|translate}}--></button>
   <!--  {{'LIST-MOUVEMENTS.BUTTON' | translate}}-->
   <br>
   <br>
@@ -25,12 +25,20 @@
           RECHERCHE AVANCE
         </mat-panel-title>
         <mat-panel-description>
+
+          <div [ngSwitch]="authenticated?.role">
+            <div *ngSwitchCase="'ADMIN'">PHASE / SECTEUR / MINISTERE</div>
+            <div *ngSwitchCase="'USER'">PHASE / MINISTERE</div>
+            <div *ngSwitchCase="'MINISTERE'">PHASE / DATE</div>
+            <div *ngSwitchDefault>This is Default</div>
+          </div>
+<!--
           <div *ngIf="isAdmin(); else user">
             PHASE / SECTEUR / MINISTERE
           </div>
           <ng-template #user>
             PHASE / MINISTERE
-          </ng-template>
+          </ng-template>-->
 
           <mat-icon>search</mat-icon>
         </mat-panel-description>
@@ -50,7 +58,7 @@
             <mat-error>{{ 'ADD-MOUVEMENT.ETAT.MAT-ERROR' | translate }}</mat-error>
           </mat-form-field>
         </div>
-        <div *ngIf="isAdmin()" class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
+        <div *ngIf="isAdmin() && !isMinistereUser()" class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
           <mat-form-field class="example-full-width">
             <mat-label>SECTEUR<!--{{ 'ADD-MOUVEMENT.ETAT' | translate }}--></mat-label>
             <mat-select
@@ -65,7 +73,7 @@
             <mat-error>{{ 'ADD-MOUVEMENT.ETAT.MAT-ERROR' | translate }}</mat-error>
           </mat-form-field>
         </div>
-        <div class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
+        <div *ngIf="!isMinistereUser()" class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
           <mat-form-field class="example-full-width">
             <mat-label>MINISTERES<!--{{ 'ADD-MOUVEMENT.ETAT' | translate }}--></mat-label>
             <mat-select  name="ministere" (selectionChange)="onGetMinistere($event)"><!--[disabled]="!authService.isAdmin()"-->

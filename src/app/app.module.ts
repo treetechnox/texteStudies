@@ -99,6 +99,10 @@ import { ShowPdfComponent } from './show-pdf/show-pdf.component';
 import {TooltipModule} from "ngx-bootstrap/tooltip";
 import { AddAvisComponent } from './add-avis/add-avis.component';
 import { ListAvisComponent } from './list-avis/list-avis.component';
+import { ObservateurComponent } from './observateur/observateur.component';
+import { AproposComponent } from './apropos/apropos.component';
+import { ExternalUrlDirective } from './external-url.directive';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 
@@ -145,6 +149,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     ShowPdfComponent,
     AddAvisComponent,
     ListAvisComponent,
+    ObservateurComponent,
+    AproposComponent,
+    ExternalUrlDirective,
+    NotFoundComponent,
   ],
     imports: [
         FormsModule,

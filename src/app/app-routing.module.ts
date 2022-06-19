@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {InjectionToken, NgModule} from '@angular/core';
+import {Routes, RouterModule, ActivatedRouteSnapshot} from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {AddUserComponent} from './add-user/add-user.component';
 import {ListUserComponent} from './list-user/list-user.component';
@@ -22,12 +22,16 @@ import {EditNatureComponent} from './edit-nature/edit-nature.component';
 import {AuthGuard} from './auth.guard';
 import {EditTexteComponent} from "./edit-texte/edit-texte.component";
 import {ListAvisComponent} from "./list-avis/list-avis.component";
+import {ObservateurComponent} from "./observateur/observateur.component";
+import {AproposComponent} from "./apropos/apropos.component";
+import {NotFoundComponent} from "./not-found/not-found.component";
 
 
-
+const externalUrlProvider = new InjectionToken('externalUrlRedirectResolver');
+const deactivateGuard = new InjectionToken('deactivateGuard');
 
 const routes: Routes = [{ path: '', redirectTo : 'login', pathMatch : 'full' },
-  { path: 'lesprojets', component : ListProjetComponent/*, canActivate:[AuthGuard]*/},
+  { path: 'lesprojets', component : ListProjetComponent, canActivate:[AuthGuard]},
   //{ path: 'lesreservations', component : ListReservationsComponent},
   { path: 'lesavis', component : ListAvisComponent},
   { path: 'lessecteurs', component : ListSecteursComponent},
@@ -35,6 +39,15 @@ const routes: Routes = [{ path: '', redirectTo : 'login', pathMatch : 'full' },
   { path: 'lesnatures', component : ListNatureComponent},
   { path: 'lesministeres', component : ListMinistereComponent},
   { path: 'lesusers', component : ListUserComponent},
+  { path: 'lesobservateurs', component : ObservateurComponent},
+  { path: 'apropos', component : AproposComponent},
+
+  {
+    path: 'externalRedirect',
+    canActivate: [externalUrlProvider],
+    // We need a component here because we cannot define the route otherwise
+    component: NotFoundComponent,
+  },
 
   { path: 'lajoutphase', component : AddPhaseComponent},
   { path: 'lajoutprojet', component : AddProjetComponent},
@@ -58,6 +71,25 @@ const routes: Routes = [{ path: '', redirectTo : 'login', pathMatch : 'full' },
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {useHash: true})],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [
+    {
+      provide: externalUrlProvider,
+      useValue: (route: ActivatedRouteSnapshot) => {
+
+        const externalUrl = route.paramMap.get('externalUrl');
+        // @ts-ignore
+        window.open(externalUrl, '_blank');
+      },
+    },
+    {
+      provide: deactivateGuard,
+      useValue: () => {
+        console.log('Guard function is called!')
+
+        return false;
+      }
+    },
+  ],
 })
 export class AppRoutingModule { }

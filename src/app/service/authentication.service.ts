@@ -75,6 +75,15 @@ export class AuthenticationService {
     }
     return false;
   }
+  isMinistereUser () {
+    //console.log('current user ' + this.userAuthenticated.role);
+    if(this.userAuthenticated){
+      if (this.userAuthenticated.role!==null)
+        return this.userAuthenticated.role.indexOf('MINISTERE')>-1;
+      //return true;
+    }
+    return false;
+  }
 
   getUserSalleByHisSecteur(){
     //this.userService.getUserById(this.userAuthenticated.id)

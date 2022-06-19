@@ -59,6 +59,10 @@ export class AppComponent {
     return this.authService.isAdmin();
   }
 
+  isMinistereUser() {
+    return this.authService.isMinistereUser();
+  }
+
   actualiser() {
     window.location.reload();
   }
