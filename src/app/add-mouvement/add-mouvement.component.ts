@@ -175,7 +175,8 @@ export class AddMouvementComponent implements OnInit {
   toFormattedDate(date: any) {
 /*    console.log(iso)
     this._adapter.setLocale('fr');*/
-    this.mouvement.datePhase = date/*formatDate(this.date.toDateString(),"dd-MM-yyyy",this.locale);*/
+    this.mouvement.datePhase = date
+    formatDate(this.date.toDateString(),"dd-MM-yyyy",this.locale);
     console.log(this.mouvement.datePhase)
 
   }
@@ -208,6 +209,7 @@ export class AddMouvementComponent implements OnInit {
 
     this.mouvement.secteur = this.selsect
     this.mouvement.isactive = true;
+    this.mouvement.datePhase = this.date.toDateString();
     console.log(this.mouvement);
     this.mouvementService.saveMouvement(this.texteId,this.mouvement).subscribe(value => {
       console.log(value)

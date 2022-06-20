@@ -99,13 +99,17 @@
             CONSULTATIOIN DES TEXTES
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown6">
-            <li><a class="dropdown-item" [routerLink]="'/lesprojets'">{{
+            <li><a class="dropdown-item" [routerLink]="'/lesprojets'">
+              LA LISTE DES TEXTE ET CES MOUVEMENTS
+              <!--{{
               "HOME.UTILISATEURS.LIST" | translate
-              }}</a></li>
+              }}--></a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" [routerLink]="'/apropos'">{{
+            <li><a class="dropdown-item" (click)="openApropos()" ><!--[routerLink]="'/apropos'"-->
+              DES LIENS
+              <!--{{
               "HOME.UTILISATEURS.AJOUT" | translate
-              }}</a></li>
+              }}--></a></li>
           </ul>
         </li>
       </ul>

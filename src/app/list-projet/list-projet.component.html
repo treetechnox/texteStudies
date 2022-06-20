@@ -129,7 +129,7 @@
                [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
 
             <div class="example-element-description example-full-width">
-              <div class="myflex example-margin"><!--{{ app.localStorageItem('lge') === 'fr' ? 'MODIFIER ' :  ' تعديل : ' }}-->
+              <div *ngIf="isMinistereUser()===false"  class="myflex example-margin"><!--{{ app.localStorageItem('lge') === 'fr' ? 'MODIFIER ' :  ' تعديل : ' }}-->
                 <button mat-raised-button matTooltip="MODIFIER"
                         class="btn btn-primary spacer" (click)="onEditTexte(element.id)">
                   <mat-icon>edit</mat-icon>
@@ -157,17 +157,6 @@
                 <app-list-mouvement
                   class="make-gold"
                   [texteId]="element.id"></app-list-mouvement>
-
-              <!--<ul>
-                <br>
-                <div >
-                  <div [ngStyle]="{'text-align':app.localStorageItem('lge') === 'fr' ? 'left' : 'right' }">
-                    <mat-label class="spacer">
-                      {{app.localStorageItem('lge') === 'fr'?'LISTE DES FONCTIONS PAR ORGANISME SELSECTIONNEES:': 'قائمة وظائف الهيئة المختارة : '}}
-                    </mat-label>
-                  </div>
-                </div>
-              </ul>-->
             </div>
           </div>
         </td>

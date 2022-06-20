@@ -118,15 +118,23 @@ export class ListProjetComponent implements AfterViewInit {
         this.dataSource.sort = this.sort;
       })
     }else if (this.isMinistereUser()){
-      /*this.ministereService.getMinistereById()*/
-      this.texteService.getAllTextes().subscribe(value => {
-        this.textes = value;
-        //console.log(this.textes);
-        this.dataSource = new MatTableDataSource(this.textes);
-        // @ts-ignore
-        this.dataSource.paginator = this.paginator;
-        // @ts-ignore
-        this.dataSource.sort = this.sort;
+      let str= this.authenticated?.username;
+      let n!: any;
+      if(str !==''){
+        n = str?.lastIndexOf('_');
+        console.log(n);
+      }
+      let result = str?.substring(n + 1)
+      console.log(result);
+      this.ministereService.getMinistereById(result).subscribe(value => {
+        this.texteService.getAllTextesByMinistere(value.libelleFr).subscribe(value1 => {
+          this.textes = value1;
+          this.dataSource = new MatTableDataSource(this.textes);
+          // @ts-ignore
+          this.dataSource.paginator = this.paginator;
+          // @ts-ignore
+          this.dataSource.sort = this.sort;
+        })
       })
     }else {
       // @ts-ignore
@@ -287,6 +295,7 @@ export class ListProjetComponent implements AfterViewInit {
   }
 
   isMinistereUser() {
+    //console.log(this.authService.isMinistereUser());
     return this.authService.isMinistereUser();
   }
 

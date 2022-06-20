@@ -138,32 +138,38 @@ export class AddUserComponent implements OnInit {
 
 
   getUserMinistere($event: MatSelectChange) {
-    let s = new String();
-    s= $event.value.libelleFr;
-
-     /*if(s.indexOf("MINISTERE DE L\'")>-1){
-       console.log(s.replace("MINISTERE DE L\'",''));
+    let s = $event.value.libelleFr;
+     if(s.indexOf("MINISTERE DE L\'")>-1){
+       s=s.replace("MINISTERE DE L\'",'');
+       console.log(s);
     }else if(s.indexOf("MINISTERE DE LA")>-1){
-       console.log(s.replace("MINISTERE DE LA",''));
-     }*/
+       s=s.replace("MINISTERE DE LA",'');
+       console.log(s);
+     }else if(s.indexOf("MINISTERE DE ")>-1){
+       s=s.replace("MINISTERE DE ",'');
+       console.log(s);
+     }
 
     let x = s.replace(/['"]+/g, '');
     console.log(x);
-    let y = x.replace(/\s/g,$event.value.id);
+    let y='';
+    if(/\s/g.test(s)){
+      y= x.replace(/\s/g,'');
+    }
+    y= x.replace(/\s/g,'');
+    y+='_'+$event.value.id
     console.log(y.toLowerCase());
     this.user.username = y.toLowerCase();
     this.user.nom = y.toLowerCase();
     this.user.prenom = y.toLowerCase();
 
-
+    this.user.password = s+"00"+$event.value.id;
+    console.log(this.user);
 
 
   }
 
   getSelection($event: MatSelectChange) {
-    this.user.password = $event.value.libelleFr+"00"+$event.value.id;
 
-
-    console.log(this.user);
   }
 }

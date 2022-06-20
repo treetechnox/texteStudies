@@ -16,6 +16,7 @@ import {HttpEventType, HttpResponse} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {AddPhaseComponent} from "../add-phase/add-phase.component";
 import {ShowPdfComponent} from "../show-pdf/show-pdf.component";
+import {AuthenticationService} from "../service/authentication.service";
 
 @Component({
   selector: 'app-list-mouvement',
@@ -52,6 +53,7 @@ export class ListMouvementComponent implements OnInit {
    currentFileUpload: any;
 
   constructor(private mouvementService:MouvementService,
+              private authService:AuthenticationService,
               private _snackBar: MatSnackBar,
               private  ministereService:MinistereService,
               private dialog: MatDialog,
@@ -180,6 +182,10 @@ export class ListMouvementComponent implements OnInit {
         }, 100);*/
       });
 
+  }
+
+  isMinistereUser() {
+    return this.authService.isMinistereUser();
   }
 
 }

@@ -37,7 +37,7 @@ export class MinistereService {
   }
 
   getMinistereById(id: any):Observable<any>{
-    return this.http.get(`${this.url}ministere/${id}`);
+    return this.http.get(`${this.url}${id}`);
   }
 
   saveMinistere(ministere:any):Observable<any>{

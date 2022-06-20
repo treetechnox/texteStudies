@@ -32,6 +32,17 @@
             <input matInput placeholder="الملاحظة" type="text" [(ngModel)]="avis.details" name="avis"/><!--required-->
           </mat-form-field>
         </div>
+        <div class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
+          <mat-form-field>
+            <input matInput readonly [matDatepicker]="picker1" placeholder="{{'ADD-MOUVEMENT.PHASE_MOUVEMENT.DATE_ETAT' | translate}}"
+                   id="date1" name="date1"
+                   [(ngModel)]="date"
+                   [ngModelOptions]="{standalone: true}"
+                   (dateChange)="toFormattedDate($event.value)">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+        </div>
         <!--<button type="submit" class="btn btn-success">AJOUTER MOUVEMENT</button>-->
         <div class="form-group">
           <button type="submit" class="btn btn-success" (click)="onSubmitSave()">AJOUTER</button>

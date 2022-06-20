@@ -79,6 +79,7 @@ export class AuthenticationService {
     //console.log('current user ' + this.userAuthenticated.role);
     if(this.userAuthenticated){
       if (this.userAuthenticated.role!==null)
+        /*console.log(this.userAuthenticated.role);*/
         return this.userAuthenticated.role.indexOf('MINISTERE')>-1;
       //return true;
     }

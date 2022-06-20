@@ -3,6 +3,8 @@ import {Component, HostListener} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthenticationService} from './service/authentication.service';
 import {TranslateService} from '@ngx-translate/core';
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {AproposComponent} from "./apropos/apropos.component";
 
 @Component({
   selector: 'app-root',
@@ -20,7 +22,7 @@ export class AppComponent {
     sessionStorage.clear();
     this.router.navigateByUrl('/', { skipLocationChange: true });
   }
-  constructor(private router: Router,
+  constructor(private router: Router, private dialog:MatDialog,
               public authService:AuthenticationService, public translate: TranslateService) {
     translate.addLangs(['fr','ar']);
     translate.setDefaultLang('fr');
@@ -75,5 +77,16 @@ export class AppComponent {
   public localStorageItem(id: string): string {
     // @ts-ignore
     return localStorage.getItem(id);
+  }
+
+  openApropos() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    //dialogConfig.data= mouvementId;
+    // @ts-ignore
+    dialogConfig.width = '50%';
+    dialogConfig.height = '30%';
+    this.dialog.open(AproposComponent, dialogConfig);
   }
 }

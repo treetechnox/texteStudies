@@ -1,9 +1,9 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
 import {AuthenticationService} from "../service/authentication.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {AppComponent} from "../app.component";
-import {Location} from "@angular/common";
+import {formatDate, Location} from "@angular/common";
 import {Avis} from "../Avis";
 import {AvisService} from "../service/avis.service";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
@@ -24,11 +24,12 @@ export class AddAvisComponent implements OnInit {
 
   submitted!:boolean;
 
+  date = new Date((new Date().getTime()));
 
   constructor(
     private avisService: AvisService,
     private ministereService:MinistereService,
-    private authService: AuthenticationService,
+    private authService: AuthenticationService,@Inject(LOCALE_ID) public locale :string,
     private router: Router, private route: ActivatedRoute,
     private _snackBar: MatSnackBar,public app:AppComponent,
     @Inject(MAT_DIALOG_DATA) public texteId: number,
@@ -67,5 +68,13 @@ export class AddAvisComponent implements OnInit {
     console.log($event);
     this.ministere = $event
     this.avis.ministere = this.ministere;
+  }
+
+  toFormattedDate(date: any) {
+    /*    console.log(iso)
+        this._adapter.setLocale('fr');*/
+    formatDate(this.date.toDateString(),"dd-MM-yyyy",this.locale);
+
+
   }
 }

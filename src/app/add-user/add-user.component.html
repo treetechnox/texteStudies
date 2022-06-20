@@ -129,7 +129,7 @@
             <mat-error>{{'SIGNUP.SECTEUR.MAT-ERROR' |translate}}</mat-error>
           </mat-form-field>
         </div>
-        <div  class="example-full-width" dir="ltr">
+        <div *ngIf="user.role !== 'MINISTERE'" class="example-full-width" dir="ltr">
           <mat-form-field>
             <mat-label>{{'SIGNUP.SECTEUR.LABEL' |translate}}</mat-label>
             <mat-select placeholder="{{'SIGNUP.SECTEUR.PLACEHOLDER' |translate}}"
