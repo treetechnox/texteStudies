@@ -4,7 +4,7 @@ import {Ministere} from "./Ministere";
 export class Avis{
   id!:number;
   details!:string;
-  date_avis!:string;
+  date_avis!:Date;
   texte!:Texte ;
   ministere!:Ministere;
 }

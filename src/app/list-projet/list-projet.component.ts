@@ -260,7 +260,7 @@ export class ListProjetComponent implements AfterViewInit {
           /*
           this.textes1.indexOf(texte.id) === -1 ? this.textes1.push(texte) : console.log("This item already exists");*/
           this.textes = this.textes1;
-          this.dataSource= new MatTableDataSource(this.textes);
+          this.dataSource= new MatTableDataSource(this.textes.sort((a: { id: number; }, b: { id: number; }) => b.id-a.id));
           console.log(this.textes)
         })
       })

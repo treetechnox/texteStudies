@@ -103,6 +103,7 @@ import { ObservateurComponent } from './observateur/observateur.component';
 import { AproposComponent } from './apropos/apropos.component';
 import { ExternalUrlDirective } from './external-url.directive';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { RapportJournalierComponent } from './rapport-journalier/rapport-journalier.component';
 
 
 
@@ -153,6 +154,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AproposComponent,
     ExternalUrlDirective,
     NotFoundComponent,
+    RapportJournalierComponent,
   ],
     imports: [
         FormsModule,

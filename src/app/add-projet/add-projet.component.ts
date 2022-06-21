@@ -4,9 +4,11 @@ import {
 } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
-import {FormStyle,
+import {
+  formatDate, FormStyle,
   getLocaleDirection,
-  TranslationWidth }
+  TranslationWidth
+}
   from '@angular/common';
 import {AppComponent} from '../app.component';
 import {DateAdapter} from '@angular/material/core';
@@ -101,8 +103,9 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
   //selectedMinisteres: Ministere[] = [];
   //slctMinisteres: Ministere[] = [];
   submitted = false;
+  date!: Date;
 
-  date = new Date((new Date().getTime()));
+
 
   constructor(private _formBuilder: FormBuilder/*, private texteService: TexteService*/,
               private natureService:NatureService,
@@ -117,6 +120,8 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
               private dialog: MatDialog, private _snackBar: MatSnackBar, public app: AppComponent) {
 
     this.secteur = this.authService.userAuthenticated!.secteur;
+    this.mouvement.datePhase = new Date();
+    console.log(this.mouvement.datePhase,this.toFormattedDate(new Date()))
   }
 
   ngOnInit() {
@@ -128,6 +133,7 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
     this.secondFormGroup = this._formBuilder.group({
       etatMouvementCtrl: ['', Validators.required],
       secteurMouvementCtrl: ['', Validators.required],
+      dateMouvementCtrl: ['', Validators.required],
     });
     this.setNullTexteToVide();
     //this.reloadDataOrganismes();
@@ -233,12 +239,20 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
       this.texte.refer = '';
     }
   }
+/*
+  toFormattedDate2(date: any) {
+    /!*console.log(iso)
+    this._adapter.setLocale('fr');*!/
+    this.mouvement.date_phase = date
+    formatDate(date,"dd-MM-yyyy",this.locale);
+    console.log(this.mouvement.date_phase)
+  }*/
 
-  toFormattedDate(date: any) {
-    /*console.log(iso)
-    this._adapter.setLocale('fr');*/
-    this.mouvement.datePhase = date/*formatDate(this.date.toDateString(),"dd-MM-yyyy",this.locale);*/
-    console.log(this.mouvement.datePhase)
+  toFormattedDate(iso: any) {
+    //console.log(this.etatMouvement.proposition);
+    this.date = new Date(iso);
+    //console.log(`${this.date.getDate() + 1}-${this.date.getMonth() + 1}-${this.date.getFullYear()}`);
+    return `${this.date.getDate() + 1}-${this.date.getMonth() + 1}-${this.date.getFullYear()}`;
   }
 
 
@@ -303,6 +317,7 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
 
   onSubmitSave() {
     this.submitted = true;
+    console.log(this.mouvement)
     this.saveTexte();
   }
 
@@ -316,7 +331,6 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
 
   makeNominat(event: any) {
     console.log(event);
-
   }
   getSelectedSecteur(event: any) {
     console.log(event);

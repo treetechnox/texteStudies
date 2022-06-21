@@ -1,0 +1,71 @@
+<br><br>
+<div class="text-dark" style="display: flex;  justify-content: space-between;">
+
+  <div>
+    <button type="submit"
+            mat-raised-button
+            matTooltip="Imprimer l'etat de sortie"
+            class="btn btn-light" (click)="printing()"
+            style="position: center"
+    >
+      <i class="fa fa-print fa-3x" aria-hidden="true"></i>
+    </button>
+    <button style="margin-left: 10px" type="submit"
+            mat-raised-button
+            matTooltip="Exporter EXCEL"
+            class="btn btn-light"
+            (click)="exportexcel()">
+      <i class="fa fa-download fa-3x" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <mat-chip-list aria-label="Fish selection">
+    <mat-chip style="font-size: large" color="primary" selected>{{aujourdhui | date:'dd / MM / yyyy, h:mm:ss a' }}</mat-chip>
+  </mat-chip-list>
+</div>
+<br><br>
+<div class="table-responsive">
+  <table id="excel-table" class="table table-bordered table-light" *ngIf="textes"
+         matSort (matSortChange)="sortData($event)">
+    <thead class="thead-dark example-full-width">
+    <tr>
+      <th >#</th>
+      <th matTooltip="Ordre par salle" mat-sort-header="nature">NATURE</th>
+      <th matTooltip="Ordre par date" mat-sort-header="sommaireAr">النص</th>
+      <th matTooltip="Ordre par periode" mat-sort-header="sommaireFr">TEXTE</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let res of sortedData; let i=index; ">
+      <td>{{i+1}}</td>
+      <td>{{ res.nature?.libelleFr }}</td>
+      <td>{{ res.sommaireAr}}</td>
+      <td>{{ res.sommaireFr}}</td>
+     <!-- <td>
+        <div *ngIf="res.periode == '0'; else periode1">
+          <div  *ngFor="let per of periode_fr">
+            <div *ngIf="per.id===0">
+              {{per.value}}
+            </div>
+          </div>
+        </div>
+        <ng-template #periode1>
+          <div *ngFor="let per of periode_fr">
+            <div *ngIf="per.id===1">
+              {{per.value}}
+            </div>
+          </div>
+        </ng-template>
+      </td>-->
+    </tr>
+
+    <!--<mat-slider min="1" max="100" step="1" value="1"></mat-slider>-->
+
+    </tbody>
+
+  </table>
+
+  <br>
+
+
+</div>

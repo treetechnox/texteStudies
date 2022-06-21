@@ -9,7 +9,7 @@ export class Mouvement{
   secteur!:Secteur;
   texte!:Texte;
   reunion!:Reunion;
-  datePhase!:string;
+  datePhase!:Date;
   details!:string;
   scanpdf!:string;
   mouvementMinistere!:any;

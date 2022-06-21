@@ -37,6 +37,7 @@ export class AddAvisComponent implements OnInit {
 
 
   ngOnInit() {
+    this.avis.date_avis = new Date();
     this.ministereService.getAllMinisteres().subscribe({next: value => {
         this.ministeres = value;
       },

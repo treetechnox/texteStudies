@@ -209,7 +209,7 @@ export class AddMouvementComponent implements OnInit {
 
     this.mouvement.secteur = this.selsect
     this.mouvement.isactive = true;
-    this.mouvement.datePhase = this.date.toDateString();
+    this.mouvement.datePhase = this.date;
     console.log(this.mouvement);
     this.mouvementService.saveMouvement(this.texteId,this.mouvement).subscribe(value => {
       console.log(value)

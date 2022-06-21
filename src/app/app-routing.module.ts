@@ -25,6 +25,7 @@ import {ListAvisComponent} from "./list-avis/list-avis.component";
 import {ObservateurComponent} from "./observateur/observateur.component";
 import {AproposComponent} from "./apropos/apropos.component";
 import {NotFoundComponent} from "./not-found/not-found.component";
+import {RapportJournalierComponent} from "./rapport-journalier/rapport-journalier.component";
 
 
 const externalUrlProvider = new InjectionToken('externalUrlRedirectResolver');
@@ -32,7 +33,7 @@ const deactivateGuard = new InjectionToken('deactivateGuard');
 
 const routes: Routes = [{ path: '', redirectTo : 'login', pathMatch : 'full' },
   { path: 'lesprojets', component : ListProjetComponent, canActivate:[AuthGuard]},
-  //{ path: 'lesreservations', component : ListReservationsComponent},
+  { path: 'lesrapports', component : RapportJournalierComponent},
   { path: 'lesavis', component : ListAvisComponent},
   { path: 'lessecteurs', component : ListSecteursComponent},
   { path: 'lesphases', component : ListPhasesComponent},

@@ -190,11 +190,14 @@
               <mat-form-field>
                 <input matInput readonly [matDatepicker]="picker1" placeholder="{{'ADD-MOUVEMENT.PHASE_MOUVEMENT.DATE_ETAT' | translate}}"
                        id="date1" name="date1"
-                       [(ngModel)]="date"
-                       [ngModelOptions]="{standalone: true}"
-                       (dateChange)="toFormattedDate($event.value)">
+                       [(ngModel)]="mouvement.datePhase"
+                       required
+                       (dateChange)="toFormattedDate($event.value)"
+                       formControlName="dateMouvementCtrl"
+                ><!--[ngModelOptions]="{standalone: true}"-->
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
+                <mat-error>INSEREZ LA DATE DE MOUVEMENT</mat-error><!--{{ 'ADD-MOUVEMENT.ETAT.MAT-ERROR' | translate }}-->
               </mat-form-field>
             </div>
           </div>
