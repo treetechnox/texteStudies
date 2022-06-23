@@ -91,7 +91,7 @@ export class ListAvisComponent implements OnInit {
     dialogConfig.data = texteId;
     // @ts-ignore
     dialogConfig.width = '50%';
-    dialogConfig.height = '40%';
+    dialogConfig.height = '50%';
     this.dialog.open(AddAvisComponent, dialogConfig);
   }
 

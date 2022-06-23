@@ -21,7 +21,7 @@
         </mat-form-field>
       </div>
       <div class="col"[ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
-        <mat-form-field>
+        <mat-form-field class="example-full-width">
           <mat-label>PHASE<!--{{ 'ADD-MOUVEMENT.ETAT' | translate }}--></mat-label>
           <mat-select required name="etat" [(ngModel)]="mouvement.phase"
                       (selectionChange)="getSelectedPhase($event)"
@@ -36,7 +36,7 @@
         </mat-form-field>
       </div>
       <div class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
-        <mat-form-field>
+        <mat-form-field class="example-full-width">
           <input matInput readonly [matDatepicker]="picker1" placeholder="{{'ADD-MOUVEMENT.PHASE_MOUVEMENT.DATE_ETAT' | translate}}"
                  id="date1" name="date1"
                  [(ngModel)]="mouvement.datePhase"

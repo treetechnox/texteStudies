@@ -311,8 +311,8 @@ export class ListProjetComponent implements AfterViewInit {
       dialogConfig.autoFocus = true;
       dialogConfig.data=texteId;
       // @ts-ignore
-      dialogConfig.width = '400px';
-      dialogConfig.height = '330px';
+      dialogConfig.width = '50%';
+      dialogConfig.height = '50%';
       this.dialog.open(AddAvisComponent, dialogConfig);
 
   }

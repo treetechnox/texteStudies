@@ -9,12 +9,14 @@
         <i class="fa fa-hand-o-left fa-2x"></i>
       </button>
       <form>
-        <div class="row" ><!--[ngStyle]="{
+        <br>
+        <div class="mybigtexte" ><span><!--[ngStyle]="{
                   direction:
                     app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'
                 }"-->
-          <h5 >AJOUTER UN AVIS</h5><!--{{ 'ADD-MOUVEMENT.H5' | translate }}-->
+          AJOUTER UN AVIS</span><!--{{ 'ADD-MOUVEMENT.H5' | translate }}-->
         </div>
+        <br>
         <div class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
           <mat-form-field class="example-full-width">
             <mat-label>MINISTERES<!--{{ 'ADD-MOUVEMENT.ETAT' | translate }}--></mat-label>
