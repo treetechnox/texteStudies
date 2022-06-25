@@ -30,7 +30,7 @@ export class PhaseService {
   }
 
   getPhaseById(id: any):Observable<any>{
-    return this.http.get(`${this.url}phase/${id}`);
+    return this.http.get(`${this.url}${id}`);
   }
 
   savePhase(phase:any):Observable<any>{

@@ -1,16 +1,28 @@
-<div class="jumbotron text-dark">
+<br>
+<div class="jumbotron mycustom-jumbotron text-dark">
   <div class="container">
     <div [hidden]="submitted">
+      <button mat-raised-button
+              matTooltip="RETOUR"
+              class="btn btn-dark"
+              [routerLink]="'/lessecteurs'">
+        <i class="fa fa-hand-o-left fa-2x"></i>
+      </button>
+      <br/>
       <form>
-        <div class="row" [ngStyle]="{
-                  direction:
-                    app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'
-                }">
-          <h5 >AJOUTER UNE SECTEUR</h5><!--{{ 'ADD-MOUVEMENT.H5' | translate }}-->
+        <br>
+        <div class="row entete"  [ngStyle]="{direction:app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'}">
+
+          <span>AJOUTER UNE SECTEUR</span><!--{{ 'ADD-MOUVEMENT.H5' | translate }}-->
         </div>
-        <div [ngStyle]="{direction:app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'}">
+        <div [ngStyle]="{direction:'rtl'}">
           <mat-form-field class="example-full-width">
-            <input matInput placeholder=" libelle Secteur" type="text" [(ngModel)]="secteur.libelleFr" name="secteur"/><!--required-->
+            <input matInput placeholder=" تسمية القطاع" type="text" [(ngModel)]="secteur.libelleAr" name="secteurAR"/><!--required-->
+          </mat-form-field>
+        </div>
+        <div [ngStyle]="{direction:'ltr'}">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder=" libelle Secteur" type="text" [(ngModel)]="secteur.libelleFr" name="secteurFR"/><!--required-->
           </mat-form-field>
         </div>
         <!--<button type="submit" class="btn btn-success">AJOUTER MOUVEMENT</button>-->
@@ -21,7 +33,7 @@
     </div>
 
     <div [hidden]="!submitted">
-      <h4>LE SECTEUR EST MODIFIE AVEC SUCCES!</h4>
+      <h4>LE SECTEUR EST AJOUTE AVEC SUCCES!</h4>
       <!-- <button class="btn btn-success" (click)="newEmployee()">Add</button> -->
     </div>
 

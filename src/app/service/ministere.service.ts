@@ -44,7 +44,7 @@ export class MinistereService {
     return this.http.post(`${this.url}ministere`,ministere);
   }
   updateMinistere(ministereId:number,ministere:any):Observable<any>{
-    //console.log(`${this.url1}/secteur/${secteurId}`,secteur)
+    console.log(`${this.url}ministere/${ministereId}`,ministere);
     return this.http.put(`${this.url}ministere/${ministereId}`,ministere);
   }
 }

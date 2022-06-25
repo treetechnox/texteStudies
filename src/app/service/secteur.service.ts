@@ -28,14 +28,14 @@ export class SecteurService {
   }
 
   getSecteurById(id: any):Observable<any>{
-    return this.http.get(`${this.url}secteur/${id}`);
+    return this.http.get(`${this.url}${id}`);
   }
 
   saveSecteur(secteur:any):Observable<any>{
     return this.http.post(`${this.url}secteur`,secteur);
   }
   updateSecteur(secteurId:number,secteur:any):Observable<any>{
-    //console.log(`${this.url1}/secteur/${secteurId}`,secteur)
+    console.log(`${this.url}secteur/${secteurId}`,secteur)
     return this.http.put(`${this.url}secteur/${secteurId}`,secteur);
   }
 }

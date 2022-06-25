@@ -1,1 +1,74 @@
-<p>edit-phase works!</p>
+<br>
+<div align=" {{app.localStorageItem('lge') === 'fr' ? 'left' : 'right'}}"
+     class="add-border jumbotron mycustom-jumbotron">
+
+  <button mat-raised-button
+          matTooltip="RETOUR"
+          class="btn btn-dark"
+          [routerLink]="'/lesphases'">
+    <i class="fa fa-hand-o-left fa-2x"></i>
+  </button>
+  <div class="container">
+
+    <div [hidden]="submitted">
+      <br>
+      <form [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
+
+
+        <div class="entete" style="font-size:1.5rem;text-align: center">
+          <!--<span>{{'ADD-FONCTION.H5'|translate}}</span>-->AJOUTER PHASE
+        </div>
+
+        <div class="row">
+          <div class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
+            <div class="form-group" dir="rtl">
+              <mat-form-field class="example-full-width" >
+                <!--<mat-label for="organisme2"></mat-label>-->
+                <input matInput type="text"
+                       placeholder="طور"
+                       [ngModelOptions]="{standalone: true}"
+                       id="organisme2" required="required"
+                       [(ngModel)]="phase.libelleAr" name="phaseAR"><!--class="form-control" --><!--{{'ADD-FONCTION.LIBELLE-AR'|translate}}-->
+              </mat-form-field>
+            </div>
+            <mat-form-field class="example-full-width">
+              <!--<mat-label for="organisme"></mat-label>-->
+              <input matInput type="text"
+                     placeholder="PHASE"
+                     [ngModelOptions]="{standalone: true}"
+                     id="organisme" required="required" [(ngModel)]="phase.libelleFr"
+                     name="phaseFR" (change)="verifierFonction(phase.libelleFr)"><!--{{'ADD-FONCTION.LIBELLE-FR'|translate}}--><!----><!--class="form-control" -->
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div *ngIf="!fonctionExist; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>
+          <div class="form-group" >
+            <button type="submit" class="btn btn-success" [disabled]="!phase.libelleFr?.trim()
+            || !phase.libelleAr?.trim()"
+                    (click)="onSubmitUpdate()" >{{'EDIT-FONCTION.BUTTON'|translate}}</button>
+          </div>
+        </ng-template>
+        <ng-template #elseBlock>
+          <div class="alert alert-danger" role="alert">
+            {{'ADD-FONCTION.FONCTION-ERROR'| translate}}
+          </div>
+        </ng-template>
+
+
+
+
+        <!--<button type="submit" class="btn btn-success">AJOUTER MOUVEMENT</button>-->
+      </form>
+    </div>
+
+    <div [hidden]="!submitted">
+      <h4>{{'GENERAL.SUCCES'|translate}}</h4>
+      <!-- <button class="btn btn-success" (click)="newEmployee()">Add</button> -->
+    </div>
+
+  </div>
+</div>
+
+

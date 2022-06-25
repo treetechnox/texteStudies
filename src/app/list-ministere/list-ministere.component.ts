@@ -86,7 +86,5 @@ export class ListMinistereComponent implements OnInit {
     this.dialog.open(AddMinistereComponent, dialogConfig);
   }
 
-  onEditSecteur(id:any) {
 
-  }
 }
