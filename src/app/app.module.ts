@@ -105,6 +105,7 @@ import { ExternalUrlDirective } from './external-url.directive';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { RapportJournalierComponent } from './rapport-journalier/rapport-journalier.component';
 import { EditAvisComponent } from './edit-avis/edit-avis.component';
+import { PortailMinisteresComponent } from './portail-ministeres/portail-ministeres.component';
 
 
 
@@ -157,6 +158,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     NotFoundComponent,
     RapportJournalierComponent,
     EditAvisComponent,
+    PortailMinisteresComponent,
   ],
     imports: [
         FormsModule,

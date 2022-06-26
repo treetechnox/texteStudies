@@ -1,0 +1,52 @@
+<mat-accordion displayMode="flat" multi class="mat-table">
+  <section class="mat-elevation-z2 mat-header-row">
+    <span class="mat-header-cell">User Id</span>
+    <span class="mat-header-cell">Name</span>
+    <span class="mat-header-cell">Exam Name</span>
+    <span class="mat-header-cell">Exam Category</span>
+  </section>
+  <mat-expansion-panel *ngFor="let result of selectedResult">
+    <mat-expansion-panel-header class="mat-row">
+      <span class="mat-cell">{{ result.user.id }}</span>
+      <pre>
+      </pre>
+      <span class="mat-cell">
+        {{ result.user.firstName | titlecase }}
+        {{ result.user.middleName | titlecase }}
+        {{ result.user.lastName | titlecase }}
+      </span>
+      <span class="mat-cell"> - {{ result.exam?.examName }} </span>
+      <span class="mat-cell"> - {{ result.exam.examCategory?.examCategoryName }} </span>
+    </mat-expansion-panel-header>
+    <div class="row">
+      <div class="col">
+        <h3>Personal Details:</h3> <br>
+        Email: {{ result.user.emailId }} <br>
+        Phone: {{ result.user.mobileNumber }} <br>
+        Gender: {{ result.user.gender }} <br>
+        Age: {{ result.user.age }} <br>
+        City: {{ result.user.city }} <br>
+        State: {{ result.user.state }} <br>
+        Country: {{ result.user.country }}
+      </div>
+      <div class="col">
+        <h3>Education Details:</h3> <br>
+        College: {{ result.user.college }} <br>
+        Degree: {{ result.user.degree }} <br>
+        Graduation Year: {{ result.user.graduationYear }} <br>
+        Graduation Percentage: {{ result.user.graduationPercentage }} <br>
+        Skills: {{ result.user.skills }}
+      </div>
+      <div class="col" *ngFor="let resultDetail of result.resultDetailSet;">
+        <h3>
+          {{ resultDetail.examDetail.questionCategory.questionCategoryName }} -
+          Marks: {{ resultDetail.examDetail.section.marksPerQuestion }}
+        </h3> <br>
+        Number of Questions: {{ resultDetail.examDetail.numberOfQuestions }} <br>
+        Marks Obtained: {{ resultDetail.obtainedMarks }}/{{ resultDetail.totalMarks }} <br>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+<mat-paginator #paginator [length]="length" [pageSize]="pageSize"
+               [pageSizeOptions]="pageSizeOptions" (page)="pageEvent=getData($event)" showFirstLastButtons></mat-paginator>

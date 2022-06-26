@@ -173,7 +173,7 @@ export class ListProjetComponent implements AfterViewInit {
     // @ts-ignore
     const paginatorIntl= this.paginator._intl;
     paginatorIntl.nextPageLabel = '';
-    paginatorIntl.itemsPerPageLabel=this.app.localStorageItem('lge') === 'fr' ? 'NOMBRE DES ORGANISMES PAR PAGE:' : 'عدد المنظمات في كل صفحة:';
+    paginatorIntl.itemsPerPageLabel=this.app.localStorageItem('lge') === 'fr' ? 'NOMBRE PAR PAGE:' : 'العدد في كل صفحة:';
     /*paginatorIntl.itemsPerPageLabel='';*/
     paginatorIntl.previousPageLabel = '';
   }

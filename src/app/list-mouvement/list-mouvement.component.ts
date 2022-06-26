@@ -17,6 +17,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {AddPhaseComponent} from "../add-phase/add-phase.component";
 import {ShowPdfComponent} from "../show-pdf/show-pdf.component";
 import {AuthenticationService} from "../service/authentication.service";
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-list-mouvement',
@@ -55,6 +56,7 @@ export class ListMouvementComponent implements OnInit {
   constructor(private mouvementService:MouvementService,
               private authService:AuthenticationService,
               private _snackBar: MatSnackBar,
+              public app:AppComponent,
               private  ministereService:MinistereService,
               private dialog: MatDialog,
               private router: Router) { }

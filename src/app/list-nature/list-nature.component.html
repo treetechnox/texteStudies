@@ -1,19 +1,17 @@
 <br>
 <div class="jumbotron mycustom-jumbotron">
-  <div class="entete" style=" text-align: center"><span>LA LISTE DES MINISTERES</span></div>
+  <div class="entete" style=" text-align: center"><span>LA LISTE DES NATURES</span></div>
   <br>
   <button type="submit" mat-raised-button
           matTooltip="{{ 'LIST-CANDIDATS.AJOUTER-BUTTON.TOOLTIP' | translate }}"
           class="btn btn-success" (click)="addNature()">{{ 'LIST-CANDIDATS.AJOUTER-BUTTON' | translate }}</button>
 
-  <br>
-
-
-
-  <mat-form-field>
+  <br><br>
+  <mat-form-field class="example-full-width">
     <mat-label >Filtre</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. libelle d'un organisme" #input>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. loi ..." #input>
   </mat-form-field>
+  <br><br>
 
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>

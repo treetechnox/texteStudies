@@ -26,6 +26,7 @@ import {ObservateurComponent} from "./observateur/observateur.component";
 import {AproposComponent} from "./apropos/apropos.component";
 import {NotFoundComponent} from "./not-found/not-found.component";
 import {RapportJournalierComponent} from "./rapport-journalier/rapport-journalier.component";
+import {PortailMinisteresComponent} from "./portail-ministeres/portail-ministeres.component";
 
 
 const externalUrlProvider = new InjectionToken('externalUrlRedirectResolver');
@@ -39,6 +40,7 @@ const routes: Routes = [{ path: '', redirectTo : 'login', pathMatch : 'full' },
   { path: 'lesphases', component : ListPhasesComponent},
   { path: 'lesnatures', component : ListNatureComponent},
   { path: 'lesministeres', component : ListMinistereComponent},
+  { path: 'poetailministeres', component : PortailMinisteresComponent},
   { path: 'lesusers', component : ListUserComponent},
   { path: 'lesobservateurs', component : ObservateurComponent},
   { path: 'apropos', component : AproposComponent},
