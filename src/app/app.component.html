@@ -6,135 +6,7 @@
     SUIVI DES PROJETS DES TEXTES
   </h3>
 </div>-->
-<nav id="navbar" *ngIf="authService.isAuthenticated == true" class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <div class="container-fluid">
-    <a class="navbar-brand" [routerLink]="'/lesprojets'">
-      <i class="fa fa-home fa-2x" aria-hidden="true"></i>
-    </a>
-    <button class="navbar-toggler"
-            type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item dropdown" *ngIf="!isMinistereUser()" >
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            TEXTES
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" [routerLink]="'/lesprojets'">
-              LISTE DES PROJETS DES TEXTES
-            </a></li>
-            <li><a class="dropdown-item" [routerLink]="'/lajoutprojet'">
-              AJOUTER PROJET DE TEXTE</a></li>
-            <li><hr class="dropdown-divider"></li>
 
-            <li><a class="dropdown-item" [routerLink]="'/lesrapports'">
-              RAPPORTS TEXTE</a></li>
-            <!--<li><a class="dropdown-item" href="#">Something else here</a></li>-->
-          </ul>
-        </li>
-        <li class="nav-item dropdown" *ngIf="isAdmin()">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            NATURES
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
-            <li><a class="dropdown-item" [routerLink]="'/lesnatures'">
-              LISTE DES NATURES DES TEXTES</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" [routerLink]="'/lajoutnature'">AJOUTER NATURE DE TEXTE</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown" *ngIf="isAdmin()">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            PHASES
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
-            <li><a class="dropdown-item" [routerLink]="'/lesphases'">LISTE DES PHASES</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" [routerLink]="'/lajoutphase'">AJOUTER PHASE</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown" *ngIf="isAdmin()">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            MINISTERES
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
-            <li><a class="dropdown-item" [routerLink]="'/lesministeres'">LISTE DES MINISTERES</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" [routerLink]="'/lajoutministere'">AJOUTER MINISTERE</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown" *ngIf="isAdmin()">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {{ "HOME.SECTEURS" | translate }}
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown4">
-            <li><a class="dropdown-item" [routerLink]="'/lessecteurs'">{{
-              "HOME.SECTEURS.LIST" | translate
-              }}</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" [routerLink]="'/lajoutsecteur'">{{
-              "HOME.SECTEURS.AJOUT" | translate
-              }}</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown" *ngIf="isAdmin()">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown5" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {{ "HOME.UTILISATEURS" | translate }}
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown5">
-            <li><a class="dropdown-item" [routerLink]="'/lesusers'">{{
-              "HOME.UTILISATEURS.LIST" | translate
-              }}</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" [routerLink]="'/signup'">{{
-              "HOME.UTILISATEURS.AJOUT" | translate
-              }}</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown" *ngIf="isMinistereUser()">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown6"
-             role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            CONSULTATIOIN DES TEXTES
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown6">
-            <li><a class="dropdown-item" [routerLink]="'/lesprojets'">
-              LA LISTE DES TEXTE ET CES MOUVEMENTS
-              <!--{{
-              "HOME.UTILISATEURS.LIST" | translate
-              }}--></a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" (click)="openApropos()" ><!--[routerLink]="'/apropos'"-->
-              DES LIENS
-              <!--{{
-              "HOME.UTILISATEURS.AJOUT" | translate
-              }}--></a></li>
-          </ul>
-        </li>
-      </ul>
-      <div class="d-flex">
-        <span style="margin: 2px;"></span>
-        <button class="dcnx btn btn-outline-light" type="submit"
-                matTooltip="DECONNEXION"
-          (click)="onLogout()"
-                style="background-color: #ee8488;"
-        >
-          <div class="dcnx">
-            <i class="dcnx-elt fa fa-sign-out fa-2x" aria-hidden="true"></i
-            ><span class="dcnx-elt">{{
-            authService.userAuthenticated?.username
-            }}</span>
-          </div>
-
-        </button>
-      </div>
-    </div>
-  </div>
-</nav>
 <!--<nav
   class="navbar navbar-expand-lg navbar-dark bg-primary"
   *ngIf="authService.isAuthenticated == true"
@@ -367,15 +239,173 @@
   </div>
 </nav>-->
 
-<main role="main"  class="wrapper"  id="sect1" >
 
 
+
+<!--<nav id="navbar" *ngIf="authService.isAuthenticated == true" class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" [routerLink]="'/lesprojets'">
+      <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+    </a>
+    <button class="navbar-toggler"
+            type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown" *ngIf="!isMinistereUser()" >
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            TEXTES
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" [routerLink]="'/lesprojets'">
+              LISTE DES PROJETS DES TEXTES
+            </a></li>
+            <li><a class="dropdown-item" [routerLink]="'/lajoutprojet'">
+              AJOUTER PROJET DE TEXTE</a></li>
+            <li><hr class="dropdown-divider"></li>
+
+            <li><a class="dropdown-item" [routerLink]="'/lesrapports'">
+              RAPPORTS TEXTE</a></li>
+            &lt;!&ndash;<li><a class="dropdown-item" href="#">Something else here</a></li>&ndash;&gt;
+          </ul>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isAdmin()">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            NATURES
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
+            <li><a class="dropdown-item" [routerLink]="'/lesnatures'">
+              LISTE DES NATURES DES TEXTES</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" [routerLink]="'/lajoutnature'">AJOUTER NATURE DE TEXTE</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isAdmin()">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            PHASES
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+            <li><a class="dropdown-item" [routerLink]="'/lesphases'">LISTE DES PHASES</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" [routerLink]="'/lajoutphase'">AJOUTER PHASE</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isAdmin()">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            MINISTERES
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
+            <li><a class="dropdown-item" [routerLink]="'/lesministeres'">LISTE DES MINISTERES</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" [routerLink]="'/lajoutministere'">AJOUTER MINISTERE</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isAdmin()">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ "HOME.SECTEURS" | translate }}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown4">
+            <li><a class="dropdown-item" [routerLink]="'/lessecteurs'">{{
+              "HOME.SECTEURS.LIST" | translate
+              }}</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" [routerLink]="'/lajoutsecteur'">{{
+              "HOME.SECTEURS.AJOUT" | translate
+              }}</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isAdmin()">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown5" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ "HOME.UTILISATEURS" | translate }}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown5">
+            <li><a class="dropdown-item" [routerLink]="'/lesusers'">{{
+              "HOME.UTILISATEURS.LIST" | translate
+              }}</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" [routerLink]="'/signup'">{{
+              "HOME.UTILISATEURS.AJOUT" | translate
+              }}</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isMinistereUser()">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown6"
+             role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            CONSULTATIOIN DES TEXTES
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown6">
+            <li><a class="dropdown-item" [routerLink]="'/lesprojets'">
+              LA LISTE DES TEXTE ET CES MOUVEMENTS
+              &lt;!&ndash;{{
+              "HOME.UTILISATEURS.LIST" | translate
+              }}&ndash;&gt;</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" (click)="openApropos()" >&lt;!&ndash;[routerLink]="'/apropos'"&ndash;&gt;
+              DES LIENS
+              &lt;!&ndash;{{
+              "HOME.UTILISATEURS.AJOUT" | translate
+              }}&ndash;&gt;</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="d-flex">
+        <span style="margin: 2px;"></span>
+        <button class="dcnx btn btn-outline-light" type="submit"
+                matTooltip="DECONNEXION"
+                (click)="onLogout()"
+                style="background-color: #ee8488;"
+        >
+          <div class="dcnx">
+            <i class="dcnx-elt fa fa-sign-out fa-2x" aria-hidden="true"></i
+            ><span class="dcnx-elt">{{
+            authService.userAuthenticated?.username
+            }}</span>
+          </div>
+
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>-->
+
+<!--<main role="main"  class="wrapper"  id="sect1" >
   <div class="container">
     <router-outlet></router-outlet>
-
   </div>
   <br/><br/><br/>
-</main>
+</main>-->
+<div class="mybackground">
+  <nav dir="rtl">
+    <img src="../assets/images/joradp.ico" alt="logo" class="logo">
+    <ul>
+      <li><a href="#">مشاريع</a></li>
+      <li><a href="#">How it works</a></li>
+      <li><a href="#">Privacy</a></li>
+    </ul>
+    <div>
+      <a href="#" class="login-btn">ولوج</a>
+      <a href="#" class="btn">حول البرنامج</a>
+    </div>
+  </nav>
+  <div class="mycontainer">
+    <div>
+      <img src="../assets/images/seau.png" class="feature-img anim">
+    </div>
+    <div class="content anim" dir="rtl">
+      <span class="bigtitle"> برنامج متــــــابعة </span>
+      <br>
+      <br>
+      <span class="bigtitle">مشاريع النصوص</span>
+      <p class="anim">برنامج موجه لمتابعة و تسيير مشاريع النصوص </p>
+      <p class="anim">في مختلف المراحل التي تطالها</p>
+      <a href="#" class="btn anim">Join Now</a>
+    </div>
+  </div>
+</div>
 
 <footer id="footer" style="text-align: center">
   <p>© SGG 2022</p>
