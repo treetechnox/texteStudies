@@ -48,6 +48,7 @@ export class AppComponent {
       }, error1 => console.log('N existe pas')
     );
   }*/
+  isToLogg: Boolean=false;
 
   onLogout() {
     const conf = confirm('Voulez vous deconnecter?');
@@ -88,5 +89,11 @@ export class AppComponent {
     dialogConfig.width = '50%';
     dialogConfig.height = '30%';
     this.dialog.open(AproposComponent, dialogConfig);
+  }
+
+  setToLog() {
+    console.log(this.isToLogg);
+    this.isToLogg=true;
+    console.log(this.isToLogg);
   }
 }

@@ -18,10 +18,19 @@
 }
 
 nav{
-  padding: 10px 0;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 50px;
+  background: rgba(0,0,0,0.1);
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 50px -15px rgba(0,0,0,1);
+  -moz-box-shadow: 0px 0px 50px -15px rgba(0,0,0,1);
+  box-shadow: 0px 0px 50px -10px rgba(0,0,0,1);
+
 }
 
 .logo{
@@ -36,16 +45,30 @@ nav ul li{
 }
 
 nav ul li a{
+  padding: 10px;
   text-decoration: none;
   color:#333;
   font-weight: 400;
+}
+nav ul li a:hover{
+  color: #054b1d;
+  font-weight: 700;
+  transition: .5s ease;
+  border-radius: 5px;
 }
 
 .login-btn{
   text-decoration: none;
   color:#333;
-  margin-right: 15px;
+  margin: 10px 15px;
   font-weight: 400;
+  padding: 10px;
+}
+.login-btn:hover{
+  color: #054b1d;
+  font-weight: 700;
+  transition: .5s ease;
+  border-radius: 5px;
 }
 
 .btn{
@@ -59,6 +82,16 @@ nav ul li a{
   border-top-right-radius: 0;
   transition: 0.5s;
 }
+.btn_scnd{
+  text-decoration: none;
+  padding: 5px;
+  color: #fff;
+  background: rgba(0,0,0,0.3);
+  font-size: 14px;
+  border-radius: 30px;
+  border-top-right-radius: 0;
+  transition: 0.5s;
+}
 
 .mycontainer{
   /*border: 1px solid #775d5d;*/
@@ -67,30 +100,40 @@ nav ul li a{
   justify-content: space-around;
 }
 
-.content{
+.contenter{
   /*border: 1px solid #261616;*/
   margin-top: 10%;
   max-width: 600px;
   right: 10%;
 }
-
-.content .bigtitle{
+.contenter-scnd{
   /*border: 1px solid #261616;*/
-  font-size: 60px;
+  margin-top: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contenter .bigtitle{
+  /*border: 1px solid #261616;*/
+  font-size: 50px;
   color: #222;
 }
 
-.content p{
+.contenter p{
   margin:30px 10px 30px;
   color: #333;
 }
 
-.content .btn{
+.contenter .btn{
   padding: 15px 80px;
   font-size: 16px;
 }
 
 .btn:hover{
+  border-top-right-radius: 30px;
+}
+.btn_scnd:hover{
   border-top-right-radius: 30px;
 }
 
@@ -99,8 +142,10 @@ nav ul li a{
   /*position: absolute;*/
   top: 20%;
   margin-right: 10px;
+  -webkit-box-reflect: below 0px linear-gradient(transparent,transparent,#0004);
 
 }
+
 
 .anim{
   opacity: 0;
@@ -113,3 +158,31 @@ nav ul li a{
     transform: translateY(0px);
   }
 }
+
+
+.move {
+  animation: move 15s infinite;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes move {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(90deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
+
+
+/**          ************
+   *       *
+    *    *    APROPOS PAGE
+     ***
+*/
+
