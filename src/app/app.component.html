@@ -368,6 +368,18 @@
             </div>
 
           </button>
+          <li>
+            <select
+              style="width: 55px; margin: 5px;"
+              class="custom-select"
+              #langselect
+              (change)="changeLang(langselect.value)"
+            >
+              <option *ngFor="let lang of translate.getLangs()" [value]="lang">{{
+                lang
+                }}</option>
+            </select>
+          </li>
         </div>
       </div>
     </div>
