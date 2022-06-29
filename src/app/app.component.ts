@@ -25,11 +25,11 @@ export class AppComponent {
   constructor(private router: Router, private dialog:MatDialog,
               public authService:AuthenticationService, public translate: TranslateService) {
     translate.addLangs(['fr','ar']);
-    translate.setDefaultLang('fr');
+    translate.setDefaultLang('ar');
     const browserLang:any = translate.getBrowserLang();
     console.log(browserLang);
-    translate.use(browserLang.match(/fr|ar/)?browserLang: 'fr');
-    localStorage.setItem('lge','fr')
+    translate.use(browserLang.match(/fr|ar/)?browserLang: 'ar');
+    localStorage.setItem('lge','ar')
   }
   ngOnInit(){
     this.title = 'Application pour les reunions';
@@ -71,6 +71,7 @@ export class AppComponent {
   }
 
   changeLang(value: string) {
+    console.log(value);
     localStorage.setItem('lge',value);
     this.translate.use(value);
   }

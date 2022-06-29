@@ -285,7 +285,7 @@
               </a></li>
               <li><a class="dropdown-item" [routerLink]="'/lajoutprojet'">
                 AJOUTER PROJET DE TEXTE</a></li>
-              <li><hr class="dropdown-divider"></li>
+              <hr class="dropdown-divider">
 
               <li><a class="dropdown-item" [routerLink]="'/lesrapports'">
                 RAPPORTS TEXTE</a></li>
@@ -299,7 +299,7 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
               <li><a class="dropdown-item" [routerLink]="'/lesnatures'">
                 LISTE DES NATURES DES TEXTES</a></li>
-              <li><hr class="dropdown-divider"></li>
+              <hr class="dropdown-divider">
               <li><a class="dropdown-item" [routerLink]="'/lajoutnature'">AJOUTER NATURE DE TEXTE</a></li>
             </ul>
           </li>
@@ -309,7 +309,7 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
               <li><a class="dropdown-item" [routerLink]="'/lesphases'">LISTE DES PHASES</a></li>
-              <li><hr class="dropdown-divider"></li>
+              <hr class="dropdown-divider">
               <li><a class="dropdown-item" [routerLink]="'/lajoutphase'">AJOUTER PHASE</a></li>
             </ul>
           </li>
@@ -319,7 +319,7 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
               <li><a class="dropdown-item" [routerLink]="'/lesministeres'">LISTE DES MINISTERES</a></li>
-              <li><hr class="dropdown-divider"></li>
+              <hr class="dropdown-divider">
               <li><a class="dropdown-item" [routerLink]="'/lajoutministere'">AJOUTER MINISTERE</a></li>
             </ul>
           </li>
@@ -331,7 +331,7 @@
               <li><a class="dropdown-item" [routerLink]="'/lessecteurs'">{{
                 "HOME.SECTEURS.LIST" | translate
                 }}</a></li>
-              <li><hr class="dropdown-divider"></li>
+              <hr class="dropdown-divider">
               <li><a class="dropdown-item" [routerLink]="'/lajoutsecteur'">{{
                 "HOME.SECTEURS.AJOUT" | translate
                 }}</a></li>
@@ -345,7 +345,7 @@
               <li><a class="dropdown-item" [routerLink]="'/lesusers'">{{
                 "HOME.UTILISATEURS.LIST" | translate
                 }}</a></li>
-              <li><hr class="dropdown-divider"></li>
+              <hr class="dropdown-divider">
               <li><a class="dropdown-item" [routerLink]="'/signup'">{{
                 "HOME.UTILISATEURS.AJOUT" | translate
                 }}</a></li>
@@ -362,7 +362,7 @@
                 <!--{{
                 "HOME.UTILISATEURS.LIST" | translate
                 }}--></a></li>
-              <li><hr class="dropdown-divider"></li>
+              <hr class="dropdown-divider">
               <li><a class="dropdown-item" (click)="openApropos()" ><!--[routerLink]="'/apropos'"-->
                 DES LIENS
                 <!--{{
@@ -386,10 +386,10 @@
             </div>
 
           </button>
-          <li>
+
             <select
               style="width: 55px; margin: 5px;"
-              class="custom-select"
+              class="btn_scnd"
               #langselect
               (change)="changeLang(langselect.value)"
             >
@@ -397,8 +397,7 @@
                 lang
                 }}</option>
             </select>
-          </li>
-        </div>
+          </div>
       </div>
     </div>
   </nav>

@@ -349,6 +349,31 @@
     "MOUVEMENTS": "قائمة الحركات",
     "LIST-ACTIVE": "الحركات النشطة"
 
-  }
+  },
 
+  "LIST-PROJET": {
+    "TITLE": "قائمة المشاريع",
+    "ADD-BUTTON": "إضافة مشروع نص",
+    "SIMPLE-FILTER": "بحث عادي",
+    "ADVANCED-FILTER": "بحث متقدم",
+    "ADVANCED-FILTER.PHASE": "المرحلة",
+    "ADVANCED-FILTER.PHASE-TOOLTIP": "المرحلة",
+    "ADVANCED-FILTER.SECTEUR": "القطاع",
+    "ADVANCED-FILTER.SECTEUR-TOOLTIP": "القطاع",
+    "ADVANCED-FILTER.MINISTERE": "الوزارة",
+    "ADVANCED-FILTER.MINISTERE-TOOLTIP": "الوزارة",
+    "ADVANCED-FILTER.DATE": "التاريخ",
+    "ADVANCED-FILTER.DATE-TOOLTIP": "التاريخ",
+    "ADVANCED-FILTER.BUTTON": "ابحث",
+    "ADVANCED-FILTER.BUTTON-TOOLTIP": "ابحث",
+    "TABLE.ID": "رقم",
+    "TABLE.SOMMAIRE-AR": "النص عربي",
+    "TABLE.SOMMAIRE-FR": "النص فرنسي",
+    "TABLE.REFER": "المرجع",
+    "TABLE.DETAILS": "التفاصيل",
+    "TABLE.EDIT-BUTTON": "تعديل النص",
+    "TABLE.ADD-AVIS": "إضافة رأي",
+    "TABLE.LIST-AVIS": "قائمة الأراء",
+    "TABLE.PAGINATOR": "العدد في الصفحة"
+  }
 }

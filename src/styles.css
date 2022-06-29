@@ -221,7 +221,7 @@ mat-card{
   background: #1E90FF !important;
   clear: both;
   color: #efefef;
-  height: 120px;
+  height: 100px;
   margin-top: 0px;
 }
 
@@ -453,4 +453,9 @@ use direction
 
 .mat-elevation-z8 {
   overflow-x: auto;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+  padding: 24px;
 }
