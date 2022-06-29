@@ -6,7 +6,25 @@
     SUIVI DES PROJETS DES TEXTES
   </h3>
 </div>-->
+<!--
+<<<<<<< Updated upstream
+=======
+        </button>
 
+          <select class="form-select-lg example-margin" aria-label="Default select example"
+            #langselect
+            (change)="changeLang(langselect.value)"
+          >
+            <option *ngFor="let lang of translate.getLangs()" [value]="lang">{{
+              lang
+              }}</option>
+          </select>
+
+      </div>
+    </div>
+  </div>
+</nav>
+>>>>>>> Stashed changes-->
 <!--<nav
   class="navbar navbar-expand-lg navbar-dark bg-primary"
   *ngIf="authService.isAuthenticated == true"
