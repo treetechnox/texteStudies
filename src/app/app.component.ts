@@ -13,6 +13,7 @@ import {AproposComponent} from "./apropos/apropos.component";
 })
 export class AppComponent {
   title: string | undefined;
+  isToLogg: boolean | string=false;
 
   //candidat: Candidat = new Candidat();
   //faHome = faHome;
@@ -25,11 +26,12 @@ export class AppComponent {
   constructor(private router: Router, private dialog:MatDialog,
               public authService:AuthenticationService, public translate: TranslateService) {
     translate.addLangs(['fr','ar']);
-    translate.setDefaultLang('ar');
+    translate.setDefaultLang('fr');
     const browserLang:any = translate.getBrowserLang();
     console.log(browserLang);
-    translate.use(browserLang.match(/fr|ar/)?browserLang: 'ar');
-    localStorage.setItem('lge','ar')
+    translate.use(browserLang.match(/fr|ar/)?browserLang: 'fr');
+    localStorage.setItem('lge','fr')
+    this.isToLogg=true? sessionStorage.getItem('logged')==='true': '';
   }
   ngOnInit(){
     this.title = 'Application pour les reunions';
@@ -48,12 +50,13 @@ export class AppComponent {
       }, error1 => console.log('N existe pas')
     );
   }*/
-  isToLogg: Boolean=false;
+
 
   onLogout() {
     const conf = confirm('Voulez vous deconnecter?');
     if (conf) {
       this.authService.removeAuthenticatedUserFromLocalStorage();
+      sessionStorage.clear();
       this.router.navigateByUrl('/login');
     }
   }
@@ -95,6 +98,8 @@ export class AppComponent {
   setToLog() {
     console.log(this.isToLogg);
     this.isToLogg=true;
+    sessionStorage.setItem('logged',String(this.isToLogg));
+
     console.log(this.isToLogg);
   }
 }

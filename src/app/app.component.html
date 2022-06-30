@@ -261,7 +261,10 @@
 
 <div
   [hidden] ="!isToLogg">
-  <nav id="navbar" *ngIf="authService.isAuthenticated == true" class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <nav id="navbar" *ngIf="authService.isAuthenticated == true"
+       class="navbar navbar-expand-lg navbar-dark bg-primary"
+       [style]="{'direction':localStorageItem('lge') === 'ar' ? 'rtl' : 'ltr'}"
+  >
     <div class="container-fluid">
       <a class="navbar-brand" [routerLink]="'/lesprojets'">
         <i class="fa fa-home fa-2x" aria-hidden="true"></i>
@@ -273,82 +276,84 @@
               aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent"
+           [style]="{'text-align':localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+      >
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown" *ngIf="!isMinistereUser()" >
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              TEXTES
+              {{'NAVBAR.TEXTE' | translate}}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" [routerLink]="'/lesprojets'">
-                LISTE DES PROJETS DES TEXTES
+                {{'NAVBAR.TEXTE.LIST' | translate}}
               </a></li>
               <li><a class="dropdown-item" [routerLink]="'/lajoutprojet'">
-                AJOUTER PROJET DE TEXTE</a></li>
+                {{'NAVBAR.TEXTE.ADD' | translate}}</a></li>
               <hr class="dropdown-divider">
 
               <li><a class="dropdown-item" [routerLink]="'/lesrapports'">
-                RAPPORTS TEXTE</a></li>
+                {{'NAVBAR.TEXTE.RAPPORT' | translate}}</a></li>
               <!--<li><a class="dropdown-item" href="#">Something else here</a></li>-->
             </ul>
           </li>
           <li class="nav-item dropdown" *ngIf="isAdmin()">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              NATURES
+              {{'NAVBAR.NATURE' | translate}}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
               <li><a class="dropdown-item" [routerLink]="'/lesnatures'">
-                LISTE DES NATURES DES TEXTES</a></li>
+                {{'NAVBAR.NATURE.LIST' | translate}}</a></li>
               <hr class="dropdown-divider">
-              <li><a class="dropdown-item" [routerLink]="'/lajoutnature'">AJOUTER NATURE DE TEXTE</a></li>
+              <li><a class="dropdown-item" [routerLink]="'/lajoutnature'">{{'NAVBAR.NATURE.ADD' | translate}}</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown" *ngIf="isAdmin()">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              PHASES
+              {{'NAVBAR.PHASE' | translate}}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
-              <li><a class="dropdown-item" [routerLink]="'/lesphases'">LISTE DES PHASES</a></li>
+              <li><a class="dropdown-item" [routerLink]="'/lesphases'">{{'NAVBAR.PHASE.LIST' | translate}}</a></li>
               <hr class="dropdown-divider">
-              <li><a class="dropdown-item" [routerLink]="'/lajoutphase'">AJOUTER PHASE</a></li>
+              <li><a class="dropdown-item" [routerLink]="'/lajoutphase'">{{'NAVBAR.PHASE.ADD' | translate}}</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown" *ngIf="isAdmin()">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              MINISTERES
+              {{'NAVBAR.MINISTERE' | translate}}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
-              <li><a class="dropdown-item" [routerLink]="'/lesministeres'">LISTE DES MINISTERES</a></li>
+              <li><a class="dropdown-item" [routerLink]="'/lesministeres'">{{'NAVBAR.MINISTERE.LIST' | translate}}</a></li>
               <hr class="dropdown-divider">
-              <li><a class="dropdown-item" [routerLink]="'/lajoutministere'">AJOUTER MINISTERE</a></li>
+              <li><a class="dropdown-item" [routerLink]="'/lajoutministere'">{{'NAVBAR.MINISTERE.ADD' | translate}}</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown" *ngIf="isAdmin()">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              {{ "HOME.SECTEURS" | translate }}
+              {{'NAVBAR.SECTEUR' | translate}}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown4">
-              <li><a class="dropdown-item" [routerLink]="'/lessecteurs'">{{
-                "HOME.SECTEURS.LIST" | translate
-                }}</a></li>
+              <li><a class="dropdown-item" [routerLink]="'/lessecteurs'">
+                {{'NAVBAR.SECTEUR.LIST' | translate}}
+              </a></li>
               <hr class="dropdown-divider">
-              <li><a class="dropdown-item" [routerLink]="'/lajoutsecteur'">{{
-                "HOME.SECTEURS.AJOUT" | translate
-                }}</a></li>
+              <li><a class="dropdown-item" [routerLink]="'/lajoutsecteur'">
+                {{'NAVBAR.SECTEUR.ADD' | translate}}
+              </a></li>
             </ul>
           </li>
           <li class="nav-item dropdown" *ngIf="isAdmin()">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown5" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              {{ "HOME.UTILISATEURS" | translate }}
+              {{ "NAVBAR.USER" | translate }}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown5">
-              <li><a class="dropdown-item" [routerLink]="'/lesusers'">{{
-                "HOME.UTILISATEURS.LIST" | translate
-                }}</a></li>
+              <li><a class="dropdown-item" [routerLink]="'/lesusers'">
+                {{"NAVBAR.USER.LIST" | translate}}
+              </a></li>
               <hr class="dropdown-divider">
-              <li><a class="dropdown-item" [routerLink]="'/signup'">{{
-                "HOME.UTILISATEURS.AJOUT" | translate
-                }}</a></li>
+              <li><a class="dropdown-item" [routerLink]="'/signup'">
+                {{"NAVBAR.USER.ADD" | translate}}
+              </a></li>
             </ul>
           </li>
           <li class="nav-item dropdown" *ngIf="isMinistereUser()">
@@ -434,7 +439,7 @@
       <span class="bigtitle">مشاريع النصوص</span>
       <p class="anim">برنامج موجه لمتابعة و تسيير مشاريع النصوص </p>
       <p class="anim">في مختلف المراحل التي تطالها</p>
-      <button class="btn anim" (click)="isToLogg = !isToLogg">دخـــــول</button>
+      <button class="btn anim" (click)="setToLog()">دخـــــول</button>
 
     </div>
 

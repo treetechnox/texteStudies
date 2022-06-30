@@ -1,10 +1,12 @@
 <br>
 <div class="jumbotron mycustom-jumbotron">
-  <div class="entete" style=" text-align: center"><span>LA LISTE DES NATURES</span></div>
+  <div class="entete" style=" text-align: center"><span>
+    {{'LIST-NATURE.TITLE' | translate}}
+  </span></div>
   <br>
   <button type="submit" mat-raised-button
-          matTooltip="{{ 'LIST-CANDIDATS.AJOUTER-BUTTON.TOOLTIP' | translate }}"
-          class="btn btn-success" (click)="addNature()">{{ 'LIST-CANDIDATS.AJOUTER-BUTTON' | translate }}</button>
+          matTooltip="{{'LIST-NATURE.ADD-BUTTON' | translate}}"
+          class="btn btn-success" (click)="addNature()">{{'LIST-NATURE.ADD-BUTTON' | translate}}</button>
 
   <br><br>
   <mat-form-field class="example-full-width">

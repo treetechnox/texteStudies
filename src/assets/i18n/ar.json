@@ -351,6 +351,28 @@
 
   },
 
+  "NAVBAR": {
+    "TEXTE": "النصوص",
+    "TEXTE.LIST": "قائمة مشاريع النصوص",
+    "TEXTE.ADD": "إضافة مشروع نص",
+    "TEXTE.RAPPORT": "تقرير عن النصوص",
+    "NATURE": "الأنواع",
+    "NATURE.LIST": "قائمة أنواع النصوص ",
+    "NATURE.ADD": "إضافة نوع نص",
+    "PHASE": "المراحل",
+    "PHASE.LIST": "قائمة المراحل",
+    "PHASE.ADD": "إضافة مرحلة",
+    "MINISTERE": "الوزارات",
+    "MINISTERE.LIST": "قائمة الوزارات",
+    "MINISTERE.ADD": "إضافة وزارة",
+    "SECTEUR": "القطاعات",
+    "SECTEUR.LIST": "قائمة القطاعات",
+    "SECTEUR.ADD": "إضافة قطاع",
+    "USER": "المستحدمين",
+    "USER.LIST": "قائمة المستحدمين",
+    "USER.ADD": "إضافة مستحدم"
+  },
+
   "LIST-PROJET": {
     "TITLE": "قائمة المشاريع",
     "ADD-BUTTON": "إضافة مشروع نص",
@@ -375,5 +397,26 @@
     "TABLE.ADD-AVIS": "إضافة رأي",
     "TABLE.LIST-AVIS": "قائمة الأراء",
     "TABLE.PAGINATOR": "العدد في الصفحة"
+  },
+
+  "LIST-NATURE": {
+    "TITLE": "قائمة أنواع النصوص",
+    "ADD-BUTTON": "إضافة قائمة نوع نص",
+    "SIMPLE-FILTER": "بحث عادي",
+    "TABLE.ID": "رقم",
+    "TABLE.LIBELLE-AR": "النوع عربي",
+    "TABLE.LIBELLE-FR": "النوع فرنسي",
+    "TABLE.PAGINATOR": "العدد في الصفحة"
+  },
+
+  "LIST-NATURE": {
+    "TITLE": "قائمة أنواع النصوص",
+    "ADD-BUTTON": "إضافة قائمة نوع نص",
+    "SIMPLE-FILTER": "بحث عادي",
+    "TABLE.ID": "رقم",
+    "TABLE.LIBELLE-AR": "النوع عربي",
+    "TABLE.LIBELLE-FR": "النوع فرنسي",
+    "TABLE.PAGINATOR": "العدد في الصفحة"
   }
+
 }

@@ -1,10 +1,7 @@
 :root{
   --bg:#e2f3e2;
 }
-@font-face {
-  font-family: "Cairo";
-  src: local("Cairo"), url('../assets/fonts/Cairo-Bold.ttf') format("truetype");
-}
+
 .mybackground{
 
   width:100%;
