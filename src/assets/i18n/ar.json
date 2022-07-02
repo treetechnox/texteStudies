@@ -411,11 +411,21 @@
 
   "LIST-NATURE": {
     "TITLE": "قائمة أنواع النصوص",
-    "ADD-BUTTON": "إضافة قائمة نوع نص",
+    "ADD-BUTTON": "إضافة نوع نص",
     "SIMPLE-FILTER": "بحث عادي",
     "TABLE.ID": "رقم",
     "TABLE.LIBELLE-AR": "النوع عربي",
     "TABLE.LIBELLE-FR": "النوع فرنسي",
+    "TABLE.PAGINATOR": "العدد في الصفحة"
+  },
+  "LIST-PHASE": {
+    "TITLE": "قائمة مراحل النصوص",
+    "ADD-BUTTON": "إضافة مرحلة نص",
+    "SIMPLE-FILTER": "بحث عادي",
+    "TABLE.ID": "رقم",
+    "TABLE.LIBELLE-AR": "المرحلة عربي",
+    "TABLE.LIBELLE-FR": "المرحلة فرنسي",
+    "TABLE.OPERATIONS": "عمليات",
     "TABLE.PAGINATOR": "العدد في الصفحة"
   }
 

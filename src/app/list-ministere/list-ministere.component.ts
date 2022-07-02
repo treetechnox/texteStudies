@@ -7,6 +7,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {MatTableDataSource} from '@angular/material/table';
 import {AddMinistereComponent} from '../add-ministere/add-ministere.component';
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-list-ministere',
@@ -32,6 +33,7 @@ export class ListMinistereComponent implements OnInit {
   panelOpenState = false;
 
   constructor(private ministereService: MinistereService,
+              public app : AppComponent,
               private dialog: MatDialog,
               private router: Router) {
 

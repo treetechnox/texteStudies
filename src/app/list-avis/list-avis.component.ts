@@ -10,6 +10,7 @@ import {AddMinistereComponent} from "../add-ministere/add-ministere.component";
 import {Avis} from "../Avis";
 import {AddAvisComponent} from "../add-avis/add-avis.component";
 import {AvisService} from "../service/avis.service";
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-list-avis',
@@ -36,6 +37,7 @@ export class ListAvisComponent implements OnInit {
   panelOpenState = false;
 
   constructor(private avisService: AvisService,
+              public app: AppComponent,
               private dialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) texteId:number,
               private router: Router) {

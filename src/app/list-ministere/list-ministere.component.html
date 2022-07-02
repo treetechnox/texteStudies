@@ -1,5 +1,6 @@
 <br>
-<div class="jumbotron mycustom-jumbotron">
+<div class="jumbotron mycustom-jumbotron"
+     [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }">
   <div class="entete" style=" text-align: center"><span>LA LISTE DES MINISTERES</span></div>
   <br>
   <button type="submit" mat-raised-button

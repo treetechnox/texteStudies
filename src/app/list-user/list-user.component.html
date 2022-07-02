@@ -1,5 +1,6 @@
 <br>
-<div class="jumbotron mycustom-jumbotron">
+<div class="jumbotron mycustom-jumbotron"
+     [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }">
   <br>
   <div class="text-dark" style=" text-align: center"><span class="entete">LA LISTE DES UTILISATEURS</span></div>
   <br>

@@ -80,7 +80,7 @@ table{
 }
 
 .navbar-dark .navbar-nav .nav-link {
-  color: rgba(255, 255, 255);
+  color: rgba(255, 255, 255,1);
   font-size: 16px;
   font-weight: 500;
 }

@@ -8,6 +8,7 @@ import {AddUserComponent} from '../add-user/add-user.component';
 import {MatPaginator} from "@angular/material/paginator";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {MatTableDataSource} from "@angular/material/table";
+import {AppComponent} from "../app.component";
 /*import {error} from "util";
 import {Salle} from "../salle";
 import {SalleService} from "../service/salle.service";
@@ -52,6 +53,7 @@ export class ListUserComponent implements OnInit {
     }*/
 
   constructor(private userService: UserService,
+              public app:AppComponent,
               private router: Router, private route: ActivatedRoute,
               private dialog: MatDialog) {
 

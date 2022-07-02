@@ -1,5 +1,6 @@
 <br>
-<div class="jumbotron mycustom-jumbotron">
+<div class="jumbotron mycustom-jumbotron"
+     [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }">
   <br/>
 <div class="entete" style=" text-align: center"><span>LA LISTE DES SECTEURS</span></div>
 <br>

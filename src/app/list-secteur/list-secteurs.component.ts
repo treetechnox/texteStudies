@@ -8,6 +8,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {MatTableDataSource} from "@angular/material/table";
 import {Ministere} from "../Ministere";
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-list-secteurs',
@@ -35,6 +36,7 @@ export class ListSecteursComponent implements OnInit {
   panelOpenState = false;
 
   constructor(private secteurService: SecteurService,
+              public app:AppComponent,
               private dialog: MatDialog,
               private router: Router) {
 

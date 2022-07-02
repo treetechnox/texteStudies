@@ -8,6 +8,7 @@ import {NatureService} from '../service/nature.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {AddMinistereComponent} from '../add-ministere/add-ministere.component';
 import {AddNatureComponent} from '../add-nature/add-nature.component';
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-list-nature',
@@ -28,6 +29,7 @@ export class ListNatureComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private natureService:NatureService,
+              public app:AppComponent,
               private dialog: MatDialog,
               private router: Router) { }
 

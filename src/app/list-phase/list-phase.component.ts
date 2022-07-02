@@ -9,6 +9,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Phase} from '../phase';
 import {PhaseService} from '../service/phase.service';
 import {AddPhaseComponent} from '../add-phase/add-phase.component';
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-list-phase',
@@ -34,6 +35,7 @@ export class ListPhasesComponent implements OnInit {
   panelOpenState = false;
 
   constructor(private phaseService: PhaseService,
+              public app:AppComponent,
               private dialog: MatDialog,
               private router: Router) {
 

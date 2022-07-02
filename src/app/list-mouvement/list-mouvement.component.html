@@ -1,6 +1,7 @@
 <br/>
 <div class="dropdown-divider"></div>
-<div class=""><!--jumbotron mycustom-jumbotron-mouvement--><!--simple-border-->
+<div class=""
+     [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }"><!--jumbotron mycustom-jumbotron-mouvement--><!--simple-border-->
   <div class="mybigtexte" ><span>LA LISTE DES PHASES</span></div>
   <br/>
   <button *ngIf="!isMinistereUser()" type="submit" mat-raised-button

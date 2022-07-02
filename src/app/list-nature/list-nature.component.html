@@ -1,5 +1,6 @@
 <br>
-<div class="jumbotron mycustom-jumbotron">
+<div class="jumbotron mycustom-jumbotron"
+     [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }">
   <div class="entete" style=" text-align: center"><span>
     {{'LIST-NATURE.TITLE' | translate}}
   </span></div>
@@ -20,22 +21,22 @@
 
       <!-- id Column -->
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> No. </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> {{'LIST-NATURE.TABLE.ID' | translate}} </th>
         <td mat-cell *matCellDef="let element"> {{element.id}} </td>
       </ng-container>
 
       <!-- libelle fr Column -->
       <ng-container matColumnDef="libelleAr">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> النوع </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> {{'LIST-NATURE.TABLE.LIBELLE-AR' | translate}} </th>
         <td mat-cell *matCellDef="let element"> {{element.libelleAr}} </td>
       </ng-container>
       <ng-container matColumnDef="libelleFr">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> NATURE </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> {{'LIST-NATURE.TABLE.LIBELLE-FR' | translate}} </th>
         <td mat-cell *matCellDef="let element"> {{element.libelleFr}} </td>
       </ng-container>
 
       <ng-container matColumnDef="operations">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> OPERATIONS </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> {{'LIST-NATURE.TABLE.OPERATIONS' | translate}} </th>
         <td mat-cell *matCellDef="let element">
           <button
             mat-raised-button
