@@ -120,7 +120,7 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
               private dialog: MatDialog, private _snackBar: MatSnackBar, public app: AppComponent) {
 
     this.secteur = this.authService.userAuthenticated!.secteur;
-    this.mouvement.datePhase = new Date();
+    //this.mouvement.datePhase = new Date();
     console.log(this.mouvement.datePhase,this.toFormattedDate(new Date()))
   }
 
@@ -227,9 +227,10 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
       search = search?.toLowerCase();
     }
     // filter the banks
-    this.filteredMinisteresMulti.next(
-      this.ministeres.filter(bank => bank.libelleFr?.toLowerCase().indexOf(search) > -1)
-    );
+
+    localStorage.getItem('lge')==='ar'
+      ?this.filteredMinisteresMulti.next(this.ministeres.filter(minist => minist.libelleAr?.toLowerCase().indexOf(search) > -1))
+      :this.filteredMinisteresMulti.next(this.ministeres.filter(minist => minist.libelleFr?.toLowerCase().indexOf(search) > -1));
   }
   /* ***********************************    END OF FILTER       **************************************** */
 

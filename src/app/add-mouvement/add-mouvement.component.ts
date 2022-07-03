@@ -104,7 +104,7 @@ export class AddMouvementComponent implements OnInit {
     this.mouvement.datePhase = d.getDay()+'-'+d.getMonth()+'-'+d.getFullYear();*/
 
 
-
+    this.mouvement.datePhase= this.date;
 
     this.texteService.getTexteById(this.texteId).subscribe(value => {
       this.texte = value;

@@ -380,6 +380,8 @@
     "ADVANCED-FILTER": "بحث متقدم",
     "ADVANCED-FILTER.PHASE": "المرحلة",
     "ADVANCED-FILTER.PHASE-TOOLTIP": "المرحلة",
+    "ADVANCED-FILTER.ISACTIVE": "نشط؟",
+    "ADVANCED-FILTER.ISACTIVE-TOOLTIP": "الوضعية الحالية: نشط؟",
     "ADVANCED-FILTER.SECTEUR": "القطاع",
     "ADVANCED-FILTER.SECTEUR-TOOLTIP": "القطاع",
     "ADVANCED-FILTER.MINISTERE": "الوزارة",
@@ -396,6 +398,22 @@
     "TABLE.EDIT-BUTTON": "تعديل النص",
     "TABLE.ADD-AVIS": "إضافة رأي",
     "TABLE.LIST-AVIS": "قائمة الأراء",
+    "TABLE.PAGINATOR": "العدد في الصفحة"
+  },
+
+  "LIST-MOUVEMENT": {
+    "TITLE": "قائمة مراحل النص",
+    "MINISTERE-TEXTE": "قائمة الوزارات حسب النص",
+    "ADD-BUTTON": "إضافة مرحلة",
+    "TABLE.ID": "رقم",
+    "TABLE.PHASE": "المرحلة",
+    "TABLE.SECTEUR": "القطاع",
+    "TABLE.DATE": "التاريخ",
+    "TABLE.ETAT": "الحالة",
+    "TABLE.OPERATIONS": "العمليات",
+    "TABLE.EDIT-BUTTON": "تعديل",
+    "TABLE.UPLOAD": "تحميل PDF",
+    "TABLE.SHOW-PDF": "عرض الوثيقة",
     "TABLE.PAGINATOR": "العدد في الصفحة"
   },
 
@@ -418,6 +436,7 @@
     "TABLE.LIBELLE-FR": "النوع فرنسي",
     "TABLE.PAGINATOR": "العدد في الصفحة"
   },
+
   "LIST-PHASE": {
     "TITLE": "قائمة مراحل النصوص",
     "ADD-BUTTON": "إضافة مرحلة نص",
@@ -427,6 +446,84 @@
     "TABLE.LIBELLE-FR": "المرحلة فرنسي",
     "TABLE.OPERATIONS": "عمليات",
     "TABLE.PAGINATOR": "العدد في الصفحة"
+  },
+
+  "LIST-MINISTERE": {
+    "TITLE": "قائمة الوزارات",
+    "ADD-BUTTON": "إضافة وزارة",
+    "SIMPLE-FILTER": "بحث عادي",
+    "TABLE.ID": "رقم",
+    "TABLE.LIBELLE-AR": "الوزارة عربي",
+    "TABLE.LIBELLE-FR": "الوزارة فرنسي",
+    "TABLE.OPERATIONS": "عمليات",
+    "TABLE.PAGINATOR": "العدد في الصفحة"
+  },
+
+  "LIST-SECTEUR": {
+    "TITLE": "قائمة القطاعات",
+    "ADD-BUTTON": "إضافة قطاع",
+    "SIMPLE-FILTER": "بحث عادي",
+    "TABLE.ID": "رقم",
+    "TABLE.LIBELLE-AR": "القطاع عربي",
+    "TABLE.LIBELLE-FR": "القطاع فرنسي",
+    "TABLE.OPERATIONS": "عمليات",
+    "TABLE.PAGINATOR": "العدد في الصفحة"
+  },
+
+  "LIST-USER": {
+    "TITLE": "قائمة أسماء المستخدمين",
+    "ADD-BUTTON": "إضافة مستخدم",
+    "SIMPLE-FILTER": "بحث عادي",
+    "TABLE.ID": "رقم",
+    "TABLE.USER": "المستخدم",
+    "TABLE.NOM": "اللقب",
+    "TABLE.PRENOM": "الاسم",
+    "TABLE.ROLE": "الدور",
+    "TABLE.OPERATIONS": "عمليات",
+    "TABLE.PAGINATOR": "العدد في الصفحة"
+  },
+
+
+
+
+
+
+
+
+  "ADD-TEXTE": {
+    "STEP-ONE": "إضافة نص",
+    "NATURE": "طبيعة النص",
+    "SOMMAIRE-AR": "النص عربي",
+    "SOMMAIRE-FR": "النص فرنسي",
+    "FORWARD": "تقدم",
+    "RESET": "مسح",
+    "STEP-TWO": "إضافة مرحلة",
+    "SECTEUR": "القطاع",
+    "PHASE": "المرحلة",
+    "DATE": "تاريخ",
+    "DETAILS": "ملاحظات",
+    "LIST-MINISTERE": "قائمة الوزارات",
+    "SELECTED-MINISTERE": "الوزارات المختارة",
+    "BACKWARD": "إرجع",
+    "ADD-BUTTON": "إضافة",
+
+    "DATE-SIG": "تاريخ الإمضاء",
+    "DATE-PUB": "تاريخ النشر",
+    "REF": "المرجع",
+    "JOURNAL": "الجريدة",
+    "PAGEAR": "الصفحة عربي",
+    "PAGEFR": "الصفحة فرنسي",
+
+    "ERROR-NATURE": "الرجاء إدخال طبيعة النص",
+    "ERROR-SOMMAIRE-AR": "الرجاء إدخال النص بالعربية",
+    "ERROR-SOMMAIRE-FR": "الرجاء إدخال النص بالفرنسية",
+    "ERROR-SECTEUR": "الرجاء إدخال القطاع",
+    "ERROR-PHASE": "الرجاء إدخال المرحلة",
+    "ERROR-DATE": "الرجاء إدخال التايخ",
+    "ERROR-MINISTERE": "الرجاء إدخال الوزارة",
+
+    "NO-RESULT": "لا توجد نتيجة"
+
   }
 
 }

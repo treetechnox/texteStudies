@@ -29,6 +29,7 @@ import {AvisService} from "../service/avis.service";
 import {noAuto} from "@fortawesome/fontawesome-svg-core";
 import {ListAvisComponent} from "../list-avis/list-avis.component";
 import {User} from "../user";
+import {MatSelectChange} from "@angular/material/select";
 
 export interface MouvementMinistere{
   id: number;
@@ -211,6 +212,7 @@ export class ListProjetComponent implements AfterViewInit {
 
   private nodeTree: any;
   direction: string = this.app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl';
+  isActive:any;
 
 
   public localStorageItem(id: string): string {
@@ -351,6 +353,10 @@ export class ListProjetComponent implements AfterViewInit {
     dialogConfigList.width = '60%';
     dialogConfigList.height = '50%px';
     this.dialog.open(ListAvisComponent, dialogConfigList);
+  }
+
+  onGetIsActive($event: MatSelectChange) {
+    this.isActive=$event;
   }
 }
 

@@ -2,27 +2,29 @@
 <div class="dropdown-divider"></div>
 <div class=""
      [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }"><!--jumbotron mycustom-jumbotron-mouvement--><!--simple-border-->
-  <div class="mybigtexte" ><span>LA LISTE DES PHASES</span></div>
+  <div class="mybigtexte" >
+    <span>{{'LIST-MOUVEMENT.TITLE'|translate}}</span>
+  </div>
   <br/>
   <button *ngIf="!isMinistereUser()" type="submit" mat-raised-button
-          matTooltip="{{ 'LIST-CANDIDATS.AJOUTER-BUTTON.TOOLTIP' | translate }}"
-          class="btn btn-success" (click)="addMouvement()">{{ 'LIST-CANDIDATS.AJOUTER-BUTTON' | translate }} MOUVEMENT</button>
+          matTooltip="{{'LIST-MOUVEMENT.ADD-BUTTON'|translate}}"
+          class="btn btn-success" (click)="addMouvement()">{{ 'LIST-MOUVEMENT.ADD-BUTTON' | translate }}</button>
 
   <br/><br/>
 
   <div class="all-grid">
     <div class="myflex">
       <div class="mytexte">
-        <span> MINISTERES PAR TEXTE</span>
+        <span>{{'LIST-MOUVEMENT.MINISTERE-TEXTE'|translate}}</span>
       </div>
     </div>
     <div class="grid-container"><!--cards-->
       <div class="card card--fixedWidth" *ngFor="let minist of ministeres"><!--card  grid-item-->
         <div class="card__description">
           <div class="icon fa fa-building card__descriptionIcon"></div>
-          <div class="card__descriptionText">{{minist.libelleFr}}</div>
+          <div class="card__descriptionText">{{minist.libelleAr}}</div>
         </div>
-        <div class="card__price">ID : {{minist.id}}</div>
+        <div class="card__price">{{minist.libelleFr}}</div>
       </div>
     </div>
   </div>
@@ -32,13 +34,13 @@
 
       <!-- id Column -->
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> No. </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="">{{'LIST-MOUVEMENT.TABLE.ID'|translate}} </th>
         <td mat-cell *matCellDef="let element ; let i = index;"> {{i+1}} </td>
       </ng-container>
 
       <!-- libelle fr Column -->
       <ng-container matColumnDef="libelleAr">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> PHASE </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> {{'LIST-MOUVEMENT.TABLE.PHASE'|translate}} </th>
         <td mat-cell *matCellDef="let element">
           <div class="is-all"
                [ngClass]="{
@@ -61,16 +63,16 @@
         </td>
       </ng-container>
       <ng-container matColumnDef="libelleFr">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> SECTEUR </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> {{'LIST-MOUVEMENT.TABLE.SECTEUR'|translate}} </th>
         <td mat-cell *matCellDef="let element"> {{element.secteur?.libelleFr}} </td>
       </ng-container>
       <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> DATE </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> {{'LIST-MOUVEMENT.TABLE.DATE'|translate}} </th>
         <td mat-cell *matCellDef="let element"> {{toFormattedDate(element.datePhase)}} </td>
       </ng-container>
 
       <ng-container matColumnDef="etat">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> ETAT </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> {{'LIST-MOUVEMENT.TABLE.ETAT'|translate}} </th>
         <td mat-cell *matCellDef="let element">
 
           <!--<div [ngClass]="
@@ -83,19 +85,21 @@
       </ng-container>
 
       <ng-container matColumnDef="operations">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> OPERATIONS </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> {{'LIST-MOUVEMENT.TABLE.OPERATIONS'|translate}} </th>
         <td mat-cell *matCellDef="let element">
           <div class="myflex spacer">
           <button *ngIf="!isMinistereUser()"
             mat-raised-button
             mat-icon-button
-            matTooltip="Edit LE MOUVEMENT"
+            matTooltip="{{'LIST-MOUVEMENT.TABLE.EDIT-BUTTON'|translate}}"
             class="btn btn-success" (click)="onEditNature(element.id)">
             <i class="fa fa-edit" aria-hidden="true"></i>
           </button>
             <label class="btn btn-primary" *ngIf="!isMinistereUser()">
               <i class="fa fa-upload" aria-hidden="true"></i>
-          <input class="example-full-width" name="UploadFile{{element.id}}" accept="application/pdf"
+          <input class="example-full-width" name="UploadFile{{element.id}}"
+                 matTooltip="{{'LIST-MOUVEMENT.TABLE.UPLOAD'|translate}}"
+                 accept="application/pdf"
                  style="display: none;" type="file"
                  (change)="onSelectFile($event,element.id)" />
             </label>
@@ -104,13 +108,11 @@
               <button
                 mat-raised-button
                 mat-icon-button
-                matTooltip="AFFICHER DOCUMENT"
+                matTooltip="{{'LIST-MOUVEMENT.TABLE.SHOW-PDF'|translate}}"
                 class="btn btn-light" (click)="showPdf(element.id)"
               ><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
             </div>
           </div>
-
-
         </td>
       </ng-container>
 

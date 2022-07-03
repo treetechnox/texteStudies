@@ -12,60 +12,60 @@
           <ng-template matStepLabel>
             <h5 [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
               <!--{{ "ADD-TEXTE.H5" | translate }}-->
-              AJOUTER SOMMAIRE
+              {{'ADD-TEXTE.STEP-ONE' |translate}}
             </h5>
           </ng-template>
 
           <div class="row">
-            <mat-form-field class="example-full-width">
-              <mat-label>{{ 'ADD-MOUVEMENT.NOMINATION' | translate }}</mat-label>
+            <mat-form-field
+              [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+              class="example-full-width">
+              <mat-label>{{'ADD-TEXTE.NATURE' |translate}}</mat-label>
               <mat-select
-                required name="typemouve" placeholder="{{ 'ADD-MOUVEMENT.NOMINATION' | translate }}"
+                required name="typemouve"
                           [(ngModel)]="nature"
                           (ngModelChange)="makeNominat($event)"
                           formControlName="natureCtrl">
                 <mat-option></mat-option>
                 <mat-option *ngFor="let nat of natures ; let i=index" [value]="nat">
-                  {{nat.libelleFr}}
+                  <div [ngSwitch]="app.localStorageItem('lge')">
+                    <div *ngSwitchCase="'ar'" class="myfilterar">{{nat?.libelleAr}}</div>
+                    <div *ngSwitchCase="'fr'" class="myfilterfr">{{nat?.libelleFr}}</div>
+                    <div *ngSwitchDefault></div>
+                  </div>
                 </mat-option>
               </mat-select>
               <!--<mat-error>{{ 'ADD-MOUVEMENT.NOMINATION.MAT-ERROR' | translate }}</mat-error>-->
               <mat-error *ngIf="firstFormGroup.controls['natureCtrl'].hasError('required')
               && firstFormGroup.controls['natureCtrl'].pristine">
-                INSEREZ LA NATURE DU TEXTE !!!
+                {{'ADD-TEXTE.ERROR-NATURE'|translate}}
               </mat-error>
             </mat-form-field>
           </div>
           <div class="row" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
-
-            <mat-form-field class="example-full-width" [formGroup]="firstFormGroup">
+            <mat-form-field
+              [style]="{'text-align': 'right'}"
+              class="example-full-width" [formGroup]="firstFormGroup">
               <!--{{ 'ADD-TEXTE.NOMFR.PLACEHOLDER' | translate }}-->
-              <textarea  matInput placeholder="النص"
+              <textarea  matInput placeholder="{{'ADD-TEXTE.SOMMAIRE-AR'|translate}}"
                          required type="text" [(ngModel)]="texte.sommaireAr"
                          name="firstName" formControlName="sommaireArCtrl"></textarea>
-              <mat-error>{{ "ADD-TEXTE.NOMFR.ERROR" | translate }}</mat-error>
+              <mat-error>{{'ADD-TEXTE.ERROR-SOMMAIRE-AR'|translate}}</mat-error>
             </mat-form-field>
-
           </div>
           <div class="row" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
-
-            <mat-form-field class="example-full-width" [formGroup]="firstFormGroup">
+            <mat-form-field
+              [style]="{'text-align': 'left'}"
+              class="example-full-width" [formGroup]="firstFormGroup">
               <!--{{ 'ADD-TEXTE.PRENOMFR.PLACEHOLDER' | translate }}-->
-              <textarea matInput placeholder="LE TEXTE" required type="text"
+              <textarea matInput placeholder="{{'ADD-TEXTE.SOMMAIRE-FR'|translate}}" required type="text"
                         [(ngModel)]="texte.sommaireFr" name="lastName" formControlName="sommaireFrCtrl"
               ><!--(change)="verifierTexte(texte.sommaireAr,  texte.sommaireFr)"--></textarea>
-              <mat-error>{{ "ADD-TEXTE.PRENOMFR.ERROR" | translate }}</mat-error>
+              <mat-error>{{'ADD-TEXTE.ERROR-SOMMAIRE-FR'|translate}}</mat-error>
             </mat-form-field>
-
           </div>
 
-
           <div class="example-full-width" *ngIf="!texteExist; else kayen">
-            <!--<div class="row">
-              <h5 [ngStyle]="{
-                    direction: app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'
-                  }">{{'ADD-TEXTE.ADD_MOUVEMENT' | translate  }}</h5>
-            </div>-->
           </div>
           <hr/>
           <div class="row">
@@ -74,7 +74,7 @@
                 <button
                   type="submit"
                   mat-raised-button
-                  matTooltip="{{ 'ADD-TEXTE.BUTTON_REFRESH' | translate }}"
+                  matTooltip="{{ 'ADD-TEXTE.RESET' | translate }}"
                   class="btn btn-primary"
                   (click)="stepper.reset()"
                 >
@@ -86,7 +86,7 @@
 
             <button class="elementID" mat-button matStepperNext
                     mat-raised-button
-                    matTooltip="{{'STEP.AVANCE'| translate}}">
+                    matTooltip="{{'ADD-TEXTE.FORWARD'| translate}}">
               <i class="fa fa-arrow-circle-right fa-2x" aria-hidden="true">
               </i></button>
 
@@ -150,45 +150,61 @@
       <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="secondFormGroup" #myform2="ngForm"
               [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
-          <ng-template matStepLabel><h5>AJOUTER MOUVEMENT</h5><!--{{ 'ADD-MOUVEMENT.H5' | translate }}--></ng-template>
+          <ng-template matStepLabel><h5>{{'ADD-TEXTE.STEP-TWO'|translate}}</h5><!--{{ 'ADD-MOUVEMENT.H5' | translate }}--></ng-template>
 
           <div class="row">
             <!--<p>{{selsect?.libelleFr}}</p>-->
             <div class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
-              <mat-form-field class="example-full-width">
-                <mat-label>SECTEUR<!--{{ 'ADD-MOUVEMENT.ETAT' | translate }}--></mat-label>
+              <mat-form-field
+                [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+                class="example-full-width">
+                <mat-label>{{'ADD-TEXTE.SECTEUR'|translate}}<!--{{ 'ADD-MOUVEMENT.ETAT' | translate }}--></mat-label>
                 <mat-select required [disabled]="!authService.isAdmin()"  name="etat"
                             [(ngModel)]="selsect"
                             formControlName="secteurMouvementCtrl"
                 ><!--[ngModelOptions]="{standalone: true}-->
                   <mat-option></mat-option>
                   <mat-option *ngFor="let sct of secteurs; let i=index" [value]="sct">
-                    {{sct?.libelleFr}}
+                    <div [ngSwitch]="app.localStorageItem('lge')">
+                      <div *ngSwitchCase="'ar'" class="myfilterar">{{sct?.libelleAr}}</div>
+                      <div *ngSwitchCase="'fr'" class="myfilterfr">{{sct?.libelleFr}}</div>
+                      <div *ngSwitchDefault></div>
+                    </div>
                   </mat-option>
 
                 </mat-select>
-                <mat-error>{{ 'ADD-MOUVEMENT.ETAT.MAT-ERROR' | translate }}</mat-error>
+                <mat-error>{{ 'ADD-TEXTE.ERROR-SECTEUR' | translate }}</mat-error>
               </mat-form-field>
             </div>
             <div class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
-              <mat-form-field>
-                <mat-label>PHASE<!--{{ 'ADD-MOUVEMENT.ETAT' | translate }}--></mat-label>
+              <mat-form-field
+                class="example-full-width"
+                [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+              >
+                <mat-label>{{'ADD-TEXTE.PHASE' | translate}}<!--{{ 'ADD-MOUVEMENT.ETAT' | translate }}--></mat-label>
                 <mat-select required name="etat" [(ngModel)]="mouvement.phase"
                             (selectionChange)="getSelectedSecteur($event)"
                             formControlName="etatMouvementCtrl"
                 ><!--(ngModelChange)="makeNominat(mouvement.typeMouvement)"-->
                   <mat-option></mat-option>
                   <mat-option *ngFor="let phs of phases; let i=index" [value]="phs">
-                    {{phs.libelleFr}}
+                    <div [ngSwitch]="app.localStorageItem('lge')">
+                      <div *ngSwitchCase="'ar'" class="myfilterar">{{phs?.libelleAr}}</div>
+                      <div *ngSwitchCase="'fr'" class="myfilterfr">{{phs?.libelleFr}}</div>
+                      <div *ngSwitchDefault></div>
+                    </div>
                   </mat-option>
                 </mat-select>
-                <mat-error>{{ 'ADD-MOUVEMENT.ETAT.MAT-ERROR' | translate }}</mat-error>
+                <mat-error>{{ 'ADD-TEXTE.ERROR-PHASE' | translate }}</mat-error>
               </mat-form-field>
             </div>
 
             <div class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
-              <mat-form-field>
-                <input matInput readonly [matDatepicker]="picker1" placeholder="{{'ADD-MOUVEMENT.PHASE_MOUVEMENT.DATE_ETAT' | translate}}"
+              <mat-form-field
+                class="example-full-width"
+                [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+              >
+                <input matInput readonly [matDatepicker]="picker1"
                        id="date1" name="date1"
                        [(ngModel)]="mouvement.datePhase"
                        required
@@ -197,17 +213,23 @@
                 ><!--[ngModelOptions]="{standalone: true}"-->
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
-                <mat-error>INSEREZ LA DATE DE MOUVEMENT</mat-error><!--{{ 'ADD-MOUVEMENT.ETAT.MAT-ERROR' | translate }}-->
+                <mat-error>{{'ADD-TEXTE.ERROR-DATE'}}</mat-error><!--{{ 'ADD-MOUVEMENT.ETAT.MAT-ERROR' | translate }}-->
               </mat-form-field>
             </div>
           </div>
           <div *ngIf="mouvement.phase?.libelleFr==='TEXTE PUBLIE'">
-            <h5>{{'ADD-CANDIDAT.TEXTE' | translate}}</h5>
+            <div class="row">
+              <div class="entete">
+                  <mat-label>{{'ADD-CANDIDAT.TEXTE' | translate}}</mat-label>
+              </div>
+            </div>
             <div class="row" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
               <div class="col">
                 <div class="form-group">
-                  <mat-form-field>
-                    <input matInput placeholder="{{'ADD-CANDIDAT.TEXTE.REF' | translate}}" type="text" [(ngModel)]="texte.refer" name="ref"
+                  <mat-form-field
+                    [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+                    class="example-full-width">
+                    <input matInput placeholder="{{'ADD-TEXTE.REF' | translate}}" type="text" [(ngModel)]="texte.refer" name="ref"
                            [ngModelOptions]="{standalone: true}">
                     <mat-error>Il faut remplir la reference!</mat-error>
                   </mat-form-field>
@@ -215,8 +237,10 @@
               </div>
               <div class="col">
                 <div class="form-group">
-                  <mat-form-field>
-                    <input matInput placeholder="{{'ADD-CANDIDAT.TEXTE.JOURNAL' | translate}}" type="text" [(ngModel)]="texte.journal" name="journal"
+                  <mat-form-field
+                    [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+                    class="example-full-width">
+                    <input matInput placeholder="{{'ADD-TEXTE.JOURNAL' | translate}}" type="text" [(ngModel)]="texte.journal" name="journal"
                            [ngModelOptions]="{standalone: true}">
                     <mat-error>Il faut remplir le journal!</mat-error>
                   </mat-form-field>
@@ -227,8 +251,10 @@
             <div class="row" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
               <div class="col">
                 <div class="form-group">
-                  <mat-form-field>
-                    <input matInput readonly [matDatepicker]="picker2" placeholder="{{'ADD-MOUVEMENT.PHASE_MOUVEMENT.DATE_ETAT' | translate}}"
+                  <mat-form-field
+                    [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+                    class="example-full-width">
+                    <input matInput readonly [matDatepicker]="picker2" placeholder="{{'ADD-TEXTE.DATE-SIG' | translate}}"
                            id="dateSignture" name="dateSignture"
                            [(ngModel)]="texte.dateSignature"
                            [ngModelOptions]="{standalone: true}"
@@ -240,8 +266,10 @@
               </div>
               <div class="col">
                 <div class="form-group">
-                  <mat-form-field>
-                    <input matInput readonly [matDatepicker]="picker3" placeholder="{{'ADD-MOUVEMENT.PHASE_MOUVEMENT.DATE_ETAT' | translate}}"
+                  <mat-form-field
+                    [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+                    class="example-full-width">
+                    <input matInput readonly [matDatepicker]="picker3" placeholder="{{'ADD-TEXTE.DATE-PUB' | translate}}"
                            id="datePublication" name="datePublication"
                            [(ngModel)]="texte.datePublication"
                            [ngModelOptions]="{standalone: true}"
@@ -255,8 +283,10 @@
             <div class="row" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
               <div class="col">
                 <div class="form-group">
-                  <mat-form-field>
-                    <input matInput placeholder="{{'ADD-CANDIDAT.TEXTE.PAGEAR' | translate}}" type="text" [(ngModel)]="texte.pageAr"
+                  <mat-form-field
+                    [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+                    class="example-full-width">
+                    <input matInput placeholder="{{'ADD-TEXTE.PAGEAR' | translate}}" type="text" [(ngModel)]="texte.pageAr"
                            [ngModelOptions]="{standalone: true}"
                            name="pagear">
                     <mat-error>Il faut remplir la pageAr!</mat-error>
@@ -265,8 +295,10 @@
               </div>
               <div class="col">
                 <div class="form-group">
-                  <mat-form-field>
-                    <input matInput placeholder="{{'ADD-CANDIDAT.TEXTE.PAGEFR' | translate}}" type="text" [(ngModel)]="texte.pageFr"
+                  <mat-form-field
+                    [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+                    class="example-full-width">
+                    <input matInput placeholder="{{'ADD-TEXTE.PAGEFR' | translate}}" type="text" [(ngModel)]="texte.pageFr"
                            [ngModelOptions]="{standalone: true}"
                            name="pagefr">
                     <mat-error>Il faut remplir la pageFr!</mat-error>
@@ -274,19 +306,15 @@
                 </div>
               </div>
             </div>
-            <!--
-
-
-                  <button (click)="getTexte()">Voir Texte:</button>
-            -->
-
           </div>
 
 
 
-            <mat-form-field class="example-full-width">
+            <mat-form-field
+              [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+              class="example-full-width">
               <!--{{ 'ADD-TEXTE.PRENOMFR.PLACEHOLDER' | translate }}-->
-              <textarea matInput placeholder="LES DETAILS" type="text"
+              <textarea matInput placeholder="{{'ADD-TEXTE.DETAILS'|translate}}" type="text"
                         [(ngModel)]="mouvement.details" name="details"
                         [ngModelOptions]="{standalone: true}"
               ></textarea>
@@ -295,70 +323,61 @@
 
 
 
-          <mat-form-field class="example-full-width"><!--/*selectionChange.emit($event);*/-->
+          <mat-form-field
+            [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+            class="example-full-width"><!--/*selectionChange.emit($event);*/-->
             <mat-select [ngModel]="selectedValues"
                         [ngModelOptions]="{standalone: true}"
-                        (ngModelChange)="getMinistere($event)" placeholder="LA LISTE DES MINISTERES"
+                        (ngModelChange)="getMinistere($event)"
+                        placeholder="{{'ADD-TEXTE.LIST-MINISTERE'|translate}}"
                         [multiple]="true" #multiSelect>
               <mat-option>
                 <ngx-mat-select-search
+                  class="error-message"
+                  [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
                   [formControl]="ministereMultiFilterCtrl"
-                  placeholderLabel="RECHERCHE DES MINISTERES..."
-                  noEntriesFoundLabel="PAS DE RESULTAT !"></ngx-mat-select-search>
+                  placeholderLabel="{{'LIST-MINISTERE.SIMPLE-FILTER'|translate}}"
+                  noEntriesFoundLabel="{{'ADD-TEXTE.NO-RESULT'|translate}}"></ngx-mat-select-search>
               </mat-option>
               <mat-option *ngFor="let minist of filteredMinisteresMulti | async" [value]="minist">
-                {{minist.libelleFr}}
+                <div [ngSwitch]="app.localStorageItem('lge')">
+                  <div *ngSwitchCase="'ar'" class="myfilterar">{{minist?.libelleAr}}</div>
+                  <div *ngSwitchCase="'fr'" class="myfilterfr">{{minist?.libelleFr}}</div>
+                  <div *ngSwitchDefault></div>
+                </div>
               </mat-option>
             </mat-select>
           </mat-form-field>
 
           <p>
-            LA LISTE DES MINISTERES SELECTIONNEES:
+            {{'ADD-TEXTE.SELECTED-MINISTERE'|translate}}
           </p>
           <ul *ngFor="let minist of selectedValues">
-            <li>{{minist?.libelleFr}}</li>
+            <li><div [ngSwitch]="app.localStorageItem('lge')">
+              <div *ngSwitchCase="'ar'" class="myfilterar">{{minist?.libelleAr}}</div>
+              <div *ngSwitchCase="'fr'" class="myfilterfr">{{minist?.libelleFr}}</div>
+              <div *ngSwitchDefault></div>
+            </div></li>
           </ul>
-
-
-          <!--<mat-form-field class="example-full-width">
-            <mat-label>{{ 'ADD-MOUVEMENT.FONCTION' | translate }}</mat-label>&lt;!&ndash;{{ 'ADD-MOUVEMENT.FONCTION' | translate }}&ndash;&gt;
-            <mat-select
-              multiple
-              name="minist" placeholder="SELECT MINISTERE" [(ngModel)]="slctMinisteres"
-                        [ngModelOptions]="{standalone: true}"
-                        (ngModelChange)="onMinistereSelected($event)">
-              <input id="recherche" matInput
-                     placeholder="Recherche..."
-                     type = "text" (keyup)="onKeyFct($event)" (keydown)="handleInput($event)">
-              <div *ngFor="let minist of selectedMinisteres">
-                <mat-option
-                  [value]="minist">&lt;!&ndash;*ngIf="checkIfExistFonction(fct)"&ndash;&gt;
-                  {{app.localStorageItem('lge') === 'fr' ? minist.libelleFr : minist.libelleAr}}
-                </mat-option>
-              </div>
-            </mat-select>
-            <mat-error>Il faut choisir la fonction</mat-error>
-          </mat-form-field>-->
-
           <hr/>
           <div class="row example-full-width controle">
             <button class="elementID" mat-button matStepperPrevious
                     mat-raised-button
-                    matTooltip= "{{'STEP.RECULE'| translate}}" >
+                    matTooltip= "{{'ADD-TEXTE.BACKWARD'| translate}}" >
               <i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true">
                 <!----></i></button>
 
             <button class="elementID" mat-button matStepperNext
                     (click)="getEvent(myform1,myform2)"
                     mat-raised-button
-                    matTooltip= "{{'STEP.AVANCE'| translate}}">
+                    matTooltip= "{{'ADD-TEXTE.FORWARD'| translate}}">
               <i class="fa fa-arrow-circle-right fa-2x" aria-hidden="true">
                 <!----></i></button>
           </div>
         </form>
       </mat-step>
       <mat-step>
-        <ng-template matStepLabel><h5>{{ 'ADD-CANDIDAT.BUTTON_ADD' | translate }}</h5></ng-template>
+        <ng-template matStepLabel><h5>{{ 'ADD-TEXTE.ADD-BUTTON' | translate }}</h5></ng-template>
         <div>
           <div class="col-12" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
             <br>
@@ -366,7 +385,7 @@
               <button
                 type="submit"
                 mat-raised-button
-                matTooltip="{{ 'ADD-CANDIDAT.BUTTON_ADD' | translate }}"
+                matTooltip="{{ 'ADD-TEXTE.ADD-BUTTON' | translate }}"
                 class="btn btn-success "
                 (click)="onSubmitSave()"
                 [disabled]="!myform1.valid && !myform2.valid"
