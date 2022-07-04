@@ -96,6 +96,15 @@ export class ListProjetComponent implements AfterViewInit {
 
   authenticated!:User | undefined;
 
+  private nodeTree: any;
+  direction: string = this.app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl';
+  isActive!:boolean;
+
+/*  myActivity = new Map();*/
+
+  activityAR!:Array<string>;
+  activityFR!:Array<string>;
+
   constructor(private texteService: TexteService,
               private avisService:AvisService,
               private mouvementService:MouvementService,
@@ -106,6 +115,11 @@ export class ListProjetComponent implements AfterViewInit {
               /*private fonctionService: FonctionService,*/
               private router: Router,public app:AppComponent,
               private dialog:MatDialog) {
+
+    this.activityAR=['لا','نعم']!;
+    this.activityFR=['NON','OUI']!;
+
+
     this.authenticated = this.authService.userAuthenticated;
     console.log(this.authenticated?.id);
     if (this.isAdmin()){
@@ -210,9 +224,7 @@ export class ListProjetComponent implements AfterViewInit {
     return [...this.filter];
   }
 
-  private nodeTree: any;
-  direction: string = this.app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl';
-  isActive:any;
+
 
 
   public localStorageItem(id: string): string {
@@ -246,8 +258,9 @@ export class ListProjetComponent implements AfterViewInit {
     this.dataSource = new MatTableDataSource();
     this.mouvement.phase = this.phase
     this.mouvement.secteur= this.secteur;
+    this.mouvement.isactive = this.isActive;
 
-    this.mouvementService.getFilter(this.mouvement.phase.id,this.mouvement.secteur.id,this.ministere.id)
+    this.mouvementService.getFilter(this.mouvement.phase.id,this.mouvement.secteur.id,this.ministere.id,this.mouvement.isactive)
       .subscribe(value => {
        /* this.mouvements=value._embedded.mouvements.sort((a,b) => a.id.rendered.localeCompare(b.id.rendered));*/
       this.mouvements = value._embedded.mouvements;
@@ -356,7 +369,9 @@ export class ListProjetComponent implements AfterViewInit {
   }
 
   onGetIsActive($event: MatSelectChange) {
-    this.isActive=$event;
+    console.log( $event.value);
+    $event.value === '1'? this.isActive=true:this.isActive=false;
+    console.log(this.isActive);
   }
 }
 

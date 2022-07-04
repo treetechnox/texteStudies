@@ -10,33 +10,40 @@
       </button>
       <form>
         <br>
-        <div class="mybigtexte" ><span><!--[ngStyle]="{
-                  direction:
-                    app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'
-                }"-->
-          AJOUTER UN AVIS</span><!--{{ 'ADD-MOUVEMENT.H5' | translate }}-->
+        <div class="entete" >
+          {{'ADD-AVIS.TITLE'|translate}}
         </div>
         <br>
         <div class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
-          <mat-form-field class="example-full-width">
-            <mat-label>MINISTERES<!--{{ 'ADD-MOUVEMENT.ETAT' | translate }}--></mat-label>
+          <mat-form-field
+            [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+            class="example-full-width">
+            <mat-label>{{ 'ADD-TEXTE.LIST-MINISTERE' | translate }}</mat-label>
             <mat-select  name="ministere" (selectionChange)="onGetMinistere($event.value)"><!--[disabled]="!authService.isAdmin()"-->
               <mat-option></mat-option>
               <mat-option *ngFor="let mnst of ministeres; let i=index" [value]="mnst">
-                {{mnst?.libelleFr}}
+                <div [ngSwitch]="app.localStorageItem('lge')">
+                  <div *ngSwitchCase="'ar'" class="myfilterar">{{mnst?.libelleAr}}</div>
+                  <div *ngSwitchCase="'fr'" class="myfilterfr">{{mnst?.libelleFr}}</div>
+                  <div *ngSwitchDefault></div>
+                </div>
               </mat-option>
             </mat-select>
-            <mat-error>{{ 'ADD-MOUVEMENT.ETAT.MAT-ERROR' | translate }}</mat-error>
+            <mat-error>{{ 'ADD-TEXTE.ERROR-MINISTERE' | translate }}</mat-error>
           </mat-form-field>
         </div>
         <div ><!--[ngStyle]="{direction:app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'}"-->
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="الملاحظة" type="text" [(ngModel)]="avis.details" name="avis"/><!--required-->
+          <mat-form-field
+            [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+            class="example-full-width">
+            <input matInput placeholder="{{'ADD-AVIS.OBSERVATION'|translate}}" type="text" [(ngModel)]="avis.details" name="avis"/><!--required-->
           </mat-form-field>
         </div>
         <div class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
-          <mat-form-field>
-            <input matInput readonly [matDatepicker]="picker1" placeholder="{{'ADD-MOUVEMENT.PHASE_MOUVEMENT.DATE_ETAT' | translate}}"
+          <mat-form-field
+            [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+            class="example-full-width">
+            <input matInput readonly [matDatepicker]="picker1" placeholder="{{'ADD-TEXTE.DATE' | translate}}"
                    id="date1" name="date1"
                    [(ngModel)]="avis.date_avis"
                    [ngModelOptions]="{standalone: true}"
@@ -47,7 +54,7 @@
         </div>
         <!--<button type="submit" class="btn btn-success">AJOUTER MOUVEMENT</button>-->
         <div class="form-group">
-          <button type="submit" class="btn btn-success" (click)="onSubmitSave()">AJOUTER</button>
+          <button type="submit" class="btn btn-success" (click)="onSubmitSave()">{{'ADD-TEXTE.ADD-BUTTON' |translate}}</button>
         </div>
       </form>
     </div>

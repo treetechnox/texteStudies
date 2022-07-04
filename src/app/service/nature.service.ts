@@ -10,7 +10,7 @@ export class NatureService {
   url:string;
   //url1:string;
   constructor(private http:HttpClient) {
-    this.url = "http://localhost:8083/natures/";
+    this.url = "http://172.16.90.1:8083/natures/";
   }
 
   getPhaseByLibellefr(libellefr: string): Observable<any> {

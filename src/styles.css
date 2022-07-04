@@ -3,6 +3,11 @@
   font-family: "Cairo";
   src: local("Cairo"), url('./assets/fonts/Cairo-Bold.ttf') format("truetype");
 }
+
+@font-face {
+  font-family: "Old-Antic-Bold";
+  src: local("Old-Antic-Bold"), url('src/assets/fonts/farsi-simple-bold.ttf') format("truetype");
+}
 html, body {
   height: 100%;
   margin: 0;

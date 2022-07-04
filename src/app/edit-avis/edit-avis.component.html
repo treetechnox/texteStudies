@@ -1,1 +1,68 @@
-<p>edit-avis works!</p>
+<br>
+<div class="add-border jumbotron mycustom-jumbotron">
+  <div class="container">
+    <div [hidden]="submitted">
+      <button mat-raised-button
+              matTooltip="RETOUR"
+              class="btn btn-dark"
+              [routerLink]="'/leaviss'">
+        <i class="fa fa-hand-o-left fa-2x"></i>
+      </button>
+      <form>
+        <br>
+        <div class="entete" >
+          {{'ADD-AVIS.TITLE'|translate}}
+        </div>
+        <br>
+        <div class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
+          <mat-form-field
+            [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+            class="example-full-width">
+            <mat-label>{{ 'ADD-TEXTE.LIST-MINISTERE' | translate }}</mat-label>
+            <mat-select  name="ministere" (selectionChange)="onGetMinistere($event.value)"><!--[disabled]="!authService.isAdmin()"-->
+              <mat-option></mat-option>
+              <mat-option *ngFor="let mnst of ministeres; let i=index" [value]="mnst">
+                <div [ngSwitch]="app.localStorageItem('lge')">
+                  <div *ngSwitchCase="'ar'" class="myfilterar">{{mnst?.libelleAr}}</div>
+                  <div *ngSwitchCase="'fr'" class="myfilterfr">{{mnst?.libelleFr}}</div>
+                  <div *ngSwitchDefault></div>
+                </div>
+              </mat-option>
+            </mat-select>
+            <mat-error>{{ 'ADD-TEXTE.ERROR-MINISTERE' | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div ><!--[ngStyle]="{direction:app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'}"-->
+          <mat-form-field
+            [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+            class="example-full-width">
+            <input matInput placeholder="{{'ADD-AVIS.OBSERVATION'|translate}}" type="text" [(ngModel)]="avis.details" name="avis"/><!--required-->
+          </mat-form-field>
+        </div>
+        <div class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
+          <mat-form-field
+            [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+            class="example-full-width">
+            <input matInput readonly [matDatepicker]="picker1" placeholder="{{'ADD-TEXTE.DATE' | translate}}"
+                   id="date1" name="date1"
+                   [(ngModel)]="avis.date_avis"
+                   [ngModelOptions]="{standalone: true}"
+                   (dateChange)="toFormattedDate($event.value)">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <!--<button type="submit" class="btn btn-success">AJOUTER MOUVEMENT</button>-->
+        <div class="form-group">
+          <button type="submit" class="btn btn-success" (click)="onSubmitSave()">{{'ADD-TEXTE.ADD-BUTTON' |translate}}</button>
+        </div>
+      </form>
+    </div>
+
+    <div [hidden]="!submitted">
+      <h4>LE SECTEUR EST AJOUTE AVEC SUCCES!</h4>
+      <!-- <button class="btn btn-success" (click)="newEmployee()">Add</button> -->
+    </div>
+
+  </div>
+</div>

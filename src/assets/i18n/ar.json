@@ -522,8 +522,42 @@
     "ERROR-DATE": "الرجاء إدخال التايخ",
     "ERROR-MINISTERE": "الرجاء إدخال الوزارة",
 
-    "NO-RESULT": "لا توجد نتيجة"
+    "NO-RESULT": "لا توجد نتيجة",
+    "SUBMITED": "AJOUTE AVEC SUCCES!"
 
+  },
+
+  "ADD-MOUVEMENT": {
+    "TITLE": "إضافة مرحلة"
+  },
+
+  "ADD-AVIS": {
+    "TITLE": "إضافة رأي",
+    "OBSERVATION": "الملاحظة"
+  },
+
+  "ADD-NATURE": {
+    "TITLE": "إضافة نوع",
+    "LIBELLEAR": " تسمية النوع عربي",
+    "LIBELLEFR": " تسمية النوع فرنسي"
+  },
+
+  "ADD-PHASE": {
+    "TITLE": "إضافة مرحلة",
+    "LIBELLEAR": " تسمية المرحلة عربي",
+    "LIBELLEFR": " تسمية المرحلة فرنسي"
+  },
+
+  "ADD-MINISTERE": {
+    "TITLE": "إضافة وزارة",
+    "LIBELLEAR": " تسمية الوزارة عربي",
+    "LIBELLEFR": " تسمية الوزارة فرنسي"
+  },
+
+  "ADD-SECTEUR": {
+    "TITLE": "إضافة قطاع",
+    "LIBELLEAR": " تسمية القطاع عربي",
+    "LIBELLEFR": " تسمية القطاع فرنسي"
   }
 
 }

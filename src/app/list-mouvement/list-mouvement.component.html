@@ -48,8 +48,8 @@
                'is-distribution': element.phase.libelleFr === 'DISTRIBUTION A TOUS LES MINISTERES',
                'is-telex': element.phase.libelleFr === 'DISTRIBUTION DES TELEX AUX MINISTERES CONCERNES',
                'is-reunion': element.phase.libelleFr === 'ETUDE VIA LES REUNIONS',
-               'is-conseil-gov': element.phase.libelleFr === 'CONSEIL DE GOUVERNEMENT',
-               'is-conseil-mnstr': element.phase.libelleFr === 'CONSEIL DES MINISTRES',
+               'is-conseil-gov': element.phase.libelleFr === 'REUNION DE GOUVERNEMENT',
+               'is-conseil-mnstr': element.phase.libelleFr === 'REUNION DES MINISTRES',
                'is-aprobat': element.phase.libelleFr === 'APPROBATION',
                'is-aprobat-obsrv': element.phase.libelleFr === 'APPROBATION: ON TENANT COMPTE DES OBSERVATIONS',
                'is-nouv-lecture': element.phase.libelleFr === 'UNE NOUVELLE LECTURE: TEXTE NON ACCEPTE',
@@ -59,12 +59,24 @@
                'is-publie': element.phase.libelleFr === 'TEXTE PUBLIE',
                'is-parlement': element.phase.libelleFr === 'POUR DISCUSSION AU PARLEMENT'
                }"
-          >{{element.phase?.libelleFr}}</div>
+          >
+            <div [ngSwitch]="app.localStorageItem('lge')">
+              <div *ngSwitchCase="'ar'" class="myfilterar">{{element.phase?.libelleAr}}</div>
+              <div *ngSwitchCase="'fr'" class="myfilterfr">{{element.phase?.libelleFr}}</div>
+              <div *ngSwitchDefault></div>
+            </div>
+          </div>
         </td>
       </ng-container>
       <ng-container matColumnDef="libelleFr">
         <th mat-header-cell *matHeaderCellDef mat-sort-header=""> {{'LIST-MOUVEMENT.TABLE.SECTEUR'|translate}} </th>
-        <td mat-cell *matCellDef="let element"> {{element.secteur?.libelleFr}} </td>
+        <td mat-cell *matCellDef="let element">
+          <div [ngSwitch]="app.localStorageItem('lge')">
+            <div *ngSwitchCase="'ar'" class="myfilterar">{{element.secteur?.libelleAr}}</div>
+            <div *ngSwitchCase="'fr'" class="myfilterfr">{{element.secteur?.libelleFr}}</div>
+            <div *ngSwitchDefault></div>
+          </div>
+        </td>
       </ng-container>
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef mat-sort-header=""> {{'LIST-MOUVEMENT.TABLE.DATE'|translate}} </th>
@@ -79,7 +91,11 @@
                element.isactive == 'false'? 'make-false':'make-true'
                ">{{element.isactive}}</div>-->
           <div class="make-true" *ngIf="element.isactive == '1' ">
-            ACTIVE
+            <div [ngSwitch]="app.localStorageItem('lge')">
+              <div *ngSwitchCase="'ar'" class="myfilterar">نشط</div>
+              <div *ngSwitchCase="'fr'" class="myfilterfr">ACTIVE</div>
+              <div *ngSwitchDefault></div>
+            </div>
           </div>
          </td>
       </ng-container>
@@ -103,7 +119,7 @@
                  style="display: none;" type="file"
                  (change)="onSelectFile($event,element.id)" />
             </label>
-            <h5>{{currentFileUpload?.name}}</h5>
+            <!--<h5>{{currentFileUpload?.name}}</h5>-->
             <div *ngIf="!!element.scanpdf">
               <button
                 mat-raised-button

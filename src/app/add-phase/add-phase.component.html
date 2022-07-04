@@ -13,99 +13,33 @@
     <div [hidden]="submitted">
       <br>
       <form [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
-        <!--<h5>SELECTIONNER UNE FONCTION</h5>-->
-        <!--<div class="row-cols-1">
-          <div class="card">
-            <div class="card-header">Choix de l'Hiérarchie</div>
-            <div class="card-body">
-              &lt;!&ndash;<div class="col">
-                <mat-form-field  class="example-full-width">
-                  <mat-label>Select organisme</mat-label>
-                  <mat-select required name="org" [(ngModel)]="organisme.id" (ngModelChange)="onOrganismesSelected(organisme.id)">
-                    <mat-option disabled>Choisissez un organisme</mat-option>
-                    <mat-option
-                      *ngFor="let org of organismes" [value]="org.id">
-                      {{org.libellefr}}
-                    </mat-option>
-                  </mat-select>
-                  <mat-error>Il faut choisir un organisme!</mat-error>
-                </mat-form-field>
-              </div>&ndash;&gt;
-              <div class="col" >
-                <mat-form-field class="example-full-width">
-                  <mat-label>Fonction pere</mat-label>
-                  <mat-select name="fonction1" placeholder="SOUS LES COMMANDES DE:"
-                              [(ngModel)]="fonction.lien"
-                              (ngModelChange)="teste(fonction.id)"
-                              >&lt;!&ndash;[(ngModel)]="organisme.lien"(selectionChange)="onFonctionPereSelected(fonction?.id)"&ndash;&gt;
-                    <mat-option
-                      *ngFor="let fct of fonctions" [value]="fct.id">
-                      {{fct.libelleFr}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div class="col" >
-                &lt;!&ndash;<label for="niveau">NIVEAU</label>&ndash;&gt;
-                <mat-form-field class="example-full-width">
-                  <mat-label>- NIVEAU -</mat-label>
-                  <mat-select name="niv" [(ngModel)]="fonction.niveau" >
-                    <mat-option *ngFor="let niv of niveau" [value]="niv.value">
-                      {{niv.viewValue}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-                &lt;!&ndash;<input type="text" class="form-control" id="niveau" required="required" [(ngModel)]="organisme.niveau" name="niveau">&ndash;&gt;
-              </div>
-            </div>
-          </div>
-        </div>-->
-        <!-- <div class="form-group">
-           <select class='form-control' #mySelect (change)='onOptionsSelected(mySelect.value)'>
-             <option value="" disabled>Choisissez un organisme</option>
-             <option  *ngFor="let org of organismes?.content" [value]="org.id">
-               {{org.libellefr}}
-             </option>
-           </select>
-           <hr>
-         </div>-->
-
         <div class="entete" style="font-size:1.5rem;text-align: center">
-          <!--<span>{{'ADD-FONCTION.H5'|translate}}</span>-->AJOUTER PHASE
+         <span>{{'ADD-PHASE.TITLE'|translate}}</span>
         </div>
 
         <div class="row">
 
           <div class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
 
-            <mat-form-field class="example-full-width">
-              <!--<mat-label for="organisme"></mat-label>-->
-              <input matInput type="text"
-                     placeholder="PHASE"
-                     [ngModelOptions]="{standalone: true}"
-                     id="organisme" required="required" [(ngModel)]="phase.libelleFr"
-                     name="organisme" (change)="verifierFonction(phase.libelleFr)"><!--{{'ADD-FONCTION.LIBELLE-FR'|translate}}--><!----><!--class="form-control" -->
-            </mat-form-field>
-
             <div class="form-group" dir="rtl">
               <mat-form-field class="example-full-width" >
                 <!--<mat-label for="organisme2"></mat-label>-->
                 <input matInput type="text"
-                       placeholder="طور"
+                       placeholder="{{'ADD-PHASE.LIBELLEAR'|translate}}"
                        [ngModelOptions]="{standalone: true}"
                        id="organisme2" required="required"
                        [(ngModel)]="phase.libelleAr" name="organisme2"><!--class="form-control" --><!--{{'ADD-FONCTION.LIBELLE-AR'|translate}}-->
               </mat-form-field>
             </div>
-
-
-            <!--<div class="form-group">-->
-            <!--<label for="id">id</label>-->
-            <!--<input type="text" class="form-control" id="id" required="required" [(ngModel)]="fonction.id" name="id">-->
-            <!--</div>-->
-
+            <mat-form-field class="example-full-width">
+              <!--<mat-label for="organisme"></mat-label>-->
+              <input matInput type="text"
+                     placeholder="{{'ADD-PHASE.LIBELLEFR'|translate}}"
+                     [ngModelOptions]="{standalone: true}"
+                     id="organisme" required="required" [(ngModel)]="phase.libelleFr"
+                     name="organisme" (change)="verifierFonction(phase.libelleFr)"><!--{{'ADD-FONCTION.LIBELLE-FR'|translate}}--><!----><!--class="form-control" -->
+            </mat-form-field>
           </div>
-
         </div>
 
         <div *ngIf="!fonctionExist; then thenBlock else elseBlock"></div>

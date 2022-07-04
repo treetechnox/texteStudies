@@ -9,25 +9,28 @@
         <i class="fa fa-hand-o-left fa-2x"></i>
       </button>
       <form>
-        <div class="row" ><!--[ngStyle]="{
-                  direction:
-                    app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'
-                }"-->
-          <h5 >AJOUTER UNE SECTEUR</h5><!--{{ 'ADD-MOUVEMENT.H5' | translate }}-->
+        <div class="row" >
+          <br>
+          <span style="margin: 5px" class="entete" >{{'ADD-MINISTERE.TITLE'|translate}}</span><!--{{ 'ADD-MOUVEMENT.H5' | translate }}-->
         </div>
         <div ><!--[ngStyle]="{direction:app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'}"-->
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder=" تسمية القطاع" type="text" [(ngModel)]="ministere.libelleAr" name="secteur"/><!--required-->
+          <mat-form-field
+            style="text-align:right" class="example-full-width">
+            <input matInput placeholder="{{'ADD-MINISTERE.LIBELLEAR'|translate}}" type="text" [(ngModel)]="ministere.libelleAr" name="secteur" required/><!---->
           </mat-form-field>
         </div>
         <div ><!--[ngStyle]="{direction:app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'}"-->
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder=" libelle Secteur" type="text" [(ngModel)]="ministere.libelleFr" name="secteur"/><!--required-->
+          <mat-form-field
+            style="text-align:left" class="example-full-width">
+            <input matInput placeholder="{{'ADD-MINISTERE.LIBELLEFR'|translate}}" type="text" [(ngModel)]="ministere.libelleFr" name="secteur" required/><!---->
           </mat-form-field>
         </div>
         <!--<button type="submit" class="btn btn-success">AJOUTER MOUVEMENT</button>-->
         <div class="form-group">
-          <button type="submit" class="btn btn-success" (click)="onSubmitSave()">AJOUTER</button>
+          <button type="submit" class="btn btn-success"
+                  [disabled]="!ministere.libelleFr?.trim()
+            || !ministere.libelleAr?.trim()"
+                  (click)="onSubmitSave()">{{'ADD-TEXTE.ADD-BUTTON'|translate}}</button>
         </div>
       </form>
     </div>

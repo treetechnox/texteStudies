@@ -13,21 +13,26 @@
         <br>
         <div class="row entete"  [ngStyle]="{direction:app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl'}">
 
-          <span>AJOUTER UNE SECTEUR</span><!--{{ 'ADD-MOUVEMENT.H5' | translate }}-->
+          <span>{{'ADD-SECTEUR.TITLE'|translate}}</span><!--{{ 'ADD-MOUVEMENT.H5' | translate }}-->
         </div>
         <div [ngStyle]="{direction:'rtl'}">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder=" تسمية القطاع" type="text" [(ngModel)]="secteur.libelleAr" name="secteur"/><!--required-->
+          <mat-form-field style="text-align: right" class="example-full-width">
+            <input matInput placeholder="{{'ADD-SECTEUR.LIBELLEAR'|translate}}"
+                   type="text" [(ngModel)]="secteur.libelleAr" name="secteur" required/><!---->
           </mat-form-field>
         </div>
         <div [ngStyle]="{direction:'ltr'}">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder=" libelle Secteur" type="text" [(ngModel)]="secteur.libelleFr" name="secteur"/><!--required-->
+          <mat-form-field style="text-align: left" class="example-full-width">
+            <input matInput placeholder="{{'ADD-SECTEUR.LIBELLEFR'|translate}}"
+                   type="text" [(ngModel)]="secteur.libelleFr" name="secteur" required/><!---->
           </mat-form-field>
         </div>
         <!--<button type="submit" class="btn btn-success">AJOUTER MOUVEMENT</button>-->
         <div class="form-group">
-          <button type="submit" class="btn btn-success" (click)="onSubmitSave()">AJOUTER</button>
+          <button type="submit" class="btn btn-success"
+                  [disabled]="!secteur.libelleFr?.trim()
+            || !secteur.libelleAr?.trim()"
+                  (click)="onSubmitSave()">AJOUTER</button>
         </div>
       </form>
     </div>

@@ -12,9 +12,9 @@ export class MouvementService {
   url2:string;
 
   constructor(private http:HttpClient) {
-    this.url='http://localhost:8083/mouvements/';
-    this.url1='http://localhost:8083/mouvements';
-    this.url2='http://localhost:8083/mouvements_ministeres/';
+    this.url='http://172.16.90.1:8083/mouvements/';
+    this.url1='http://172.16.90.1:8083/mouvements';
+    this.url2='http://172.16.90.1:8083/mouvements_ministeres/';
   }
 
   getAllMouvements():Observable<any[]>{
@@ -82,7 +82,8 @@ export class MouvementService {
   /*getTexteBySommaireArFr(nomfr: string, prenomfr: string):Observable<any> {
     return this.http.get(`${this.url}`);
   }*/
-  getFilter(phaseId: number, secteurId: number | undefined, ministereId: number):Observable<any> {
+  getFilter(phaseId: number, secteurId: number | undefined, ministereId: number,isactive:boolean):Observable<any> {
+    console.log(isactive);
     let sub_url = '?';
     if(phaseId>0)
       sub_url+=`&phase=${phaseId}`;
@@ -91,6 +92,10 @@ export class MouvementService {
       sub_url+=`&secteur=${secteurId}`;
     if(ministereId>0)
       sub_url+=`&mouvementMinisteres.ministere=${ministereId}`;
+    if(isactive===true)
+      sub_url+=`&isactive=${isactive}`;
+
+    sub_url+='&sort=id,desc';
     console.log(`${this.url1}${sub_url}`);
 
     return this.http.get(`${this.url1}${sub_url}`);

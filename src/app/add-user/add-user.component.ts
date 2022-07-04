@@ -156,14 +156,18 @@ export class AddUserComponent implements OnInit {
     if(/\s/g.test(s)){
       y= x.replace(/\s/g,'');
     }
+
     y= x.replace(/\s/g,'');
+    y=y.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    this.user.password = y+"00"+$event.value.id;
+
     y+='_'+$event.value.id
     console.log(y.toLowerCase());
     this.user.username = y.toLowerCase();
     this.user.nom = y.toLowerCase();
     this.user.prenom = y.toLowerCase();
 
-    this.user.password = s+"00"+$event.value.id;
+
     console.log(this.user);
 
 

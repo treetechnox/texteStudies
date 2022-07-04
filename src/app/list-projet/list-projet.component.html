@@ -94,24 +94,25 @@
             class="example-full-width">
             <mat-label>{{'LIST-PROJET.ADVANCED-FILTER.ISACTIVE' | translate}}</mat-label>
             <mat-select
-              [value]="isActive"
               matTooltip="{{'LIST-PROJET.ADVANCED-FILTER.ISACTIVE-TOOLTIP' | translate}}"
               #input name="isactive" (selectionChange)="onGetIsActive($event)">
               <mat-option></mat-option>
-              <mat-option >
-                <div [ngSwitch]="app.localStorageItem('lge')">
-                  <div *ngSwitchCase="'ar'" class="myfilterar">نعم</div>
-                  <div *ngSwitchCase="'fr'" class="myfilterfr">OUI</div>
-                  <div *ngSwitchDefault>This is Default</div>
+              <div [ngSwitch]="app.localStorageItem('lge')">
+                <div *ngSwitchCase="'ar'" class="myfilterar">
+                  <!--suppress TypeScriptValidateTypes -->
+                  <mat-option *ngFor="let actvAr of activityAR | keyvalue" [value]="actvAr.key">
+                    {{actvAr.value}}
+                  </mat-option>
                 </div>
-              </mat-option>
-              <mat-option >
-                <div [ngSwitch]="app.localStorageItem('lge')">
-                  <div *ngSwitchCase="'ar'" class="myfilterar">لا</div>
-                  <div *ngSwitchCase="'fr'" class="myfilterfr">NON</div>
-                  <div *ngSwitchDefault>This is Default</div>
+                <div *ngSwitchCase="'fr'" class="myfilterfr">
+                  <!--suppress TypeScriptValidateTypes -->
+                  <mat-option *ngFor="let actvFr of activityFR | keyvalue"  [value]="actvFr.key">
+                    {{actvFr.value}}
+                  </mat-option>
                 </div>
-              </mat-option>
+                <div *ngSwitchDefault>This is Default</div>
+              </div>
+
             </mat-select>
           </mat-form-field>
         </div>

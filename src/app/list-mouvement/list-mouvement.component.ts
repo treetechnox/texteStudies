@@ -130,10 +130,11 @@ export class ListMouvementComponent implements OnInit {
 
         });
         alert('le Fichier est chargé');
+        window.location.reload();
       }else if(event instanceof HttpResponse){
         console.log('Erreur au niveau de telechargement');
       }
-      window.location.reload();
+      //
     }, error1 => alert("Erreur de chargement"));
   }
 
