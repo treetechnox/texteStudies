@@ -61,7 +61,7 @@
             PHASE / MINISTERE
           </ng-template>-->
 
-          <mat-icon>search</mat-icon>
+          <i class="fa fa-search"></i>
         </mat-panel-description>
       </mat-expansion-panel-header>
 
@@ -204,14 +204,14 @@
               <div *ngIf="isMinistereUser()===false"  class="myflex example-margin"><!--{{ app.localStorageItem('lge') === 'fr' ? 'MODIFIER ' :  ' تعديل : ' }}-->
                 <button mat-raised-button matTooltip="MODIFIER"
                         class="btn btn-primary spacer" (click)="onEditTexte(element.id)">
-                  <mat-icon>edit</mat-icon>
+                  <i class="fa fa-edit"></i>
                   {{'LIST-PROJET.TABLE.EDIT-BUTTON' | translate}}
                 </button>
                 <button mat-raised-button
                         matTooltip="{{'LIST-PROJET.TABLE.ADD-AVIS' | translate}}"
                         (click)="ajouterAvis(element.id)"
                 >
-                  <mat-icon>playlist_add</mat-icon>
+                  <i class="fa fa-plus-circle"></i>
                   {{'LIST-PROJET.TABLE.ADD-AVIS' | translate}}
                 </button>
                 <button
@@ -221,7 +221,7 @@
                   mat-button color="accent"
                   (click)="onShowListAvis(element.id)"
                 >
-                  <mat-icon>view_list</mat-icon>{{'LIST-PROJET.TABLE.LIST-AVIS' | translate}}
+                  <i class="fa fa-list"></i> {{'LIST-PROJET.TABLE.LIST-AVIS' | translate}}
 
                 </button>
 
