@@ -244,7 +244,8 @@ export class EditTexteComponent implements OnInit {
     console.log(f1.valid,f2.valid)
   }
 
-  getNomination(nature: Nature) {
+  getNature(nature: Nature) {
     console.log(nature);
   }
+
 }

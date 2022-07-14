@@ -427,15 +427,6 @@
     "TABLE.PAGINATOR": "العدد في الصفحة"
   },
 
-  "LIST-NATURE": {
-    "TITLE": "قائمة أنواع النصوص",
-    "ADD-BUTTON": "إضافة نوع نص",
-    "SIMPLE-FILTER": "بحث عادي",
-    "TABLE.ID": "رقم",
-    "TABLE.LIBELLE-AR": "النوع عربي",
-    "TABLE.LIBELLE-FR": "النوع فرنسي",
-    "TABLE.PAGINATOR": "العدد في الصفحة"
-  },
 
   "LIST-PHASE": {
     "TITLE": "قائمة مراحل النصوص",
@@ -447,6 +438,23 @@
     "TABLE.OPERATIONS": "عمليات",
     "TABLE.PAGINATOR": "العدد في الصفحة"
   },
+
+  "LIST-MOUVEMENT": {
+    "TITLE": "LIST DES ETATS DE TEXTES ",
+    "MINISTERE-TEXTE": "MINSTERES PAR TEXTE",
+    "ADD-BUTTON": "AJOUTER PHASE",
+    "TABLE.ID": "N°",
+    "TABLE.PHASE": "PHASE",
+    "TABLE.SECTEUR": "SECTEUR",
+    "TABLE.DATE": "DATE",
+    "TABLE.ETAT": "ÉTAT ACTUEL",
+    "TABLE.OPERATIONS": "OPERATIONS",
+    "TABLE.EDIT-BUTTON": "MODIFIER",
+    "TABLE.UPLOAD": "CHARGER PDF",
+    "TABLE.SHOW-PDF": "AFFICHER DOCUMENT",
+    "TABLE.PAGINATOR": "NOMBRE PAR PAGE"
+  },
+
 
   "LIST-MINISTERE": {
     "TITLE": "قائمة الوزارات",
@@ -483,10 +491,16 @@
     "TABLE.PAGINATOR": "العدد في الصفحة"
   },
 
-
-
-
-
+  "LIST-AVIS": {
+    "TITLE": "قائمة الأراء الخاصة بالوزارات",
+    "ADD-BUTTON": "إضافة قطاع",
+    "SIMPLE-FILTER": "بحث عادي",
+    "TABLE.ID": "رقم",
+    "TABLE.DETAILS": "عن الرأي",
+    "TABLE.MINISTERE": "الوزارة",
+    "TABLE.OPERATIONS": "عمليات",
+    "TABLE.PAGINATOR": "العدد في الصفحة"
+  },
 
 
 

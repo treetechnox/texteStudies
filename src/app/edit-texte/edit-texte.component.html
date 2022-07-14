@@ -5,23 +5,26 @@
   <div class="container">
     <form [formGroup]="firstFormGroup" #myform1="ngForm"
           [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
-      <ng-template matStepLabel>
+
         <h5 [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
           <!--{{ "ADD-TEXTE.H5" | translate }}-->
-          AJOUTER SOMMAIRE
+          {{ 'LIST-PROJET.ADD-BUTTON' | translate }}
         </h5>
-      </ng-template>
+
       <div class="row">
         <mat-form-field class="example-full-width">
-          <mat-label>{{ 'ADD-MOUVEMENT.NOMINATION' | translate }}</mat-label>
+          <mat-label>{{ 'LIST-NATURE.TITLE' | translate }}</mat-label>
           <mat-select
-            required name="typemouve" placeholder="{{ 'ADD-MOUVEMENT.NOMINATION' | translate }}"
+            required name="typemouve" placeholder="{{ 'LIST-NATURE.TITLE' | translate }}"
             [(ngModel)]="natr"
-            (ngModelChange)="getNomination($event)"
+            (ngModelChange)="getNature($event)"
             formControlName="natureCtrl">
             <mat-option></mat-option>
             <mat-option *ngFor="let nat of natures ; let i=index" [value]="nat">
-              {{nat.libelleFr}}
+              <div [ngSwitch]="app.localStorageItem('lge')">
+                <div *ngSwitchCase="'ar'" class="myfilterar">{{nat.libelleAr}}</div>
+                <div *ngSwitchCase="'fr'" class="myfilterfr">{{nat.libelleFr}}</div>
+              </div>
             </mat-option>
           </mat-select>
           <!--<mat-error>{{ 'ADD-MOUVEMENT.NOMINATION.MAT-ERROR' | translate }}</mat-error>-->
@@ -31,8 +34,9 @@
           </mat-error>
         </mat-form-field>
       </div>
-      <div class="row" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
-        <mat-form-field class="example-full-width" [formGroup]="firstFormGroup">
+      <div class="row" >
+        <mat-form-field [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'"
+                        class="example-full-width" [formGroup]="firstFormGroup">
           <!--{{ 'ADD-TEXTE.NOMFR.PLACEHOLDER' | translate }}-->
           <textarea  matInput placeholder="النص"
                      required type="text" [(ngModel)]="texte.sommaireAr"
