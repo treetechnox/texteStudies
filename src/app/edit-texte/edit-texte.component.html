@@ -35,21 +35,25 @@
         </mat-form-field>
       </div>
       <div class="row" >
-        <mat-form-field [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'"
+        <mat-form-field
+          [style]="{'text-align':'right'}"
                         class="example-full-width" [formGroup]="firstFormGroup">
           <!--{{ 'ADD-TEXTE.NOMFR.PLACEHOLDER' | translate }}-->
           <textarea  matInput placeholder="النص"
+
                      required type="text" [(ngModel)]="texte.sommaireAr"
                      name="firstName" formControlName="sommaireArCtrl"></textarea>
           <mat-error>{{ "ADD-TEXTE.NOMFR.ERROR" | translate }}</mat-error>
         </mat-form-field>
       </div>
-      <div class="row" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
-        <mat-form-field class="example-full-width" [formGroup]="firstFormGroup">
-          <!--{{ 'ADD-TEXTE.PRENOMFR.PLACEHOLDER' | translate }}-->
+      <div class="row" >
+        <mat-form-field
+          [style]="{'text-align':'left'}"
+          class="example-full-width" [formGroup]="firstFormGroup">
+
           <textarea matInput placeholder="LE TEXTE" required type="text"
                     [(ngModel)]="texte.sommaireFr" name="lastName" formControlName="sommaireFrCtrl"
-          ><!--(change)="verifierTexte(texte.sommaireAr,  texte.sommaireFr)"--></textarea>
+          ></textarea>
           <mat-error>{{ "ADD-TEXTE.PRENOMFR.ERROR" | translate }}</mat-error>
         </mat-form-field>
       </div>

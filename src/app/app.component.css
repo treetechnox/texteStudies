@@ -35,10 +35,15 @@ nav ul li{
   margin: 5px 5px;
 }
 
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+  position: absolute;
+  background: black;
+}
+
 nav ul li a{
   padding: 10px;
   text-decoration: none;
-  color:#333;
+  color: #fff;
   font-weight: 400;
 }
 nav ul li a:hover{

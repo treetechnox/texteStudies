@@ -385,7 +385,7 @@ mat-card{
 }
 
 .is-aprobat{
-  background: #00ff00;
+  background: #057305;
 }
 
 .is-aprobat-obsrv{
@@ -394,6 +394,13 @@ mat-card{
 
 .is-nouv-lecture{
   background: #ff8000;
+}
+
+.is-corresp{
+  background: #988d8d;
+}
+.is-cabint{
+  background: #637049;
 }
 
 .make-gold {
