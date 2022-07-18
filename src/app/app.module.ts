@@ -106,6 +106,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { RapportJournalierComponent } from './rapport-journalier/rapport-journalier.component';
 import { EditAvisComponent } from './edit-avis/edit-avis.component';
 import { PortailMinisteresComponent } from './portail-ministeres/portail-ministeres.component';
+import { NatureTexteComponent } from './nature-texte/nature-texte.component';
 
 
 
@@ -159,6 +160,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     RapportJournalierComponent,
     EditAvisComponent,
     PortailMinisteresComponent,
+    NatureTexteComponent,
   ],
     imports: [
         FormsModule,

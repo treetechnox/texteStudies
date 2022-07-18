@@ -9,7 +9,7 @@ export class TracesService {
 
   url:string;
   constructor(private http:HttpClient) {
-    this.url = "http://172.16.90.1:8083/traces"
+    this.url = "http://localhost:8083/traces"
   }
 
   getAlltraces():Observable<any>{

@@ -11,8 +11,8 @@ export class MinistereService {
   url:string;
   url1:string;
   constructor(private http:HttpClient) {
-    this.url = "http://172.16.90.1:8083/ministeres/";
-    this.url1 = "http://172.16.90.1:8083/mouvements_ministeres/";
+    this.url = "http://localhost:8083/ministeres/";
+    this.url1 = "http://localhost:8083/mouvements_ministeres/";
   }
 
   getAllMinisteres():Observable<any[]>{

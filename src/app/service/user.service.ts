@@ -14,8 +14,8 @@ export class UserService {
   */
 
   constructor(private http: HttpClient) {
-    this.url = 'http://172.16.90.1:8083/utilisateurs/';
-    /*this.url1 = 'http://172.16.90.1:8083/utilisateur';*/
+    this.url = 'http://localhost:8083/utilisateurs/';
+    /*this.url1 = 'http://localhost:8083/utilisateur';*/
   }
 
   getAllUsers(): Observable<any> {

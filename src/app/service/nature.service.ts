@@ -8,9 +8,11 @@ import {Phase} from '../phase';
 })
 export class NatureService {
   url:string;
+  url_alt:string;
   //url1:string;
   constructor(private http:HttpClient) {
-    this.url = "http://172.16.90.1:8083/natures/";
+    this.url = "http://localhost:8083/natures/";
+    this.url_alt = "http://localhost:8083/natures?";
   }
 
   getPhaseByLibellefr(libellefr: string): Observable<any> {
@@ -37,5 +39,10 @@ export class NatureService {
   updateNature(natureId:number,nature:any):Observable<any>{
     //console.log(`${this.url1}/secteur/${secteurId}`,secteur)
     return this.http.put(`${this.url}nature/${natureId}`,nature);
+  }
+
+  getNatureByTexteIdWithinURI(texteId:number):Observable<any>{
+    console.log(`${this.url_alt}texte.id=${texteId}`);
+    return this.http.get(`${this.url_alt}textes.id=${texteId}`)
   }
 }

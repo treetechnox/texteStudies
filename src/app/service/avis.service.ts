@@ -10,7 +10,7 @@ export class AvisService {
 
   url!:string;
   constructor(private http:HttpClient) {
-    this.url = 'http://172.16.90.1:8083/aviss/';
+    this.url = 'http://localhost:8083/aviss/';
   }
 
   getAvisByTexte(texteId:number):Observable<any>{
