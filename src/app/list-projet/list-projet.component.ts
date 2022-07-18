@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
 import {AfterViewInit, ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 // @ts-ignore
 //import {MatDialog, MatSort} from '@angular/material';
@@ -30,6 +30,9 @@ import {noAuto} from "@fortawesome/fontawesome-svg-core";
 import {ListAvisComponent} from "../list-avis/list-avis.component";
 import {User} from "../user";
 import {MatSelectChange} from "@angular/material/select";
+import {Nature} from "../Nature";
+import {NatureService} from "../service/nature.service";
+import {formatDate} from "@angular/common";
 
 export interface MouvementMinistere{
   id: number;
@@ -57,11 +60,15 @@ export interface MouvementMinistere{
 export class ListProjetComponent implements AfterViewInit {
 
   filter:any;
-  columnsToDisplay: string[] = ['id', 'sommaireAr', 'sommaireFr','refer','details'];
+  columnsToDisplay: string[] = ['id', 'nature','sommaireAr', 'sommaireFr','refer','details'];
 
   texte:Texte=new Texte();
 
   allAvis:string='';
+
+  totalElements : number | undefined;
+  totalPages: number | undefined;
+  actualPage: number | undefined;
 
   mouvement:Mouvement = new Mouvement();
   mouvements:Mouvement[] = [];
@@ -70,6 +77,10 @@ export class ListProjetComponent implements AfterViewInit {
 
   phase:Phase = new Phase();
   phases:Phase[] = [];
+
+  nature:Nature = new Nature();
+  natures:Nature[] = [];
+
   mouvementMinistere:MouvementMinistere=new class implements MouvementMinistere {
     id!: number;
     ministere!: Ministere;
@@ -89,7 +100,7 @@ export class ListProjetComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort: MatSort | undefined;
 
-  public page = 1;
+  //public page = 1;
 
   public pageLabel!: string;
   private disabled: boolean=false;
@@ -109,9 +120,11 @@ export class ListProjetComponent implements AfterViewInit {
               private avisService:AvisService,
               private mouvementService:MouvementService,
               private phaseService:PhaseService,
+              private natureService:NatureService,
               private secteurService:SecteurService,
               private ministereService:MinistereService,
               private authService:AuthenticationService,
+              @Inject(LOCALE_ID) public locale :string,
               /*private fonctionService: FonctionService,*/
               private router: Router,public app:AppComponent,
               private dialog:MatDialog) {
@@ -143,7 +156,7 @@ export class ListProjetComponent implements AfterViewInit {
       console.log(result);
       this.ministereService.getMinistereById(result).subscribe(value => {
         this.texteService.getAllTextesByMinistere(value.libelleFr).subscribe(value1 => {
-          this.textes = value1;
+          this.textes = value1.sort((a:any,b:any) => b.id - a.id);
           this.dataSource = new MatTableDataSource(this.textes);
           // @ts-ignore
           this.dataSource.paginator = this.paginator;
@@ -154,7 +167,7 @@ export class ListProjetComponent implements AfterViewInit {
     }else {
       // @ts-ignore
       this.texteService.getAllTextesBySecteur(this.authService.userAuthenticated.secteur.id).subscribe(value => {
-        this.textes = value;
+        this.textes = value.sort((a:any,b:any) => b.id - a.id);
         console.log(this.textes);
         this.dataSource = new MatTableDataSource(this.textes);
         this.dataSource.paginator = this.paginator!;
@@ -175,14 +188,17 @@ export class ListProjetComponent implements AfterViewInit {
 
     console.log(current); // 👉️ "read"
 
-    this.phaseService.getAllPhases().subscribe(value => {
-      this.phases = value;
+    this.phaseService.getAllPhases().subscribe(phe => {
+      this.phases = phe;
     },error => console.log('phases not found'));
-    this.secteurService.getAllSecteurs().subscribe(value => {
-      this.secteurs = value;
+    this.natureService.getAllNatures().subscribe(ntr => {
+      this.natures = ntr;
+    },error => console.log('phases not found'));
+    this.secteurService.getAllSecteurs().subscribe(sct => {
+      this.secteurs = sct;
     },error => console.log('secteurs not found'));
-    this.ministereService.getAllMinisteres().subscribe(value => {
-      this.ministeres = value;
+    this.ministereService.getAllMinisteres().subscribe(mnst => {
+      this.ministeres = mnst;
     },error => console.log('phases not found'));
     //this.columns = this.app.localStorageItem('lge') === 'fr' ? this.columnsToDisplayFr: this.columnsToDisplayAr;
     // @ts-ignore
@@ -256,14 +272,40 @@ export class ListProjetComponent implements AfterViewInit {
     this.textes1=[];
 
     this.dataSource = new MatTableDataSource();
-    this.mouvement.phase = this.phase
-    this.mouvement.secteur= this.secteur;
+    this.mouvement.phase = this.phase;
+    // @ts-ignore
+
+    if(this.authService.isUser()){
+      // @ts-ignore
+      this.mouvement.secteur = this.authService.userAuthenticated.secteur;
+      console.log( '111'+this.mouvement.secteur)
+    }else{
+      this.mouvement.secteur= this.secteur;
+      console.log('222'+this.mouvement.secteur)
+    }
+
+    console.log(this.nature);
+    // @ts-ignore
+    this.mouvement.texte?.nature=this.nature;
+
     this.mouvement.isactive = this.isActive;
 
-    this.mouvementService.getFilter(this.mouvement.phase.id,this.mouvement.secteur.id,this.ministere.id,this.mouvement.isactive)
+    this.mouvementService.getFilter(this.mouvement.phase.id,
+      this.nature.id,
+      this.mouvement.secteur.id,
+      this.ministere.id,
+      this.mouvement.isactive,
+      1000)
       .subscribe(value => {
        /* this.mouvements=value._embedded.mouvements.sort((a,b) => a.id.rendered.localeCompare(b.id.rendered));*/
       this.mouvements = value._embedded.mouvements;
+
+        this.totalElements = value.page.totalElements;
+        this.totalPages = value.page.totalPages;
+        this.actualPage = value.page.number;
+
+      console.log(this.totalElements,this.totalPages,this.actualPage);
+
       console.log(this.mouvements);
 
       this.mouvements.forEach(value1 => {
@@ -276,6 +318,8 @@ export class ListProjetComponent implements AfterViewInit {
           this.textes1.indexOf(texte.id) === -1 ? this.textes1.push(texte) : console.log("This item already exists");*/
           this.textes = this.textes1;
           this.dataSource= new MatTableDataSource(this.textes.sort((a: { id: number; }, b: { id: number; }) => b.id-a.id));
+          this.dataSource.paginator = this.paginator!;
+          this.dataSource.sort = this.sort!;
           console.log(this.textes)
         })
       })
@@ -288,6 +332,13 @@ export class ListProjetComponent implements AfterViewInit {
     console.log(this.phase);
     if (this.phase=== undefined ){
       this.phase = new Phase();
+    }
+  }
+  onGetNature(event: any) {
+    this.nature=event.value;
+    console.log(this.nature);
+    if (this.nature=== undefined ){
+      this.nature = new Phase();
     }
   }
   onGetSecteur(event: any) {
@@ -372,6 +423,19 @@ export class ListProjetComponent implements AfterViewInit {
     console.log( $event.value);
     $event.value === '1'? this.isActive=true:this.isActive=false;
     console.log(this.isActive);
+  }
+
+  toFormattedDate(date: any) {
+    /*    console.log(iso)
+        this._adapter.setLocale('fr');*/
+    /*this.mouvement.datePhase = date*/
+    formatDate(date.toDateString(),"yyyy-MM-dd",this.locale);
+    console.log(this.mouvement.datePhase)
+
+  }
+
+  nextPage($event: PageEvent) {
+    console.log($event);
   }
 }
 

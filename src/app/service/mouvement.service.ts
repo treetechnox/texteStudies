@@ -82,11 +82,14 @@ export class MouvementService {
   /*getTexteBySommaireArFr(nomfr: string, prenomfr: string):Observable<any> {
     return this.http.get(`${this.url}`);
   }*/
-  getFilter(phaseId: number, secteurId: number | undefined, ministereId: number,isactive:boolean):Observable<any> {
-    console.log(isactive);
+  getFilter(phaseId: number,natureId: number, secteurId: number | undefined, ministereId: number,isactive:boolean, totalelt:number):Observable<any> {
+    console.log('phaseId:'+phaseId,'natureId:'+natureId,'secteurId:'+secteurId,
+      'ministereId:'+ministereId,'isactive:'+isactive);
     let sub_url = '?';
     if(phaseId>0)
       sub_url+=`&phase=${phaseId}`;
+    if(natureId>0)
+      sub_url+=`&texte.nature.id=${natureId}`;
     // @ts-ignore
     if(secteurId>0)
       sub_url+=`&secteur=${secteurId}`;
@@ -95,7 +98,7 @@ export class MouvementService {
     if(isactive===true)
       sub_url+=`&isactive=${isactive}`;
 
-    sub_url+='&sort=id,desc';
+    sub_url+='&sort=id,desc&size='+totalelt;
     console.log(`${this.url1}${sub_url}`);
 
     return this.http.get(`${this.url1}${sub_url}`);
