@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NatureService} from "../service/nature.service";
 import {Nature} from "../Nature";
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-nature-texte',
@@ -13,12 +14,14 @@ export class NatureTexteComponent implements OnInit {
   texteId!: number;
 
   nature :Nature = new Nature();
-  constructor(private natureService:NatureService) { }
+  constructor(private natureService:NatureService, public app:AppComponent) { }
 
   ngOnInit(): void {
     this.natureService.getNatureByTexteIdWithinURI(this.texteId).subscribe(ntr =>{
-      console.log(ntr);
+
       this.nature = ntr._embedded.natures[0];
+      console.log(this.nature);
+
     })
   }
 

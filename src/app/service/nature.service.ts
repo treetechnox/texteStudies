@@ -11,8 +11,8 @@ export class NatureService {
   url_alt:string;
   //url1:string;
   constructor(private http:HttpClient) {
-    this.url = "http://localhost:8083/natures/";
-    this.url_alt = "http://localhost:8083/natures?";
+    this.url = "http://172.16.90.1:8083/natures/";
+    this.url_alt = "http://172.16.90.1:8083/natures?";
   }
 
   getPhaseByLibellefr(libellefr: string): Observable<any> {
@@ -42,7 +42,7 @@ export class NatureService {
   }
 
   getNatureByTexteIdWithinURI(texteId:number):Observable<any>{
-    console.log(`${this.url_alt}texte.id=${texteId}`);
+    console.log(`${this.url_alt}textes.id=${texteId}`);
     return this.http.get(`${this.url_alt}textes.id=${texteId}`)
   }
 }

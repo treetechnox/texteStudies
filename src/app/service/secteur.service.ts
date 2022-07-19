@@ -11,8 +11,8 @@ export class SecteurService {
   url:string;
   //url1:string;
   constructor(private http:HttpClient) {
-    this.url = "http://localhost:8083/secteurs/";
-    //this.url1 = "http://localhost:8083/secteur";
+    this.url = "http://172.16.90.1:8083/secteurs/";
+    //this.url1 = "http://172.16.90.1:8083/secteur";
   }
 
   getAllSecteurs():Observable<any[]>{

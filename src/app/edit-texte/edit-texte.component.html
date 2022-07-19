@@ -6,17 +6,23 @@
     <form [formGroup]="firstFormGroup" #myform1="ngForm"
           [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
 
-        <h5 [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
+        <div class="entete example-full-width" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
           <!--{{ "ADD-TEXTE.H5" | translate }}-->
-          {{ 'LIST-PROJET.ADD-BUTTON' | translate }}
-        </h5>
+          <span>{{ 'EDIT-TEXTE.TITLE' | translate }}</span>
+        </div>
 
       <div class="row">
+        <span>
+          <div [ngSwitch]="app.localStorageItem('lge')">
+            <div *ngSwitchCase="'ar'" class="myfilterar">{{ 'EDIT-TEXTE.ACTUAL-NATURE' | translate }}  ==>   <span style="color: red">{{nature.libelleAr}}</span></div>
+            <div *ngSwitchCase="'fr'" class="myfilterfr">{{ 'EDIT-TEXTE.ACTUAL-NATURE' | translate }}  ==>   <span style="color: red">{{nature.libelleFr}}</span></div>
+          </div>
+        </span>
         <mat-form-field class="example-full-width">
           <mat-label>{{ 'LIST-NATURE.TITLE' | translate }}</mat-label>
           <mat-select
-            required name="typemouve" placeholder="{{ 'LIST-NATURE.TITLE' | translate }}"
-            [(ngModel)]="natr"
+            required name="nature" placeholder="{{ 'LIST-NATURE.TITLE' | translate }}"
+            [(ngModel)]="nature"
             (ngModelChange)="getNature($event)"
             formControlName="natureCtrl">
             <mat-option></mat-option>
@@ -65,10 +71,10 @@
               <button
                 type="submit"
                 mat-raised-button
-                matTooltip="{{ 'ADD-CANDIDAT.BUTTON_ADD' | translate }}"
+                matTooltip="{{ 'EDIT-TEXTE.TITLE' | translate }}"
                 class="btn btn-success "
                 (click)="onSubmitUpdate()"
-                [disabled]="!myform1.valid ">
+                [disabled]="!myform1.form.valid ">
                 <i class="fa fa-plus fa-3x" aria-hidden="true"></i>
               </button>
             </div>
@@ -79,7 +85,7 @@
               <button
                 type="submit"
                 mat-raised-button
-                matTooltip="{{ 'ADD-CANDIDAT.BUTTON_ADD' | translate }}"
+                matTooltip="{{ 'ADD-CANDIDAT.BUTTON_REFRESH' | translate }}"
                 class="btn btn-success "
                 (click)="reinisialize()">
                 <i class="fa fa-refresh fa-3x" aria-hidden="true"></i>

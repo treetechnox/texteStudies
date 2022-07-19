@@ -1,1 +1,7 @@
-<p>{{nature.libelleFr}}</p>
+<span style="color: darkred">
+<div [ngSwitch]="app.localStorageItem('lge')">
+                <div *ngSwitchCase="'ar'" class="myfilterar">{{nature?.libelleAr}}</div>
+                <div *ngSwitchCase="'fr'" class="myfilterfr">{{nature?.libelleFr}}</div>
+                <div *ngSwitchDefault></div>
+              </div>
+</span>

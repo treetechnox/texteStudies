@@ -22,6 +22,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {AppComponent} from "../app.component";
 import {take, takeUntil} from "rxjs/operators";
 import {MouvementMinistere} from "../add-projet/add-projet.component";
+import {stringify} from "@angular/compiler/src/util";
 
 @Component({
   selector: 'app-edit-texte',
@@ -73,10 +74,11 @@ export class EditTexteComponent implements OnInit {
   }
   texte: Texte = new Texte();
   texteExist = false;
-  phase: Phase = new Phase();
-  phases: Phase[] = [];
+//  phase: Phase = new Phase();
+//  phases: Phase[] = [];
 
-  nature!:Nature;
+  nature:Nature = new Nature();
+
   natures:Nature[]=[];
   secteurs:Secteur[]=[];
   ministeres:Ministere[]=[];
@@ -116,20 +118,30 @@ export class EditTexteComponent implements OnInit {
       sommaireArCtrl: ['', Validators.required],
     });
 
+    this.natureService.getNatureByTexteIdWithinURI(this.route.snapshot.params['id']).subscribe(ntr =>{
+      this.nature.id = ntr._embedded.natures[0].id;
+      this.nature.libelleAr = ntr._embedded.natures[0].libelleAr;
+      this.nature.libelleFr = ntr._embedded.natures[0].libelleFr;
+      console.log(this.nature);
+    });
+
     this.texteService.getTexteById(this.route.snapshot.params['id']).subscribe(value => {
       this.texte = value;
-      this.natr = this.texte.nature;
+      /*this.natr = this.texte.nature;*/
       console.log(this.texte);
-    })
+    });
+
+
+
     this.natureService.getAllNatures().subscribe(value => {
       console.log(value);
       this.natures = value;
     });
-
+/*
     this.phaseService.getAllPhases().subscribe(value => {
       console.log(value);
       this.phases = value;
-    });
+    });*/
   }
 
   ngAfterViewInit() {
@@ -161,12 +173,16 @@ export class EditTexteComponent implements OnInit {
 
   updateTexte() {
     this.texte.nature = this.nature;
+    console.log(this.nature);
     console.log(this.texte);
     this.texteService.updateTexte(this.route.snapshot.params['id'],this.texte)
       .subscribe(data => {
         console.log(data);
         this.texte = data;
-      });
+        this._snackBar.open('LE TEXTE A ETE MODIFIE', 'L\' AJOUT', {
+          duration: 2000,
+        });
+      },error => console.log('Erreur modification Texte N°: ' + this.route.snapshot.params['id']));
   }
 
 
