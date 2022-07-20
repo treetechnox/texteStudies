@@ -33,6 +33,8 @@ import {MatSelectChange} from "@angular/material/select";
 import {Nature} from "../Nature";
 import {NatureService} from "../service/nature.service";
 import {formatDate} from "@angular/common";
+import {AddCorrespondanceComponent} from "../add-correspondance/add-correspondance.component";
+import {ListCorrespondanceComponent} from "../list-correspondance/list-correspondance.component";
 
 export interface MouvementMinistere{
   id: number;
@@ -63,6 +65,9 @@ export class ListProjetComponent implements AfterViewInit {
   columnsToDisplay: string[] = ['id', 'nature','sommaireAr', 'sommaireFr','refer','details'];
 
   texte:Texte=new Texte();
+
+  dateFrom: string='';
+  dateTo: string='';
 
   allAvis:string='';
 
@@ -295,7 +300,9 @@ export class ListProjetComponent implements AfterViewInit {
       this.mouvement.secteur.id,
       this.ministere.id,
       this.mouvement.isactive,
-      1000)
+      this.dateFrom,
+      this.dateTo,
+      100000)
       .subscribe(value => {
        /* this.mouvements=value._embedded.mouvements.sort((a,b) => a.id.rendered.localeCompare(b.id.rendered));*/
       this.mouvements = value._embedded.mouvements;
@@ -383,6 +390,17 @@ export class ListProjetComponent implements AfterViewInit {
 
   }
 
+  ajouterCorrespondance(texteId:number) {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = false;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data=texteId;
+      // @ts-ignore
+      dialogConfig.width = '50%';
+      dialogConfig.height = '50%';
+      this.dialog.open(AddCorrespondanceComponent, dialogConfig);
+  }
+
   getListAvissByTxtId(texteId:number) {
     this.avisService.getAvisByTexte(texteId).subscribe({
       next:value => {
@@ -419,6 +437,17 @@ export class ListProjetComponent implements AfterViewInit {
     this.dialog.open(ListAvisComponent, dialogConfigList);
   }
 
+  onShowListCorrespondance(texteId:number) {
+    const dialogConfigList = new MatDialogConfig();
+    dialogConfigList.disableClose = false;
+    dialogConfigList.autoFocus = true;
+    dialogConfigList.data=texteId;
+    // @ts-ignore
+    dialogConfigList.width = '60%';
+    dialogConfigList.height = '50%px';
+    this.dialog.open(ListCorrespondanceComponent, dialogConfigList);
+  }
+
   onGetIsActive($event: MatSelectChange) {
     console.log( $event.value);
     $event.value === '1'? this.isActive=true:this.isActive=false;
@@ -437,5 +466,16 @@ export class ListProjetComponent implements AfterViewInit {
   nextPage($event: PageEvent) {
     console.log($event);
   }
+
+  setDateFrom(value: any) {
+    this.dateFrom =formatDate(value.toDateString(),"yyyy-MM-dd",this.locale);
+    console.log(this.dateFrom);
+  }
+
+  setDateTo(value: any) {
+    this.dateTo =formatDate(value.toDateString(),"yyyy-MM-dd",this.locale);
+    console.log(this.dateTo);
+  }
+
 }
 

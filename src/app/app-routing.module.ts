@@ -27,6 +27,7 @@ import {AproposComponent} from "./apropos/apropos.component";
 import {NotFoundComponent} from "./not-found/not-found.component";
 import {RapportJournalierComponent} from "./rapport-journalier/rapport-journalier.component";
 import {PortailMinisteresComponent} from "./portail-ministeres/portail-ministeres.component";
+import {ListCorrespondanceComponent} from "./list-correspondance/list-correspondance.component";
 
 
 const externalUrlProvider = new InjectionToken('externalUrlRedirectResolver');
@@ -36,6 +37,7 @@ const routes: Routes = [{ path: '', redirectTo : 'login', pathMatch : 'full' },
   { path: 'lesprojets', component : ListProjetComponent, canActivate:[AuthGuard]},
   { path: 'lesrapports', component : RapportJournalierComponent},
   { path: 'lesavis', component : ListAvisComponent},
+  { path: 'lecorrespondances', component : ListCorrespondanceComponent},
   { path: 'lessecteurs', component : ListSecteursComponent},
   { path: 'lesphases', component : ListPhasesComponent},
   { path: 'lesnatures', component : ListNatureComponent},

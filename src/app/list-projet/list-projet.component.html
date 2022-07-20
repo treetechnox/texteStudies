@@ -28,16 +28,16 @@
           <div [ngSwitch]="authenticated?.role">
             <div *ngSwitchCase="'ADMIN'">
               <div [ngSwitch]="app.localStorageItem('lge')">
-                <div *ngSwitchCase="'fr'">PHASE / SECTEUR / MINISTERE</div>
-                <div *ngSwitchCase="'ar'">وزارة / قطاع / مرحلة</div>
+                <div *ngSwitchCase="'fr'">PHASE / SECTEUR / MINISTERE / DATE</div>
+                <div *ngSwitchCase="'ar'">تاريخ / وزارة / قطاع / مرحلة</div>
                 <div *ngSwitchDefault>This is Default</div>
               </div>
 
             </div>
             <div *ngSwitchCase="'USER'">
               <div [ngSwitch]="app.localStorageItem('lge')">
-                <div *ngSwitchCase="'fr'">PHASE / MINISTERE</div>
-                <div *ngSwitchCase="'ar'">وزارة / مرحلة</div>
+                <div *ngSwitchCase="'fr'">PHASE / MINISTERE / DATE</div>
+                <div *ngSwitchCase="'ar'"> تاريخ /وزارة / مرحلة</div>
                 <div *ngSwitchDefault>This is Default</div>
               </div>
             </div>
@@ -68,18 +68,16 @@
             <mat-form-field class="example-full-width">
               <input matInput readonly [matDatepicker]="picker1" placeholder="{{'LIST-PROJET.ADVANCED-FILTER.FROM' | translate}}"
                      id="date1" name="date1"
-                     (dateChange)="toFormattedDate($event.value)">
+                     (dateChange)="setDateFrom($event.value)">
               <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
               <mat-datepicker #picker1></mat-datepicker>
             </mat-form-field>
           </div>
           <div class="col">
-            <mat-form-field class="example-full-width">
+            <mat-form-field class="example-full-width"><!--[(ngModel)]="mouvement.datePhase" [ngModelOptions]="{standalone: true}"-->
               <input matInput readonly [matDatepicker]="picker2" placeholder="{{'LIST-PROJET.ADVANCED-FILTER.TO' | translate}}"
                      id="date2" name="date1"
-                     [(ngModel)]="mouvement.datePhase"
-                     [ngModelOptions]="{standalone: true}"
-                     (dateChange)="toFormattedDate($event.value)">
+                     (dateChange)="setDateTo($event.value)">
               <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
               <mat-datepicker #picker2></mat-datepicker>
             </mat-form-field>
@@ -244,29 +242,50 @@
 
             <div class="example-element-description example-full-width">
               <div *ngIf="isMinistereUser()===false"  class="myflex example-margin"><!--{{ app.localStorageItem('lge') === 'fr' ? 'MODIFIER ' :  ' تعديل : ' }}-->
-                <button mat-raised-button matTooltip="MODIFIER"
-                        class="btn btn-primary spacer" (click)="onEditTexte(element.id)">
-                  <i class="fa fa-edit"></i>
-                  {{'LIST-PROJET.TABLE.EDIT-BUTTON' | translate}}
-                </button>
-                <button mat-raised-button
-                        matTooltip="{{'LIST-PROJET.TABLE.ADD-AVIS' | translate}}"
-                        (click)="ajouterAvis(element.id)"
-                >
-                  <i class="fa fa-plus-circle"></i>
-                  {{'LIST-PROJET.TABLE.ADD-AVIS' | translate}}
-                </button>
-                <button
-                  matTooltip="{{allAvis}}"
-                  matTooltipClass="my-custom-tooltip"
-                  mat-raised-button
-                  mat-button color="accent"
-                  (click)="onShowListAvis(element.id)"
-                >
-                  <i class="fa fa-list"></i> {{'LIST-PROJET.TABLE.LIST-AVIS' | translate}}
+                <div class="row flexbox">
+                  <div class="col">
+                    <button mat-raised-button matTooltip="MODIFIER"
+                            class="btn btn-primary spacer" (click)="onEditTexte(element.id)">
+                      <i class="fa fa-edit"></i>
+                      {{'LIST-PROJET.TABLE.EDIT-BUTTON' | translate}}
+                    </button>
+                  </div>
+                  <div class="col-4 spacer">
+                    <button mat-raised-button
+                            matTooltip="{{'LIST-PROJET.TABLE.ADD-AVIS' | translate}}"
+                            (click)="ajouterAvis(element.id)"
+                    >
+                      <i class="fa fa-plus-circle"></i>
+                      {{'LIST-PROJET.TABLE.ADD-AVIS' | translate}}
+                    </button>
+                    <button
+                      matTooltipClass="my-custom-tooltip"
+                      mat-raised-button
+                      mat-button color="accent"
+                      (click)="onShowListAvis(element.id)"
+                    >
+                      <i class="fa fa-list"></i> {{'LIST-PROJET.TABLE.LIST-AVIS' | translate}}
+                    </button><!--matTooltip="{{allAvis}}"-->
+                  </div>
+                  <div class="col-4 spacer">
+                    <button mat-raised-button
+                            matTooltip="{{'LIST-PROJET.TABLE.ADD-CORRESPONDANCE' | translate}}"
+                            (click)="ajouterCorrespondance(element.id)"
+                    >
+                      <i class="fa fa-plus-circle"></i>
+                      {{'LIST-PROJET.TABLE.ADD-CORRESPONDANCE' | translate}}
+                    </button>
+                    <button
+                      matTooltipClass="my-custom-tooltip"
+                      mat-raised-button
+                      mat-button color="accent"
+                      (click)="onShowListCorrespondance(element.id)"
+                    ><!--matTooltip="{{allAvis}}"-->
+                      <i class="fa fa-list"></i> {{'LIST-PROJET.TABLE.LIST-CORRESPONDANCE' | translate}}
 
-                </button>
-
+                    </button>
+                  </div>
+                </div>
               </div>
                 <app-list-mouvement
                   class="make-gold"

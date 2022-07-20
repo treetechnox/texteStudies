@@ -185,9 +185,6 @@ export class EditTexteComponent implements OnInit {
       },error => console.log('Erreur modification Texte N°: ' + this.route.snapshot.params['id']));
   }
 
-
-
-
   onSubmitUpdate() {
     this.submitted = true;
     console.log(this.mouvement)

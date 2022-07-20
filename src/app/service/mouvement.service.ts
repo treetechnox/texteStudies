@@ -82,9 +82,10 @@ export class MouvementService {
   /*getTexteBySommaireArFr(nomfr: string, prenomfr: string):Observable<any> {
     return this.http.get(`${this.url}`);
   }*/
-  getFilter(phaseId: number,natureId: number, secteurId: number | undefined, ministereId: number,isactive:boolean, totalelt:number):Observable<any> {
+  getFilter(phaseId: number,natureId: number, secteurId: number | undefined, ministereId: number,isactive:boolean,
+            dateFrom:string,dateTo:string, totalelt:number):Observable<any> {
     console.log('phaseId:'+phaseId,'natureId:'+natureId,'secteurId:'+secteurId,
-      'ministereId:'+ministereId,'isactive:'+isactive);
+      'ministereId:'+ministereId,'isactive:'+isactive,'dateFrom:'+dateFrom,'dateTo:'+dateTo);
     let sub_url = '?';
     if(phaseId>0)
       sub_url+=`&phase=${phaseId}`;
@@ -97,6 +98,10 @@ export class MouvementService {
       sub_url+=`&mouvementMinisteres.ministere=${ministereId}`;
     if(isactive===true)
       sub_url+=`&isactive=${isactive}`;
+    if (dateFrom!=='')
+      sub_url+=`&datePhase=${dateFrom}`;
+    if (dateTo!=='')
+      sub_url+=`&datePhase=${dateTo}`;
 
     sub_url+='&sort=id,desc&size='+totalelt;
     console.log(`${this.url1}${sub_url}`);

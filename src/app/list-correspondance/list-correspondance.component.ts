@@ -1,40 +1,40 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
-import {Ministere} from "../Ministere";
+//import {Correspondance} from "../Correspondance";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
-import {MinistereService} from "../service/ministere.service";
+//import {CorrespondanceService} from "../service/Correspondance.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {AuthenticationService} from "../service/authentication.service";
+import {AppComponent} from "../app.component";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {Router} from "@angular/router";
-import {AddMinistereComponent} from "../add-ministere/add-ministere.component";
-import {Avis} from "../Avis";
-import {AddAvisComponent} from "../add-avis/add-avis.component";
-import {AvisService} from "../service/avis.service";
-import {AppComponent} from "../app.component";
-import {AuthenticationService} from "../service/authentication.service";
+//import {AddCorrespondanceComponent} from "../add-Correspondance/add-Correspondance.component";
 import {HttpEventType, HttpResponse} from "@angular/common/http";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {Correspondance} from "../Correspondance";
+import {CorrespondanceService} from "../service/correspondance.service";
+import {AddCorrespondanceComponent} from "../add-correspondance/add-correspondance.component";
 
 @Component({
-  selector: 'app-list-avis',
-  templateUrl: './list-avis.component.html',
-  styleUrls: ['./list-avis.component.css']
+  selector: 'app-list-correspondance',
+  templateUrl: './list-correspondance.component.html',
+  styleUrls: ['./list-correspondance.component.css']
 })
-export class ListAvisComponent implements OnInit {
+export class ListCorrespondanceComponent implements OnInit {
 
   ngOnInit(): void {
   }
 
   texteId!:number;
-  aviss: Avis[] = [];
-  avis: Avis = new Avis();
+  correspondances: Correspondance[] = [];
+  correspondance: Correspondance = new Correspondance();
   //organisme: Organisme = new Organisme();
   selectedFiles: any;
   progress!: number;
   currentFileUpload: any;
 
   displayedColumns: string[] = ['id', 'details','ministere', 'operations'];
-  dataSource!: MatTableDataSource<Avis>;
+  dataSource!: MatTableDataSource<Correspondance>;
   //organismes : Organisme[]= new Array();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -42,7 +42,7 @@ export class ListAvisComponent implements OnInit {
 
   panelOpenState = false;
 
-  constructor(private avisService: AvisService,
+  constructor(private correspondanceService: CorrespondanceService,
               private _snackBar: MatSnackBar,
               private authService:AuthenticationService,
               public app: AppComponent,
@@ -53,14 +53,12 @@ export class ListAvisComponent implements OnInit {
     if(texteId>0){
       this.texteId = texteId
     }
-    this.avisService.getAvisByTexte(texteId).subscribe(value => {
-      // @ts-ignore
-
+    this.correspondanceService.getCorrespondanceByTexte(texteId).subscribe(value => {
       console.log(value);
-      this.aviss = value;
+      this.correspondances = value;
       /*this.ministeres = value._embedded.ministeres;*/
-      console.log(this.aviss);
-      this.dataSource = new MatTableDataSource(this.aviss);
+      console.log(this.correspondances);
+      this.dataSource = new MatTableDataSource(this.correspondances);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })
@@ -83,8 +81,8 @@ export class ListAvisComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  onEditAvis(id: any) {
-    this.router.navigateByUrl(`lavis/${id}`);
+  onEditCorrespondance(id: any) {
+    this.router.navigateByUrl(`lcorrespondance/${id}`);
     console.log(id)
   }
 
@@ -94,7 +92,7 @@ export class ListAvisComponent implements OnInit {
   }*/
 
 
-  onAddAvis(texteId:number) {
+  onAddCorrespondance(texteId:number) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
@@ -102,26 +100,26 @@ export class ListAvisComponent implements OnInit {
     // @ts-ignore
     dialogConfig.width = '50%';
     dialogConfig.height = '50%';
-    this.dialog.open(AddAvisComponent, dialogConfig);
+    this.dialog.open(AddCorrespondanceComponent, dialogConfig);
   }
 
   isMinistereUser() {
     return this.authService.isMinistereUser();
   }
 
-  onSelectFile(event: any,avisId:number) {
+  onSelectFile(event: any,correspondanceId:number) {
     this.selectedFiles = event.target.files;
     console.log(this.selectedFiles.item(0));
     if(this.selectedFiles){
-      this.uploadPdf(avisId);
+      this.uploadPdf(correspondanceId);
     }
   }
 
-  uploadPdf(avisId:number){
+  uploadPdf(correspondanceId:number){
     this.progress = 0;
     this.currentFileUpload = this.selectedFiles.item(0);
     console.log(this.currentFileUpload);
-    this.avisService.uploadPdfScanService(this.currentFileUpload, avisId).subscribe(event =>{
+    this.correspondanceService.uploadPdfScanService(this.currentFileUpload, correspondanceId).subscribe(event =>{
       console.log(event);
       if(event.type === HttpEventType.UploadProgress){
         // @ts-ignore
@@ -139,17 +137,17 @@ export class ListAvisComponent implements OnInit {
     }, error1 => alert("Erreur de chargement"));
   }
 
-  showPdf(avisId:number) {
+  showPdf(correspondanceId:number) {
     /*const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    dialogConfig.data= avisId;
+    dialogConfig.data= correspondanceId;
     // @ts-ignore
     dialogConfig.width = '80%';
     dialogConfig.height = '80%';
     this.dialog.open(ShowPdfComponent, dialogConfig);*/
 
-    this.avisService.getPDF(avisId).subscribe(mypdf => {
+    this.correspondanceService.getPDF(correspondanceId).subscribe(mypdf => {
       var newBlob = new Blob([mypdf],{type:"application/pdf"});
       // @ts-ignore
       if (window.navigator && window.navigator.msSaveOrOpenBlob) {
@@ -173,7 +171,7 @@ export class ListAvisComponent implements OnInit {
        this.link = document.createElement('a');
        console.log(this.link);
        this.link.href = data;
-       this.link.download = `${this.avis.scanpdf}`;
+       this.link.download = `${this.correspondance.scanpdf}`;
        // this is necessary as link.click() does not work on the latest firefox
        this.link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
 

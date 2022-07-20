@@ -5,13 +5,13 @@
       <button mat-raised-button
               matTooltip="RETOUR"
               class="btn btn-dark"
-              [routerLink]="'/leaviss'">
+              [routerLink]="'/lecorrespondances'">
         <i class="fa fa-hand-o-left fa-2x"></i>
       </button>
       <form>
         <br>
         <div class="entete" >
-          {{'ADD-AVIS.TITLE'|translate}}
+          {{'ADD-CORRESPONDANCE.TITLE'|translate}}
         </div>
         <br>
         <div class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
@@ -36,7 +36,7 @@
           <mat-form-field
             [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
             class="example-full-width">
-            <input matInput placeholder="{{'ADD-AVIS.OBSERVATION'|translate}}" type="text" [(ngModel)]="avis.details" name="avis"/><!--required-->
+            <input matInput placeholder="{{'ADD-CORRESPONDANCE.OBSERVATION'|translate}}" type="text" [(ngModel)]="correspondance.details" name="correspondance"/><!--required-->
           </mat-form-field>
         </div>
         <div class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
@@ -45,7 +45,7 @@
             class="example-full-width">
             <input matInput readonly [matDatepicker]="picker1" placeholder="{{'ADD-TEXTE.DATE' | translate}}"
                    id="date1" name="date1"
-                   [(ngModel)]="avis.dateAvis"
+                   [(ngModel)]="correspondance.dateCorrespond"
                    [ngModelOptions]="{standalone: true}"
                    (dateChange)="toFormattedDate($event.value)">
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>

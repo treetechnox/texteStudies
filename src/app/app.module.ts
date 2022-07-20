@@ -107,6 +107,9 @@ import { RapportJournalierComponent } from './rapport-journalier/rapport-journal
 import { EditAvisComponent } from './edit-avis/edit-avis.component';
 import { PortailMinisteresComponent } from './portail-ministeres/portail-ministeres.component';
 import { NatureTexteComponent } from './nature-texte/nature-texte.component';
+import { AddCorrespondanceComponent } from './add-correspondance/add-correspondance.component';
+import { EditCorrespondanceComponent } from './edit-correspondance/edit-correspondance.component';
+import { ListCorrespondanceComponent } from './list-correspondance/list-correspondance.component';
 
 
 
@@ -161,6 +164,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     EditAvisComponent,
     PortailMinisteresComponent,
     NatureTexteComponent,
+    AddCorrespondanceComponent,
+    EditCorrespondanceComponent,
+    ListCorrespondanceComponent,
   ],
     imports: [
         FormsModule,

@@ -1,7 +1,5 @@
 import {Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
-import {Avis} from "../Avis";
 import {Ministere} from "../Ministere";
-import {AvisService} from "../service/avis.service";
 import {MinistereService} from "../service/ministere.service";
 import {AuthenticationService} from "../service/authentication.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -9,15 +7,17 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {AppComponent} from "../app.component";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {formatDate, Location} from "@angular/common";
+import {Correspondance} from "../Correspondance";
+import {CorrespondanceService} from "../service/correspondance.service";
 
 @Component({
-  selector: 'app-edit-avis',
-  templateUrl: './edit-avis.component.html',
-  styleUrls: ['./edit-avis.component.css']
+  selector: 'app-add-correspondance',
+  templateUrl: './add-correspondance.component.html',
+  styleUrls: ['./add-correspondance.component.css']
 })
-export class EditAvisComponent implements OnInit {
+export class AddCorrespondanceComponent implements OnInit {
 
-  avis: Avis = new Avis();
+  correspondance: Correspondance = new Correspondance();
   ministere: Ministere= new Ministere();
   ministeres: Ministere[]=[];
 
@@ -26,7 +26,7 @@ export class EditAvisComponent implements OnInit {
   date = new Date((new Date().getTime()));
 
   constructor(
-    private avisService: AvisService,
+    private correspondanceService: CorrespondanceService,
     private ministereService:MinistereService,
     private authService: AuthenticationService,@Inject(LOCALE_ID) public locale :string,
     private router: Router, private route: ActivatedRoute,
@@ -36,7 +36,8 @@ export class EditAvisComponent implements OnInit {
 
 
   ngOnInit() {
-    this.avis.dateAvis = new Date();
+    formatDate(this.date.toDateString(),"dd-MM-yyyy",this.locale);
+    this.correspondance.dateCorrespond = this.date;
     this.ministereService.getAllMinisteres().subscribe({next: value => {
         this.ministeres = value;
       },
@@ -51,14 +52,14 @@ export class EditAvisComponent implements OnInit {
 
 
   onSubmitSave() {
-    //console.log(this.avis);
-    this.avisService.saveAvis(this.texteId,this.avis).subscribe({
+    //console.log(this.correspondance);
+    this.correspondanceService.saveCorrespondance(this.texteId,this.correspondance).subscribe({
       next:value => {
         console.log(value);
         if(value===null) alert("vous ne pouvez pas ajouter le meme secteur deux fois !!");
         this._snackBar.open('LA SECTEUR A ETE AJOUTE', 'FERMER', {duration: 2000})
       },
-      complete:()=>console.log('Avis sauvgardé'),
+      complete:()=>console.log('Correspondance sauvgardé'),
       error:err => console.log(err),
     });
     //window.location.reload();//this.location.back();
@@ -67,14 +68,13 @@ export class EditAvisComponent implements OnInit {
   onGetMinistere($event: any) {
     console.log($event);
     this.ministere = $event
-    this.avis.ministere = this.ministere;
+    this.correspondance.ministere = this.ministere;
   }
 
-  toFormattedDate(date: any) {
-    /*    console.log(iso)
+  toFormattedDate(event:any) {
+    console.log(event);
+    /*
         this._adapter.setLocale('fr');*/
-    formatDate(this.date.toDateString(),"dd-MM-yyyy",this.locale);
-
-
+    //formatDate(this.date.toDateString(),"dd-MM-yyyy",this.locale);
   }
 }

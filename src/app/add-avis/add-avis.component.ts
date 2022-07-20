@@ -24,7 +24,7 @@ export class AddAvisComponent implements OnInit {
 
   submitted!:boolean;
 
-  date = new Date((new Date().getTime()));
+  //date = new Date((new Date().getTime()));
 
   constructor(
     private avisService: AvisService,
@@ -37,7 +37,7 @@ export class AddAvisComponent implements OnInit {
 
 
   ngOnInit() {
-    this.avis.date_avis = new Date();
+    this.avis.dateAvis = new Date();
     this.ministereService.getAllMinisteres().subscribe({next: value => {
         this.ministeres = value;
       },
@@ -74,8 +74,6 @@ export class AddAvisComponent implements OnInit {
   toFormattedDate(date: any) {
     /*    console.log(iso)
         this._adapter.setLocale('fr');*/
-    formatDate(this.date.toDateString(),"dd-MM-yyyy",this.locale);
-
-
+    //formatDate(this.date.toDateString(),"dd-MM-yyyy",this.locale);
   }
 }
