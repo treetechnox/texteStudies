@@ -289,6 +289,12 @@ export class ListProjetComponent implements AfterViewInit {
       console.log('222'+this.mouvement.secteur)
     }
 
+
+    if(this.isMinistereUser()){
+      console.log(this.authService.userAuthenticated?.role);
+
+    }
+
     console.log(this.nature);
     // @ts-ignore
     this.mouvement.texte?.nature=this.nature;
