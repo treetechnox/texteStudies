@@ -35,6 +35,7 @@ import {NatureService} from "../service/nature.service";
 import {formatDate} from "@angular/common";
 import {AddCorrespondanceComponent} from "../add-correspondance/add-correspondance.component";
 import {ListCorrespondanceComponent} from "../list-correspondance/list-correspondance.component";
+import {RapportJournalierComponent} from "../rapport-journalier/rapport-journalier.component";
 
 export interface MouvementMinistere{
   id: number;
@@ -340,6 +341,42 @@ export class ListProjetComponent implements AfterViewInit {
     console.log(this.mouvement);
   }
 
+  OnPrint() {
+
+    let sub_url = 'http://172.16.90.1:8083/mouvements?';
+    if(this.mouvement.phase?.id>0)
+      sub_url+=`&phase=${this.mouvement.phase?.id}`;
+    if(this.nature.id>0)
+      sub_url+=`&texte.nature.id=${this.nature.id}`;
+    // @ts-ignore
+    if(this.mouvement.secteur?.id>0)
+      sub_url+=`&secteur=${this.mouvement.secteur?.id}`;
+    if(this.ministere.id>0)
+      sub_url+=`&mouvementMinisteres.ministere=${this.ministere.id}`;
+    if(this.isActive===true)
+      sub_url+=`&isactive=${this.isActive}`
+    else if (this.isActive===false)
+      sub_url+=`&isactive=${this.isActive}`;
+    if (this.dateFrom!=='')
+      sub_url+=`&datePhase=${this.dateFrom}`;
+    if (this.dateTo!=='')
+      sub_url+=`&datePhase=${(this.dateTo)}`;
+
+    sub_url+='&sort=id,desc&size='+100000;
+    console.log(sub_url);
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data=sub_url;
+    // @ts-ignore
+    dialogConfig.width = '90%';
+    dialogConfig.height = '90%';
+    this.dialog.open(RapportJournalierComponent, dialogConfig);
+
+
+  }
+
   onGetPhase(event: any) {
     this.phase=event.value;
     console.log(this.phase);
@@ -457,6 +494,10 @@ export class ListProjetComponent implements AfterViewInit {
   onGetIsActive($event: MatSelectChange) {
     console.log( $event.value);
     $event.value === '1'? this.isActive=true:this.isActive=false;
+    if ($event.value===undefined)
+      { // @ts-ignore
+        this.isActive= null;
+      }
     console.log(this.isActive);
   }
 

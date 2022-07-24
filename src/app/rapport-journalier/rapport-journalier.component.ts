@@ -11,6 +11,9 @@ import {TranslateService} from '@ngx-translate/core';
 import {Texte} from "../Texte";
 import {TexteService} from "../service/texte.service";
 import {formatDate} from "@angular/common";
+import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MatTableDataSource} from "@angular/material/table";
+import {Mouvement} from "../Mouvement";
 /*
 import * as XLSX from 'xlsx';
 import * as jspdf from 'jspdf';
@@ -38,20 +41,12 @@ export class RapportJournalierComponent implements OnInit {
 
   fileName= `RapportTextes_${formatDate(new Date().toDateString(),"dd-MM-yyyy",this.locale)}.xlsx`;
   textes: Texte[]=[];
-
-  /*periode_fr: Periode[] = [
-    {id: 0, value: 'MATIN'},
-    {id: 1, value: 'APRES MIDI'}
-  ];
-  periode_ar: Periode[] = [
-    {id: 0, value: 'الصباح'},
-    {id: 1, value: 'بعد الظهيرة'}
-  ];*/
   aujourdhui: Date =new Date();
 
 
   constructor(private texteService: TexteService,public _translateSrvc: TranslateService,
               @Inject(LOCALE_ID) public locale :string,
+              @Inject(MAT_DIALOG_DATA) public url: string,
               public app:AppComponent,) {
     setInterval(() => {
       this.aujourdhui = new Date();
@@ -61,18 +56,30 @@ export class RapportJournalierComponent implements OnInit {
 
 
   ngOnInit(){
-    this.getTextes();
+    console.log(this.url);
+    this.getTextesByUrl();
 
   }
 
-  getTextes(){
-    this.texteService.getAllTextes().subscribe(value => {
-      console.log(value)
-      this.textes = value;
+  getTextesByUrl(){
+    this.texteService.getAllTextesByUrl(this.url).subscribe(value => {
+let mouvements:Mouvement[]=[];
+      // @ts-ignore
+      mouvements = value._embedded.mouvements;
+      console.log(mouvements);
 
-      console.log(value[0])
-      this.sortedData = value; console.log(this.sortedData)
+      mouvements.forEach(value1 => {
+        this.texteService.getTexteByMouvementId(value1.id).subscribe(texte=>{
+
+          if (!this.textes.some((item) => item.id == texte.id)) {
+            this.textes.push(texte);
+          }
+          console.log(this.textes);
+          this.sortedData = this.textes; console.log(this.sortedData)
+        })
+      })
     });
+
   }
 
   public localStorageItem(id: string): string {
@@ -82,7 +89,15 @@ export class RapportJournalierComponent implements OnInit {
 
 
   printing() {
-    window.print()
+
+    let originalContents = document.body.innerHTML;
+    // @ts-ignore
+    let printReport= document.getElementById('table').innerHTML;
+    document.body.innerHTML = printReport;
+    window.print();
+    document.body.innerHTML = originalContents;
+
+    /*window.print()*/
   }
   sortData(sort: Sort) {
     const data = this.textes.slice();

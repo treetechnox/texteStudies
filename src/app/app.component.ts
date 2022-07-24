@@ -25,12 +25,12 @@ export class AppComponent {
   }
   constructor(private router: Router, private dialog:MatDialog,
               public authService:AuthenticationService, public translate: TranslateService) {
-    translate.addLangs(['fr','ar']);
-    translate.setDefaultLang('fr');
+    translate.addLangs(['ar','fr']);
+    translate.setDefaultLang('ar');
     const browserLang:any = translate.getBrowserLang();
     console.log(browserLang);
-    translate.use(browserLang.match(/fr|ar/)?browserLang: 'fr');
-    localStorage.setItem('lge','fr')
+    translate.use(browserLang.match(/fr|ar/)?browserLang: 'ar');
+    localStorage.setItem('lge','ar')
     this.isToLogg=true? sessionStorage.getItem('logged')==='true': '';
   }
   ngOnInit(){

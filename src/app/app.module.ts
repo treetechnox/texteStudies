@@ -110,6 +110,7 @@ import { NatureTexteComponent } from './nature-texte/nature-texte.component';
 import { AddCorrespondanceComponent } from './add-correspondance/add-correspondance.component';
 import { EditCorrespondanceComponent } from './edit-correspondance/edit-correspondance.component';
 import { ListCorrespondanceComponent } from './list-correspondance/list-correspondance.component';
+import {NgxPrintModule} from "ngx-print";
 
 
 
@@ -209,6 +210,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatCardModule,
         MatProgressBarModule,
         NgxPaginationModule,
+        NgxPrintModule,
         // FlexLayoutModule
         TranslateModule.forRoot({
             loader: {

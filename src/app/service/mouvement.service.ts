@@ -97,6 +97,8 @@ export class MouvementService {
     if(ministereId>0)
       sub_url+=`&mouvementMinisteres.ministere=${ministereId}`;
     if(isactive===true)
+      sub_url+=`&isactive=${isactive}`
+    else if (isactive===false)
       sub_url+=`&isactive=${isactive}`;
     if (dateFrom!=='')
       sub_url+=`&datePhase=${dateFrom}`;

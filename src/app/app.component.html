@@ -266,16 +266,18 @@
        [style]="{'direction':localStorageItem('lge') === 'ar' ? 'rtl' : 'ltr'}"
   >
     <div class="container-fluid">
-      <a class="navbar-brand" [routerLink]="'/lesprojets'">
-        <i class="fa fa-home fa-2x" aria-hidden="true"></i>
-      </a>
-      <button class="navbar-toggler"
-              type="button" data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <div class="myhome">
+        <a class="navbar-brand" [routerLink]="'/lesprojets'">
+          <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+        </a>
+        <button class="navbar-toggler"
+                type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
       <div class="collapse navbar-collapse" id="navbarSupportedContent"
            [style]="{'text-align':localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
       >
@@ -376,33 +378,34 @@
             </ul>
           </li>
         </ul>
-        <div class="d-flex">
-          <span style="margin: 2px;"></span>
-          <button class="dcnx btn btn-outline-light" type="submit"
-                  matTooltip="DECONNEXION"
-                  (click)="onLogout()"
-                  style="background-color: #ee8488;"
-          >
-            <div class="dcnx">
-              <i class="dcnx-elt fa fa-sign-out fa-2x" aria-hidden="true"></i
-              ><span class="dcnx-elt">{{
-              authService.userAuthenticated?.username
-              }}</span>
-            </div>
 
-          </button>
-
-            <select
-              style="width: 55px; margin: 5px;"
-              class="btn_scnd"
-              #langselect
-              (change)="changeLang(langselect.value)"
-            >
-              <option *ngFor="let lang of translate.getLangs()" [value]="lang">{{
-                lang
-                }}</option>
-            </select>
+      </div>
+      <div class="d-flex">
+        <span style="margin: 2px;"></span>
+        <button class="dcnx btn btn-outline-light" type="submit"
+                matTooltip="DECONNEXION"
+                (click)="onLogout()"
+                style="background-color: #ee8488;"
+        >
+          <div class="dcnx">
+            <i class="dcnx-elt fa fa-sign-out fa-2x" aria-hidden="true"></i
+            ><span class="dcnx-elt">{{
+            authService.userAuthenticated?.username
+            }}</span>
           </div>
+
+        </button>
+
+        <select
+          style="width: 55px; margin: 5px;"
+          class="btn_scnd"
+          #langselect
+          (change)="changeLang(langselect.value)"
+        >
+          <option *ngFor="let lang of translate.getLangs()" [value]="lang">{{
+            lang
+            }}</option>
+        </select>
       </div>
     </div>
   </nav>

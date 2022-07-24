@@ -1,20 +1,23 @@
 <br><br>
-<div class="text-dark" style="display: flex;  justify-content: space-between;">
+<div class="text-dark" style="display: flex;  justify-content: space-between;"
+     [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }"
+>
 
-  <div>
-    <button type="submit"
+  <div><!--[printStyle]=" direction : {{ app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }}"-->
+    <button printSectionId="table"
+            [useExistingCss]="true"
+
             mat-raised-button
-            matTooltip="Imprimer l'etat de sortie"
-            class="btn btn-light" (click)="printing()"
+            class="btn btn-light"
             style="position: center"
-    >
+            ngxPrint
+    ><!--matTooltip="Imprimer l'etat de sortie"-->
       <i class="fa fa-print fa-3x" aria-hidden="true"></i>
     </button>
     <button style="margin-left: 10px" type="submit"
             mat-raised-button
-            matTooltip="Exporter EXCEL"
             class="btn btn-light"
-            (click)="exportexcel()">
+            (click)="exportexcel()"><!--matTooltip="Exporter EXCEL"-->
       <i class="fa fa-download fa-3x" aria-hidden="true"></i>
     </button>
   </div>
@@ -24,21 +27,21 @@
   </mat-chip-list>
 </div>
 <br><br>
-<div class="table-responsive">
+<div id="table" class="table-responsive" [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }">
   <table id="excel-table" class="table table-bordered table-light" *ngIf="textes"
          matSort (matSortChange)="sortData($event)">
     <thead class="thead-dark example-full-width">
     <tr>
-      <th >#</th>
-      <th matTooltip="Ordre par salle" mat-sort-header="nature">NATURE</th>
-      <th matTooltip="Ordre par date" mat-sort-header="sommaireAr">النص</th>
-      <th matTooltip="Ordre par periode" mat-sort-header="sommaireFr">TEXTE</th>
+      <th >{{"LIST-PROJET.TABLE.ID" | translate}}</th>
+      <th matTooltip="Ordre par " mat-sort-header="nature">{{"LIST-PROJET.ADVANCED-FILTER.NATURE" | translate}} </th>
+      <th matTooltip="Ordre par " mat-sort-header="sommaireAr">{{"LIST-PROJET.TABLE.SOMMAIRE-AR" | translate}}</th>
+      <th matTooltip="Ordre par " mat-sort-header="sommaireFr">{{"LIST-PROJET.TABLE.SOMMAIRE-FR" | translate}}</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let res of sortedData; let i=index; ">
       <td>{{i+1}}</td>
-      <td>{{ res.nature?.libelleFr }}</td>
+      <td><app-nature-texte [texteId]="res.id"></app-nature-texte></td>
       <td>{{ res.sommaireAr}}</td>
       <td>{{ res.sommaireFr}}</td>
      <!-- <td>

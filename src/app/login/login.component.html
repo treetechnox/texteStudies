@@ -11,17 +11,20 @@
       <div class="card-body">
         <div class="row-cols-1">
           <div class="col">
-            <mat-form-field >
+            <mat-form-field [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}" >
               <mat-label>{{'LOGIN.USERNAME.LABEL' | translate}}</mat-label>
               <input matInput placeholder="{{'LOGIN.USERNAME.PLACEHOLDER' | translate}}" required="required"
                      [(ngModel)]="user.username"  name="user"><!--[(ngModel)]="user.username" -->
             </mat-form-field>
           </div>
           <div class="col">
-            <mat-form-field>
+            <mat-form-field [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}">
               <mat-label>{{'LOGIN.PASSWORD.LABEL' | translate}}</mat-label>
               <input matInput placeholder="{{'LOGIN.PASSWORD.PLACEHOLDER' | translate}}" required="required"
-                     [(ngModel)]="user.password"  type="password" name="password"><!--[(ngModel)]="user.passeword" -->
+                     [(ngModel)]="user.password"
+                     [type]=" hide ? 'password' : 'text'"
+                     name="password">
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon><!--[(ngModel)]="user.passeword" -->
             </mat-form-field>
           </div>
         </div>

@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   user: User = new User();
   isLoading: boolean | undefined;
   message_erreur:undefined | boolean=true;
+  hide = true;
 
   constructor(public authenticationService: AuthenticationService, private router:Router,
               public app: AppComponent) { }
