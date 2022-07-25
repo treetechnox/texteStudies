@@ -201,7 +201,7 @@ export class AddMouvementComponent implements OnInit {
       })
     })
 
-    if(this.mouvement.phase.libelleFr = 'TEXTE PUBLIE'){
+    if(this.mouvement.phase.libelleFr === 'TEXTE PUBLIE'){
       this.texteService.updateTexte(this.texteId,this.texte).subscribe(value => {
         console.log(value);
       })
@@ -224,7 +224,7 @@ export class AddMouvementComponent implements OnInit {
           console.log(minmouv);
         })
       })
-      window.location.reload();
+      //window.location.reload();
     },error => console.log(error))
   }
 

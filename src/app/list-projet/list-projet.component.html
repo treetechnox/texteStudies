@@ -66,21 +66,27 @@
         <div class="row" ><!--dir="{{direction}}"-->
           <div class="col">
             <mat-form-field class="example-full-width">
-              <input matInput readonly [matDatepicker]="picker1" placeholder="{{'LIST-PROJET.ADVANCED-FILTER.FROM' | translate}}"
+              <input #fromInput matInput readonly [matDatepicker]="picker1" placeholder="{{'LIST-PROJET.ADVANCED-FILTER.FROM' | translate}}"
                      id="date1" name="date1"
                      (dateChange)="setDateFrom($event.value)">
               <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
               <mat-datepicker #picker1></mat-datepicker>
             </mat-form-field>
+            <button class="btn btn-danger" (click)="resetFrom()">
+              <i class="fa fa-refresh" aria-hidden="true"></i>
+            </button>
           </div>
           <div class="col">
             <mat-form-field class="example-full-width"><!--[(ngModel)]="mouvement.datePhase" [ngModelOptions]="{standalone: true}"-->
-              <input matInput readonly [matDatepicker]="picker2" placeholder="{{'LIST-PROJET.ADVANCED-FILTER.TO' | translate}}"
+              <input #toInput matInput readonly [matDatepicker]="picker2" placeholder="{{'LIST-PROJET.ADVANCED-FILTER.TO' | translate}}"
                      id="date2" name="date1"
                      (dateChange)="setDateTo($event.value)">
               <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
               <mat-datepicker #picker2></mat-datepicker>
             </mat-form-field>
+            <button class="btn btn-danger" (click)="resetTo()">
+              <i class="fa fa-refresh" aria-hidden="true"></i>
+            </button>
           </div>
 
         </div>
@@ -208,6 +214,13 @@
                 (click)="OnPrint()">
           <i class="fa fa-print fa-2x" aria-hidden="true"></i>
           {{'ETAT-SORTIE.PRINTING' | translate}}
+        </button>
+        <button mat-button color="accent"
+                mat-raised-button
+                matTooltip= "{{'ADD-DETAIL.BUTTON-RESET' | translate}}"
+                (click)="resetForm()">
+          <i class="fa fa-refresh fa-2x" aria-hidden="true"></i>
+          {{'ADD-DETAIL.BUTTON-RESET' | translate}}
         </button>
       </form>
     </mat-expansion-panel>

@@ -175,7 +175,8 @@
               mat-raised-button
               matTooltip= "{{'STEP.AVANCE'| translate}}"
               [disabled]="!myform.valid"
-              (click)="onSubmitSaveMouvement()">
+              (click)="onSubmitSaveMouvement()"
+              mat-dialog-close>
         <i class="fa fa-plus fa-3x" aria-hidden="true"></i>
       </button>
     </div>

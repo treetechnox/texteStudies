@@ -1,11 +1,11 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Nature} from '../Nature';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {NatureService} from '../service/nature.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {Router} from '@angular/router';
-import {MatTableDataSource} from '@angular/material/table';
+import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {AddNatureComponent} from '../add-nature/add-nature.component';
 import {Mouvement} from '../Mouvement';
 import {MouvementService} from '../service/mouvement.service';
@@ -28,6 +28,8 @@ export class ListMouvementComponent implements OnInit {
 
   @Input()
   texteId!: number;
+
+  @ViewChild('table') table!: MatTable<Mouvement>;
 
   link: any;
 
@@ -59,7 +61,7 @@ export class ListMouvementComponent implements OnInit {
               public app:AppComponent,
               private  ministereService:MinistereService,
               private dialog: MatDialog,
-              private router: Router) { }
+              private router: Router,private changeDetectorRefs: ChangeDetectorRef) { }
 
   ngAfterViewInit() {
     let paginatorIntl: any;
@@ -72,13 +74,18 @@ export class ListMouvementComponent implements OnInit {
     this.ministereService.getAllMinistereByTopMouvementAndByTexteId(this.texteId).subscribe(value => {
       this.ministeres = value;
     });
-    this.mouvementService.getMouvementByTexteId(this.texteId).subscribe(value => {
+    this.getMouvementsByTexteId(this.texteId);
+  }
+
+  getMouvementsByTexteId(texteId:any){
+    this.mouvementService.getMouvementByTexteId(texteId).subscribe(value => {
       //console.log(value);
       this.mouvements = value;
       console.log(this.mouvements);
       this.dataSource = new MatTableDataSource(this.mouvements);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.changeDetectorRefs.detectChanges();
     })
   }
 
@@ -90,7 +97,10 @@ export class ListMouvementComponent implements OnInit {
     // @ts-ignore
     dialogConfig.width = '70%';
     dialogConfig.height = '50%';
-    this.dialog.open(AddMouvementComponent, dialogConfig);
+    this.dialog.open(AddMouvementComponent, dialogConfig).afterClosed().subscribe(value => {
+      this.getMouvementsByTexteId(this.texteId);
+    });
+
   }
 
   applyFilter(event: Event) {

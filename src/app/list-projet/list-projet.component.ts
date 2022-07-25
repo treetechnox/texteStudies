@@ -36,6 +36,7 @@ import {formatDate} from "@angular/common";
 import {AddCorrespondanceComponent} from "../add-correspondance/add-correspondance.component";
 import {ListCorrespondanceComponent} from "../list-correspondance/list-correspondance.component";
 import {RapportJournalierComponent} from "../rapport-journalier/rapport-journalier.component";
+import {MatInput} from "@angular/material/input";
 
 export interface MouvementMinistere{
   id: number;
@@ -213,6 +214,21 @@ export class ListProjetComponent implements AfterViewInit {
     paginatorIntl.itemsPerPageLabel=this.app.localStorageItem('lge') === 'fr' ? 'NOMBRE PAR PAGE:' : 'العدد في كل صفحة:';
     /*paginatorIntl.itemsPerPageLabel='';*/
     paginatorIntl.previousPageLabel = '';
+  }
+
+
+  @ViewChild('fromInput', {read: MatInput}) fromInput!: MatInput;
+
+  @ViewChild('toInput', {read: MatInput}) toInput!: MatInput;
+
+  resetFrom() {
+    this.fromInput.value = '';
+    this.dateFrom='';
+
+  }
+  resetTo() {
+    this.toInput.value = '';
+    this.dateTo = '';
   }
 
   applyFilter(event: Event) {
@@ -524,5 +540,8 @@ export class ListProjetComponent implements AfterViewInit {
     console.log(this.dateTo);
   }
 
+  resetForm() {
+
+  }
 }
 
