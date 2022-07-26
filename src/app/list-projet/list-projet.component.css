@@ -170,12 +170,12 @@ section {
 }
 
 th.mat-header-cell {
-  padding: 0 30px 0 30px;
+  padding: 0 15px 0 0px;
   border-bottom-width: 1px;
   border-bottom-style: solid;
 }
 td.mat-cell {
-  padding: 0 30px 0 30px;
+  padding: 0 15px 0 0px;
   border-bottom-width: 1px;
   border-bottom-style: solid;
 }

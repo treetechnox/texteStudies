@@ -8,10 +8,12 @@
   font-family: "Old-Antic-Bold";
   src: local("Old-Antic-Bold"), url('src/assets/fonts/farsi-simple-bold.ttf') format("truetype");
 }
+
+
 html, body {
   height: 100%;
   margin: 0;
-  font-family: 'Cairo', sans-serif!important;
+  font-family: 'Cairo', sans-serif!important;;
   /*font-family: Roboto, "Helvetica Neue", sans-serif;*/
 }
 
@@ -59,6 +61,18 @@ html, body {
 table{
   width: 100%;
   font-weight: bold;
+  font-family: 'Cairo', sans-serif!important;
+}
+
+button{
+  font-family: 'Cairo', sans-serif!important;
+}
+
+.mat-select {
+  font-family: 'Cairo', sans-serif!important;
+}
+
+.mat-option-text {
   font-family: 'Cairo', sans-serif!important;
 }
 

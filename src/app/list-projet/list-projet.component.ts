@@ -21,7 +21,7 @@ import {AuthenticationService} from '../service/authentication.service';
 import {MatSort} from "@angular/material/sort";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {pdfDefaultOptions} from "ngx-extended-pdf-viewer";
-import {NgForm} from "@angular/forms";
+import {FormGroup, NgForm, Validators} from "@angular/forms";
 import {AddPhaseComponent} from "../add-phase/add-phase.component";
 import {AddAvisComponent} from "../add-avis/add-avis.component";
 import {Avis} from "../Avis";
@@ -62,6 +62,8 @@ export interface MouvementMinistere{
 })
 
 export class ListProjetComponent implements AfterViewInit {
+
+  @ViewChild('myForm') myForm!: NgForm;
 
   filter:any;
   columnsToDisplay: string[] = ['id', 'nature','sommaireAr', 'sommaireFr','refer','details'];
@@ -181,7 +183,10 @@ export class ListProjetComponent implements AfterViewInit {
         this.dataSource.sort = this.sort!;
       })
     }
+
   }
+
+
 
   ngAfterViewInit() {
 
@@ -541,7 +546,7 @@ export class ListProjetComponent implements AfterViewInit {
   }
 
   resetForm() {
-
+    this.myForm.reset();
   }
 }
 
