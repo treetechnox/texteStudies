@@ -32,7 +32,13 @@
       </ng-container>
       <ng-container matColumnDef="ministere">
         <th mat-header-cell *matHeaderCellDef mat-sort-header=""> {{ 'LIST-AVIS.TABLE.MINISTERE' | translate }} </th>
-        <td mat-cell *matCellDef="let element"> {{element.ministere.libelleFr}} </td>
+        <td mat-cell *matCellDef="let element">
+          <div [ngSwitch]="app.localStorageItem('lge')">
+            <div *ngSwitchCase="'ar'" class="myfilterar">{{element.ministere?.libelleAr}}</div>
+            <div *ngSwitchCase="'fr'" class="myfilterfr">{{element.ministere?.libelleFr}}</div>
+            <div *ngSwitchDefault>This is Default</div>
+          </div>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="operations">
