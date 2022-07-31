@@ -1,6 +1,6 @@
 <br>
 <form class="add-border text-dark"><!--[formGroup]="myForm" -->
-  <div class="card text-center w-50">
+  <div *ngIf="currentUser?.role==='ADMIN'; else notAdmin" class="card text-center w-50">
     <div class="card-header">{{'SIGNUP.CARD-HEADER' |translate}}</div>
     <div class="card-body">
 
@@ -223,6 +223,16 @@
       </div>
     </div>
   </div>
+  <ng-template #notAdmin>
+    <div class="jumbotron mycustom-jumbotron">
+      <div style="display: flex;justify-content: space-between;align-content: center">
+        <mat-error> ACCES NON AUTORISE</mat-error>
+        <button  mat-raised-button [routerLink]="'/login'">
+          LOGIN?
+        </button>
+      </div>
+    </div>
+  </ng-template>
   <br>
 
 </form>

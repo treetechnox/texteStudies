@@ -32,15 +32,16 @@ export class AppComponent {
     translate.use(browserLang.match(/fr|ar/)?browserLang: 'ar');
     localStorage.setItem('lge','ar')
     this.isToLogg=true? sessionStorage.getItem('logged')==='true': '';
+
   }
   ngOnInit(){
     this.title = 'Application pour les reunions';
     this.authService.loadAuthenticatedUserFromLocalStorage();
   }
 
-  reloadHome() {
+/*  reloadHome() {
     this.router.navigateByUrl('/candidats');
-  }
+  }*/
 
   /*verifierCandidat(nomfr: string , prenomfr: string ) {
     this.candidatService.getCandidatByNomAndPrenom(nomfr, prenomfr ).subscribe(value => {

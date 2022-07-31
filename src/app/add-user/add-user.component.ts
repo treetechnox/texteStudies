@@ -3,7 +3,7 @@ import {UserService} from '../service/user.service';
 // @ts-ignore
 import {User} from '../user';
 import {AuthenticationService} from '../service/authentication.service';
-import {Router} from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {AppComponent} from '../app.component';
@@ -37,12 +37,19 @@ export class AddUserComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
 
+  currentUser:User | undefined=new User();
+
 
 
   constructor(private userService: UserService,private secteurService:SecteurService,
               private ministereService:MinistereService,private authService:AuthenticationService,
               private router:Router,private formBuilder: FormBuilder,private _snackBar: MatSnackBar,
               public app:AppComponent) {
+
+    this.authService.loadAuthenticatedUserFromLocalStorage();
+    this.currentUser = this.authService.userAuthenticated;
+    console.log(this.currentUser);
+
     /* this.myForm = this.formBuilder.group({
        nom:[''],
        prenom:[''],

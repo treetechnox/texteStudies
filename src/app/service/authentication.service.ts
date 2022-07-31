@@ -52,7 +52,7 @@ export class AuthenticationService {
             this.isAuthenticated=true;
             this.token =btoa(unescape(encodeURIComponent(JSON.stringify(
               this.userAuthenticated))));
-            sessionStorage.setItem('authToken',this.token);
+            localStorage.setItem('authToken',this.token);
             if (this.isAuthenticated) {
               this.router.navigateByUrl('/lesprojets');
             }
@@ -105,12 +105,12 @@ export class AuthenticationService {
   saveAuthenticatedUser () {
     //console.log(this.token);
     if (this.userAuthenticated) {
-      sessionStorage.setItem('authToken',this.token);
+      localStorage.setItem('authToken',this.token);
     }
   }
 
   loadAuthenticatedUserFromLocalStorage() {
-    let t = sessionStorage.getItem('authToken');
+    let t = localStorage.getItem('authToken');
     if (t) {
       let user = JSON.parse(atob(t));
       this.userAuthenticated = {
@@ -128,7 +128,7 @@ export class AuthenticationService {
   }
 
   removeAuthenticatedUserFromLocalStorage() {
-    sessionStorage.removeItem('authToken');
+    localStorage.removeItem('authToken');
     this.isAuthenticated = false;
     this.token = null;
     // @ts-ignore

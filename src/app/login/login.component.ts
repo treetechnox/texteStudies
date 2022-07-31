@@ -19,6 +19,9 @@ export class LoginComponent implements OnInit {
               public app: AppComponent) { }
 
   ngOnInit() {
+    if (this.authenticationService.isAuthenticated) {
+      this.router.navigate(['/lesprojets']);
+    }
     /*// @ts-ignore
     this.userService.getAllUsers().subscribe(value => {
       // @ts-ignore

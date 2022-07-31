@@ -30,6 +30,10 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header=""> {{ 'LIST-AVIS.TABLE.DETAILS' | translate }} </th>
         <td mat-cell *matCellDef="let element"> {{element.details}} </td>
       </ng-container>
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> {{ 'LIST-AVIS.TABLE.DETAILS' | translate }} </th>
+        <td mat-cell *matCellDef="let element"> {{element.dateAvis}} </td>
+      </ng-container>
       <ng-container matColumnDef="ministere">
         <th mat-header-cell *matHeaderCellDef mat-sort-header=""> {{ 'LIST-AVIS.TABLE.MINISTERE' | translate }} </th>
         <td mat-cell *matCellDef="let element">
