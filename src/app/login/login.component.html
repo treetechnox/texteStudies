@@ -20,11 +20,13 @@
           <div class="col">
             <mat-form-field [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}">
               <mat-label>{{'LOGIN.PASSWORD.LABEL' | translate}}</mat-label>
-              <input matInput placeholder="{{'LOGIN.PASSWORD.PLACEHOLDER' | translate}}" required="required"
-                     [(ngModel)]="user.password"
-                     [type]=" hide ? 'password' : 'text'"
-                     name="password">
-              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon><!--[(ngModel)]="user.passeword" -->
+              <div style="display: flex;justify-content: space-between; align-items: center">
+                <input matInput placeholder="{{'LOGIN.PASSWORD.PLACEHOLDER' | translate}}" required="required"
+                       [(ngModel)]="user.password"
+                       [type]=" hide ? 'password' : 'text'"
+                       name="password">
+                <i class="material-icons" (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</i>
+              </div>
             </mat-form-field>
           </div>
         </div>
