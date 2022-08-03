@@ -37,6 +37,7 @@ import {AddCorrespondanceComponent} from "../add-correspondance/add-correspondan
 import {ListCorrespondanceComponent} from "../list-correspondance/list-correspondance.component";
 import {RapportJournalierComponent} from "../rapport-journalier/rapport-journalier.component";
 import {MatInput} from "@angular/material/input";
+import {ThemePalette} from "@angular/material/core";
 
 export interface MouvementMinistere{
   id: number;
@@ -531,8 +532,34 @@ export class ListProjetComponent implements AfterViewInit {
 
   }
 
-  nextPage($event: PageEvent) {
+  /*nextPage($event: PageEvent) {
     console.log($event);
+  }*/
+  background: ThemePalette = "primary";
+
+  getTextes(request: {}){
+    this.texteService.getAllTextesByPages(request)
+      .subscribe(data => {
+        console.log(data)
+          // @ts-ignore
+          this.textes = data['content'];
+          // @ts-ignore
+          this.totalElements = data['totalElements'];
+        }
+        , error => {
+          console.log(error.error.message);
+        }
+      );
+  }
+
+  nextPage(event: PageEvent) {
+    console.log(event);
+    const request = {};
+    // @ts-ignore
+    request['page'] = event.pageIndex.toString();
+    // @ts-ignore
+    request['size'] = event.pageSize.toString();
+    this.getTextes(request);
   }
 
   setDateFrom(value: any) {

@@ -218,3 +218,11 @@ td.mat-cell {
 td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
   padding-right: 15px;
 }*/
+
+.tabed{
+  margin: 8px;
+}
+
+::ng-deep  .mat-tab-label .mat-tab-label-content {
+  font-family: 'Cairo', sans-serif;
+}

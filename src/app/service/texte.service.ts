@@ -21,6 +21,12 @@ export class TexteService {
     return this.http.get(this.url);
   }
 
+  getAllTextesByPages(request: {}):Observable<any[]>{
+    console.log(`${this.url}all`);
+    // @ts-ignore
+    return this.http.get(`${this.url}all`,{request});
+  }
+
   getAllTextesByUrl(url:string):Observable<any[]>{
     console.log(url);
     // @ts-ignore

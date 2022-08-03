@@ -553,3 +553,28 @@ use direction
   font-family: 'Cairo', sans-serif!important;
   font-size: 14px ; color:red;font-weight: bold;
 }
+
+.close-button{
+  float: right;
+  top:-24px;
+  right:-24px;
+  color: red;
+}
+
+.close-icon {
+  transition: 0.5s ease-in-out;
+}
+
+.close-icon:hover {
+  transform: rotate(180deg);
+}
+
+::ng-deep .icon-outside .close-button{
+  float: right;
+  top:-52px;
+  right:-52px;
+}
+
+::ng-deep .icon-outside .mat-dialog-container {
+  overflow: unset
+}

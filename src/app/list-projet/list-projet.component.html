@@ -262,18 +262,19 @@
           <div class="example-element-detail"
                [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
 
+
             <div class="example-element-description example-full-width">
               <div *ngIf="isMinistereUser()===false" ><!--{{ app.localStorageItem('lge') === 'fr' ? 'MODIFIER ' :  ' تعديل : ' }}-->
-                <div style="display: flex;justify-content: space-around;align-content: center">
-                  <div class="col">
+                <mat-tab-group [backgroundColor]="background" mat-align-tabs="start">
+                  <mat-tab label="{{'LIST-PROJET.TABLE.EDIT-BUTTON' | translate}}">
                     <button mat-raised-button matTooltip="MODIFIER"
-                            class="btn btn-primary spacer" (click)="onEditTexte(element.id)">
+                            class="btn btn-primary spacer tabed" (click)="onEditTexte(element.id)">
                       <i class="fa fa-edit"></i>
-                      {{'LIST-PROJET.TABLE.EDIT-BUTTON' | translate}}
                     </button>
-                  </div>
-                  <div class="col">
+                  </mat-tab>
+                  <mat-tab label="{{'LIST-PROJET.TABLE.LIST-AVIS' | translate}}">
                     <button mat-raised-button
+                            class="tabed"
                             matTooltip="{{'LIST-PROJET.TABLE.ADD-AVIS' | translate}}"
                             (click)="ajouterAvis(element.id)"
                     >
@@ -284,14 +285,16 @@
                       matTooltipClass="my-custom-tooltip"
                       mat-raised-button
                       mat-button color="accent"
+                      class="tabed"
                       (click)="onShowListAvis(element.id)"
                     >
-                      <i class="fa fa-list"></i> {{'LIST-PROJET.TABLE.LIST-AVIS' | translate}}
-                    </button><!--matTooltip="{{allAvis}}"-->
-                  </div>
-                  <div class="col ">
+                      <i class="fa fa-list"></i>
+                    </button>
+                  </mat-tab>
+                  <mat-tab label="{{'LIST-PROJET.TABLE.LIST-CORRESPONDANCE' | translate}}">
                     <button mat-raised-button
                             matTooltip="{{'LIST-PROJET.TABLE.ADD-CORRESPONDANCE' | translate}}"
+                            class="tabed"
                             (click)="ajouterCorrespondance(element.id)"
                     >
                       <i class="fa fa-plus-circle"></i>
@@ -301,13 +304,13 @@
                       matTooltipClass="my-custom-tooltip"
                       mat-raised-button
                       mat-button color="accent"
+                      class="tabed"
                       (click)="onShowListCorrespondance(element.id)"
                     ><!--matTooltip="{{allAvis}}"-->
-                      <i class="fa fa-list"></i> {{'LIST-PROJET.TABLE.LIST-CORRESPONDANCE' | translate}}
-
+                      <i class="fa fa-list"></i>
                     </button>
-                  </div>
-                </div>
+                  </mat-tab>
+                </mat-tab-group>
               </div>
                 <app-list-mouvement
                   class="make-gold"
