@@ -29,7 +29,7 @@ import {AvisService} from "../service/avis.service";
 import {noAuto} from "@fortawesome/fontawesome-svg-core";
 import {ListAvisComponent} from "../list-avis/list-avis.component";
 import {User} from "../user";
-import {MatSelectChange} from "@angular/material/select";
+import {MatSelect, MatSelectChange} from "@angular/material/select";
 import {Nature} from "../Nature";
 import {NatureService} from "../service/nature.service";
 import {formatDate} from "@angular/common";
@@ -224,8 +224,15 @@ export class ListProjetComponent implements AfterViewInit {
 
 
   @ViewChild('fromInput', {read: MatInput}) fromInput!: MatInput;
-
   @ViewChild('toInput', {read: MatInput}) toInput!: MatInput;
+
+  @ViewChild('phs', {read: MatSelect}) phs!: MatSelect;
+  @ViewChild('ntr', {read: MatSelect}) ntr!: MatSelect;
+  @ViewChild('atv', {read: MatSelect}) atv!: MatSelect;
+  @ViewChild('sct', {read: MatSelect}) sct!: MatSelect;
+  @ViewChild('mst', {read: MatSelect}) mst!: MatSelect;
+
+
 
   resetFrom() {
     this.fromInput.value = '';
@@ -312,16 +319,12 @@ export class ListProjetComponent implements AfterViewInit {
       console.log('222'+this.mouvement.secteur)
     }
 
-
     if(this.isMinistereUser()){
       console.log(this.authService.userAuthenticated?.role);
-
     }
 
-    console.log(this.nature);
     // @ts-ignore
     this.mouvement.texte?.nature=this.nature;
-
     this.mouvement.isactive = this.isActive;
 
     this.mouvementService.getFilter(this.mouvement.phase.id,
@@ -542,9 +545,11 @@ export class ListProjetComponent implements AfterViewInit {
       .subscribe(data => {
         console.log(data)
           // @ts-ignore
-          this.textes = data['content'];
+          this.textes = data.content;
+          console.log(this.textes);
           // @ts-ignore
-          this.totalElements = data['totalElements'];
+          this.totalElements = data.totalElements;
+          console.log(this.totalElements);
         }
         , error => {
           console.log(error.error.message);
@@ -573,7 +578,33 @@ export class ListProjetComponent implements AfterViewInit {
   }
 
   resetForm() {
-    this.myForm.reset();
+    /* Phase */
+    this.phase=new Phase();
+    this.phs.value = null;
+
+    /* Nature */
+    this.nature=new Nature();
+    this.ntr.value = null;
+
+    /* Secteur */
+    this.mouvement.secteur=new Secteur();
+    this.sct.value = null;
+
+    /* Active */
+    this.isActive = null as any;
+    this.atv.value = -1;
+
+    /* Ministere */
+    this.ministere= new Ministere();
+    this.mst.value = null;
+
+    /* Date From */
+    this.dateFrom='';
+    this.fromInput.value = '';
+
+    /* Date To */
+    this.dateTo='';
+    this.toInput.value = '';
   }
 }
 

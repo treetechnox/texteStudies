@@ -99,7 +99,7 @@
             <mat-select
 
               matTooltip="{{'LIST-PROJET.ADVANCED-FILTER.PHASE-TOOLTIP' | translate}}"
-              #input name="phase" (selectionChange)="onGetPhase($event)">
+              #phs name="phase" (selectionChange)="onGetPhase($event)">
               <mat-option></mat-option>
               <mat-option *ngFor="let phse of phases; let i=index" [value]="phse">
                 <div [ngSwitch]="app.localStorageItem('lge')">
@@ -120,7 +120,7 @@
             <mat-select
 
               matTooltip="{{'LIST-PROJET.ADVANCED-FILTER.NATURE-TOOLTIP' | translate}}"
-              #input name="nature" (selectionChange)="onGetNature($event)">
+              #ntr name="nature" (selectionChange)="onGetNature($event)">
               <mat-option></mat-option>
               <mat-option *ngFor="let ntr of natures; let i=index" [value]="ntr">
                 <div [ngSwitch]="app.localStorageItem('lge')">
@@ -140,7 +140,7 @@
             <mat-label>{{'LIST-PROJET.ADVANCED-FILTER.ISACTIVE' | translate}}</mat-label>
             <mat-select
               matTooltip="{{'LIST-PROJET.ADVANCED-FILTER.ISACTIVE-TOOLTIP' | translate}}"
-              #input name="isactive" (selectionChange)="onGetIsActive($event)">
+              #atv name="isactive" (selectionChange)="onGetIsActive($event)">
               <mat-option></mat-option>
               <div [ngSwitch]="app.localStorageItem('lge')">
                 <div *ngSwitchCase="'ar'" class="myfilterar">
@@ -169,6 +169,7 @@
             class="example-full-width">
             <mat-label><span class="align-label">{{'LIST-PROJET.ADVANCED-FILTER.SECTEUR' | translate}}</span></mat-label>
             <mat-select
+              #sct
               matTooltip="{{'LIST-PROJET.ADVANCED-FILTER.SECTEUR-TOOLTIP' | translate}}"
               matTooltipClass="custom-tooltip"
               name="secteur" (selectionChange)="onGetSecteur($event)"><!--[disabled]="!authService.isAdmin()"-->
@@ -189,7 +190,9 @@
             [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
             class="example-full-width">
             <mat-label>{{'LIST-PROJET.ADVANCED-FILTER.MINISTERE' | translate}}</mat-label>
-            <mat-select  name="ministere" (selectionChange)="onGetMinistere($event)">
+            <mat-select
+              #mst
+              name="ministere" (selectionChange)="onGetMinistere($event)">
               <mat-option></mat-option>
               <mat-option *ngFor="let mnst of ministeres; let i=index" [value]="mnst">
                 <div [ngSwitch]="app.localStorageItem('lge')">
