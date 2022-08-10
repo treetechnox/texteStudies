@@ -21,10 +21,13 @@ export class TexteService {
     return this.http.get(this.url);
   }
 
-  getAllTextesByPages(request: {}):Observable<any[]>{
-    console.log(`${this.url}all`,{request});
+  getAllTextesByPages(page:number, size:number):Observable<any[]>{
+    const request:string = (page!== undefined && size!== undefined)
+      ? `?page=${page}&size=${size}`
+      : ``;
+    console.log(`${this.url}all${request}`);
     // @ts-ignore
-    return this.http.get(`${this.url}all`,{request});
+    return this.http.get(`${this.url}all${request}`);
   }
 
   getAllTextesByUrl(url:string):Observable<any[]>{

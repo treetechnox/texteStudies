@@ -278,9 +278,8 @@
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent"
-           [style]="{'text-align':localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
-      >
+      <div class="collapse navbar-collapse"
+           [style]="{'text-align':localStorageItem('lge') === 'ar' ? 'right' : 'left'}">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown" *ngIf="!isMinistereUser()" >
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

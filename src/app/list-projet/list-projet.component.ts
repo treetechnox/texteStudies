@@ -38,6 +38,7 @@ import {ListCorrespondanceComponent} from "../list-correspondance/list-correspon
 import {RapportJournalierComponent} from "../rapport-journalier/rapport-journalier.component";
 import {MatInput} from "@angular/material/input";
 import {ThemePalette} from "@angular/material/core";
+import {delay} from "rxjs";
 
 export interface MouvementMinistere{
   id: number;
@@ -78,7 +79,9 @@ export class ListProjetComponent implements AfterViewInit {
 
   totalElements : number | undefined;
   totalPages: number | undefined;
-  actualPage: number | undefined;
+  page: number =0;
+  size: number =15;
+
 
   mouvement:Mouvement = new Mouvement();
   mouvements:Mouvement[] = [];
@@ -126,6 +129,8 @@ export class ListProjetComponent implements AfterViewInit {
   activityAR!:Array<string>;
   activityFR!:Array<string>;
 
+  isLoading=true;
+
   constructor(private texteService: TexteService,
               private avisService:AvisService,
               private mouvementService:MouvementService,
@@ -139,19 +144,24 @@ export class ListProjetComponent implements AfterViewInit {
               private router: Router,public app:AppComponent,
               private dialog:MatDialog) {
 
+
+
     this.activityAR=['لا','نعم']!;
     this.activityFR=['NON','OUI']!;
-
 
     this.authenticated = this.authService.userAuthenticated;
     console.log(this.authenticated?.id);
     if (this.isAdmin()){
-      this.texteService.getAllTextes().subscribe(value => {
-        this.textes = value;
+      this.texteService.getAllTextesByPages(this.page,this.size).pipe(delay(1000)).subscribe(value => {
+        this.isLoading = false;
+        // @ts-ignore
+        this.textes = value.content;
+        // @ts-ignore
+        this.totalElements = value.totalElements;
         //console.log(this.textes);
         this.dataSource = new MatTableDataSource(this.textes);
         // @ts-ignore
-        this.dataSource.paginator = this.paginator;
+        //this.dataSource.paginator = this.paginator;
         // @ts-ignore
         this.dataSource.sort = this.sort;
       })
@@ -339,11 +349,13 @@ export class ListProjetComponent implements AfterViewInit {
        /* this.mouvements=value._embedded.mouvements.sort((a,b) => a.id.rendered.localeCompare(b.id.rendered));*/
       this.mouvements = value._embedded.mouvements;
 
-        this.totalElements = value.page.totalElements;
+        //this.totalElements = value.page.totalElements;
+/*
         this.totalPages = value.page.totalPages;
         this.actualPage = value.page.number;
 
       console.log(this.totalElements,this.totalPages,this.actualPage);
+*/
 
       console.log(this.mouvements);
 
@@ -540,13 +552,16 @@ export class ListProjetComponent implements AfterViewInit {
   }*/
   background: ThemePalette = "primary";
 
-  getTextes(request: {}){
-    this.texteService.getAllTextesByPages(request)
+  getTextes(page:number,size:number){
+    this.isLoading=true;
+    this.texteService.getAllTextesByPages(this.page,this.size).pipe(delay(1000))
       .subscribe(data => {
+          this.isLoading = false;
         console.log(data)
           // @ts-ignore
           this.textes = data.content;
           console.log(this.textes);
+          this.dataSource = new MatTableDataSource(this.textes);
           // @ts-ignore
           this.totalElements = data.totalElements;
           console.log(this.totalElements);
@@ -561,10 +576,10 @@ export class ListProjetComponent implements AfterViewInit {
     console.log(event);
     const request = {};
     // @ts-ignore
-    request['page'] = event.pageIndex.toString();
+    this.page = event.pageIndex.toString();
     // @ts-ignore
-    request['size'] = event.pageSize.toString();
-    this.getTextes(request);
+    this.size = event.pageSize.toString();
+    this.getTextes(this.page,this.size);
   }
 
   setDateFrom(value: any) {
@@ -578,6 +593,10 @@ export class ListProjetComponent implements AfterViewInit {
   }
 
   resetForm() {
+
+    this.page=0;
+    this.size=15;
+
     /* Phase */
     this.phase=new Phase();
     this.phs.value = null;

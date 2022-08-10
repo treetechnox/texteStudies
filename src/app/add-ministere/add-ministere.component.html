@@ -1,5 +1,11 @@
 <br>
-<div class="add-border jumbotron mycustom-jumbotron">
+<div >
+  <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <!--<mat-icon class="close-icon" color="warn">close</mat-icon>-->
+    <i class="material-icons close-icon">close</i>
+  </button>
+  <br>
+
   <div class="container">
     <div [hidden]="submitted">
       <button mat-raised-button

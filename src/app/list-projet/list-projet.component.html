@@ -332,8 +332,19 @@
       </tr>
       <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
     </table>
+    <mat-card *ngIf="isLoading"  id="pause" class="d-flex align-items-center justify-content-center">
+      <mat-progress-spinner
+        color="primary"
+        mode="indeterminate">
+      </mat-progress-spinner>
+    </mat-card>
 
-    <mat-paginator [pageSizeOptions]="[15, 25, 50, 100]" [length]="totalElements" (page)="nextPage($event)" showFirstLastButtons></mat-paginator>
+    <mat-paginator
+      [pageIndex]="page"
+      [pageSize]="size"
+      [pageSizeOptions]="[10, 15, 20, 50]"
+      [length]="totalElements"
+      (page)="nextPage($event)" showFirstLastButtons></mat-paginator>
   </div>
   <br/>
 
