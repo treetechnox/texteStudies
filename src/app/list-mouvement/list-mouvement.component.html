@@ -60,7 +60,8 @@
                'is-publie': element.phase.id === 13,
                'is-parlement': element.phase.id === 14,
                'is-corresp': element.phase.id === 15,
-               'is-cabinet': element.phase.id === 16
+               'is-cabinet': element.phase.id === 16,
+               'is-default': element.phase.id === 17
                }"
           >
             <div [ngSwitch]="app.localStorageItem('lge')">

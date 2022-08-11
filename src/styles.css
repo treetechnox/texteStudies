@@ -392,66 +392,86 @@ mat-card{
   color: #ffffff;
 }
 .is-initiation{
+  width: 100%;
   background: #ff8000;
 }
 
 .is-distribution{
+  width: 100%;
   background: #29527a;
 }
 
 .is-telex{
+  width: 100%;
   background: #29527a;
 }
 
 .is-reunion{
+  width: 100%;
   background: #ff00ff;
 }
 
 .is-conseil-gov{
+  width: 100%;
   background: #0000ff;
 }
 
 .is-conseil-mnstr{
+  width: 100%;
   background: #0000ff;
 }
 
 .is-parlement{
+  width: 100%;
   background: #0000ff;
 }
 
 .is-pour-signature{
+  width: 100%;
   background: #00ffff;
 }
 
 .is-signe{
+  width: 100%;
   background: #00ff00;
 }
 
 .is-pour-publication{
+  width: 100%;
   background: #00ffff;
 }
 
 .is-publie{
+  width: 100%;
   background: 	#00ff00;
 }
 
 .is-aprobat{
+  width: 100%;
   background: #057305;
 }
 
 .is-aprobat-obsrv{
+  width: 100%;
   background: #00ffff;
 }
 
 .is-nouv-lecture{
+  width: 100%;
   background: #ff8000;
 }
 
 .is-corresp{
+  width: 100%;
   background: #988d8d;
 }
 .is-cabint{
+  width: 100%;
   background: #637049;
+}
+.is-default{
+  width: 100%;
+  background: #413f3f;
 }
 
 .make-gold {
