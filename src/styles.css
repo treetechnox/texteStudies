@@ -223,9 +223,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .mycustom-jumbotron {
   background-color: #fff;
-  border:10px solid #003366;
-  margin: 5px 2rem;
-  padding: 10px;
+  border:5px solid #003366;
+  margin: 5px 1rem;
+  padding: 5px;
 }
 .entete{
   background: skyblue;
@@ -262,7 +262,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
 mat-expansion-panel:first-child mat-expansion-panel-header {
-  background-color: #4eebf0;
+  background-color: #f0c24e;
   font-weight: bold;
   font-family: 'Cairo', sans-serif!important;
 }
@@ -273,12 +273,24 @@ mat-expansion-panel:first-child mat-expansion-panel-header {
 }
 
 mat-expansion-panel:first-child mat-expansion-panel-header:hover {
-  background-color: #4eebf0;
+  background-color: #f0c24e;
   font-weight: bold;
 }
 
 mat-card{
   background-color: #efefef;
+}
+
+.home_display{
+  display: flex;
+  justify-content: space-between;
+  padding: 50px
+}
+#left_side{
+  background: white;
+  padding: 10px;
+  margin: 10px;
+  height: fit-content;
 }
 
 #footer {
@@ -613,3 +625,19 @@ use direction
    border-top-right-radius: 150px ;
    width: 100%;
  }
+
+
+
+@media only screen and (max-width: 950px){
+  .home_display{
+    flex-direction: column;
+  }
+  #left_side{
+    width: 100%;
+    flex: 1;
+  }
+  #right_side{
+    width: 100%;
+    flex: 1;
+  }
+}

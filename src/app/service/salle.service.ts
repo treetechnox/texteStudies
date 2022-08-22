@@ -11,7 +11,7 @@ export class SalleService {
   url:string;
 
   constructor(private http:HttpClient) {
-    this.url = "http://172.16.90.1:8083/";
+    this.url = "http://localhost:8083/";
   }
 
   getSalles():Observable<any>{

@@ -190,6 +190,13 @@ nav ul li a:hover{
      ***
 */
 
+.home_display{
+  display: flex;
+  justify-content: space-between;
+  padding: 50px
+}
+
+
 @media only screen and (max-width: 1140px){
   .feature-img{
     width: 330px;

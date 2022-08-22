@@ -31,23 +31,7 @@
     "CONNECT": "ولوج",
     "MAT-ERROR": "الرجاء التحقق من إسم المستحدم / كلمة المرور"
   },
-  "SIGNUP": {
-    "CARD-HEADER": "إضافة مستخدم جديد",
-    "USERNAME.LABEL": "إسم المستحدم",
-    "USERNAME.PLACEHOLDER": "مثال: مستحدم1",
-    "ROLE.LABEL": "صفة المستحدم",
-    "ROLE.PLACEHOLDER": "الصفحة",
-    "ROLE.VALUE.ADMIN": "ADMIN",
-    "ROLE.VALUE.USER": "USER",
-    "ROLE.MAT-ERROR": "الرجاء اختيار نوع المستخدم",
-    "PASSWORDNEW.LABEL": "كلمة المرور",
-    "PASSWORDNEW.PLACEHOLDER": "مثال: 123",
-    "PASSWORDCONFIRM.LABEL": "إعادة كلمة المرور",
-    "PASSWORDCONFIRM.PLACEHOLDER": "مثال: 123",
-    "CONNECT": "ولوج",
-    "MAT-ERROR.NEWPASSWORD": "أدخل كلمة المرور",
-    "MAT-ERROR": "الرجاء التحقق من إسم المستحدم / كلمة المرور"
-  },
+
   "LIST-CANDIDATS": {
     "CARD-HEADER": "قائمة الإطارات",
     "AJOUTER-BUTTON": "إضافة",
@@ -351,6 +335,34 @@
 
   },
 
+  "SIGNUP": {
+    "CARD-HEADER": "إضافة مستخدم جديد",
+    "LASTNAME.LABEL": "إسم المستحدم",
+    "LASTNAME.PLACEHOLDER": "مثال: مستحدم1",
+    "FIRSTNAME.LABEL": "لقب المستحدم",
+    "FIRSTNAME.PLACEHOLDER": "مثال: مستحدم1",
+    "USERNAME.LABEL": "المستحدم",
+    "USERNAME.PLACEHOLDER": "مثال: مستحدم",
+    "ROLE.LABEL": "صفة المستحدم",
+    "ROLE.PLACEHOLDER": " مستخدم مسؤول، عادي ...",
+    "SECTEUR.LABEL": "قطاع المستحدم",
+    "SECTEUR.PLACEHOLDER": "مثال: الديوان، إعلام ألي ...",
+    "SECTEUR.MAT-ERROR": "الرجاء اختيار قطاع المستخدم",
+    "ROLE.VALUE.ADMIN": "ADMIN",
+    "ROLE.VALUE.USER": "USER",
+    "ROLE.VALUE.MINISTERE": "الوزارة",
+    "MINISTERE.LISTE": "قائمة الوزارات",
+    "ROLE.MAT-ERROR": "الرجاء اختيار نوع المستخدم",
+    "PASSWORDNEW.LABEL": "كلمة المرور",
+    "PASSWORDNEW.PLACEHOLDER": "مثال: 123",
+    "PASSWORDCONFIRM.LABEL": " إعادة كتابة كلمة المرور",
+    "PASSWORDCONFIRM.PLACEHOLDER": "مثال: 123",
+    "CONNECT": "CONNECTER",
+    "MAT-ERROR.NEWPASSWORD": "أدخل كلمة المرور",
+    "MAT-ERROR.CONFIRM": "الرجاء التحقق من إسم المستحدم / كلمة المرور"
+  },
+
+
   "NAVBAR": {
     "TEXTE": "النصوص",
     "TEXTE.LIST": "قائمة مشاريع النصوص",
@@ -370,7 +382,9 @@
     "SECTEUR.ADD": "إضافة قطاع",
     "USER": "المستحدمين",
     "USER.LIST": "قائمة المستحدمين",
-    "USER.ADD": "إضافة مستحدم"
+    "USER.ADD": "إضافة مستحدم",
+    "CONSULT": "معاينة النصوص",
+    "LINK": "روابط"
   },
 
   "LIST-PROJET": {

@@ -11,8 +11,8 @@ export class TexteService {
   url:string;
   url1:string;
   constructor(private http:HttpClient) {
-    this.url='http://172.16.90.1:8083/textes/';
-    this.url1='http://172.16.90.1:8083/mouvements/';
+    this.url='http://localhost:8083/textes/';
+    this.url1='http://localhost:8083/mouvements/';
   }
 
   getAllTextes():Observable<any[]>{
@@ -36,7 +36,7 @@ export class TexteService {
     return this.http.get(url);
   }
 
-  getAllTextesByMinistere(ministere:string):Observable<any[]>{
+  getAllTextesByMinistere(ministere:number):Observable<any[]>{
     console.log(`${this.url1}mimo/${ministere}/textes`);
     // @ts-ignore
     return this.http.get(`${this.url1}mimo/${ministere}/textes`);

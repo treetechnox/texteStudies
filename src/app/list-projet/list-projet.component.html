@@ -1,352 +1,371 @@
-<br>
-<div class="jumbotron mycustom-jumbotron"
-     [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }">
-  <br>
-  <div class="entete" style="text-align: center"><span>{{'LIST-PROJET.TITLE' | translate}}</span></div>
-  <br>
-  <button *ngIf="!isMinistereUser()" class="btn btn-primary" (click)="onAddProjet()">
-    {{'LIST-PROJET.ADD-BUTTON' | translate}}
-  </button>
-  <!--  {{'LIST-MOUVEMENTS.BUTTON' | translate}}-->
-  <br>
-  <br>
-
-  <mat-form-field class="example-full-width"
-    [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}">
-    <mat-label>{{'LIST-PROJET.SIMPLE-FILTER' | translate}}</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
-  </mat-form-field>
-
-  <mat-accordion class="example-headers-align" multi>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{'LIST-PROJET.ADVANCED-FILTER' | translate}}
-        </mat-panel-title>
-        <mat-panel-description>
-
-          <div [ngSwitch]="authenticated?.role">
-            <div *ngSwitchCase="'ADMIN'">
-              <div [ngSwitch]="app.localStorageItem('lge')">
-                <div *ngSwitchCase="'fr'">PHASE / SECTEUR / MINISTERE / DATE</div>
-                <div *ngSwitchCase="'ar'">تاريخ / وزارة / قطاع / مرحلة</div>
-                <div *ngSwitchDefault>This is Default</div>
-              </div>
-
-            </div>
-            <div *ngSwitchCase="'USER'">
-              <div [ngSwitch]="app.localStorageItem('lge')">
-                <div *ngSwitchCase="'fr'">PHASE / MINISTERE / DATE</div>
-                <div *ngSwitchCase="'ar'"> تاريخ /وزارة / مرحلة</div>
-                <div *ngSwitchDefault>This is Default</div>
-              </div>
-            </div>
-            <div *ngSwitchCase="'MINISTERE'">
-              <div [ngSwitch]="app.localStorageItem('lge')">
-                <div *ngSwitchCase="'fr'">PHASE / DATE</div>
-                <div *ngSwitchCase="'ar'">تاريخ / مرحلة</div>
-                <div *ngSwitchDefault>This is Default</div>
-              </div></div>
-            <div *ngSwitchDefault>This is Default</div>
-          </div>
-<!--
-          <div *ngIf="isAdmin(); else user">
-            PHASE / SECTEUR / MINISTERE
-          </div>
-          <ng-template #user>
-            PHASE / MINISTERE
-          </ng-template>-->
-
-          <i class="fa fa-search"></i>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-
-      <form #myForm="ngForm" >
-        <br/>
-        <div class="row" ><!--dir="{{direction}}"-->
-          <div class="col">
-            <mat-form-field class="example-full-width">
-              <input #fromInput matInput readonly [matDatepicker]="picker1" placeholder="{{'LIST-PROJET.ADVANCED-FILTER.FROM' | translate}}"
-                     id="date1" name="date1"
-                     (dateChange)="setDateFrom($event.value)">
-              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-              <mat-datepicker #picker1></mat-datepicker>
-            </mat-form-field>
-            <button class="btn btn-danger" (click)="resetFrom()">
-              <i class="fa fa-refresh" aria-hidden="true"></i>
-            </button>
-          </div>
-          <div class="col">
-            <mat-form-field class="example-full-width"><!--[(ngModel)]="mouvement.datePhase" [ngModelOptions]="{standalone: true}"-->
-              <input #toInput matInput readonly [matDatepicker]="picker2" placeholder="{{'LIST-PROJET.ADVANCED-FILTER.TO' | translate}}"
-                     id="date2" name="date1"
-                     (dateChange)="setDateTo($event.value)">
-              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-              <mat-datepicker #picker2></mat-datepicker>
-            </mat-form-field>
-            <button class="btn btn-danger" (click)="resetTo()">
-              <i class="fa fa-refresh" aria-hidden="true"></i>
-            </button>
-          </div>
-
-        </div>
-        <br/>
-        <div class="col" ><!--dir="{{direction}}"-->
-          <mat-form-field
-            [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
-            class="example-full-width">
-            <mat-label>{{'LIST-PROJET.ADVANCED-FILTER.PHASE' | translate}}</mat-label>
-            <mat-select
-
-              matTooltip="{{'LIST-PROJET.ADVANCED-FILTER.PHASE-TOOLTIP' | translate}}"
-              #phs name="phase" (selectionChange)="onGetPhase($event)">
-              <mat-option></mat-option>
-              <mat-option *ngFor="let phse of phases; let i=index" [value]="phse">
-                <div [ngSwitch]="app.localStorageItem('lge')">
-                  <div *ngSwitchCase="'ar'" class="myfilterar">{{phse?.libelleAr}}</div>
-                  <div *ngSwitchCase="'fr'" class="myfilterfr">{{phse?.libelleFr}}</div>
-                  <div *ngSwitchDefault>This is Default</div>
-                </div>
-
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col" ><!--dir="{{direction}}"-->
-          <mat-form-field
-            [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
-            class="example-full-width">
-            <mat-label>{{'LIST-PROJET.ADVANCED-FILTER.NATURE' | translate}}</mat-label>
-            <mat-select
-
-              matTooltip="{{'LIST-PROJET.ADVANCED-FILTER.NATURE-TOOLTIP' | translate}}"
-              #ntr name="nature" (selectionChange)="onGetNature($event)">
-              <mat-option></mat-option>
-              <mat-option *ngFor="let ntr of natures; let i=index" [value]="ntr">
-                <div [ngSwitch]="app.localStorageItem('lge')">
-                  <div *ngSwitchCase="'ar'" class="myfilterar">{{ntr?.libelleAr}}</div>
-                  <div *ngSwitchCase="'fr'" class="myfilterfr">{{ntr?.libelleFr}}</div>
-                  <div *ngSwitchDefault>This is Default</div>
-                </div>
-
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col" ><!--dir="{{direction}}"-->
-          <mat-form-field
-            [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
-            class="example-full-width">
-            <mat-label>{{'LIST-PROJET.ADVANCED-FILTER.ISACTIVE' | translate}}</mat-label>
-            <mat-select
-              matTooltip="{{'LIST-PROJET.ADVANCED-FILTER.ISACTIVE-TOOLTIP' | translate}}"
-              #atv name="isactive" (selectionChange)="onGetIsActive($event)">
-              <mat-option></mat-option>
-              <div [ngSwitch]="app.localStorageItem('lge')">
-                <div *ngSwitchCase="'ar'" class="myfilterar">
-                  <!--suppress TypeScriptValidateTypes -->
-                  <mat-option [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
-                              *ngFor="let actvAr of activityAR | keyvalue" [value]="actvAr.key">
-                    {{actvAr.value}}
-                  </mat-option>
-                </div>
-                <div *ngSwitchCase="'fr'" class="myfilterfr">
-                  <!--suppress TypeScriptValidateTypes -->
-                  <mat-option [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
-                              *ngFor="let actvFr of activityFR | keyvalue"  [value]="actvFr.key">
-                    {{actvFr.value}}
-                  </mat-option>
-                </div>
-                <div *ngSwitchDefault>This is Default</div>
-              </div>
-
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div *ngIf="isAdmin() && !isMinistereUser()" class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
-          <mat-form-field
-            [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
-            class="example-full-width">
-            <mat-label><span class="align-label">{{'LIST-PROJET.ADVANCED-FILTER.SECTEUR' | translate}}</span></mat-label>
-            <mat-select
-              #sct
-              matTooltip="{{'LIST-PROJET.ADVANCED-FILTER.SECTEUR-TOOLTIP' | translate}}"
-              matTooltipClass="custom-tooltip"
-              name="secteur" (selectionChange)="onGetSecteur($event)"><!--[disabled]="!authService.isAdmin()"-->
-              <mat-option></mat-option>
-              <mat-option *ngFor="let sct of secteurs; let i=index" [value]="sct">
-                <div [ngSwitch]="app.localStorageItem('lge')">
-                  <div *ngSwitchCase="'ar'" class="myfilterar">{{sct?.libelleAr}}</div>
-                  <div *ngSwitchCase="'fr'" class="myfilterfr">{{sct?.libelleFr}}</div>
-                  <div *ngSwitchDefault>This is Default</div>
-                </div>
-
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div *ngIf="!isMinistereUser()" class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
-          <mat-form-field
-            [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
-            class="example-full-width">
-            <mat-label>{{'LIST-PROJET.ADVANCED-FILTER.MINISTERE' | translate}}</mat-label>
-            <mat-select
-              #mst
-              name="ministere" (selectionChange)="onGetMinistere($event)">
-              <mat-option></mat-option>
-              <mat-option *ngFor="let mnst of ministeres; let i=index" [value]="mnst">
-                <div [ngSwitch]="app.localStorageItem('lge')">
-                  <div *ngSwitchCase="'ar'" class="myfilterar">{{mnst?.libelleAr}}</div>
-                  <div *ngSwitchCase="'fr'" class="myfilterfr">{{mnst?.libelleFr}}</div>
-                  <div *ngSwitchDefault>This is Default</div>
-                </div>
-
-              </mat-option>
-            </mat-select>
-            <mat-error>{{ 'ADD-MOUVEMENT.ETAT.MAT-ERROR' | translate }}</mat-error>
-          </mat-form-field>
-        </div>
-        <button mat-button color="primary"
-                mat-raised-button
-                matTooltip= "{{'LIST-PROJET.ADVANCED-FILTER.BUTTON-TOOLTIP' | translate}}"
-                (click)="OnFilter()">
-          <i class="fa fa-filter fa-2x" aria-hidden="true"></i>
-          {{'LIST-PROJET.ADVANCED-FILTER.BUTTON' | translate}}
-        </button>
-        <button mat-button color="warn"
-                mat-raised-button
-                matTooltip= "{{'ETAT-SORTIE.PRINTING' | translate}}"
-                (click)="OnPrint()">
-          <i class="fa fa-print fa-2x" aria-hidden="true"></i>
-          {{'ETAT-SORTIE.PRINTING' | translate}}
-        </button>
-        <button mat-button color="accent"
-                mat-raised-button
-                matTooltip= "{{'ADD-DETAIL.BUTTON-RESET' | translate}}"
-                (click)="resetForm()">
-          <i class="fa fa-refresh fa-2x" aria-hidden="true"></i>
-          {{'ADD-DETAIL.BUTTON-RESET' | translate}}
-        </button>
-      </form>
-    </mat-expansion-panel>
-  </mat-accordion>
+<div class="home_display" [style]="{'direction':localStorageItem('lge') === 'ar' ? 'rtl' : 'ltr'}">
   <br/>
   <br/>
-  <div class="mat-elevation-z8 ">
-    <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
 
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'LIST-PROJET.TABLE.ID' | translate}} </th>
-        <td mat-cell *matCellDef="let element; let i=index;"> {{element.id}} </td>
-      </ng-container>
-      <ng-container matColumnDef="nature">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{"LIST-PROJET.ADVANCED-FILTER.NATURE" |translate}} </th><!--{{'LIST-PROJET.TABLE.ID' | translate}}-->
-        <td mat-cell *matCellDef="let element; let i=index;"><app-nature-texte [texteId]="element.id"></app-nature-texte></td>
-      </ng-container>
-      <ng-container matColumnDef="sommaireAr">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'LIST-PROJET.TABLE.SOMMAIRE-AR' | translate}}</th>
-        <td mat-cell *matCellDef="let element" class="myfilterar">{{element.sommaireAr}}</td>
-      </ng-container>
-      <ng-container matColumnDef="sommaireFr">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'LIST-PROJET.TABLE.SOMMAIRE-FR' | translate}}</th>
-        <td mat-cell *matCellDef="let element" class="myfilterfr">{{element.sommaireFr}} </td>
-      </ng-container>
-      <ng-container matColumnDef="refer">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'LIST-PROJET.TABLE.REFER' | translate}} </th>
-        <td mat-cell *matCellDef="let element"> {{element.refer}} </td>
-      </ng-container>
-      <ng-container matColumnDef="details">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> DETAILS </th>
-        <td mat-cell *matCellDef="let element"> <i class="fa fa-arrow-circle-down fa-2x"></i> </td>
-      </ng-container>
+  <div id="left_side" >
 
-      <ng-container matColumnDef="expandedDetail">
-        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length" >
-          <div class="example-element-detail"
-               [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+    <mat-accordion class="example-headers-align" multi>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{'LIST-PROJET.SIMPLE-FILTER' | translate}}
+          </mat-panel-title>
+          <mat-panel-description
+            [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}">
+            <div [ngSwitch]="app.localStorageItem('lge')">
+              <div *ngSwitchCase="'fr'">CONTENU DU TEXTE</div>
+              <div *ngSwitchCase="'ar'">مضمون النص</div>
+              <div *ngSwitchDefault>This is Default</div>
+            </div>
+            <i class="fa fa-search" style="margin: 0 15px"></i>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-form-field class="example-full-width"
+                        [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}">
+          <mat-label>{{'LIST-PROJET.SIMPLE-FILTER' | translate}}</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+        </mat-form-field>
+      </mat-expansion-panel>
+    </mat-accordion>
 
+    <br>
 
-            <div class="example-element-description example-full-width">
-              <div *ngIf="isMinistereUser()===false" ><!--{{ app.localStorageItem('lge') === 'fr' ? 'MODIFIER ' :  ' تعديل : ' }}-->
-                <mat-tab-group [backgroundColor]="background" mat-align-tabs="start">
-                  <mat-tab label="{{'LIST-PROJET.TABLE.EDIT-BUTTON' | translate}}">
-                    <button mat-raised-button matTooltip="MODIFIER"
-                            class="btn btn-primary spacer tabed" (click)="onEditTexte(element.id)">
-                      <i class="fa fa-edit"></i>
-                    </button>
-                  </mat-tab>
-                  <mat-tab label="{{'LIST-PROJET.TABLE.LIST-AVIS' | translate}}">
-                    <button mat-raised-button
-                            class="tabed"
-                            matTooltip="{{'LIST-PROJET.TABLE.ADD-AVIS' | translate}}"
-                            (click)="ajouterAvis(element.id)"
-                    >
-                      <i class="fa fa-plus-circle"></i>
-                      {{'LIST-PROJET.TABLE.ADD-AVIS' | translate}}
-                    </button>
-                    <button
-                      matTooltipClass="my-custom-tooltip"
-                      mat-raised-button
-                      mat-button color="accent"
-                      class="tabed"
-                      (click)="onShowListAvis(element.id)"
-                    >
-                      <i class="fa fa-list"></i>
-                    </button>
-                  </mat-tab>
-                  <mat-tab label="{{'LIST-PROJET.TABLE.LIST-CORRESPONDANCE' | translate}}">
-                    <button mat-raised-button
-                            matTooltip="{{'LIST-PROJET.TABLE.ADD-CORRESPONDANCE' | translate}}"
-                            class="tabed"
-                            (click)="ajouterCorrespondance(element.id)"
-                    >
-                      <i class="fa fa-plus-circle"></i>
-                      {{'LIST-PROJET.TABLE.ADD-CORRESPONDANCE' | translate}}
-                    </button>
-                    <button
-                      matTooltipClass="my-custom-tooltip"
-                      mat-raised-button
-                      mat-button color="accent"
-                      class="tabed"
-                      (click)="onShowListCorrespondance(element.id)"
-                    ><!--matTooltip="{{allAvis}}"-->
-                      <i class="fa fa-list"></i>
-                    </button>
-                  </mat-tab>
-                </mat-tab-group>
+    <mat-accordion class="example-headers-align" multi>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{'LIST-PROJET.ADVANCED-FILTER' | translate}}
+          </mat-panel-title>
+          <mat-panel-description>
+
+            <div [ngSwitch]="authenticated?.role">
+              <div *ngSwitchCase="'ADMIN'">
+                <div [ngSwitch]="app.localStorageItem('lge')">
+                  <div *ngSwitchCase="'fr'">PHASE / SECTEUR / MINISTERE / DATE</div>
+                  <div *ngSwitchCase="'ar'">تاريخ / وزارة / قطاع / مرحلة</div>
+                  <div *ngSwitchDefault>This is Default</div>
+                </div>
+
               </div>
+              <div *ngSwitchCase="'USER'">
+                <div [ngSwitch]="app.localStorageItem('lge')">
+                  <div *ngSwitchCase="'fr'">PHASE / MINISTERE / DATE</div>
+                  <div *ngSwitchCase="'ar'"> تاريخ /وزارة / مرحلة</div>
+                  <div *ngSwitchDefault>This is Default</div>
+                </div>
+              </div>
+              <div *ngSwitchCase="'MINISTERE'">
+                <div [ngSwitch]="app.localStorageItem('lge')">
+                  <div *ngSwitchCase="'fr'">PHASE / DATE</div>
+                  <div *ngSwitchCase="'ar'">تاريخ / مرحلة</div>
+                  <div *ngSwitchDefault>This is Default</div>
+                </div></div>
+              <div *ngSwitchDefault>This is Default</div>
+            </div>
+            <i class="fa fa-search"  style="margin: 0 15px"></i>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <form #myForm="ngForm" >
+          <br/>
+          <div class="row" ><!--dir="{{direction}}"-->
+            <div class="col">
+              <mat-form-field class="example-full-width">
+                <input #fromInput matInput readonly [matDatepicker]="picker1" placeholder="{{'LIST-PROJET.ADVANCED-FILTER.FROM' | translate}}"
+                       id="date1" name="date1"
+                       (dateChange)="setDateFrom($event.value)">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+              <button class="btn btn-danger" (click)="resetFrom()">
+                <i class="fa fa-refresh" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="col">
+              <mat-form-field class="example-full-width"><!--[(ngModel)]="mouvement.datePhase" [ngModelOptions]="{standalone: true}"-->
+                <input #toInput matInput readonly [matDatepicker]="picker2" placeholder="{{'LIST-PROJET.ADVANCED-FILTER.TO' | translate}}"
+                       id="date2" name="date1"
+                       (dateChange)="setDateTo($event.value)">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+              <button class="btn btn-danger" (click)="resetTo()">
+                <i class="fa fa-refresh" aria-hidden="true"></i>
+              </button>
+            </div>
+
+          </div>
+          <br/>
+          <div class="col" ><!--dir="{{direction}}"-->
+            <mat-form-field
+              [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+              class="example-full-width">
+              <mat-label>{{'LIST-PROJET.ADVANCED-FILTER.PHASE' | translate}}</mat-label>
+              <mat-select
+
+                matTooltip="{{'LIST-PROJET.ADVANCED-FILTER.PHASE-TOOLTIP' | translate}}"
+                #phs name="phase" (selectionChange)="onGetPhase($event)">
+                <mat-option></mat-option>
+                <mat-option *ngFor="let phse of phases; let i=index" [value]="phse">
+                  <div [ngSwitch]="app.localStorageItem('lge')">
+                    <div *ngSwitchCase="'ar'" class="myfilterar">{{phse?.libelleAr}}</div>
+                    <div *ngSwitchCase="'fr'" class="myfilterfr">{{phse?.libelleFr}}</div>
+                    <div *ngSwitchDefault>This is Default</div>
+                  </div>
+
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col" ><!--dir="{{direction}}"-->
+            <mat-form-field
+              [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+              class="example-full-width">
+              <mat-label>{{'LIST-PROJET.ADVANCED-FILTER.NATURE' | translate}}</mat-label>
+              <mat-select
+
+                matTooltip="{{'LIST-PROJET.ADVANCED-FILTER.NATURE-TOOLTIP' | translate}}"
+                #ntr name="nature" (selectionChange)="onGetNature($event)">
+                <mat-option></mat-option>
+                <mat-option *ngFor="let ntr of natures; let i=index" [value]="ntr">
+                  <div [ngSwitch]="app.localStorageItem('lge')">
+                    <div *ngSwitchCase="'ar'" class="myfilterar">{{ntr?.libelleAr}}</div>
+                    <div *ngSwitchCase="'fr'" class="myfilterfr">{{ntr?.libelleFr}}</div>
+                    <div *ngSwitchDefault>This is Default</div>
+                  </div>
+
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col" ><!--dir="{{direction}}"-->
+            <mat-form-field
+              [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+              class="example-full-width">
+              <mat-label>{{'LIST-PROJET.ADVANCED-FILTER.ISACTIVE' | translate}}</mat-label>
+              <mat-select
+                matTooltip="{{'LIST-PROJET.ADVANCED-FILTER.ISACTIVE-TOOLTIP' | translate}}"
+                #atv name="isactive" (selectionChange)="onGetIsActive($event)">
+                <mat-option></mat-option>
+                <div [ngSwitch]="app.localStorageItem('lge')">
+                  <div *ngSwitchCase="'ar'" class="myfilterar">
+                    <!--suppress TypeScriptValidateTypes -->
+                    <mat-option [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+                                *ngFor="let actvAr of activityAR | keyvalue" [value]="actvAr.key">
+                      {{actvAr.value}}
+                    </mat-option>
+                  </div>
+                  <div *ngSwitchCase="'fr'" class="myfilterfr">
+                    <!--suppress TypeScriptValidateTypes -->
+                    <mat-option [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+                                *ngFor="let actvFr of activityFR | keyvalue"  [value]="actvFr.key">
+                      {{actvFr.value}}
+                    </mat-option>
+                  </div>
+                  <div *ngSwitchDefault>This is Default</div>
+                </div>
+
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div *ngIf="isAdmin() && !isMinistereUser()" class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
+            <mat-form-field
+              [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+              class="example-full-width">
+              <mat-label><span class="align-label">{{'LIST-PROJET.ADVANCED-FILTER.SECTEUR' | translate}}</span></mat-label>
+              <mat-select
+                #sct
+                matTooltip="{{'LIST-PROJET.ADVANCED-FILTER.SECTEUR-TOOLTIP' | translate}}"
+                matTooltipClass="custom-tooltip"
+                name="secteur" (selectionChange)="onGetSecteur($event)"><!--[disabled]="!authService.isAdmin()"-->
+                <mat-option></mat-option>
+                <mat-option *ngFor="let sct of secteurs; let i=index" [value]="sct">
+                  <div [ngSwitch]="app.localStorageItem('lge')">
+                    <div *ngSwitchCase="'ar'" class="myfilterar">{{sct?.libelleAr}}</div>
+                    <div *ngSwitchCase="'fr'" class="myfilterfr">{{sct?.libelleFr}}</div>
+                    <div *ngSwitchDefault>This is Default</div>
+                  </div>
+
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div *ngIf="!isMinistereUser()" class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
+            <mat-form-field
+              [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
+              class="example-full-width">
+              <mat-label>{{'LIST-PROJET.ADVANCED-FILTER.MINISTERE' | translate}}</mat-label>
+              <mat-select
+                #mst
+                name="ministere" (selectionChange)="onGetMinistere($event)">
+                <mat-option></mat-option>
+                <mat-option *ngFor="let mnst of ministeres; let i=index" [value]="mnst">
+                  <div [ngSwitch]="app.localStorageItem('lge')">
+                    <div *ngSwitchCase="'ar'" class="myfilterar">{{mnst?.libelleAr}}</div>
+                    <div *ngSwitchCase="'fr'" class="myfilterfr">{{mnst?.libelleFr}}</div>
+                    <div *ngSwitchDefault>This is Default</div>
+                  </div>
+
+                </mat-option>
+              </mat-select>
+              <mat-error>{{ 'ADD-MOUVEMENT.ETAT.MAT-ERROR' | translate }}</mat-error>
+            </mat-form-field>
+          </div>
+          <button mat-button color="primary"
+                  mat-raised-button
+                  matTooltip= "{{'LIST-PROJET.ADVANCED-FILTER.BUTTON-TOOLTIP' | translate}}"
+                  (click)="OnFilter()">
+            <i class="fa fa-filter fa-2x" aria-hidden="true"></i>
+            {{'LIST-PROJET.ADVANCED-FILTER.BUTTON' | translate}}
+          </button>
+          <button mat-button color="warn"
+                  mat-raised-button
+                  matTooltip= "{{'ETAT-SORTIE.PRINTING' | translate}}"
+                  (click)="OnPrint()">
+            <i class="fa fa-print fa-2x" aria-hidden="true"></i>
+            {{'ETAT-SORTIE.PRINTING' | translate}}
+          </button>
+          <button mat-button color="accent"
+                  mat-raised-button
+                  matTooltip= "{{'ADD-DETAIL.BUTTON-RESET' | translate}}"
+                  (click)="resetForm()">
+            <i class="fa fa-refresh fa-2x" aria-hidden="true"></i>
+            {{'ADD-DETAIL.BUTTON-RESET' | translate}}
+          </button>
+        </form>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <br><!--class="jumbotron mycustom-jumbotron"-->
+  <div id="right_side"  class="example-full-width jumbotron mycustom-jumbotron"
+    [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }">
+    <br>
+    <div class="entete" style="text-align: center"><span>{{'LIST-PROJET.TITLE' | translate}}</span></div>
+    <br>
+    <button *ngIf="!isMinistereUser()" class="btn btn-primary" (click)="onAddProjet()">
+      {{'LIST-PROJET.ADD-BUTTON' | translate}}
+    </button>
+    <!--  {{'LIST-MOUVEMENTS.BUTTON' | translate}}-->
+    <br>
+    <br>
+
+    <div class="mat-elevation-z8 ">
+      <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'LIST-PROJET.TABLE.ID' | translate}} </th>
+          <td mat-cell *matCellDef="let element; let i=index;"> {{element.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="nature">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{"LIST-PROJET.ADVANCED-FILTER.NATURE" |translate}} </th><!--{{'LIST-PROJET.TABLE.ID' | translate}}-->
+          <td mat-cell *matCellDef="let element; let i=index;"><app-nature-texte [texteId]="element.id"></app-nature-texte></td>
+        </ng-container>
+        <ng-container matColumnDef="sommaireAr">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'LIST-PROJET.TABLE.SOMMAIRE-AR' | translate}}</th>
+          <td mat-cell *matCellDef="let element" class="myfilterar">{{element.sommaireAr}}</td>
+        </ng-container>
+        <ng-container matColumnDef="sommaireFr">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'LIST-PROJET.TABLE.SOMMAIRE-FR' | translate}}</th>
+          <td mat-cell *matCellDef="let element" class="myfilterfr">{{element.sommaireFr}} </td>
+        </ng-container>
+        <ng-container matColumnDef="refer">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'LIST-PROJET.TABLE.REFER' | translate}} </th>
+          <td mat-cell *matCellDef="let element"> {{element.refer}} </td>
+        </ng-container>
+        <ng-container matColumnDef="details">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> DETAILS </th>
+          <td mat-cell *matCellDef="let element"> <i class="fa fa-arrow-circle-down fa-2x"></i> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="expandedDetail">
+          <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length" >
+            <div class="example-element-detail"
+                 [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+
+
+              <div class="example-element-description example-full-width">
+                <div *ngIf="isMinistereUser()===false" ><!--{{ app.localStorageItem('lge') === 'fr' ? 'MODIFIER ' :  ' تعديل : ' }}-->
+                  <mat-tab-group [backgroundColor]="background" mat-align-tabs="start">
+                    <mat-tab label="{{'LIST-PROJET.TABLE.EDIT-BUTTON' | translate}}">
+                      <button mat-raised-button matTooltip="MODIFIER"
+                              class="btn btn-primary spacer tabed" (click)="onEditTexte(element.id)">
+                        <i class="fa fa-edit"></i>
+                      </button>
+                    </mat-tab>
+                    <mat-tab label="{{'LIST-PROJET.TABLE.LIST-AVIS' | translate}}">
+                      <button mat-raised-button
+                              class="tabed"
+                              matTooltip="{{'LIST-PROJET.TABLE.ADD-AVIS' | translate}}"
+                              (click)="ajouterAvis(element.id)"
+                      >
+                        <i class="fa fa-plus-circle"></i>
+                        {{'LIST-PROJET.TABLE.ADD-AVIS' | translate}}
+                      </button>
+                      <button
+                        matTooltipClass="my-custom-tooltip"
+                        mat-raised-button
+                        mat-button color="accent"
+                        class="tabed"
+                        (click)="onShowListAvis(element.id)"
+                      >
+                        <i class="fa fa-list"></i>
+                      </button>
+                    </mat-tab>
+                    <mat-tab label="{{'LIST-PROJET.TABLE.LIST-CORRESPONDANCE' | translate}}">
+                      <button mat-raised-button
+                              matTooltip="{{'LIST-PROJET.TABLE.ADD-CORRESPONDANCE' | translate}}"
+                              class="tabed"
+                              (click)="ajouterCorrespondance(element.id)"
+                      >
+                        <i class="fa fa-plus-circle"></i>
+                        {{'LIST-PROJET.TABLE.ADD-CORRESPONDANCE' | translate}}
+                      </button>
+                      <button
+                        matTooltipClass="my-custom-tooltip"
+                        mat-raised-button
+                        mat-button color="accent"
+                        class="tabed"
+                        (click)="onShowListCorrespondance(element.id)"
+                      ><!--matTooltip="{{allAvis}}"-->
+                        <i class="fa fa-list"></i>
+                      </button>
+                    </mat-tab>
+                  </mat-tab-group>
+                </div>
                 <app-list-mouvement
                   class="make-gold"
                   [texteId]="element.id"></app-list-mouvement>
+              </div>
             </div>
-          </div>
-        </td>
-      </ng-container>
+          </td>
+        </ng-container>
 
 
-      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-      <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
-          class="example-element-row"
-          [class.example-expanded-row]="expandedElement === element"
-          (click)="expandedElement = expandedElement === element ? null : element;  makeDisabled(element.id)">
-      </tr>
-      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-    </table>
-    <mat-card *ngIf="isLoading"  id="pause" class="d-flex align-items-center justify-content-center">
-      <mat-progress-spinner
-        color="primary"
-        mode="indeterminate">
-      </mat-progress-spinner>
-    </mat-card>
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+            class="example-element-row"
+            [class.example-expanded-row]="expandedElement === element"
+            (click)="expandedElement = expandedElement === element ? null : element;  makeDisabled(element.id)">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+      </table>
+      <mat-card *ngIf="isLoading"  id="pause" class="d-flex align-items-center justify-content-center">
+        <mat-progress-spinner
+          color="primary"
+          mode="indeterminate">
+        </mat-progress-spinner>
+      </mat-card>
 
-    <mat-paginator
-      [pageIndex]="page"
-      [pageSize]="size"
-      [pageSizeOptions]="[10, 15, 20, 50]"
-      [length]="totalElements"
-      (page)="nextPage($event)" showFirstLastButtons></mat-paginator>
+      <mat-paginator
+        [pageIndex]="page"
+        [pageSize]="size"
+        [pageSizeOptions]="[10, 15, 20, 50]"
+        [length]="totalElements"
+        (page)="nextPage($event)" showFirstLastButtons></mat-paginator>
+    </div>
+    <br/>
+
   </div>
-  <br/>
-
 </div>
+
 

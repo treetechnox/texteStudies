@@ -10,7 +10,7 @@ export class CorrespondanceService {
 
   url!:string;
   constructor(private http:HttpClient) {
-    this.url = 'http://172.16.90.1:8083/correspondances/';
+    this.url = 'http://localhost:8083/correspondances/';
   }
 
   getCorrespondanceByTexte(texteId:number):Observable<any>{

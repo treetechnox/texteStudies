@@ -174,8 +174,13 @@ export class ListProjetComponent implements AfterViewInit {
       }
       let result = str?.substring(n + 1)
       console.log(result);
-      this.ministereService.getMinistereById(result).subscribe(value => {
-        this.texteService.getAllTextesByMinistere(value.libelleFr).subscribe(value1 => {
+  /*    this.ministereService.getMinistereById(result).subscribe(value => {
+        console.log(value.libelleFr);*/
+        this.texteService.getAllTextesByMinistere(result as unknown as number)
+          .pipe(delay(1000)).subscribe(value1 => {
+          this.isLoading = false;
+
+          // @ts-ignore
           this.textes = value1.sort((a:any,b:any) => b.id - a.id);
           this.dataSource = new MatTableDataSource(this.textes);
           // @ts-ignore
@@ -183,10 +188,12 @@ export class ListProjetComponent implements AfterViewInit {
           // @ts-ignore
           this.dataSource.sort = this.sort;
         })
-      })
+ /*     })*/
     }else {
       // @ts-ignore
-      this.texteService.getAllTextesBySecteur(this.authService.userAuthenticated.secteur.id).subscribe(value => {
+      this.texteService.getAllTextesBySecteur(this.authService.userAuthenticated.secteur.id)
+        .pipe(delay(1000)).subscribe(value => {
+        this.isLoading = false;
         this.textes = value.sort((a:any,b:any) => b.id - a.id);
         console.log(this.textes);
         this.dataSource = new MatTableDataSource(this.textes);
@@ -380,7 +387,7 @@ export class ListProjetComponent implements AfterViewInit {
 
   OnPrint() {
 
-    let sub_url = 'http://172.16.90.1:8083/mouvements?';
+    let sub_url = 'http://localhost:8083/mouvements?';
     if(this.mouvement.phase?.id>0)
       sub_url+=`&phase=${this.mouvement.phase?.id}`;
     if(this.nature.id>0)
@@ -574,12 +581,13 @@ export class ListProjetComponent implements AfterViewInit {
 
   nextPage(event: PageEvent) {
     console.log(event);
-    const request = {};
-    // @ts-ignore
-    this.page = event.pageIndex.toString();
-    // @ts-ignore
-    this.size = event.pageSize.toString();
-    this.getTextes(this.page,this.size);
+    if (this.isAdmin()){
+      // @ts-ignore
+      this.page = event.pageIndex.toString();
+      // @ts-ignore
+      this.size = event.pageSize.toString();
+      this.getTextes(this.page,this.size);
+    }
   }
 
   setDateFrom(value: any) {

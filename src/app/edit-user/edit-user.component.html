@@ -6,7 +6,7 @@
       <div class="row-cols-1 example-full-width" *ngIf="app.localStorageItem('lge') === 'ar'"><!--[ngClass]="{'dir2rtl':localStorageItem('lge') === 'ar'}"-->
         <div class="example-full-width" dir="rtl">
           <mat-form-field>
-            <mat-label>{{'SIGNUP.LASTNAME.LABEL' |translate}}</mat-label>
+            <mat-label>{{'SIGNUP.USERNAME.LABEL' |translate}}</mat-label>
             <input matInput placeholder="{{'SIGNUP.LASTNAME.PLACEHOLDER' |translate}}" required="required"
                    [(ngModel)]="user.nom" name="lastname"
                    [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }"

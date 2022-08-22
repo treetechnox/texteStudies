@@ -263,7 +263,10 @@
   [hidden] ="!isToLogg">
   <nav id="navbar" *ngIf="authService.isAuthenticated == true"
        class="navbar navbar-expand-lg navbar-dark bg-primary"
-       [style]="{'direction':localStorageItem('lge') === 'ar' ? 'rtl' : 'ltr'}"
+       [style]="{
+       'direction':localStorageItem('lge') === 'ar' ? 'rtl' : 'ltr',
+       'text-align':localStorageItem('lge') === 'ar' ? 'rtl' : 'ltr'
+       }"
   >
     <div class="container-fluid">
       <div class="myhome">
@@ -360,17 +363,17 @@
           <li class="nav-item dropdown" *ngIf="isMinistereUser()">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown6"
                role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              CONSULTATIOIN DES TEXTES
+              {{'NAVBAR.CONSULT' | translate}}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown6">
               <li><a class="dropdown-item" [routerLink]="'/lesprojets'">
-                LA LISTE DES TEXTE ET CES MOUVEMENTS
+                {{'NAVBAR.TEXTE.LIST' | translate}}
                 <!--{{
                 "HOME.UTILISATEURS.LIST" | translate
                 }}--></a></li>
               <hr class="dropdown-divider">
               <li><a class="dropdown-item" (click)="openApropos()" ><!--[routerLink]="'/apropos'"-->
-                DES LIENS
+                {{'NAVBAR.LINK' | translate}}
                 <!--{{
                 "HOME.UTILISATEURS.AJOUT" | translate
                 }}--></a></li>
@@ -409,8 +412,8 @@
     </div>
   </nav>
 
-  <main role="main"  class="wrapper"  id="sect1" >
-    <div class="container">
+  <main role="main" class="wrapper"  id="sect1" ><!-- -->
+    <div ><!--class="container"-->
       <router-outlet></router-outlet>
     </div>
     <br/><br/><br/>
