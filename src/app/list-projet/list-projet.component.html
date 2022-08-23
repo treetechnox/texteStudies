@@ -23,8 +23,23 @@
         <mat-form-field class="example-full-width"
                         [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}">
           <mat-label>{{'LIST-PROJET.SIMPLE-FILTER' | translate}}</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+          <input matInput placeholder="" #input>
         </mat-form-field>
+
+
+          <button [disabled]="!input.value?.trim()"
+                  class="btn btn-primary" (click)="applyFilter(input.value)">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        <button mat-button color="accent"
+                mat-raised-button
+                matTooltip= "{{'ADD-DETAIL.BUTTON-RESET' | translate}}"
+                (click)="input.value='';loadTextes()">
+          <i class="fa fa-refresh fa-2x" aria-hidden="true"></i>
+          {{'ADD-DETAIL.BUTTON-RESET' | translate}}
+        </button>
+
+
       </mat-expansion-panel>
     </mat-accordion>
 
@@ -235,6 +250,17 @@
         </form>
       </mat-expansion-panel>
     </mat-accordion>
+
+    <div class="entete"
+         [style]="{'direction':localStorageItem('lge') === 'ar' ? 'rtl' : 'ltr'}">
+      <mat-label >{{ 'ADD-DETAIL.RESULTAT' | translate}}</mat-label>
+    </div>
+    <div [style]="{'direction':localStorageItem('lge') === 'ar' ? 'rtl' : 'ltr'}">
+      <mat-label >{{ 'ADD-DETAIL.NBRE-TEXTE' | translate}}</mat-label>
+      <span>{{totalElements}}</span>
+    </div>
+
+
   </div>
   <br><!--class="jumbotron mycustom-jumbotron"-->
   <div id="right_side"  class="example-full-width jumbotron mycustom-jumbotron"

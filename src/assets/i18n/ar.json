@@ -242,8 +242,10 @@
     "LIBELLE-FR": "التفاصيل فرنسي",
     "LIBELLE-AR": "التفاصيل عربي",
     "BUTTON-ADD": "إضافة",
-    "BUTTON-RESET": "إعادة",
-    "DETAIL-ERROR": "هذا التفصيل موجود بالفعل !!!"
+    "BUTTON-RESET": "مسح",
+    "DETAIL-ERROR": "هذا التفصيل موجود بالفعل !!!",
+    "RESULTAT": "نتائج البحث",
+    "NBRE-TEXTE": "العدد الإجمالي للنصوص:"
   },
   "EDIT-FONCTION": {
     "CARD-HEADER.H5": "حدد الهيئة",

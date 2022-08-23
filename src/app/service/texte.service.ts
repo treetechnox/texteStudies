@@ -21,6 +21,12 @@ export class TexteService {
     return this.http.get(this.url);
   }
 
+  getAllTextesLikeSommaire(keyword:string):Observable<any[]>{
+    console.log(`${this.url}filterSommaire/${keyword}`);
+    // @ts-ignore
+    return this.http.get(`${this.url}filterSommaire/${keyword}`);
+  }
+
   getAllTextesByPages(page:number, size:number):Observable<any[]>{
     const request:string = (page!== undefined && size!== undefined)
       ? `?page=${page}&size=${size}`

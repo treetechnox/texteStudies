@@ -116,18 +116,19 @@ export class ListProjetComponent implements AfterViewInit {
   //public page = 1;
 
   public pageLabel!: string;
-  private disabled: boolean=false;
+  disabled: boolean=false;
+  isFilter: boolean = false;
 
   authenticated!:User | undefined;
 
-  private nodeTree: any;
+  nodeTree: any;
   direction: string = this.app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl';
   isActive!:boolean;
 
 /*  myActivity = new Map();*/
 
-  activityAR!:Array<string>;
-  activityFR!:Array<string>;
+  activityAR:Array<string>=['لا','نعم']!;
+  activityFR:Array<string>=['NON','OUI']!;
 
   isLoading=true;
 
@@ -143,16 +144,19 @@ export class ListProjetComponent implements AfterViewInit {
               /*private fonctionService: FonctionService,*/
               private router: Router,public app:AppComponent,
               private dialog:MatDialog) {
+    this.loadTextes();
+  }
 
 
-
-    this.activityAR=['لا','نعم']!;
-    this.activityFR=['NON','OUI']!;
-
+  loadTextes(){
+    this.isLoading=true;
+    this.isFilter=false;
     this.authenticated = this.authService.userAuthenticated;
     console.log(this.authenticated?.id);
     if (this.isAdmin()){
-      this.texteService.getAllTextesByPages(this.page,this.size).pipe(delay(1000)).subscribe(value => {
+      this.texteService.getAllTextesByPages(this.page,this.size)
+        .pipe(delay(1000))
+        .subscribe(value => {
         this.isLoading = false;
         // @ts-ignore
         this.textes = value.content;
@@ -174,21 +178,21 @@ export class ListProjetComponent implements AfterViewInit {
       }
       let result = str?.substring(n + 1)
       console.log(result);
-  /*    this.ministereService.getMinistereById(result).subscribe(value => {
-        console.log(value.libelleFr);*/
-        this.texteService.getAllTextesByMinistere(result as unknown as number)
-          .pipe(delay(1000)).subscribe(value1 => {
-          this.isLoading = false;
+      /*    this.ministereService.getMinistereById(result).subscribe(value => {
+            console.log(value.libelleFr);*/
+      this.texteService.getAllTextesByMinistere(result as unknown as number)
+        .pipe(delay(1000)).subscribe(value1 => {
+        this.isLoading = false;
 
-          // @ts-ignore
-          this.textes = value1.sort((a:any,b:any) => b.id - a.id);
-          this.dataSource = new MatTableDataSource(this.textes);
-          // @ts-ignore
-          this.dataSource.paginator = this.paginator;
-          // @ts-ignore
-          this.dataSource.sort = this.sort;
-        })
- /*     })*/
+        // @ts-ignore
+        this.textes = value1.sort((a:any,b:any) => b.id - a.id);
+        this.dataSource = new MatTableDataSource(this.textes);
+        // @ts-ignore
+        this.dataSource.paginator = this.paginator;
+        // @ts-ignore
+        this.dataSource.sort = this.sort;
+      })
+      /*     })*/
     }else {
       // @ts-ignore
       this.texteService.getAllTextesBySecteur(this.authService.userAuthenticated.secteur.id)
@@ -201,9 +205,7 @@ export class ListProjetComponent implements AfterViewInit {
         this.dataSource.sort = this.sort!;
       })
     }
-
   }
-
 
 
   ngAfterViewInit() {
@@ -261,11 +263,28 @@ export class ListProjetComponent implements AfterViewInit {
     this.dateTo = '';
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
+  /*    applyFilter(event: Event) {
+      const filterValue = (event.target as HTMLInputElement).value;
+      console.log(filterValue);*/
+
+  applyFilter(input: any) {
+    this.isFilter=true;
+    this.isLoading = true;
+    const filterValue = input;
     console.log(filterValue);
-    // @ts-ignore
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    this.texteService.getAllTextesLikeSommaire(filterValue).pipe(delay(1000)).subscribe(value => {
+      this.isLoading = false;
+      this.textes = value.sort((a:any,b:any) => b.id - a.id);
+      console.log(this.textes);
+      this.dataSource = new MatTableDataSource(this.textes);
+      this.dataSource.paginator = this.paginator!;
+      this.totalElements = this.textes.length
+      console.log(this.textes.length);
+      this.dataSource.sort = this.sort!;
+    });
+
+  /*  this.dataSource.filter = filterValue.trim().toLowerCase();*/
   }
 
   onEditTexte(id: any) {
@@ -581,7 +600,7 @@ export class ListProjetComponent implements AfterViewInit {
 
   nextPage(event: PageEvent) {
     console.log(event);
-    if (this.isAdmin()){
+    if (this.isAdmin() && !this.isFilter){
       // @ts-ignore
       this.page = event.pageIndex.toString();
       // @ts-ignore
@@ -632,6 +651,8 @@ export class ListProjetComponent implements AfterViewInit {
     /* Date To */
     this.dateTo='';
     this.toInput.value = '';
+
+    this.loadTextes();
   }
 }
 
