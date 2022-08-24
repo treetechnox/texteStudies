@@ -121,7 +121,7 @@
                  matTooltip="{{'LIST-MOUVEMENT.TABLE.UPLOAD'|translate}}"
                  accept="application/pdf"
                  style="display: none;" type="file"
-                 (change)="onSelectFile($event,element.id)" />
+                 (change)="onSelectFile($event,element.id)"/>
             </label>
             <!--<h5>{{currentFileUpload?.name}}</h5>-->
             <div *ngIf="!!element.scanpdf">

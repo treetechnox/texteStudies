@@ -39,6 +39,7 @@ import {RapportJournalierComponent} from "../rapport-journalier/rapport-journali
 import {MatInput} from "@angular/material/input";
 import {ThemePalette} from "@angular/material/core";
 import {delay} from "rxjs";
+import {RapportTextesDetailsComponent} from "../rapport-textes-details/rapport-textes-details.component";
 
 export interface MouvementMinistere{
   id: number;
@@ -438,6 +439,17 @@ export class ListProjetComponent implements AfterViewInit {
     this.dialog.open(RapportJournalierComponent, dialogConfig);
 
 
+  }
+
+  OnPrintTexteDetails(texteId:number) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data=texteId;
+    // @ts-ignore
+    dialogConfig.width = '90%';
+    dialogConfig.height = '90%';
+    this.dialog.open(RapportTextesDetailsComponent, dialogConfig);
   }
 
   onGetPhase(event: any) {

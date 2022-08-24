@@ -113,6 +113,7 @@ import { ListCorrespondanceComponent } from './list-correspondance/list-correspo
 import {NgxPrintModule} from "ngx-print";
 import { AvisDialogComponent } from './dialogs/avis-dialog/avis-dialog.component';
 import { RapportTexteComponent } from './rapport-texte/rapport-texte.component';
+import { RapportTextesDetailsComponent } from './rapport-textes-details/rapport-textes-details.component';
 
 
 
@@ -172,6 +173,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ListCorrespondanceComponent,
     AvisDialogComponent,
     RapportTexteComponent,
+    RapportTextesDetailsComponent,
   ],
     imports: [
         FormsModule,

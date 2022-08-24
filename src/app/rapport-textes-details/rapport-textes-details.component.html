@@ -1,0 +1,102 @@
+<br><br>
+<div class="text-dark" style="display: flex;  justify-content: space-between;"
+     [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }"
+>
+
+  <div style="display: flex"><!--[printStyle]=" direction : {{ app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }}"-->
+    <button printSectionId="myTexteDetails"
+            [useExistingCss]="true"
+            styleSheetFile="{{app.localStorageItem('lge')==='ar'?'assets/pdfar.css':'assets/pdffr.css'}}"
+            mat-raised-button
+            class="btn btn-light"
+            style="position: center"
+            ngxPrint
+    ><!--matTooltip="Imprimer l'etat de sortie"-->
+      <i class="fa fa-print fa-3x" aria-hidden="true"></i>
+    </button>
+    <button style="margin-left: 10px" type="submit"
+            mat-raised-button
+            class="btn btn-light"
+            (click)="exportexcel()"><!--matTooltip="Exporter EXCEL"-->
+      <i class="fa fa-download fa-3x" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <mat-chip-list aria-label="Fish selection">
+    <mat-chip style="font-size: large" color="primary" selected>{{aujourdhui | date:'dd / MM / yyyy, h:mm:ss a' }}</mat-chip>
+  </mat-chip-list>
+</div>
+<br><br>
+<div class="mycustom-jumbotron" id="myTexteDetails" >
+
+  <br>
+  <div [style]="app.localStorageItem('lge')==='ar'?'rtl':'ltr'">
+    <div [ngSwitch]="app.localStorageItem('lge')">
+      <div *ngSwitchCase="'ar'" class="myfilterar"><span>{{texte.sommaireAr}}</span></div>
+      <div *ngSwitchCase="'fr'" class="myfilterfr"><span>{{texte.sommaireFr}}</span></div>
+      <div *ngSwitchDefault>This is Default</div>
+    </div>
+
+    <br>
+  </div>
+  <div id="table" class="table-responsive" [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }">
+    <table id="excel-table" class="table table-bordered table-light" *ngIf="mouvements"
+           matSort (matSortChange)="sortData($event)">
+      <thead class="thead-dark example-full-width">
+      <tr>
+        <th >{{"LIST-MOUVEMENT.TABLE.ID" | translate}}</th>
+        <th >{{"LIST-MOUVEMENT.TABLE.PHASE" | translate}}</th>
+        <th >{{"LIST-MOUVEMENT.TABLE.DATE" | translate}}</th>
+        <th >{{"LIST-MOUVEMENT.TABLE.ETAT" | translate}}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let res of mouvements; let i=index; ">
+        <td>{{i+1}}</td>
+        <td>
+          <div [ngSwitch]="app.localStorageItem('lge')">
+            <div *ngSwitchCase="'ar'" class="myfilterar">{{res.phase?.libelleAr}}</div>
+            <div *ngSwitchCase="'fr'" class="myfilterfr">{{res.phase?.libelleFr}}</div>
+            <div *ngSwitchDefault>This is Default</div>
+          </div>
+        </td>
+        <td>{{ res.datePhase}}</td>
+        <td>
+          <div class="make-true" *ngIf="res.isactive == true ">
+            <div [ngSwitch]="app.localStorageItem('lge')">
+              <div *ngSwitchCase="'ar'" class="myfilterar">المرحلة الحالية</div>
+              <div *ngSwitchCase="'fr'" class="myfilterfr">ACTIVE</div>
+              <div *ngSwitchDefault></div>
+            </div>
+          </div>
+        </td>
+        <!-- <td>
+           <div *ngIf="res.periode == '0'; else periode1">
+             <div  *ngFor="let per of periode_fr">
+               <div *ngIf="per.id===0">
+                 {{per.value}}
+               </div>
+             </div>
+           </div>
+           <ng-template #periode1>
+             <div *ngFor="let per of periode_fr">
+               <div *ngIf="per.id===1">
+                 {{per.value}}
+               </div>
+             </div>
+           </ng-template>
+         </td>-->
+      </tr>
+
+      <!--<mat-slider min="1" max="100" step="1" value="1"></mat-slider>-->
+
+      </tbody>
+
+    </table>
+
+    <br>
+
+
+  </div>
+</div>
+

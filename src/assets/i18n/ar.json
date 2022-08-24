@@ -245,7 +245,8 @@
     "BUTTON-RESET": "مسح",
     "DETAIL-ERROR": "هذا التفصيل موجود بالفعل !!!",
     "RESULTAT": "نتائج البحث",
-    "NBRE-TEXTE": "العدد الإجمالي للنصوص:"
+    "NBRE-TEXTE": "العدد الإجمالي للنصوص:",
+    "CRITERE": "معايير البحث"
   },
   "EDIT-FONCTION": {
     "CARD-HEADER.H5": "حدد الهيئة",
@@ -415,10 +416,13 @@
     "TABLE.SOMMAIRE-FR": "النص فرنسي",
     "TABLE.REFER": "المرجع",
     "TABLE.DETAILS": "التفاصيل",
+    "TAB.TEXTE": "النص",
     "TABLE.EDIT-BUTTON": "تعديل النص",
     "TABLE.ADD-AVIS": "إضافة رأي",
+    "TAB.AVIS": "الأراء",
     "TABLE.LIST-AVIS": "قائمة الأراء",
     "TABLE.ADD-CORRESPONDANCE": "إضافة مراسلة",
+    "TAB.CORRESPONDANCE": "المراسلات",
     "TABLE.LIST-CORRESPONDANCE": "قائمة المراسلات",
     "TABLE.PAGINATOR": "العدد في الصفحة"
   },

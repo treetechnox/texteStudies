@@ -3,10 +3,10 @@
      [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }"
 >
 
-  <div><!--[printStyle]=" direction : {{ app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }}"-->
+  <div style="display: flex"><!--[printStyle]=" direction : {{ app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }}"-->
     <button printSectionId="table"
             [useExistingCss]="true"
-
+            styleSheetFile="{{app.localStorageItem('lge')==='ar'?'assets/pdfar.css':'assets/pdffr.css'}}"
             mat-raised-button
             class="btn btn-light"
             style="position: center"
