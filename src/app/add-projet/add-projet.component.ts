@@ -134,6 +134,7 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
       etatMouvementCtrl: ['', Validators.required],
       secteurMouvementCtrl: ['', Validators.required],
       dateMouvementCtrl: ['', Validators.required],
+      ministereMouvementCtrl: [ [], Validators.required],
     });
     this.setNullTexteToVide();
     //this.reloadDataOrganismes();

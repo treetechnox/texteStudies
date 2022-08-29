@@ -1,4 +1,4 @@
-import {Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
 import {AfterViewInit, ViewChild} from '@angular/core';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
@@ -38,7 +38,7 @@ import {ListCorrespondanceComponent} from "../list-correspondance/list-correspon
 import {RapportJournalierComponent} from "../rapport-journalier/rapport-journalier.component";
 import {MatInput} from "@angular/material/input";
 import {ThemePalette} from "@angular/material/core";
-import {delay} from "rxjs";
+import {delay, lastValueFrom} from "rxjs";
 import {RapportTextesDetailsComponent} from "../rapport-textes-details/rapport-textes-details.component";
 
 export interface MouvementMinistere{
@@ -144,7 +144,8 @@ export class ListProjetComponent implements AfterViewInit {
               @Inject(LOCALE_ID) public locale :string,
               /*private fonctionService: FonctionService,*/
               private router: Router,public app:AppComponent,
-              private dialog:MatDialog) {
+              private cdRef: ChangeDetectorRef,
+  private dialog:MatDialog) {
     this.loadTextes();
   }
 
@@ -221,6 +222,9 @@ export class ListProjetComponent implements AfterViewInit {
 
     console.log(current); // 👉️ "read"
 
+    this.cdRef.detectChanges();
+
+
     this.phaseService.getAllPhases().subscribe(phe => {
       this.phases = phe;
     },error => console.log('phases not found'));
@@ -246,21 +250,21 @@ export class ListProjetComponent implements AfterViewInit {
   @ViewChild('fromInput', {read: MatInput}) fromInput!: MatInput;
   @ViewChild('toInput', {read: MatInput}) toInput!: MatInput;
 
-  @ViewChild('phs', {read: MatSelect}) phs!: MatSelect;
-  @ViewChild('ntr', {read: MatSelect}) ntr!: MatSelect;
-  @ViewChild('atv', {read: MatSelect}) atv!: MatSelect;
-  @ViewChild('sct', {read: MatSelect}) sct!: MatSelect;
-  @ViewChild('mst', {read: MatSelect}) mst!: MatSelect;
+  @ViewChild('phs') phs!: MatSelect;
+  @ViewChild('ntr') ntr!: MatSelect;
+  @ViewChild('atv') atv!: MatSelect;
+  @ViewChild('sct') sct!: MatSelect;
+  @ViewChild('mst') mst!: MatSelect;
 
 
 
   resetFrom() {
-    this.fromInput.value = '';
+    this.fromInput.value = null;
     this.dateFrom='';
 
   }
   resetTo() {
-    this.toInput.value = '';
+    this.toInput.value = null;
     this.dateTo = '';
   }
 
@@ -336,7 +340,99 @@ export class ListProjetComponent implements AfterViewInit {
     console.log(event);
   }
 
-  OnFilter() {
+  async OnFilter() {
+    this.isLoading = true;
+    // @ts-ignore
+    this.mouvements = [];
+
+    this.textes = [];
+    this.textes1 = [];
+
+    this.dataSource = new MatTableDataSource();
+    this.mouvement.phase = this.phase;
+    // @ts-ignore
+
+    if (this.authService.isUser()) {
+      // @ts-ignore
+      this.mouvement.secteur = this.authService.userAuthenticated.secteur;
+      console.log('111' + this.mouvement.secteur)
+    } else {
+      this.mouvement.secteur = this.secteur;
+      console.log('222' + this.mouvement.secteur)
+    }
+
+    if (this.isMinistereUser()) {
+      console.log(this.authService.userAuthenticated?.role);
+    }
+
+    // @ts-ignore
+    this.mouvement.texte?.nature = this.nature;
+    this.mouvement.isactive = this.isActive;
+
+    let value:any = await lastValueFrom(this.mouvementService.getFilter(this.mouvement.phase.id,
+      this.nature.id,
+      this.mouvement.secteur.id,
+      this.ministere.id,
+      this.mouvement.isactive,
+      this.dateFrom,
+      this.dateTo,
+      100000));
+
+    this.mouvements = value._embedded.mouvements;
+    for (const value1 of this.mouvements) {
+      //console.log(value1.id);
+      let texte: Texte = await this.getTextesFromMouvements(value1.id);
+      if (!this.textes.some((item) => item.id == texte.id)) {
+        this.textes.push(texte);
+      }
+      /*this.textes.push();console.log(this.textes)*/
+
+    }
+    this.isLoading = false;
+    this.dataSource = new MatTableDataSource(this.textes.sort((a: { id: number; }, b: { id: number; }) => b.id - a.id));
+    this.dataSource.paginator = this.paginator!;
+    this.dataSource.sort = this.sort!;
+    this.totalElements = this.textes.length;
+    //console.log(this.textes);
+    /*this.mouvementService.getFilter(this.mouvement.phase.id,
+      this.nature.id,
+      this.mouvement.secteur.id,
+      this.ministere.id,
+      this.mouvement.isactive,
+      this.dateFrom,
+      this.dateTo,
+      100000)
+      .subscribe(async value => {
+        /!* this.mouvements=value._embedded.mouvements.sort((a,b) => a.id.rendered.localeCompare(b.id.rendered));*!/
+
+        console.log(this.mouvements);
+
+        for (const value1 of this.mouvements) {
+          //console.log(value1.id);
+          let texte: Texte = await this.getTextesFromMouvements(value1.id);
+          if (!this.textes.some((item) => item.id == texte.id)) {
+            this.textes.push(texte);
+          }
+          /!*this.textes.push();console.log(this.textes)*!/
+
+        }
+        this.isLoading = false;
+        this.dataSource = new MatTableDataSource(this.textes.sort((a: { id: number; }, b: { id: number; }) => b.id - a.id));
+        this.dataSource.paginator = this.paginator!;
+        this.dataSource.sort = this.sort!;
+        this.totalElements = this.textes.length;
+        console.log(this.textes)
+      });
+    console.log(this.mouvement);*/
+  }
+
+
+  async getTextesFromMouvements(mouvementId: number) {
+    let texte: Texte = await lastValueFrom(this.texteService.getTexteByMouvementId(mouvementId));
+    return texte;
+  }
+
+  /*OnFilter() {
     // @ts-ignore
     this.mouvements=[];
 
@@ -373,37 +469,37 @@ export class ListProjetComponent implements AfterViewInit {
       this.dateTo,
       100000)
       .subscribe(value => {
-       /* this.mouvements=value._embedded.mouvements.sort((a,b) => a.id.rendered.localeCompare(b.id.rendered));*/
+       /!* this.mouvements=value._embedded.mouvements.sort((a,b) => a.id.rendered.localeCompare(b.id.rendered));*!/
       this.mouvements = value._embedded.mouvements;
 
         //this.totalElements = value.page.totalElements;
-/*
+/!*
         this.totalPages = value.page.totalPages;
         this.actualPage = value.page.number;
 
       console.log(this.totalElements,this.totalPages,this.actualPage);
-*/
+*!/
 
       console.log(this.mouvements);
 
       this.mouvements.forEach(value1 => {
         this.texteService.getTexteByMouvementId(value1.id).subscribe(texte=>{
 
-          if (!this.textes1.some((item) => item.id == texte.id)) {
-            this.textes1.push(texte);
+          if (!this.textes.some((item) => item.id == texte.id)) {
+            this.textes.push(texte);
           }
-          /*
-          this.textes1.indexOf(texte.id) === -1 ? this.textes1.push(texte) : console.log("This item already exists");*/
-          this.textes = this.textes1;
+          /!*
+          this.textes1.indexOf(texte.id) === -1 ? this.textes1.push(texte) : console.log("This item already exists");*!/
+          //this.textes = this.textes1;
           this.dataSource= new MatTableDataSource(this.textes.sort((a: { id: number; }, b: { id: number; }) => b.id-a.id));
           this.dataSource.paginator = this.paginator!;
           this.dataSource.sort = this.sort!;
-          console.log(this.textes)
+          //console.log(this.textes)
         })
       })
     });
     console.log(this.mouvement);
-  }
+  }*/
 
   OnPrint() {
 
@@ -666,5 +762,6 @@ export class ListProjetComponent implements AfterViewInit {
 
     this.loadTextes();
   }
+
 }
 

@@ -42,7 +42,7 @@ export class NatureService {
   }
 
   getNatureByTexteIdWithinURI(texteId:number):Observable<any>{
-    console.log(`${this.url_alt}textes.id=${texteId}`);
+    //console.log(`${this.url_alt}textes.id=${texteId}`);
     return this.http.get(`${this.url_alt}textes.id=${texteId}`)
   }
 }

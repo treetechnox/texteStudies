@@ -246,7 +246,7 @@
     "DETAIL-ERROR": "هذا التفصيل موجود بالفعل !!!",
     "RESULTAT": "نتائج البحث",
     "NBRE-TEXTE": "العدد الإجمالي للنصوص:",
-    "CRITERE": "معايير البحث"
+    "CRITERE": "معايير البحث: "
   },
   "EDIT-FONCTION": {
     "CARD-HEADER.H5": "حدد الهيئة",

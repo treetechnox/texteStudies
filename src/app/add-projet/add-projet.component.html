@@ -308,8 +308,6 @@
             </div>
           </div>
 
-
-
             <mat-form-field
               [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
               class="example-full-width">
@@ -327,10 +325,11 @@
             [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
             class="example-full-width"><!--/*selectionChange.emit($event);*/-->
             <mat-select [ngModel]="selectedValues"
-                        [ngModelOptions]="{standalone: true}"
+                        required
                         (ngModelChange)="getMinistere($event)"
                         placeholder="{{'ADD-TEXTE.LIST-MINISTERE'|translate}}"
-                        [multiple]="true" #multiSelect>
+                        formControlName="ministereMouvementCtrl"
+                        [multiple]="true" #multiSelect><!--[ngModelOptions]="{standalone: true}"-->
               <mat-option>
                 <ngx-mat-select-search
                   class="error-message"

@@ -271,7 +271,8 @@
     "BUTTON-RESET": "REINITTIALISER",
     "DETAIL-ERROR": "CE DETAIL EXISTE DEJA !!!",
     "RESULTAT": "Resultat de la recherche",
-    "NBRE-TEXTE": "Le nombre totale de textes:"
+    "NBRE-TEXTE": "Le nombre totale de textes:",
+    "CRITERE": "Les criteres de recherches:"
   },
   "EDIT-FONCTION": {
     "CARD-HEADER.H5": "SELECTIONNER UN ORGANISME",

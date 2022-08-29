@@ -47,7 +47,7 @@ export class MouvementService {
   }
 
   getMouvementByTexteId(id: any):Observable<any>{
-    console.log(`${this.url}texte/${id}`);
+    //console.log(`${this.url}texte/${id}`);
     return this.http.get(`${this.url}texte/${id}`);
   }
 

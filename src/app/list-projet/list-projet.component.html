@@ -194,10 +194,10 @@
                 matTooltipClass="custom-tooltip"
                 name="secteur" (selectionChange)="onGetSecteur($event)"><!--[disabled]="!authService.isAdmin()"-->
                 <mat-option></mat-option>
-                <mat-option *ngFor="let sct of secteurs; let i=index" [value]="sct">
+                <mat-option *ngFor="let sctn of secteurs; let i=index" [value]="sctn">
                   <div [ngSwitch]="app.localStorageItem('lge')">
-                    <div *ngSwitchCase="'ar'" class="myfilterar">{{sct?.libelleAr}}</div>
-                    <div *ngSwitchCase="'fr'" class="myfilterfr">{{sct?.libelleFr}}</div>
+                    <div *ngSwitchCase="'ar'" class="myfilterar">{{sctn?.libelleAr}}</div>
+                    <div *ngSwitchCase="'fr'" class="myfilterfr">{{sctn?.libelleFr}}</div>
                     <div *ngSwitchDefault>This is Default</div>
                   </div>
 
@@ -257,10 +257,72 @@
     </div>
     <div [style]="{'direction':localStorageItem('lge') === 'ar' ? 'rtl' : 'ltr'}">
       <mat-label >{{ 'ADD-DETAIL.NBRE-TEXTE' | translate}}</mat-label>
+      <br>
       <span>{{totalElements}}</span>
     </div>
+    <div [style]="{'direction':localStorageItem('lge') === 'ar' ? 'rtl' : 'ltr'}">
 
 
+      <mat-label >{{ 'ADD-DETAIL.CRITERE' | translate}}</mat-label>
+      <br>
+      <br>
+      <div *ngIf="(phase | json) !== ({} | json)">
+        <mat-label>{{'LIST-PROJET.ADVANCED-FILTER.PHASE' | translate}}</mat-label>:
+        <span>
+          <div [ngSwitch]="app.localStorageItem('lge')">
+            <div *ngSwitchCase="'ar'" class="myfilterar">{{phase?.libelleAr}}</div>
+            <div *ngSwitchCase="'fr'" class="myfilterfr">{{phase?.libelleFr}}</div>
+            <div *ngSwitchDefault>This is Default</div>
+          </div>
+        </span><br>
+      </div>
+
+      <div *ngIf="(nature | json) !== ({} | json)">
+        <mat-label>{{'LIST-PROJET.ADVANCED-FILTER.NATURE' | translate}}</mat-label>:
+        <span>
+          <div [ngSwitch]="app.localStorageItem('lge')">
+            <div *ngSwitchCase="'ar'" class="myfilterar">{{nature?.libelleAr}}</div>
+            <div *ngSwitchCase="'fr'" class="myfilterfr">{{nature?.libelleFr}}</div>
+            <div *ngSwitchDefault>This is Default</div>
+          </div>
+        </span><br>
+      </div>
+
+      <div *ngIf="isActive">
+        <mat-label>{{'LIST-PROJET.ADVANCED-FILTER.ISACTIVE' | translate}}</mat-label>:
+        <span>
+          <div [ngSwitch]="app.localStorageItem('lge')">
+            <div *ngSwitchCase="'ar'" class="myfilterar"><div>{{isActive == true ?'نعم':'لا'}}</div></div>
+            <div *ngSwitchCase="'fr'" class="myfilterfr"><div>{{isActive == true ?'OUI':'NON'}}</div></div>
+            <div *ngSwitchDefault>This is Default</div>
+          </div>
+        </span><br>
+      </div>
+
+      <div *ngIf="(secteur | json) !== ({} | json)">
+        <mat-label>{{'LIST-PROJET.ADVANCED-FILTER.SECTEUR' | translate}}</mat-label>:
+        <span>
+          <div [ngSwitch]="app.localStorageItem('lge')">
+            <div *ngSwitchCase="'ar'" class="myfilterar">{{secteur?.libelleAr}}</div>
+            <div *ngSwitchCase="'fr'" class="myfilterfr">{{secteur?.libelleFr}}</div>
+            <div *ngSwitchDefault>This is Default</div>
+          </div>
+        </span><br>
+      </div>
+
+      <div *ngIf="(ministere | json) !== ({} | json)">
+        <mat-label>{{'LIST-PROJET.ADVANCED-FILTER.MINISTERE' | translate}}</mat-label>:
+        <span>
+          <div [ngSwitch]="app.localStorageItem('lge')">
+            <div *ngSwitchCase="'ar'" class="myfilterar">{{ministere?.libelleAr}}</div>
+            <div *ngSwitchCase="'fr'" class="myfilterfr">{{ministere?.libelleFr}}</div>
+            <div *ngSwitchDefault>This is Default</div>
+          </div>
+        </span><br>
+      </div>
+
+      <br>
+    </div>
   </div>
   <br><!--class="jumbotron mycustom-jumbotron"-->
   <div id="right_side"  class="example-full-width jumbotron mycustom-jumbotron"
