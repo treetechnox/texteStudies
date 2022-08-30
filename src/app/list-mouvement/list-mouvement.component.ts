@@ -81,7 +81,7 @@ export class ListMouvementComponent implements OnInit {
     this.mouvementService.getMouvementByTexteId(texteId).subscribe(value => {
       //console.log(value);
       this.mouvements = value;
-      //console.log(this.mouvements);
+      console.log(this.mouvements);
       this.dataSource = new MatTableDataSource(this.mouvements);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

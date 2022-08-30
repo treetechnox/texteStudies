@@ -72,6 +72,7 @@ export class ListProjetComponent implements AfterViewInit {
   columnsToDisplay: string[] = ['id', 'nature','sommaireAr', 'sommaireFr','refer','details'];
 
   texte:Texte=new Texte();
+  passedTexteId!:number;
 
   dateFrom: string='';
   dateTo: string='';
@@ -363,6 +364,14 @@ export class ListProjetComponent implements AfterViewInit {
 
     if (this.isMinistereUser()) {
       console.log(this.authService.userAuthenticated?.role);
+      let str= this.authenticated?.username;
+      let n!: any;
+      if(str !==''){
+        n = str?.lastIndexOf('_');
+      }
+      let result = str?.substring(n + 1);
+      this.ministere = await  lastValueFrom(this.ministereService.getMinistereById(result));
+      console.log(this.ministere);
     }
 
     // @ts-ignore
@@ -636,6 +645,7 @@ export class ListProjetComponent implements AfterViewInit {
     this.disabled = false;
     this.getListAvissByTxtId(texteId);
 
+    this.passedTexteId = texteId;
 
   }
 
@@ -741,16 +751,22 @@ export class ListProjetComponent implements AfterViewInit {
     this.ntr.value = null;
 
     /* Secteur */
-    this.mouvement.secteur=new Secteur();
-    this.sct.value = null;
+    if(this.authService.userAuthenticated?.role == 'ADMIN'){
+      this.mouvement.secteur=new Secteur();
+      this.sct.value = null;
+    }
 
     /* Active */
     this.isActive = null as any;
     this.atv.value = -1;
 
     /* Ministere */
-    this.ministere= new Ministere();
-    this.mst.value = null;
+    if(this.authService.userAuthenticated?.role == 'ADMIN' ||
+      this.authService.userAuthenticated?.role == 'USER'){
+      this.ministere= new Ministere();
+      this.mst.value = null;
+    }
+
 
     /* Date From */
     this.dateFrom='';
