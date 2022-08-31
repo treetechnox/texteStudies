@@ -114,6 +114,8 @@ import {NgxPrintModule} from "ngx-print";
 import { AvisDialogComponent } from './dialogs/avis-dialog/avis-dialog.component';
 import { RapportTexteComponent } from './rapport-texte/rapport-texte.component';
 import { RapportTextesDetailsComponent } from './rapport-textes-details/rapport-textes-details.component';
+import { EditMouvementComponent } from './edit-mouvement/edit-mouvement.component';
+import { DeleteMouvementDialogComponent } from './delete-mouvement-dialog/delete-mouvement-dialog.component';
 
 
 
@@ -174,6 +176,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AvisDialogComponent,
     RapportTexteComponent,
     RapportTextesDetailsComponent,
+    EditMouvementComponent,
+    DeleteMouvementDialogComponent,
   ],
     imports: [
         FormsModule,

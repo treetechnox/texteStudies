@@ -132,6 +132,13 @@
                 class="btn btn-light" (click)="showPdf(element.id)"
               ><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
             </div>
+            <button
+              mat-raised-button
+              mat-icon-button
+              matTooltip="{{'LIST-MOUVEMENT.TABLE.DELETE-BUTTON' | translate}}"
+              class="btn btn-danger" (click)="onDeleteNature(element.id,element.phase)">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
           </div>
         </td>
       </ng-container>

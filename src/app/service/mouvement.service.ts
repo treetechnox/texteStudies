@@ -42,7 +42,7 @@ export class MouvementService {
 
   getTopMouvementByTexteIdDesc(texteId:number):Observable<any>{
     console.log(`${texteId}`);
-    console.log(`${this.url}topDesc/mouvement/${texteId}`);
+    console.log(`${this.url}topisactive/mouvement/${texteId}`);
     return this.http.get(`${this.url}topDesc/mouvement/${texteId}/`);
   }
 

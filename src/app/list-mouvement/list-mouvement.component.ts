@@ -18,6 +18,8 @@ import {AddPhaseComponent} from "../add-phase/add-phase.component";
 import {ShowPdfComponent} from "../show-pdf/show-pdf.component";
 import {AuthenticationService} from "../service/authentication.service";
 import {AppComponent} from "../app.component";
+import {DeleteMouvementDialogComponent} from "../delete-mouvement-dialog/delete-mouvement-dialog.component";
+import {Phase} from "../phase";
 
 @Component({
   selector: 'app-list-mouvement',
@@ -116,6 +118,17 @@ export class ListMouvementComponent implements OnInit {
 
   onEditNature(id:any) {
 
+  }
+
+  onDeleteNature(id:any, phase:Phase) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data= {id, phase};
+    // @ts-ignore
+    dialogConfig.width = '400px';
+    dialogConfig.height = '150px';
+    this.dialog.open(DeleteMouvementDialogComponent, dialogConfig);
   }
 
   onSelectFile(event: any,mouvementId:number) {

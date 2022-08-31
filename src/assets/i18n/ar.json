@@ -438,6 +438,7 @@
     "TABLE.ETAT": "الحالة",
     "TABLE.OPERATIONS": "العمليات",
     "TABLE.EDIT-BUTTON": "تعديل",
+    "TABLE.DELETE-BUTTON": "حذف",
     "TABLE.UPLOAD": "تحميل PDF",
     "TABLE.SHOW-PDF": "عرض الوثيقة",
     "TABLE.PAGINATOR": "العدد في الصفحة"
@@ -598,9 +599,15 @@
     "LIBELLEAR": " تسمية القطاع عربي",
     "LIBELLEFR": " تسمية القطاع فرنسي"
   },
+
   "EDIT-TEXTE": {
     "TITLE": "تحديث النص",
     "ACTUAL-NATURE": "النوع الحالي:"
+  },
+
+  "DELETE-MOUVEMENT": {
+    "MESSAGE": "هل تريد حذف المرحلة ؟ ",
+    "BUTTON-IGNOR": "إلغاء"
   }
 
 }

@@ -335,6 +335,10 @@ mat-card{
   display: flex;
   justify-content: center;align-content: center;
 }
+.myflex2{
+  display: flex;
+  justify-content: space-around;align-content: center;
+}
 
 .mybigtexte{
   font-size: 1rem;
@@ -626,6 +630,9 @@ use direction
    width: 100%;
  }
 
+ .move-opt{
+   margin: 5px;
+ }
 
 
 @media only screen and (max-width: 950px){
