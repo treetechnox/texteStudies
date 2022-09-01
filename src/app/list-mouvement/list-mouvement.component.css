@@ -95,12 +95,12 @@ table{
 
 
 th.mat-header-cell {
-  padding: 0 15px 0 0px;
+  padding: 0 10px 0 10px;
   border-bottom-width: 1px;
   border-bottom-style: solid;
 }
 td.mat-cell {
-  padding: 0 15px 0 0px;
+  padding: 0 10px 0 10px;
   border-bottom-width: 1px;
   border-bottom-style: solid;
 }

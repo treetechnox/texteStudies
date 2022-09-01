@@ -134,33 +134,7 @@
     "MOUVEMNT.TYPE.NOMINATION": "التعيين",
     "MOUVEMNT.TYPE.CESSATION": "إنهاء مهام"
   },
-  "ADD-MOUVEMENT": {
-    "H5": "المرحلة02: حركة",
-    "TYPE-DECRET": "نوع المرسوم",
-    "NOMINATION": "نوع الحركة:",
-    "ETAT": "حالة الحركة:",
-    "OCCUPE": "يشغل المنصب",
-    "REFERENCE": "رقم المرجع",
-    "DATE": "تاريخ المرحلة",
-    "NOMINATION.MAT-ERROR": "يجب عليك اختيار نوع الحركة!",
-    "ETAT.MAT-ERROR": "يجب عليك اختيار حالة الحركة!",
-    "ORGANISME": "حدد الهيئة",
-    "FONCTION": "حدد الوظيفة",
-    "ANCIEN_CAND": "اختر مرشحًا سابقًا",
-    "ANCIEN_CAND.MAT-LABEL": "قائمة المرشحين السابقين",
-    "PHASE_MOUVEMENT.ETAT": "حدد الحالة",
-    "PHASE_MOUVEMENT.DEMANDE_DECRET": "طلب_المرسوم",
-    "PHASE_MOUVEMENT.ENVOIE_SIGNATURE": "إرسال_التوقيع",
-    "PHASE_MOUVEMENT.SIGNATURE": "التوقيع",
-    "PHASE_MOUVEMENT.ENVOIE_PUBLICATION": "إرسال_للنشر",
-    "PHASE_MOUVEMENT.PUBLICATION": "النشر",
-    "PHASE_MOUVEMENT.DATE_ETAT": "تاريخ الحالة",
-    "TEXTE.REF": "مرجع",
-    "TEXTE.JOURNAL": "جريدة",
-    "TEXTE.PAGEAR": "الصفحة العربية",
-    "TEXTE.PAGEFR": "الصفحة الفرنسية",
-    "BUTTON_ADD": "إضافة"
-  },
+
   "EDIT-MOUVEMENT": {
     "H5": "تعديل حركة",
     "NOMOINATION": "التعيين",
@@ -605,9 +579,14 @@
     "ACTUAL-NATURE": "النوع الحالي:"
   },
 
+  "EDIT-MOUVEMENT": {
+    "TITLE": "تحديث المرحلة"
+  },
+
   "DELETE-MOUVEMENT": {
     "MESSAGE": "هل تريد حذف المرحلة ؟ ",
-    "BUTTON-IGNOR": "إلغاء"
+    "BUTTON-IGNOR": "إلغاء",
+    "CONFIRM-MESSAGE": "إعادة تأكيد الحذف : "
   }
 
 }

@@ -355,3 +355,4 @@ export function HttpLoaderFactory(http: HttpClient) {
   entryComponents: [ /*ConfirmDialogComponent,AddMouvementComponent*/]
 })
 export class AppModule { }
+

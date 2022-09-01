@@ -20,6 +20,7 @@ import {AuthenticationService} from "../service/authentication.service";
 import {AppComponent} from "../app.component";
 import {DeleteMouvementDialogComponent} from "../delete-mouvement-dialog/delete-mouvement-dialog.component";
 import {Phase} from "../phase";
+import {EditMouvementComponent} from "../edit-mouvement/edit-mouvement.component";
 
 @Component({
   selector: 'app-list-mouvement',
@@ -116,9 +117,19 @@ export class ListMouvementComponent implements OnInit {
     return `${this.date.getDate() }-${this.date.getMonth() + 1}-${this.date.getFullYear()}`;
   }
 
-  onEditNature(id:any) {
-
+  onEditMouvement(id:any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data=id;
+    // @ts-ignore
+    dialogConfig.width = '70%';
+    dialogConfig.height = '50%';
+    this.dialog.open(EditMouvementComponent, dialogConfig).afterClosed().subscribe(value => {
+      this.getMouvementsByTexteId(this.texteId);
+    });
   }
+
 
   onDeleteNature(id:any, phase:Phase) {
     const dialogConfig = new MatDialogConfig();
@@ -127,7 +138,7 @@ export class ListMouvementComponent implements OnInit {
     dialogConfig.data= {id, phase};
     // @ts-ignore
     dialogConfig.width = '400px';
-    dialogConfig.height = '150px';
+    dialogConfig.height = '200px';
     this.dialog.open(DeleteMouvementDialogComponent, dialogConfig);
   }
 
