@@ -15,7 +15,7 @@
       <div class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
         <mat-form-field class="example-full-width">
           <mat-label>{{ 'ADD-TEXTE.SECTEUR' | translate }}</mat-label>
-          <mat-select [disabled]="!authService.isAdmin()" required name="etat" [(ngModel)]="selsect"
+          <mat-select [disabled]="!authService.isAdmin()" required name="secteur" [(ngModel)]="selsect"
                       formControlName="secteurMouvementCtrl">
             <mat-option></mat-option>
             <mat-option *ngFor="let sct of secteurs; let i=index" [value]="sct">
@@ -32,7 +32,7 @@
       <div class="col"[ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
         <mat-form-field class="example-full-width">
           <mat-label>{{ 'ADD-TEXTE.PHASE' | translate }}</mat-label>
-          <mat-select required name="etat" [(ngModel)]="mouvement.phase"
+          <mat-select required name="phase" [(ngModel)]="mouvement.phase"
                       (selectionChange)="getSelectedPhase($event)"
                       formControlName="etatMouvementCtrl"
           ><!--(ngModelChange)="makeNominat(mouvement.typeMouvement)"-->

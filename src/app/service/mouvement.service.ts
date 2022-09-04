@@ -79,6 +79,10 @@ export class MouvementService {
       {responseType: 'text'});
   }
 
+  removeMouvement(id:number):Observable<any>{
+    return this.http.delete(`${this.url}mouvement/${id}`, { responseType: 'text' });
+  }
+
   /*getTexteBySommaireArFr(nomfr: string, prenomfr: string):Observable<any> {
     return this.http.get(`${this.url}`);
   }*/

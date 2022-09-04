@@ -131,15 +131,18 @@ export class ListMouvementComponent implements OnInit {
   }
 
 
-  onDeleteNature(id:any, phase:Phase) {
+  onDeleteNature(mouveId:any, phase:Phase) {
+    let txtId = this.texteId ;
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    dialogConfig.data= {id, phase};
+    dialogConfig.data= {mouveId, txtId ,phase};
     // @ts-ignore
     dialogConfig.width = '400px';
     dialogConfig.height = '200px';
-    this.dialog.open(DeleteMouvementDialogComponent, dialogConfig);
+    this.dialog.open(DeleteMouvementDialogComponent, dialogConfig).afterClosed().subscribe(value => {
+      this.getMouvementsByTexteId(this.texteId);
+    });
   }
 
   onSelectFile(event: any,mouvementId:number) {

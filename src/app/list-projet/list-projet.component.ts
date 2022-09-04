@@ -40,6 +40,8 @@ import {MatInput} from "@angular/material/input";
 import {ThemePalette} from "@angular/material/core";
 import {delay, lastValueFrom} from "rxjs";
 import {RapportTextesDetailsComponent} from "../rapport-textes-details/rapport-textes-details.component";
+import {DeleteMouvementDialogComponent} from "../delete-mouvement-dialog/delete-mouvement-dialog.component";
+import {DeleteTexteComponent} from "../delete-texte/delete-texte.component";
 
 export interface MouvementMinistere{
   id: number;
@@ -72,7 +74,7 @@ export class ListProjetComponent implements AfterViewInit {
   columnsToDisplay: string[] = ['id', 'nature','sommaireAr', 'sommaireFr','refer','details'];
 
   texte:Texte=new Texte();
-  passedTexteId!:number;
+  //passedTexteId!:number;
 
   dateFrom: string='';
   dateTo: string='';
@@ -645,7 +647,7 @@ export class ListProjetComponent implements AfterViewInit {
     this.disabled = false;
     this.getListAvissByTxtId(texteId);
 
-    this.passedTexteId = texteId;
+    //this.passedTexteId = texteId;
 
   }
 
@@ -779,5 +781,18 @@ export class ListProjetComponent implements AfterViewInit {
     this.loadTextes();
   }
 
+  onDeleteTexte(id:number, texte: Texte) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data= {id, texte};
+    // @ts-ignore
+    dialogConfig.width = '400px';
+    dialogConfig.height = '200px';
+    this.dialog.open(DeleteTexteComponent, dialogConfig).afterClosed().subscribe(value => {
+      console.log(value);
+      this.loadTextes();
+    });
+  }
 }
 

@@ -173,7 +173,7 @@ export class EditMouvementComponent implements OnInit {
 
     })*/
     this.myformGroup = this._formBuilder.group({
-      etatMouvementCtrl: ['', Validators.required],
+      phaseMouvementCtrl: ['', Validators.required],
       secteurMouvementCtrl: ['', Validators.required],
     });
 
@@ -204,7 +204,10 @@ export class EditMouvementComponent implements OnInit {
   }*/
 
   onSubmitSaveMouvement(){
-
+    console.log(this.mouvement);
+    this.mouvementService.updateMouvement(this.mouvementId,this.mouvement).subscribe(value => {
+      console.log(`the last mouvement ${this.mouvementId} is updated!!!`)
+    })
   }
   /*onSubmitSaveMouvement() {
     /!*this.mouvement.mouvementMinistere*!/
@@ -265,8 +268,14 @@ export class EditMouvementComponent implements OnInit {
   }
   getSelectedPhase(event: any) {
     console.log(event.value);
+    this.mouvement.phase = event.value;
     //this.mouvement.secteur = this.selsect;
 
+  }
+
+  getSelectedSecteur(event:any) {
+    console.log(event.value);
+    this.mouvement.secteur = event.value;
   }
 
 
@@ -317,4 +326,5 @@ export class EditMouvementComponent implements OnInit {
  /* getTexte() {
     console.log(this.texte);
   }*/
+
 }

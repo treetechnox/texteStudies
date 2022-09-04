@@ -587,6 +587,12 @@
     "MESSAGE": "هل تريد حذف المرحلة ؟ ",
     "BUTTON-IGNOR": "إلغاء",
     "CONFIRM-MESSAGE": "إعادة تأكيد الحذف : "
+  },
+
+  "DELETE-TEXTE": {
+    "MESSAGE": "هل تريد حذف النص ؟ ",
+    "BUTTON-IGNOR": "إلغاء",
+    "CONFIRM-MESSAGE": "إعادة تأكيد الحذف : "
   }
 
 }

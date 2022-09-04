@@ -74,4 +74,8 @@ export class TexteService {
     console.log(`${this.url}mouvement/${mouvementId}`);
     return this.http.get(`${this.url}mouvement/${mouvementId}`)
   }
+
+  removeTexte(id:number):Observable<any>{
+    return this.http.delete(`${this.url}texte/${id}`);
+  }
 }
