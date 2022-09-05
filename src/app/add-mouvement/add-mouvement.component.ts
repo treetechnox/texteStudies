@@ -202,6 +202,7 @@ export class AddMouvementComponent implements OnInit {
     })
 
     if(this.mouvement.phase.libelleFr === 'TEXTE PUBLIE'){
+      console.log(this.texteId,this.texte);
       this.texteService.updateTexte(this.texteId,this.texte).subscribe(value => {
         console.log(value);
       })

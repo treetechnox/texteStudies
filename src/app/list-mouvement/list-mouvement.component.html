@@ -132,7 +132,7 @@
                 class="btn btn-light" (click)="showPdf(element.id)"
               ><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button>
             </div>
-            <button
+            <button *ngIf="!isMinistereUser()"
               mat-raised-button
               mat-icon-button
               matTooltip="{{'LIST-MOUVEMENT.TABLE.DELETE-BUTTON' | translate}}"
