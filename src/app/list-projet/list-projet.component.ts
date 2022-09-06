@@ -157,6 +157,7 @@ export class ListProjetComponent implements AfterViewInit {
     this.isLoading=true;
     this.isFilter=false;
     this.authenticated = this.authService.userAuthenticated;
+    let minst  = this.authenticated?.ministere;
     console.log(this.authenticated?.id);
     if (this.isAdmin()){
       this.texteService.getAllTextesByPages(this.page,this.size)
@@ -175,17 +176,19 @@ export class ListProjetComponent implements AfterViewInit {
         this.dataSource.sort = this.sort;
       })
     }else if (this.isMinistereUser()){
-      let str= this.authenticated?.username;
+      console.log(minst)
+      /*let str= this.authenticated?.username;
       let n!: any;
       if(str !==''){
         n = str?.lastIndexOf('_');
         console.log(n);
       }
       let result = str?.substring(n + 1)
-      console.log(result);
+      console.log(result);*/
       /*    this.ministereService.getMinistereById(result).subscribe(value => {
-            console.log(value.libelleFr);*/
-      this.texteService.getAllTextesByMinistere(result as unknown as number)
+            console.log(value.libelleFr);*//*result as unknown as number*/
+      // @ts-ignore
+      this.texteService.getAllTextesByMinistere(minst.id)
         .pipe(delay(1000)).subscribe(value1 => {
         this.isLoading = false;
 
@@ -281,18 +284,23 @@ export class ListProjetComponent implements AfterViewInit {
     const filterValue = input;
     console.log(filterValue);
 
-    this.texteService.getAllTextesLikeSommaire(filterValue).pipe(delay(1000)).subscribe(value => {
+    if (this.isAdmin()){
+      this.texteService.getAllTextesLikeSommaire(filterValue).pipe(delay(1000)).subscribe(value => {
+        this.isLoading = false;
+        this.textes = value.sort((a:any,b:any) => b.id - a.id);
+        console.log(this.textes);
+        this.dataSource = new MatTableDataSource(this.textes);
+        this.dataSource.paginator = this.paginator!;
+        this.totalElements = this.textes.length
+        console.log(this.textes.length);
+        this.dataSource.sort = this.sort!;
+      });
+    }else{
       this.isLoading = false;
-      this.textes = value.sort((a:any,b:any) => b.id - a.id);
-      console.log(this.textes);
-      this.dataSource = new MatTableDataSource(this.textes);
-      this.dataSource.paginator = this.paginator!;
-      this.totalElements = this.textes.length
-      console.log(this.textes.length);
-      this.dataSource.sort = this.sort!;
-    });
+      this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
 
-  /*  this.dataSource.filter = filterValue.trim().toLowerCase();*/
+  /*  */
   }
 
   onEditTexte(id: any) {

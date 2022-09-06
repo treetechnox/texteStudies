@@ -1,4 +1,5 @@
 import {Secteur} from './Secteur';
+import {Ministere} from "./Ministere";
 
 export class User {
   id!: number;
@@ -8,4 +9,5 @@ export class User {
   password!: string;
   role!: string;
   secteur!: Secteur;
+  ministere!: Ministere;
 }

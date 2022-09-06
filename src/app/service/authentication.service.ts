@@ -120,7 +120,8 @@ export class AuthenticationService {
         username:user.username,
         password:user.password,
         role:user.role,
-        secteur: user.secteur
+        secteur: user.secteur,
+        ministere: user.ministere
       };
       this.isAuthenticated = true;
       this.token = t;

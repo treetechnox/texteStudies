@@ -32,6 +32,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class AddUserComponent implements OnInit {
   user: User = new User();
   secteurs: Secteur[]=[];
+  ministere: Ministere= new Ministere();
   ministeres: Ministere[]=[];
   myForm!: FormGroup;
 
@@ -145,6 +146,10 @@ export class AddUserComponent implements OnInit {
 
 
   getUserMinistere($event: MatSelectChange) {
+
+    this.user.ministere = $event.value;
+    console.log(this.user.ministere);
+
     let s = $event.value.libelleFr;
      if(s.indexOf("MINISTERE DE L\'")>-1){
        s=s.replace("MINISTERE DE L\'",'');
