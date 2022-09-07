@@ -28,6 +28,80 @@
 </div>
 <br><br>
 <div id="table" class="table-responsive" [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }">
+
+  <div class="entete"
+       [style]="{'direction':localStorageItem('lge') === 'ar' ? 'rtl' : 'ltr'}">
+    <mat-label >{{ 'ADD-DETAIL.RESULTAT' | translate}}</mat-label>
+  </div>
+  <div [style]="{'direction':localStorageItem('lge') === 'ar' ? 'rtl' : 'ltr'}">
+    <mat-label >{{ 'ADD-DETAIL.NBRE-TEXTE' | translate}}</mat-label>
+    <br>
+    <span>{{data.totalElt}}</span> <!--totalElements/phase/nature/isActive/secteur/ministere-->
+  </div>
+  <div [style]="{'direction':localStorageItem('lge') === 'ar' ? 'rtl' : 'ltr'}">
+
+
+    <mat-label >{{ 'ADD-DETAIL.CRITERE' | translate}}</mat-label>
+    <br>
+    <br>
+    <div *ngIf="(data.phase | json) !== ({} | json)">
+      <mat-label>{{'LIST-PROJET.ADVANCED-FILTER.PHASE' | translate}}</mat-label>:
+      <span>
+          <div [ngSwitch]="app.localStorageItem('lge')">
+            <div *ngSwitchCase="'ar'" class="myfilterar">{{data.phase?.libelleAr}}</div>
+            <div *ngSwitchCase="'fr'" class="myfilterfr">{{data.phase?.libelleFr}}</div>
+            <div *ngSwitchDefault>This is Default</div>
+          </div>
+        </span><br>
+    </div>
+
+    <div *ngIf="(data.nature | json) !== ({} | json)">
+      <mat-label>{{'LIST-PROJET.ADVANCED-FILTER.NATURE' | translate}}</mat-label>:
+      <span>
+          <div [ngSwitch]="app.localStorageItem('lge')">
+            <div *ngSwitchCase="'ar'" class="myfilterar">{{data.nature?.libelleAr}}</div>
+            <div *ngSwitchCase="'fr'" class="myfilterfr">{{data.nature?.libelleFr}}</div>
+            <div *ngSwitchDefault>This is Default</div>
+          </div>
+        </span><br>
+    </div>
+
+    <div *ngIf="data.isActive">
+      <mat-label>{{'LIST-PROJET.ADVANCED-FILTER.ISACTIVE' | translate}}</mat-label>:
+      <span>
+          <div [ngSwitch]="app.localStorageItem('lge')">
+            <div *ngSwitchCase="'ar'" class="myfilterar"><div>{{data.isActive == true ?'نعم':'لا'}}</div></div>
+            <div *ngSwitchCase="'fr'" class="myfilterfr"><div>{{data.isActive == true ?'OUI':'NON'}}</div></div>
+            <div *ngSwitchDefault>This is Default</div>
+          </div>
+        </span><br>
+    </div>
+
+    <div *ngIf="(data.secteur | json) !== ({} | json)">
+      <mat-label>{{'LIST-PROJET.ADVANCED-FILTER.SECTEUR' | translate}}</mat-label>:
+      <span>
+          <div [ngSwitch]="app.localStorageItem('lge')">
+            <div *ngSwitchCase="'ar'" class="myfilterar">{{data.secteur?.libelleAr}}</div>
+            <div *ngSwitchCase="'fr'" class="myfilterfr">{{data.secteur?.libelleFr}}</div>
+            <div *ngSwitchDefault>This is Default</div>
+          </div>
+        </span><br>
+    </div>
+
+    <div *ngIf="(data.ministere | json) !== ({} | json)">
+      <mat-label>{{'LIST-PROJET.ADVANCED-FILTER.MINISTERE' | translate}}</mat-label>:
+      <span>
+          <div [ngSwitch]="app.localStorageItem('lge')">
+            <div *ngSwitchCase="'ar'" class="myfilterar">{{data.ministere?.libelleAr}}</div>
+            <div *ngSwitchCase="'fr'" class="myfilterfr">{{data.ministere?.libelleFr}}</div>
+            <div *ngSwitchDefault>This is Default</div>
+          </div>
+        </span><br>
+    </div>
+
+    <br>
+  </div>
+
   <table id="excel-table" class="table table-bordered table-light" *ngIf="textes"
          matSort (matSortChange)="sortData($event)">
     <thead class="thead-dark example-full-width">

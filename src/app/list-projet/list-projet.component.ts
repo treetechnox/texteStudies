@@ -131,8 +131,8 @@ export class ListProjetComponent implements AfterViewInit {
 
 /*  myActivity = new Map();*/
 
-  activityAR:Array<string>=['لا','نعم']!;
-  activityFR:Array<string>=['NON','OUI']!;
+  activityAR:Array<string>=['لا','المرحلة الحالية']!;
+  activityFR:Array<string>=['NON','PHASE ACTUEL']!;
 
   isLoading=true;
 
@@ -544,10 +544,11 @@ export class ListProjetComponent implements AfterViewInit {
     sub_url+='&sort=id,desc&size='+100000;
     console.log(sub_url);
 
+
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    dialogConfig.data=sub_url;
+    dialogConfig.data={url:sub_url, totalElt:this.totalElements, phase:this.phase,nature:this.nature,isActive:this.isActive,secteur:this.secteur,ministere:this.ministere};
     // @ts-ignore
     dialogConfig.width = '90%';
     dialogConfig.height = '90%';

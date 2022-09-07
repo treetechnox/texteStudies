@@ -46,7 +46,7 @@ export class RapportJournalierComponent implements OnInit {
 
   constructor(private texteService: TexteService,public _translateSrvc: TranslateService,
               @Inject(LOCALE_ID) public locale :string,
-              @Inject(MAT_DIALOG_DATA) public url: string,
+              @Inject(MAT_DIALOG_DATA) public data: any,
               public app:AppComponent,) {
     setInterval(() => {
       this.aujourdhui = new Date();
@@ -56,13 +56,13 @@ export class RapportJournalierComponent implements OnInit {
 
 
   ngOnInit(){
-    console.log(this.url);
+    console.log(this.data.url);
     this.getTextesByUrl();
 
   }
 
   getTextesByUrl(){
-    this.texteService.getAllTextesByUrl(this.url).subscribe(value => {
+    this.texteService.getAllTextesByUrl(this.data.url).subscribe(value => {
 let mouvements:Mouvement[]=[];
       // @ts-ignore
       mouvements = value._embedded.mouvements;
