@@ -28,6 +28,7 @@
 
 
           <button [disabled]="!input.value?.trim()"
+                  matTooltip= "{{'LIST-PROJET.ADVANCED-FILTER.BUTTON-TOOLTIP' | translate}}"
                   class="btn btn-primary" (click)="applyFilter(input.value)">
             <i class="fa fa-search" aria-hidden="true"></i>
           </button>
@@ -35,7 +36,7 @@
                 mat-raised-button
                 matTooltip= "{{'ADD-DETAIL.BUTTON-RESET' | translate}}"
                 (click)="input.value='';loadTextes()">
-          <i class="fa fa-refresh fa-2x" aria-hidden="true"></i>
+          <i class="fa fa-refresh" aria-hidden="true"></i>
           {{'ADD-DETAIL.BUTTON-RESET' | translate}}
         </button>
 
@@ -232,21 +233,21 @@
                   mat-raised-button
                   matTooltip= "{{'LIST-PROJET.ADVANCED-FILTER.BUTTON-TOOLTIP' | translate}}"
                   (click)="OnFilter()">
-            <i class="fa fa-filter fa-2x" aria-hidden="true"></i>
+            <i class="fa fa-filter" aria-hidden="true"></i>
             <!--{{'LIST-PROJET.ADVANCED-FILTER.BUTTON' | translate}}-->
           </button>
           <button mat-button color="warn"
                   mat-raised-button
                   matTooltip= "{{'ETAT-SORTIE.PRINTING' | translate}}"
                   (click)="OnPrint()">
-            <i class="fa fa-print fa-2x" aria-hidden="true"></i>
+            <i class="fa fa-print" aria-hidden="true"></i>
             <!--{{'ETAT-SORTIE.PRINTING' | translate}}-->
           </button>
           <button mat-button color="accent"
                   mat-raised-button
                   matTooltip= "{{'ADD-DETAIL.BUTTON-RESET' | translate}}"
                   (click)="resetForm()">
-            <i class="fa fa-refresh fa-2x" aria-hidden="true"></i>
+            <i class="fa fa-refresh" aria-hidden="true"></i>
             <!--{{'ADD-DETAIL.BUTTON-RESET' | translate}}-->
           </button>
         </form>

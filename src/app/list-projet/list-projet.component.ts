@@ -298,6 +298,8 @@ export class ListProjetComponent implements AfterViewInit {
     }else{
       this.isLoading = false;
       this.dataSource.filter = filterValue.trim().toLowerCase();
+      console.log(this.dataSource.filteredData.length)
+      this.totalElements = this.dataSource.filteredData.length;
     }
 
   /*  */
@@ -522,6 +524,8 @@ export class ListProjetComponent implements AfterViewInit {
 
   OnPrint() {
 
+
+
     let sub_url = 'http://localhost:8083/mouvements?';
     if(this.mouvement.phase?.id>0)
       sub_url+=`&phase=${this.mouvement.phase?.id}`;
@@ -541,6 +545,14 @@ export class ListProjetComponent implements AfterViewInit {
     if (this.dateTo!=='')
       sub_url+=`&datePhase=${(this.dateTo)}`;
 
+    if(this.isMinistereUser()){
+      console.log(this.authService.userAuthenticated?.ministere.id);
+      sub_url+=`&mouvementMinisteres.ministere=${this.authService.userAuthenticated?.ministere.id}`
+    }
+    if(!this.isMinistereUser() && !this.isAdmin()){
+      console.log(this.authService.userAuthenticated?.secteur.id);
+      sub_url+=`&secteur=${this.authService.userAuthenticated?.secteur.id}`;
+    }
     sub_url+='&sort=id,desc&size='+100000;
     console.log(sub_url);
 
