@@ -269,10 +269,10 @@
        }"
   >
     <div class="container-fluid" style="display: flex; justify-content: space-between">
-      <div class="myhome">
-        <a class="navbar-brand" [routerLink]="'/lesprojets'">
-          <i class="fa fa-home fa-2x" aria-hidden="true"></i>
-        </a>
+
+      <a class="navbar-brand" [routerLink]="'/lesprojets'">
+        <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+      </a>
         <button class="navbar-toggler"
                 type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent"
@@ -280,135 +280,140 @@
                 aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-      </div>
-      <div class="collapse navbar-collapse"
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent"
            [style]="{'text-align':localStorageItem('lge') === 'ar' ? 'right' : 'left'}">
+
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown" *ngIf="!isMinistereUser()" >
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               {{'NAVBAR.TEXTE' | translate}}
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" [routerLink]="'/lesprojets'">
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" [routerLink]="'/lesprojets'">
                 {{'NAVBAR.TEXTE.LIST' | translate}}
-              </a></li>
-              <li><a class="dropdown-item" [routerLink]="'/lajoutprojet'">
-                {{'NAVBAR.TEXTE.ADD' | translate}}</a></li>
-              <hr class="dropdown-divider">
+              </a>
+              <div class="dropdown-divider" style="border-color:white;"></div>
+              <a class="dropdown-item" [routerLink]="'/lajoutprojet'">
+                {{'NAVBAR.TEXTE.ADD' | translate}}</a>
+              <div class="dropdown-divider"></div>
 
-              <li><a class="dropdown-item" [routerLink]="'/lesrapports'">
-                {{'NAVBAR.TEXTE.RAPPORT' | translate}}</a></li>
+              <!--<a class="dropdown-item" [routerLink]="'/lesrapports'">
+                {{'NAVBAR.TEXTE.RAPPORT' | translate}}</a>-->
               <!--<li><a class="dropdown-item" href="#">Something else here</a></li>-->
-            </ul>
+            </div>
           </li>
           <li class="nav-item dropdown" *ngIf="isAdmin()">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               {{'NAVBAR.NATURE' | translate}}
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
-              <li><a class="dropdown-item" [routerLink]="'/lesnatures'">
-                {{'NAVBAR.NATURE.LIST' | translate}}</a></li>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+              <a class="dropdown-item" [routerLink]="'/lesnatures'">
+                {{'NAVBAR.NATURE.LIST' | translate}}</a>
               <hr class="dropdown-divider">
-              <li><a class="dropdown-item" [routerLink]="'/lajoutnature'">{{'NAVBAR.NATURE.ADD' | translate}}</a></li>
-            </ul>
+              <div class="dropdown-divider" style="border-color:white;"></div>
+              <a class="dropdown-item" [routerLink]="'/lajoutnature'">{{'NAVBAR.NATURE.ADD' | translate}}</a>
+            </div>
           </li>
           <li class="nav-item dropdown" *ngIf="isAdmin()">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               {{'NAVBAR.PHASE' | translate}}
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
-              <li><a class="dropdown-item" [routerLink]="'/lesphases'">{{'NAVBAR.PHASE.LIST' | translate}}</a></li>
-              <hr class="dropdown-divider">
-              <li><a class="dropdown-item" [routerLink]="'/lajoutphase'">{{'NAVBAR.PHASE.ADD' | translate}}</a></li>
-            </ul>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+              <a class="dropdown-item" [routerLink]="'/lesphases'">{{'NAVBAR.PHASE.LIST' | translate}}</a>
+              <div class="dropdown-divider" style="border-color:white;"></div>
+              <a class="dropdown-item" [routerLink]="'/lajoutphase'">{{'NAVBAR.PHASE.ADD' | translate}}</a>
+            </div>
           </li>
           <li class="nav-item dropdown" *ngIf="isAdmin()">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               {{'NAVBAR.MINISTERE' | translate}}
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
-              <li><a class="dropdown-item" [routerLink]="'/lesministeres'">{{'NAVBAR.MINISTERE.LIST' | translate}}</a></li>
-              <hr class="dropdown-divider">
-              <li><a class="dropdown-item" [routerLink]="'/lajoutministere'">{{'NAVBAR.MINISTERE.ADD' | translate}}</a></li>
-            </ul>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+              <a class="dropdown-item" [routerLink]="'/lesministeres'">{{'NAVBAR.MINISTERE.LIST' | translate}}</a>
+              <div class="dropdown-divider" style="border-color:white;"></div>
+              <a class="dropdown-item" [routerLink]="'/lajoutministere'">{{'NAVBAR.MINISTERE.ADD' | translate}}</a>
+            </div>
           </li>
           <li class="nav-item dropdown" *ngIf="isAdmin()">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               {{'NAVBAR.SECTEUR' | translate}}
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown4">
-              <li><a class="dropdown-item" [routerLink]="'/lessecteurs'">
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
+              <a class="dropdown-item" [routerLink]="'/lessecteurs'">
                 {{'NAVBAR.SECTEUR.LIST' | translate}}
-              </a></li>
-              <hr class="dropdown-divider">
-              <li><a class="dropdown-item" [routerLink]="'/lajoutsecteur'">
+              </a>
+              <div class="dropdown-divider" style="border-color:white;"></div>
+              <a class="dropdown-item" [routerLink]="'/lajoutsecteur'">
                 {{'NAVBAR.SECTEUR.ADD' | translate}}
-              </a></li>
-            </ul>
+              </a>
+            </div>
           </li>
           <li class="nav-item dropdown" *ngIf="isAdmin()">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown5" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               {{ "NAVBAR.USER" | translate }}
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown5">
-              <li><a class="dropdown-item" [routerLink]="'/lesusers'">
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown5">
+              <a class="dropdown-item" [routerLink]="'/lesusers'">
                 {{"NAVBAR.USER.LIST" | translate}}
-              </a></li>
-              <hr class="dropdown-divider">
-              <li><a class="dropdown-item" [routerLink]="'/signup'">
+              </a>
+              <div class="dropdown-divider" style="border-color:white;"></div>
+              <a class="dropdown-item" [routerLink]="'/signup'">
                 {{"NAVBAR.USER.ADD" | translate}}
-              </a></li>
-            </ul>
+              </a>
+            </div>
           </li>
           <li class="nav-item dropdown" *ngIf="isMinistereUser()">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown6"
                role="button" data-bs-toggle="dropdown" aria-expanded="false">
               {{'NAVBAR.CONSULT' | translate}}
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown6">
-              <li><a class="dropdown-item" [routerLink]="'/lesprojets'">
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown6">
+              <a class="dropdown-item" [routerLink]="'/lesprojets'">
                 {{'NAVBAR.TEXTE.LIST' | translate}}
                 <!--{{
                 "HOME.UTILISATEURS.LIST" | translate
-                }}--></a></li>
-              <hr class="dropdown-divider">
-              <li><a class="dropdown-item" (click)="openApropos()" ><!--[routerLink]="'/apropos'"-->
+                }}--></a>
+            <div class="dropdown-divider" style="border-color:white;"></div>
+              <a class="dropdown-item" (click)="openApropos()" ><!--[routerLink]="'/apropos'"-->
                 {{'NAVBAR.LINK' | translate}}
                 <!--{{
                 "HOME.UTILISATEURS.AJOUT" | translate
-                }}--></a></li>
-            </ul>
+                }}--></a>
+            </div>
           </li>
         </ul>
 
-      </div>
-      <div class="d-flex">
-        <span style="margin: 2px;"></span>
-        <button class="dcnx btn btn-outline-light" type="submit"
-                matTooltip="DECONNEXION"
-                (click)="onLogout()"
-                style="background-color: #ee8488;"
-        >
-          <div class="dcnx">
-            <i class="dcnx-elt fa fa-sign-out fa-2x" aria-hidden="true"></i
-            ><span class="dcnx-elt">{{
-            authService.userAuthenticated?.username
-            }}</span>
-          </div>
+        <div class="d-flex">
+          <span style="margin: 2px;"></span>
+          <button class="dcnx btn btn-outline-light" type="submit"
+                  matTooltip="DECONNEXION"
+                  (click)="onLogout()"
+                  style="background-color: #ee8488;"
+          >
+            <div class="dcnx">
+              <i class="dcnx-elt fa fa-sign-out fa-2x" aria-hidden="true"></i
+              ><span class="dcnx-elt">{{
+              authService.userAuthenticated?.username
+              }}</span>
+            </div>
 
-        </button>
+          </button>
 
-        <select
-          style="width: 55px; margin: 5px;"
-          class="btn_scnd"
-          #langselect
-          (change)="changeLang(langselect.value)"
-        >
-          <option *ngFor="let lang of translate.getLangs()" [value]="lang">{{
-            lang
-            }}</option>
-        </select>
+          <select
+            style="width: 55px; margin: 5px;"
+            class="btn_scnd"
+            #langselect
+            (change)="changeLang(langselect.value)"
+          >
+            <option *ngFor="let lang of translate.getLangs()" [value]="lang">{{
+              lang
+              }}</option>
+          </select>
+        </div>
+
       </div>
+
     </div>
   </nav>
 

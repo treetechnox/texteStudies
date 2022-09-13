@@ -80,6 +80,8 @@ export class ListProjetComponent implements AfterViewInit {
   dateTo: string='';
 
   allAvis:string='';
+  filtredTexte:Texte[]=[];
+
 
   totalElements : number | undefined;
   totalPages: number | undefined;
@@ -288,6 +290,7 @@ export class ListProjetComponent implements AfterViewInit {
       this.texteService.getAllTextesLikeSommaire(filterValue).pipe(delay(1000)).subscribe(value => {
         this.isLoading = false;
         this.textes = value.sort((a:any,b:any) => b.id - a.id);
+        this.filtredTexte = this.textes;
         console.log(this.textes);
         this.dataSource = new MatTableDataSource(this.textes);
         this.dataSource.paginator = this.paginator!;
@@ -298,6 +301,8 @@ export class ListProjetComponent implements AfterViewInit {
     }else{
       this.isLoading = false;
       this.dataSource.filter = filterValue.trim().toLowerCase();
+      this.filtredTexte = this.dataSource.filteredData;
+      console.log(this.filtredTexte);
       console.log(this.dataSource.filteredData.length)
       this.totalElements = this.dataSource.filteredData.length;
     }
@@ -522,10 +527,7 @@ export class ListProjetComponent implements AfterViewInit {
     console.log(this.mouvement);
   }*/
 
-  OnPrint() {
-
-
-
+  OnPrintAdvanced() {
     let sub_url = 'http://localhost:8083/mouvements?';
     if(this.mouvement.phase?.id>0)
       sub_url+=`&phase=${this.mouvement.phase?.id}`;
@@ -560,7 +562,20 @@ export class ListProjetComponent implements AfterViewInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    dialogConfig.data={url:sub_url, totalElt:this.totalElements, phase:this.phase,nature:this.nature,isActive:this.isActive,secteur:this.secteur,ministere:this.ministere};
+    dialogConfig.data={textes:this.filtredTexte,url:sub_url, totalElt:this.totalElements, phase:this.phase,nature:this.nature,isActive:this.isActive,secteur:this.secteur,ministere:this.ministere};
+    // @ts-ignore
+    dialogConfig.width = '90%';
+    dialogConfig.height = '90%';
+    this.dialog.open(RapportJournalierComponent, dialogConfig);
+
+
+  }
+  OnPrint() {
+    console.log(this.filtredTexte);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data={textes:this.filtredTexte};
     // @ts-ignore
     dialogConfig.width = '90%';
     dialogConfig.height = '90%';

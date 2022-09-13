@@ -6,7 +6,7 @@ import {AppComponent} from "../app.component";
 import {Sort} from "@angular/material/sort";
 
 import * as XLSX from 'xlsx';
-import {Observable} from 'rxjs';
+import {delay, Observable} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
 import {Texte} from "../Texte";
 import {TexteService} from "../service/texte.service";
@@ -14,6 +14,7 @@ import {formatDate} from "@angular/common";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {MatTableDataSource} from "@angular/material/table";
 import {Mouvement} from "../Mouvement";
+import {AuthenticationService} from "../service/authentication.service";
 /*
 import * as XLSX from 'xlsx';
 import * as jspdf from 'jspdf';
@@ -45,6 +46,7 @@ export class RapportJournalierComponent implements OnInit {
 
 
   constructor(private texteService: TexteService,public _translateSrvc: TranslateService,
+              private authService:AuthenticationService,
               @Inject(LOCALE_ID) public locale :string,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public app:AppComponent,) {
@@ -56,14 +58,19 @@ export class RapportJournalierComponent implements OnInit {
 
 
   ngOnInit(){
-    console.log(this.data.url);
-    this.getTextesByUrl();
-
+    console.log(this.data);
+    if(this.data.textes.length === 0){
+      console.log(this.data.textes);
+      this.sortedData = this.data.textes; console.log(this.sortedData);
+    }else {
+      this.getTextesByUrl();
+    }
   }
+
 
   getTextesByUrl(){
     this.texteService.getAllTextesByUrl(this.data.url).subscribe(value => {
-let mouvements:Mouvement[]=[];
+    let mouvements:Mouvement[]=[];
       // @ts-ignore
       mouvements = value._embedded.mouvements;
       console.log(mouvements);

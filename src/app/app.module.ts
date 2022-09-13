@@ -117,6 +117,7 @@ import { RapportTextesDetailsComponent } from './rapport-textes-details/rapport-
 import { EditMouvementComponent } from './edit-mouvement/edit-mouvement.component';
 import { DeleteMouvementDialogComponent } from './delete-mouvement-dialog/delete-mouvement-dialog.component';
 import { DeleteTexteComponent } from './delete-texte/delete-texte.component';
+import { ContactusComponent } from './contactus/contactus.component';
 
 
 
@@ -180,6 +181,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     EditMouvementComponent,
     DeleteMouvementDialogComponent,
     DeleteTexteComponent,
+    ContactusComponent,
   ],
     imports: [
         FormsModule,

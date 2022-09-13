@@ -1,0 +1,45 @@
+<div class="contactus">
+  <div class="sub-contactus">
+  <div class="content">
+    <div class="left-side">
+      <div class="address details">
+        <i class="fa fa-map-marker"></i>
+        <div class="topic">{{"CONTACTUS.ADRESS-TITLE" | translate}}</div>
+        <div class="text-one">{{"CONTACTUS.ADRESS1" | translate}}</div>
+        <div class="text-two">{{"CONTACTUS.ADRESS2" | translate}}</div>
+      </div>
+      <div class="phone details">
+        <i class="fa fa-phone"></i>
+        <div class="topic">{{"CONTACTUS.PHONE-TITLE" | translate}}</div>
+        <div class="text-one"> 021.68.65.51 </div>
+      </div>
+      <div class="email details">
+        <i class="fa fa-envelope"></i>
+        <div class="topic">{{"CONTACTUS.EMAIL-TITLE" | translate}}</div>
+        <div class="text-one">sgg@joradp.com</div>
+      </div>
+    </div>
+    <div class="right-side"
+         [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
+      <div class="topic-text">{{"CONTACTUS.SENDUS-TITLE" | translate}}</div>
+      <p>{{"CONTACTUS.SENDUS-MESSAGE" | translate}}</p>
+      <form action="#">
+        <div class="input-box">
+          <input type="text" placeholder='{{"CONTACTUS.NAME" | translate}}'>
+        </div>
+        <div class="input-box">
+          <input type="text" placeholder='{{"CONTACTUS.EMAIL" | translate}}'>
+        </div>
+        <div class="input-box message-box">
+          <textarea  matInput placeholder="{{'CONTACTUS.MESSAGE'|translate}}"
+                     required type="text"></textarea><!-- [(ngModel)]="texte.sommaireAr"
+                     name="firstName" formControlName="sommaireArCtrl"-->
+        </div>
+        <div class="button">
+          <input type="button" value='{{"CONTACTUS.SEND-BUTTON" | translate}}' >
+        </div>
+      </form>
+    </div>
+  </div>
+  </div>
+</div>

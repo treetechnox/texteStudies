@@ -28,6 +28,7 @@ import {NotFoundComponent} from "./not-found/not-found.component";
 import {RapportJournalierComponent} from "./rapport-journalier/rapport-journalier.component";
 import {PortailMinisteresComponent} from "./portail-ministeres/portail-ministeres.component";
 import {ListCorrespondanceComponent} from "./list-correspondance/list-correspondance.component";
+import {ContactusComponent} from "./contactus/contactus.component";
 
 
 const externalUrlProvider = new InjectionToken('externalUrlRedirectResolver');
@@ -46,6 +47,7 @@ const routes: Routes = [{ path: '', redirectTo : 'login', pathMatch : 'full' },
   { path: 'lesusers', component : ListUserComponent},
   { path: 'lesobservateurs', component : ObservateurComponent},
   { path: 'apropos', component : AproposComponent},
+  { path: 'contactus', component : ContactusComponent},
 
   {
     path: 'externalRedirect',
