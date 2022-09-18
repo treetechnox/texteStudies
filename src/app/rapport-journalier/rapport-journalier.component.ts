@@ -43,6 +43,7 @@ export class RapportJournalierComponent implements OnInit {
   fileName= `RapportTextes_${formatDate(new Date().toDateString(),"dd-MM-yyyy",this.locale)}.xlsx`;
   textes: Texte[]=[];
   aujourdhui: Date =new Date();
+  isLoading= true;
 
 
   constructor(private texteService: TexteService,public _translateSrvc: TranslateService,
@@ -59,9 +60,12 @@ export class RapportJournalierComponent implements OnInit {
 
   ngOnInit(){
     console.log(this.data);
-    if(this.data.textes.length === 0){
+    if(this.data.textes && this.data.textes.length > 0){
+      this.isLoading=true;
       console.log(this.data.textes);
       this.sortedData = this.data.textes; console.log(this.sortedData);
+      this.data.totalElt = this.sortedData.length
+      this.isLoading=false;
     }else {
       this.getTextesByUrl();
     }
@@ -69,6 +73,7 @@ export class RapportJournalierComponent implements OnInit {
 
 
   getTextesByUrl(){
+    this.isLoading=true;
     this.texteService.getAllTextesByUrl(this.data.url).subscribe(value => {
     let mouvements:Mouvement[]=[];
       // @ts-ignore
@@ -76,13 +81,14 @@ export class RapportJournalierComponent implements OnInit {
       console.log(mouvements);
 
       mouvements.forEach(value1 => {
-        this.texteService.getTexteByMouvementId(value1.id).subscribe(texte=>{
+        this.texteService.getTexteByMouvementId(value1.id).pipe(delay(1000)).subscribe(texte=>{
 
           if (!this.textes.some((item) => item.id == texte.id)) {
             this.textes.push(texte);
           }
-          console.log(this.textes);
-          this.sortedData = this.textes; console.log(this.sortedData)
+          //console.log(this.textes);
+          this.sortedData = this.textes; //console.log(this.sortedData)
+          this.isLoading=false;
         })
       })
     });

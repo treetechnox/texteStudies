@@ -23,21 +23,65 @@
          [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
       <div class="topic-text">{{"CONTACTUS.SENDUS-TITLE" | translate}}</div>
       <p>{{"CONTACTUS.SENDUS-MESSAGE" | translate}}</p>
-      <form action="#">
-        <div class="input-box">
-          <input type="text" placeholder='{{"CONTACTUS.NAME" | translate}}'>
+      <br>
+      <form [formGroup]="form" (ngSubmit)="sendMessage()">
+        <div class="input-box form-group">
+          <mat-label>{{ 'ADD-TEXTE.SECTEUR' | translate }}</mat-label>
+          <select
+            name="secteur"
+            id="secteur"
+            formControlName="secteur"
+            class="form-select form-select-lg mb-3 form-group">
+            <option></option>
+            <option *ngFor="let secteur of secteurs" [value]="secteur.id">
+              <div [ngSwitch]="app.localStorageItem('lge')">
+                <div *ngSwitchCase="'ar'">{{secteur?.libelleAr}}</div>
+                <div *ngSwitchCase="'fr'">{{secteur?.libelleFr}}</div>
+                <div *ngSwitchDefault>No Result</div>
+              </div>
+            </option>
+          </select>
+          <div *ngIf="f['secteur'].touched && f['secteur'].invalid" class="alert alert-danger">
+            <div *ngIf="f['secteur'].errors && f['secteur'].errors['required']">{{'CONTACTUS.SECTEUR-REQUIRE'|translate}}</div>
+          </div>
         </div>
-        <div class="input-box">
-          <input type="text" placeholder='{{"CONTACTUS.EMAIL" | translate}}'>
+        <br>
+        <div class="input-box form-group">
+          <input
+            id="name"
+            formControlName="name"
+            type="text"
+            placeholder='{{"CONTACTUS.NAME" | translate}}'
+            class="form-control"
+          >
+          <div *ngIf="f['name'].touched && f['name'].invalid" class="alert alert-danger">
+            <div *ngIf="f['name'].errors && f['name'].errors['required']">{{'CONTACTUS.NAME-REQUIRE'|translate}}</div>
+            <div *ngIf="f['name'].errors && f['name'].errors['minlength']">{{'CONTACTUS.NAME-PLUSTHREE'|translate}}</div>
+          </div>
         </div>
-        <div class="input-box message-box">
-          <textarea  matInput placeholder="{{'CONTACTUS.MESSAGE'|translate}}"
-                     required type="text"></textarea><!-- [(ngModel)]="texte.sommaireAr"
-                     name="firstName" formControlName="sommaireArCtrl"-->
+        <div class="input-box form-group">
+          <input
+            id="email"
+            formControlName="email"
+            type="text"
+            placeholder='{{"CONTACTUS.EMAIL" | translate}}'
+            class="form-control"
+          >
+          <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger">
+            <div *ngIf="f['email'].errors && f['email'].errors['required']">{{'CONTACTUS.EMAIL-REQUIRE'|translate}}</div>
+            <div *ngIf="f['email'].errors && f['email'].errors['email']">{{'CONTACTUS.EMAIL-VALID'|translate}}</div>
+          </div>
+        </div>
+        <div class="input-box message-box form-group">
+          <textarea formControlName="message" matInput placeholder="{{'CONTACTUS.MESSAGE'|translate}}"
+                     required type="text"></textarea>
+          <div *ngIf="f['message'].touched && f['message'].invalid" class="alert alert-danger">
+            <div *ngIf="f['message'].errors && f['message'].errors['required']">{{'CONTACTUS.MESSAGE-REQUIRE'|translate}}</div>
+          </div>
         </div>
         <div class="button">
-          <input type="button" value='{{"CONTACTUS.SEND-BUTTON" | translate}}' >
-        </div>
+          <button class="btn btn-primary" [disabled]="form.invalid" type="submit">{{"CONTACTUS.SEND-BUTTON" | translate}}</button>
+    </div>
       </form>
     </div>
   </div>

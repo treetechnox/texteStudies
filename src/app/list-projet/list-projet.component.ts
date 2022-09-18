@@ -137,6 +137,7 @@ export class ListProjetComponent implements AfterViewInit {
   activityFR:Array<string>=['NON','PHASE ACTUEL']!;
 
   isLoading=true;
+  isSearched=false;
 
   constructor(private texteService: TexteService,
               private avisService:AvisService,
@@ -359,6 +360,7 @@ export class ListProjetComponent implements AfterViewInit {
   }
 
   async OnFilter() {
+    this.isSearched=true;
     this.isLoading = true;
     // @ts-ignore
     this.mouvements = [];
@@ -562,7 +564,7 @@ export class ListProjetComponent implements AfterViewInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    dialogConfig.data={textes:this.filtredTexte,url:sub_url, totalElt:this.totalElements, phase:this.phase,nature:this.nature,isActive:this.isActive,secteur:this.secteur,ministere:this.ministere};
+    dialogConfig.data={/*textes:this.filtredTexte,*/url:sub_url, totalElt:this.totalElements, phase:this.phase,nature:this.nature,isActive:this.isActive,secteur:this.secteur,ministere:this.ministere};
     // @ts-ignore
     dialogConfig.width = '90%';
     dialogConfig.height = '90%';
@@ -575,7 +577,7 @@ export class ListProjetComponent implements AfterViewInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    dialogConfig.data={textes:this.filtredTexte};
+    dialogConfig.data={textes:this.filtredTexte, totalElt:this.filtredTexte.length};
     // @ts-ignore
     dialogConfig.width = '90%';
     dialogConfig.height = '90%';
@@ -776,7 +778,7 @@ export class ListProjetComponent implements AfterViewInit {
   }
 
   resetForm() {
-
+    this.isSearched=false;
     this.page=0;
     this.size=15;
 

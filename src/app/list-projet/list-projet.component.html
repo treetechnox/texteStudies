@@ -31,7 +31,8 @@
                   class="btn btn-primary" (click)="applyFilter(input.value)">
             <i class="fa fa-search" aria-hidden="true"></i>
           </button>
-          <button mat-button color="warn"
+          <button [disabled]="!this.isFilter"
+                  mat-button color="warn"
                   mat-raised-button
                   matTooltip= "{{'ETAT-SORTIE.PRINTING' | translate}}"
                   (click)="OnPrint()">
@@ -240,7 +241,8 @@
             <i class="fa fa-filter" aria-hidden="true"></i>
             <!--{{'LIST-PROJET.ADVANCED-FILTER.BUTTON' | translate}}-->
           </button>
-          <button mat-button color="warn"
+          <button [disabled]="!isSearched || totalElements === 0"
+                  mat-button color="warn"
                   mat-raised-button
                   matTooltip= "{{'ETAT-SORTIE.PRINTING' | translate}}"
                   (click)="OnPrintAdvanced()">

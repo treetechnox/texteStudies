@@ -38,7 +38,7 @@
     <br>
     <span>{{data.totalElt}}</span> <!--totalElements/phase/nature/isActive/secteur/ministere-->
   </div>
-  <div [style]="{'direction':localStorageItem('lge') === 'ar' ? 'rtl' : 'ltr'}">
+  <div *ngIf="data.url" [style]="{'direction':localStorageItem('lge') === 'ar' ? 'rtl' : 'ltr'}">
 
 
     <mat-label >{{ 'ADD-DETAIL.CRITERE' | translate}}</mat-label>
@@ -142,6 +142,12 @@
 
   </table>
 
+  <mat-card *ngIf="isLoading"  id="pause" class="d-flex align-items-center justify-content-center">
+    <mat-progress-spinner
+      color="primary"
+      mode="indeterminate">
+    </mat-progress-spinner>
+  </mat-card>
   <br>
 
 
