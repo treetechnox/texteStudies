@@ -530,7 +530,7 @@ export class ListProjetComponent implements AfterViewInit {
   }*/
 
   OnPrintAdvanced() {
-    let sub_url = 'http://localhost:8083/mouvements?';
+    let sub_url = 'http://172.16.90.1:8083/mouvements?';
     if(this.mouvement.phase?.id>0)
       sub_url+=`&phase=${this.mouvement.phase?.id}`;
     if(this.nature.id>0)
@@ -778,6 +778,7 @@ export class ListProjetComponent implements AfterViewInit {
   }
 
   resetForm() {
+    this.totalElements=0;
     this.isSearched=false;
     this.page=0;
     this.size=15;

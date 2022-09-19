@@ -10,8 +10,8 @@ export class ReunionService {
   url:string;
   //url1:string;
   constructor(private http:HttpClient) {
-    this.url = "http://localhost:8083/reunions/";
-    //this.url1 = "http://localhost:8083/reunion";
+    this.url = "http://172.16.90.1:8083/reunions/";
+    //this.url1 = "http://172.16.90.1:8083/reunion";
   }
 
   getAllReunions():Observable<any[]>{

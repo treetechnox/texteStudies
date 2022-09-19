@@ -1,9 +1,14 @@
-<br>
-<div class="jumbotron mycustom-jumbotron"
+<div
      [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }">
+  <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <!--<mat-icon class="close-icon" color="warn">close</mat-icon>-->
+    <i class="material-icons close-icon">close</i>
+  </button>
+  <br>
   <div class="entete" style=" text-align: center"><span>{{ 'LIST-CORRESPONDANCE.TITLE' | translate }}</span></div>
   <br>
-  <button type="submit" mat-raised-button
+  <button *ngIf="isMinistereUser()===false"
+          type="submit" mat-raised-button
           matTooltip="{{ 'LIST-CANDIDATS.AJOUTER-BUTTON.TOOLTIP' | translate }}"
           class="btn btn-success" (click)="onAddCorrespondance(texteId)">{{ 'LIST-CANDIDATS.AJOUTER-BUTTON' | translate }}</button>
 

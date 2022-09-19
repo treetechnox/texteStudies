@@ -42,7 +42,7 @@
           <button mat-button color="accent"
                   mat-raised-button
                   matTooltip= "{{'ADD-DETAIL.BUTTON-RESET' | translate}}"
-                  (click)="input.value='';loadTextes()">
+                  (click)="input.value='';totalElements=0;loadTextes()">
             <i class="fa fa-refresh" aria-hidden="true"></i>
           </button><!--{{'ADD-DETAIL.BUTTON-RESET' | translate}}-->
 
@@ -382,10 +382,11 @@
 
 
               <div class="example-element-description example-full-width">
-                <div *ngIf="isMinistereUser()===false" ><!--{{ app.localStorageItem('lge') === 'fr' ? 'MODIFIER ' :  ' تعديل : ' }}-->
+                <div ><!--{{ app.localStorageItem('lge') === 'fr' ? 'MODIFIER ' :  ' تعديل : ' }}-->
                   <mat-tab-group [backgroundColor]="background" mat-align-tabs="start">
                     <mat-tab label="{{'LIST-PROJET.TAB.TEXTE' | translate}}">
-                      <button mat-button color="primary"
+                      <button *ngIf="isMinistereUser()===false"
+                              mat-button color="primary"
                               mat-raised-button
                               matTooltip="{{'LIST-PROJET.TABLE.EDIT-BUTTON'|translate}}"
                               (click)="onEditTexte(element.id)">
@@ -398,7 +399,8 @@
                         <i class="fa fa-print fa-2x"></i>
                         <!--{{'ETAT-SORTIE.PRINTING' | translate}}-->
                       </button>
-                      <button mat-button color="warn"
+                      <button *ngIf="isMinistereUser()===false"
+                              mat-button color="warn"
                               mat-raised-button
                               matTooltip="{{'LIST-MOUVEMENT.TABLE.DELETE-BUTTON' | translate}}"
                               (click)="onDeleteTexte(element.id,element)">
@@ -406,25 +408,26 @@
                       </button>
                     </mat-tab>
                     <mat-tab label="{{'LIST-PROJET.TAB.AVIS' | translate}}">
-                      <button mat-raised-button
+                      <button *ngIf="isMinistereUser()===false"
+                              mat-raised-button
                               class="tabed"
                               matTooltip="{{'LIST-PROJET.TABLE.ADD-AVIS' | translate}}"
                               (click)="ajouterAvis(element.id)">
                         <i class="fa fa-plus fa-2x"></i>
                       </button>
-                      <button
-                        matTooltipClass="my-custom-tooltip"
-                        mat-raised-button
-                        mat-button color="accent"
-                        matTooltip="{{'LIST-PROJET.TABLE.LIST-AVIS' | translate}}"
-                        class="tabed"
-                        (click)="onShowListAvis(element.id)"
+                      <button matTooltipClass="my-custom-tooltip"
+                              mat-raised-button
+                              mat-button color="accent"
+                              matTooltip="{{'LIST-PROJET.TABLE.LIST-AVIS' | translate}}"
+                              class="tabed"
+                              (click)="onShowListAvis(element.id)"
                       >
                         <i class="fa fa-list"></i>
                       </button>
                     </mat-tab>
                     <mat-tab label="{{'LIST-PROJET.TAB.CORRESPONDANCE' | translate}}">
-                      <button mat-raised-button
+                      <button *ngIf="isMinistereUser()===false"
+                              mat-raised-button
                               matTooltip="{{'LIST-PROJET.TABLE.ADD-CORRESPONDANCE' | translate}}"
                               class="tabed"
                               (click)="ajouterCorrespondance(element.id)"

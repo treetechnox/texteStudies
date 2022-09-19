@@ -331,7 +331,7 @@
     "MINISTERE.LISTE": "قائمة الوزارات",
     "ROLE.MAT-ERROR": "الرجاء اختيار نوع المستخدم",
     "PASSWORDNEW.LABEL": "كلمة المرور",
-    "PASSWORDNEW.PLACEHOLDER": "مثال: 123",
+    "PASSWORDNEW.PLACEHOLDER": "مثال: xxXXxxXX",
     "PASSWORDCONFIRM.LABEL": " إعادة كتابة كلمة المرور",
     "PASSWORDCONFIRM.PLACEHOLDER": "مثال: 123",
     "CONNECT": "CONNECTER",

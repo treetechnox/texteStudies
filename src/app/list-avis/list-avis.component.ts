@@ -186,6 +186,7 @@ export class ListAvisComponent implements OnInit {
       }, 100);*/
     });
 
+
   }
 
 }

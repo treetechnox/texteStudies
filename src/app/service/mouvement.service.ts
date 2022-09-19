@@ -12,9 +12,9 @@ export class MouvementService {
   url2:string;
 
   constructor(private http:HttpClient) {
-    this.url='http://localhost:8083/mouvements/';
-    this.url1='http://localhost:8083/mouvements';
-    this.url2='http://localhost:8083/mouvements_ministeres/';
+    this.url='http://172.16.90.1:8083/mouvements/';
+    this.url1='http://172.16.90.1:8083/mouvements';
+    this.url2='http://172.16.90.1:8083/mouvements_ministeres/';
   }
 
   getAllMouvements():Observable<any[]>{
