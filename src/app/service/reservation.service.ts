@@ -11,7 +11,7 @@ export class ReservationService {
   private url_base: string;
 
   constructor(private http: HttpClient) {
-    this.url_base = 'http://172.16.90.1:8083';
+    this.url_base = 'http://localhost:8083';
   }
 
   getResource(id: number): Observable<any> {
@@ -75,7 +75,7 @@ export class ReservationService {
   }
 
   verifierIfDateWithTwoPeriodeNotDisabled(date:any):Observable<any>{
-    return this.http.get(`http://172.16.90.1:8083/findByTwoPeriodes/${date}`)
+    return this.http.get(`http://localhost:8083/findByTwoPeriodes/${date}`)
   }
 
   getCountingByDate(date:any, salleId:number):Observable<any>{

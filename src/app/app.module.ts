@@ -118,6 +118,7 @@ import { EditMouvementComponent } from './edit-mouvement/edit-mouvement.componen
 import { DeleteMouvementDialogComponent } from './delete-mouvement-dialog/delete-mouvement-dialog.component';
 import { DeleteTexteComponent } from './delete-texte/delete-texte.component';
 import { ContactusComponent } from './contactus/contactus.component';
+import { MinistereTexteComponent } from './ministere-texte/ministere-texte.component';
 
 
 
@@ -182,6 +183,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DeleteMouvementDialogComponent,
     DeleteTexteComponent,
     ContactusComponent,
+    MinistereTexteComponent,
   ],
     imports: [
         FormsModule,

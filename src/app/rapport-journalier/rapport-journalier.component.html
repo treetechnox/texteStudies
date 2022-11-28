@@ -44,6 +44,16 @@
     <mat-label >{{ 'ADD-DETAIL.CRITERE' | translate}}</mat-label>
     <br>
     <br>
+    <div *ngIf="(data.from && data.to)">
+      <mat-label>{{'LIST-PROJET.ADVANCED-FILTER.TIME-INTERVAL' | translate}}</mat-label>:
+      <span>
+          <div>
+            {{'LIST-PROJET.ADVANCED-FILTER.FROM' | translate}}: {{data.from}}
+            <span>{{'<--->'}}</span>
+            {{'LIST-PROJET.ADVANCED-FILTER.TO' | translate}}: {{data.to}}
+          </div>
+        </span><br>
+    </div>
     <div *ngIf="(data.phase | json) !== ({} | json)">
       <mat-label>{{'LIST-PROJET.ADVANCED-FILTER.PHASE' | translate}}</mat-label>:
       <span>

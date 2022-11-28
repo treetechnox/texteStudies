@@ -20,7 +20,7 @@ export class NatureTexteComponent implements OnInit {
     this.natureService.getNatureByTexteIdWithinURI(this.texteId).subscribe(ntr =>{
 
       this.nature = ntr._embedded.natures[0];
-      //console.log(this.nature);
+      console.log(this.nature);
     })
   }
 

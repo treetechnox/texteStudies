@@ -52,6 +52,7 @@ html, body {
   margin: 0;
   font-family: 'Cairo', sans-serif!important;
 
+
   /*font-family: Roboto, "Helvetica Neue", sans-serif;*/
 }
 
@@ -222,6 +223,14 @@ html, body {
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 */
 
+#left_side{
+  max-width: 800px;
+}
+
+#right_side{
+  max-width: 1600px;
+}
+
 .mycustom-jumbotron {
   background-color: #fff;
   border:5px solid #003366;
@@ -284,7 +293,7 @@ mat-card{
 
 .home_display{
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   padding: 50px
 }
 #left_side{

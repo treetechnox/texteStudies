@@ -71,7 +71,7 @@ export class ListProjetComponent implements AfterViewInit {
   @ViewChild('myForm') myForm!: NgForm;
 
   filter:any;
-  columnsToDisplay: string[] = ['id', 'nature','sommaireAr', 'sommaireFr','refer','details'];
+  columnsToDisplay: string[] = ['id', 'nature', 'ministere', 'sommaireAr', 'sommaireFr','refer','details'];
 
   texte:Texte=new Texte();
   //passedTexteId!:number;
@@ -530,7 +530,7 @@ export class ListProjetComponent implements AfterViewInit {
   }*/
 
   OnPrintAdvanced() {
-    let sub_url = 'http://172.16.90.1:8083/mouvements?';
+    let sub_url = 'http://localhost:8083/mouvements?';
     if(this.mouvement.phase?.id>0)
       sub_url+=`&phase=${this.mouvement.phase?.id}`;
     if(this.nature.id>0)
@@ -564,7 +564,8 @@ export class ListProjetComponent implements AfterViewInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    dialogConfig.data={/*textes:this.filtredTexte,*/url:sub_url, totalElt:this.totalElements, phase:this.phase,nature:this.nature,isActive:this.isActive,secteur:this.secteur,ministere:this.ministere};
+    dialogConfig.data={/*textes:this.filtredTexte,*/url:sub_url, totalElt:this.totalElements, phase:this.phase,nature:this.nature,
+      isActive:this.isActive,secteur:this.secteur,ministere:this.ministere, from:this.dateFrom, to:this.dateTo};
     // @ts-ignore
     dialogConfig.width = '90%';
     dialogConfig.height = '90%';
