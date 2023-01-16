@@ -118,6 +118,7 @@
     <tr>
       <th >{{"LIST-PROJET.TABLE.ID" | translate}}</th>
       <th matTooltip="Ordre par " mat-sort-header="nature">{{"LIST-PROJET.ADVANCED-FILTER.NATURE" | translate}} </th>
+      <th matTooltip="Ordre par " mat-sort-header="ministere">{{"LIST-PROJET.ADVANCED-FILTER.MINISTERE" | translate}} </th>
       <th matTooltip="Ordre par " mat-sort-header="sommaireAr">{{"LIST-PROJET.TABLE.SOMMAIRE-AR" | translate}}</th>
       <th matTooltip="Ordre par " mat-sort-header="sommaireFr">{{"LIST-PROJET.TABLE.SOMMAIRE-FR" | translate}}</th>
     </tr>
@@ -126,6 +127,7 @@
     <tr *ngFor="let res of sortedData; let i=index; ">
       <td>{{i+1}}</td>
       <td><app-nature-texte [texteId]="res.id"></app-nature-texte></td>
+      <td><app-ministere-texte [texteId]="res.id"></app-ministere-texte></td>
       <td>{{ res.sommaireAr}}</td>
       <td>{{ res.sommaireFr}}</td>
      <!-- <td>

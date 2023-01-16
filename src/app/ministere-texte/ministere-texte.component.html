@@ -1,7 +1,10 @@
 <span style="color: #0d1944">
 <div [ngSwitch]="app.localStorageItem('lge')">
-                <div *ngSwitchCase="'ar'" class="myfilterar">{{ministeres[0]?.libelleAr}}</div>
-                <div *ngSwitchCase="'fr'" class="myfilterfr">{{ministeres[0]?.libelleFr}}</div>
-                <div *ngSwitchDefault></div>
+                <div *ngFor="let ministere of ministeres; index as i;first as isFirst">
+                  <span *ngIf="!isFirst">/</span>
+                  <div *ngSwitchCase="'ar'" class="myfilterar">{{ministere.libelleAr}}</div>
+                  <div *ngSwitchCase="'fr'" class="myfilterfr">{{ministere.libelleFr}}</div>
+                  <div *ngSwitchDefault></div>
+                </div>
               </div>
 </span>

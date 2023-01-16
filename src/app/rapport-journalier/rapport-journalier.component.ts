@@ -144,6 +144,7 @@ export class RapportJournalierComponent implements OnInit {
     XLSX.writeFile(wb, this.fileName);
   }
 
+
   /*exportexcel(): void
   {
     /!* table id is passed over here *!/

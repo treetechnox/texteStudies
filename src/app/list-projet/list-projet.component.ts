@@ -114,7 +114,7 @@ export class ListProjetComponent implements AfterViewInit {
   avis:Avis=new Avis();
   aviss: Avis[]=[];
   textes : Texte[]= new Array();
-  textes1 : Texte[]= new Array();
+  //textes1 : Texte[]= new Array();
   expandedElement: Texte | null | undefined;
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort: MatSort | undefined;
@@ -366,7 +366,7 @@ export class ListProjetComponent implements AfterViewInit {
     this.mouvements = [];
 
     this.textes = [];
-    this.textes1 = [];
+    //this.textes1 = [];
 
     this.dataSource = new MatTableDataSource();
     this.mouvement.phase = this.phase;

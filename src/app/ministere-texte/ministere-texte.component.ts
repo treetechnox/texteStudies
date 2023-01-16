@@ -26,6 +26,7 @@ export class MinistereTexteComponent implements OnInit {
     this.ministereService.getAllMinistereByTopMouvementAndByTexteId(this.texteId).subscribe(mnstr =>{
       this.ministeres = mnstr;
       console.log(this.ministeres[0]);
+      console.log(this.ministeres);
     })
   }
 
