@@ -23,12 +23,18 @@ export class PhaseService {
     return this.http.get(`${this.url}search/verifierPhase?libellefr=${libellefr}`);
   }
 
+
   getAllPhases():Observable<Phase[]>{
     console.log(this.url);
     // @ts-ignore
     return this.http.get(`${this.url}all`);
   }
 
+  getAllPhasesEnCours():Observable<Phase[]>{
+    console.log(`${this.url}encours`);
+    // @ts-ignore
+    return this.http.get(`${this.url}encours`);
+  }
   getPhaseById(id: any):Observable<any>{
     return this.http.get(`${this.url}${id}`);
   }

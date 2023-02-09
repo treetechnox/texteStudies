@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs/internal/Observable';
 import {Mouvement} from '../Mouvement';
+import {PhaseService} from "./phase.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class MouvementService {
   url:string;url1:string;
   url2:string;
 
-  constructor(private http:HttpClient) {
+  constructor(private phaseService: PhaseService,private http:HttpClient) {
     this.url='http://localhost:8083/mouvements/';
     this.url1='http://localhost:8083/mouvements';
     this.url2='http://localhost:8083/mouvements_ministeres/';
@@ -86,13 +87,39 @@ export class MouvementService {
   /*getTexteBySommaireArFr(nomfr: string, prenomfr: string):Observable<any> {
     return this.http.get(`${this.url}`);
   }*/
+
+  sub_url = '';
+  /*getPhasesEnCours(){
+
+    this.phaseService.getAllPhasesEnCours().subscribe(value => {
+      console.log(value);
+      value.forEach(val => {
+        this.sub_url+=`&phase=${val.id}`
+
+      });
+      console.log(this.sub_url)
+        return this.sub_url;
+    })
+}*/
+
   getFilter(phaseId: number,natureId: number, secteurId: number | undefined, ministereId: number,isactive:boolean,
             dateFrom:string,dateTo:string, totalelt:number):Observable<any> {
     console.log('phaseId:'+phaseId,'natureId:'+natureId,'secteurId:'+secteurId,
       'ministereId:'+ministereId,'isactive:'+isactive,'dateFrom:'+dateFrom,'dateTo:'+dateTo);
     let sub_url = '?';
-    if(phaseId>0)
+    if(phaseId>0 && phaseId !==18)
       sub_url+=`&phase=${phaseId}`;
+    else if(phaseId === 18){
+      isactive = true
+      sub_url+=`&phase.encours=false`;
+
+    }
+      //console.log('phaseId: '+phaseId);
+
+      /*console.log(this.getPhasesEnCours());
+      //&phase=18&sort=id,desc&size=100000
+      console.log(sub_url);*/
+
     if(natureId>0)
       sub_url+=`&texte.nature.id=${natureId}`;
     // @ts-ignore

@@ -395,6 +395,7 @@ export class ListProjetComponent implements AfterViewInit {
 
     // @ts-ignore
     this.mouvement.texte?.nature = this.nature;
+
     this.mouvement.isactive = this.isActive;
 
     let value:any = await lastValueFrom(this.mouvementService.getFilter(this.mouvement.phase.id,
@@ -600,8 +601,15 @@ export class ListProjetComponent implements AfterViewInit {
 
   onGetPhase(event: any) {
     this.phase=event.value;
-    console.log(this.phase);
-    if (this.phase=== undefined ){
+    console.log(this.phase)
+    if (this.phase.id === 18) {
+        this.mouvement.isactive = true;
+      console.log('encours...')
+    }else if (this.phase== undefined ){
+      console.log('phase est undefined ... ');
+      if(this.isActive===false)
+        this.mouvement.isactive = false;
+
       this.phase = new Phase();
     }
   }
