@@ -77,7 +77,10 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
 
-  @Input() selsect:Secteur = this.authService.userAuthenticated!.secteur;
+  selsect:Secteur = this.authService.userAuthenticated!.secteur;
+ sele_phase:Phase = {id: 1, libelleAr: 'بدء المشروع', libelleFr: 'INITIATION DE PROJET', details: ''};
+
+
 
   mouvement: Mouvement = new Mouvement();
   lastmouvement: Mouvement = new Mouvement();
@@ -119,12 +122,20 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
               private router: Router, private route: ActivatedRoute, private _adapter: DateAdapter<any>,
               private dialog: MatDialog, private _snackBar: MatSnackBar, public app: AppComponent) {
 
+
+
+    this.sele_phase = {id: 1, libelleAr: 'بدء المشروع', libelleFr: 'INITIATION DE PROJET', details: ''};
     this.secteur = this.authService.userAuthenticated!.secteur;
-    //this.mouvement.datePhase = new Date();
+    this.mouvement.datePhase = new Date();
     console.log(this.mouvement.datePhase,this.toFormattedDate(new Date()))
+
   }
 
   ngOnInit() {
+    /*this.phaseService.getPhaseById(1).subscribe(value => {
+      console.log(value);
+      this.sele_phase = value
+    });*/
     this.firstFormGroup = this._formBuilder.group({
       natureCtrl: ['' , Validators.required],
       sommaireFrCtrl: ['', Validators.required],
@@ -136,6 +147,7 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
       dateMouvementCtrl: ['', Validators.required],
       ministereMouvementCtrl: [ [], Validators.required],
     });
+
     this.setNullTexteToVide();
     //this.reloadDataOrganismes();
 
@@ -148,6 +160,7 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
       console.log(value);
       this.phases = value;
     });
+
 
     this.secteurService.getAllSecteurs().subscribe(value => {
       console.log(value);
@@ -171,6 +184,7 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
     });
 
 
+    this.mouvement.phase = {id: 1, libelleAr: 'بدء المشروع', libelleFr: 'INITIATION DE PROJET', details: ''};
 
 
     /********************** BEGIN OF METHODS OF THE FILTER            *************************/
@@ -338,11 +352,19 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
     console.log(event);
     this.mouvement.secteur = this.selsect;
   }
+  getSelectedPhase(event: any) {
+    console.log(event);
+    this.mouvement.phase = event.value;
+    console.log(this.mouvement.phase);
+  }
 
   /*onKeyFct(event) {
     console.log(event.code,event.target.value);
     this.selectedMinisteres = this.searchMinist(event.target.value);
   }*/
+  compareFn(ph1: Phase, ph2: Phase) {
+    return ph1.id === ph2.id;
+  }
 
   searchMinist(value: string) {
     console.log(value);

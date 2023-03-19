@@ -211,12 +211,14 @@ td.mat-cell {
 }*/
 
 ::ng-deep .mat-tooltip{
+  color: white;
   white-space: pre-line !important;
   background-color: #2068af;
   font-size: 14px;
   font-weight: 500;
   font-family: 'Cairo', sans-serif;
 }
+
 
 
 /*

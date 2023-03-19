@@ -159,8 +159,9 @@
                 [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
                 class="example-full-width">
                 <mat-label>{{'ADD-TEXTE.SECTEUR'|translate}}<!--{{ 'ADD-MOUVEMENT.ETAT' | translate }}--></mat-label>
-                <mat-select required [disabled]="!authService.isAdmin()"  name="etat"
+                <mat-select required [disabled]="!authService.isAdmin()"  name="section"
                             [(ngModel)]="selsect"
+                            (selectionChange)="getSelectedSecteur($event)"
                             formControlName="secteurMouvementCtrl"
                 ><!--[ngModelOptions]="{standalone: true}-->
                   <mat-option></mat-option>
@@ -182,11 +183,14 @@
                 [style]="{'text-align':app.localStorageItem('lge') === 'ar' ? 'right' : 'left'}"
               >
                 <mat-label>{{'ADD-TEXTE.PHASE' | translate}}<!--{{ 'ADD-MOUVEMENT.ETAT' | translate }}--></mat-label>
-                <mat-select required name="etat" [(ngModel)]="mouvement.phase"
-                            (selectionChange)="getSelectedSecteur($event)"
+                <mat-select
+                  [disabled]="true"
+                  required name="phase" [(ngModel)]="sele_phase"
+                  [compareWith]="compareFn"
                             formControlName="etatMouvementCtrl"
-                ><!--(ngModelChange)="makeNominat(mouvement.typeMouvement)"-->
-                  <mat-option></mat-option>
+                ><!--(ngModelChange)="makeNominat(mouvement.typeMouvement)"--><!--(selectionChange)="getSelectedPhase($event)"-->
+
+                <mat-option></mat-option>
                   <mat-option *ngFor="let phs of phases; let i=index" [value]="phs">
                     <div [ngSwitch]="app.localStorageItem('lge')">
                       <div *ngSwitchCase="'ar'" class="myfilterar">{{phs?.libelleAr}}</div>

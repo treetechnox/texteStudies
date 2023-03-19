@@ -68,6 +68,9 @@ export class AddMouvementComponent implements OnInit {
 
   date = new Date((new Date().getTime()));
 
+  NotEncoursPhase = [10,11,12,13];
+  isEncours=true;
+
   constructor(private _formBuilder: FormBuilder/*, private texteService: TexteService*/,
               private natureService:NatureService,
               private datePipe:DatePipe,
@@ -201,6 +204,13 @@ export class AddMouvementComponent implements OnInit {
       })
     })
 
+    if(this.isEncours!==this.texte.encours){
+      this.texte.encours = this.isEncours;
+    }
+    this.texteService.updateTexte(this.texteId,this.texte).subscribe(value => {
+      console.log(value);
+    })
+
     if(this.mouvement.phase.libelleFr === 'TEXTE PUBLIE'){
       console.log(this.texteId,this.texte);
       this.texteService.updateTexte(this.texteId,this.texte).subscribe(value => {
@@ -250,8 +260,14 @@ export class AddMouvementComponent implements OnInit {
   }
   getSelectedPhase(event: any) {
     console.log(event.value);
+    if(this.NotEncoursPhase.includes(event.value.id) ){
+      this.isEncours=false;
+      console.log(`this id: ${event.value.id} is contained in Not_encours array and isEncours is: ${this.isEncours}`)
+    }else{
+      this.isEncours=true;
+      console.log(`this id: ${event.value.id} is not ---> contained in Not_encours array and isEncours is: ${this.isEncours}`)
+    }
     //this.mouvement.secteur = this.selsect;
-
   }
 
 

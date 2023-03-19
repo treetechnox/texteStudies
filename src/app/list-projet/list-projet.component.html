@@ -94,7 +94,8 @@
               <mat-form-field class="example-full-width ">
                 <div style="display: flex; justify-content: space-between">
                   <i (click)="resetFrom()" class="fa fa-refresh" aria-hidden="true"></i>
-                  <input #fromInput matInput readonly [matDatepicker]="picker1" placeholder="{{'LIST-PROJET.ADVANCED-FILTER.FROM' | translate}}"
+                  <input #fromInput matInput readonly [matDatepicker]="picker1"
+                         placeholder="{{'LIST-PROJET.ADVANCED-FILTER.FROM' | translate}}"
                          id="date1" name="date1"
                          (dateChange)="setDateFrom($event.value)">
                 </div>
@@ -106,8 +107,10 @@
             <div class="col-6">
               <mat-form-field class="example-full-width"><!--[(ngModel)]="mouvement.datePhase" [ngModelOptions]="{standalone: true}"-->
                 <div style="display: flex; justify-content: space-between">
-                  <i (click)="resetTo()" class="fa fa-refresh" aria-hidden="true"></i>
-                  <input #toInput matInput readonly [matDatepicker]="picker2" placeholder="{{'LIST-PROJET.ADVANCED-FILTER.TO' | translate}}"
+                  <i (click)="resetTo()" class="fa fa-refresh" aria-hidden="true"></i><!--[ngClass]=""-->
+                  <input #toInput matInput readonly [matDatepicker]="picker2"
+
+                         placeholder="{{'LIST-PROJET.ADVANCED-FILTER.TO' | translate}}"
                          id="date2" name="date1"
                          (dateChange)="setDateTo($event.value)">
                 </div>
@@ -128,7 +131,7 @@
 
                 matTooltip="{{'LIST-PROJET.ADVANCED-FILTER.PHASE-TOOLTIP' | translate}}"
                 #phs name="phase" (selectionChange)="onGetPhase($event)">
-                <mat-option></mat-option>
+                <mat-option (onSelectionChange)="resetPhase()"></mat-option>
                 <mat-option *ngFor="let phse of phases; let i=index" [value]="phse">
                   <div [ngSwitch]="app.localStorageItem('lge')">
                     <div *ngSwitchCase="'ar'" class="myfilterar">{{phse?.libelleAr}}</div>
@@ -197,10 +200,8 @@
               class="example-full-width">
               <mat-label><span class="align-label">{{'LIST-PROJET.ADVANCED-FILTER.SECTEUR' | translate}}</span></mat-label>
               <mat-select
-                #sct
                 matTooltip="{{'LIST-PROJET.ADVANCED-FILTER.SECTEUR-TOOLTIP' | translate}}"
-                matTooltipClass="custom-tooltip"
-                name="secteur" (selectionChange)="onGetSecteur($event)"><!--[disabled]="!authService.isAdmin()"-->
+                #sct name="secteur" (selectionChange)="onGetSecteur($event)"><!--[disabled]="!authService.isAdmin()"-->
                 <mat-option></mat-option>
                 <mat-option *ngFor="let sctn of secteurs; let i=index" [value]="sctn">
                   <div [ngSwitch]="app.localStorageItem('lge')">
@@ -219,6 +220,7 @@
               class="example-full-width">
               <mat-label>{{'LIST-PROJET.ADVANCED-FILTER.MINISTERE' | translate}}</mat-label>
               <mat-select
+                matTooltip="{{'LIST-PROJET.ADVANCED-FILTER.MINISTERE-TOOLTIP' | translate}}"
                 #mst
                 name="ministere" (selectionChange)="onGetMinistere($event)">
                 <mat-option></mat-option>

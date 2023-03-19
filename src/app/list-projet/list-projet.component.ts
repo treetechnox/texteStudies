@@ -786,6 +786,34 @@ export class ListProjetComponent implements AfterViewInit {
     console.log(this.dateTo);
   }
 
+  resetPhase(){
+    this.phase=new Phase();
+    this.phs.value = null;
+  }
+  resetNature(){
+    this.nature=new Nature();
+    this.ntr.value = null;
+  }
+
+  resetSecteur(){
+    if(this.authService.userAuthenticated?.role == 'ADMIN'){
+      this.mouvement.secteur=new Secteur();
+      this.sct.value = null;
+    }
+  }
+
+  resetMinistere(){
+    if(this.authService.userAuthenticated?.role == 'ADMIN' ||
+      this.authService.userAuthenticated?.role == 'USER'){
+      this.ministere= new Ministere();
+      this.mst.value = null;
+    }
+  }
+
+  resetIsActive(){
+    this.isActive = null as any;
+    this.atv.value = -1;
+  }
   resetForm() {
     this.totalElements=0;
     this.isSearched=false;
@@ -793,29 +821,19 @@ export class ListProjetComponent implements AfterViewInit {
     this.size=15;
 
     /* Phase */
-    this.phase=new Phase();
-    this.phs.value = null;
+    this.resetPhase();
 
     /* Nature */
-    this.nature=new Nature();
-    this.ntr.value = null;
+    this.resetNature();
 
     /* Secteur */
-    if(this.authService.userAuthenticated?.role == 'ADMIN'){
-      this.mouvement.secteur=new Secteur();
-      this.sct.value = null;
-    }
+    this.resetSecteur();
 
     /* Active */
-    this.isActive = null as any;
-    this.atv.value = -1;
+    this.resetIsActive();
 
     /* Ministere */
-    if(this.authService.userAuthenticated?.role == 'ADMIN' ||
-      this.authService.userAuthenticated?.role == 'USER'){
-      this.ministere= new Ministere();
-      this.mst.value = null;
-    }
+    this.resetMinistere();
 
 
     /* Date From */

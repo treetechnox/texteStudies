@@ -11,4 +11,5 @@ export class Texte{
   sommaireFr!:string;
   dateSignature!:string;
   datePublication!:string;
+  encours!:boolean;
 }

@@ -63,6 +63,7 @@ export class TexteService {
   }
   updateTexte(texteId:number,texte:any):Observable<any>{
     //console.log(`${this.url1}/secteur/${secteurId}`,secteur)
+    console.log(`${this.url}texte/${texteId}`,texte);
     return this.http.put(`${this.url}texte/${texteId}`,texte);
   }
 
