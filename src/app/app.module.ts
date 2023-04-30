@@ -87,7 +87,7 @@ import { EditSecteurComponent } from './edit-secteur/edit-secteur.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { ListNatureComponent } from './list-nature/list-nature.component';
 import { ListMinistereComponent } from './list-ministere/list-ministere.component';
-import { ListPhasesComponent } from './list-phase/list-phase.component';
+import { ListPhaseComponent } from './list-phase/list-phase.component';
 import { ListSecteursComponent } from './list-secteur/list-secteurs.component';
 import { ListUserComponent } from './list-user/list-user.component';
 import { EditProjetComponent } from './edit-projet/edit-projet.component';
@@ -157,7 +157,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     EditUserComponent,
     ListNatureComponent,
     ListMinistereComponent,
-    ListPhasesComponent,
+    ListPhaseComponent,
     ListSecteursComponent,
     ListUserComponent,
     EditProjetComponent,

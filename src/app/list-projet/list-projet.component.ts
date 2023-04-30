@@ -42,6 +42,7 @@ import {delay, lastValueFrom} from "rxjs";
 import {RapportTextesDetailsComponent} from "../rapport-textes-details/rapport-textes-details.component";
 import {DeleteMouvementDialogComponent} from "../delete-mouvement-dialog/delete-mouvement-dialog.component";
 import {DeleteTexteComponent} from "../delete-texte/delete-texte.component";
+import {HttpClientModule} from "@angular/common/http";
 
 export interface MouvementMinistere{
   id: number;
@@ -55,6 +56,7 @@ export interface MouvementMinistere{
 
 @Component({
   selector: 'app-list-projet',
+  /*providers: [TexteService, HttpClientModule],*/
   templateUrl: './list-projet.component.html',
   styleUrls: ['./list-projet.component.css'],
   animations: [

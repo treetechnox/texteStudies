@@ -50,6 +50,7 @@ export class AddPhaseComponent implements OnInit {
 
 
   ngOnInit() {
+
     //this.reloadDataOrganismes();
 
     /*this.detail.detailfctar='';

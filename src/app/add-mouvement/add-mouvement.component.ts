@@ -51,7 +51,10 @@ export class AddMouvementComponent implements OnInit {
   texte: Texte = new Texte();
   texteExist = false;
   phase: Phase = new Phase();
-  phases: Phase[] = [];
+  //phases: Phase[] = [];
+
+  phasesWithParent:Phase[]=[];
+  phasesWithoutParent:Phase[]=[];
 
   nature:Nature=new Nature();
   natures:Nature[]=[];
@@ -70,6 +73,8 @@ export class AddMouvementComponent implements OnInit {
 
   NotEncoursPhase = [10,11,12,13];
   isEncours=true;
+
+  globalePhase =false
 
   constructor(private _formBuilder: FormBuilder/*, private texteService: TexteService*/,
               private natureService:NatureService,
@@ -129,6 +134,7 @@ export class AddMouvementComponent implements OnInit {
 
 
     this.myformGroup = this._formBuilder.group({
+      etatGlobalMouvementCtrl: ['', Validators.required],
       etatMouvementCtrl: ['', Validators.required],
       secteurMouvementCtrl: ['', Validators.required],
     });
@@ -141,10 +147,16 @@ export class AddMouvementComponent implements OnInit {
       this.natures=value;
     });
 
-    this.phaseService.getAllPhases().subscribe(value => {
+    /*this.phaseService.getAllPhases().subscribe(value => {
       console.log(value);
       this.phases = value;
-    });
+    });*/
+
+    this.phaseService.getAllPhasesWithoutParent().subscribe( value => {
+      console.log(value);
+      this.phasesWithoutParent = value;
+    },error => console.log(error.message))
+
 
     this.secteurService.getAllSecteurs().subscribe(value => {
       console.log(value);
@@ -258,16 +270,31 @@ export class AddMouvementComponent implements OnInit {
     console.log(event);
 
   }
-  getSelectedPhase(event: any) {
-    console.log(event.value);
-    if(this.NotEncoursPhase.includes(event.value.id) ){
+  /*if(this.NotEncoursPhase.includes(event.value.id) ){
       this.isEncours=false;
       console.log(`this id: ${event.value.id} is contained in Not_encours array and isEncours is: ${this.isEncours}`)
     }else{
       this.isEncours=true;
       console.log(`this id: ${event.value.id} is not ---> contained in Not_encours array and isEncours is: ${this.isEncours}`)
+    }*/
+  //this.mouvement.secteur = this.selsect;
+  getSelectedPhaseWithoutParent(event: any) {
+    console.log(event.value);
+
+    if(event.value && event.value!== undefined){
+      this.globalePhase = true
+      this.phaseService.getAllPhasesWithParent(event.value.id).subscribe(value => {
+        console.log(value);
+        this.phasesWithParent=value
+      },error =>  console.log(error.message))
+    }else{
+      this.globalePhase = false
     }
-    //this.mouvement.secteur = this.selsect;
+
+  }
+  getSelectedPhaseWithParent(event: any) {
+    console.log(event.value);
+   this.mouvement.phase = event.value
   }
 
 

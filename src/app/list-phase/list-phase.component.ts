@@ -16,7 +16,7 @@ import {AppComponent} from "../app.component";
   templateUrl: './list-phase.component.html',
   styleUrls: ['./list-phase.component.css']
 })
-export class ListPhasesComponent implements OnInit {
+export class ListPhaseComponent implements OnInit {
 
   ngOnInit(): void {
   }

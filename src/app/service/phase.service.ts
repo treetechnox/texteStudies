@@ -30,6 +30,16 @@ export class PhaseService {
     return this.http.get(`${this.url}all`);
   }
 
+  getAllPhasesWithoutParent():Observable<Phase[]>{
+    // @ts-ignore
+    return this.http.get(`${this.url}all_with_no_parent`);
+  }
+
+  getAllPhasesWithParent(parent_id:number):Observable<Phase[]>{
+    //@ts-ignore
+    return this.http.get(`${this.url}parent/${parent_id}`);
+  }
+
   getAllPhasesEnCours():Observable<Phase[]>{
     console.log(`${this.url}encours`);
     // @ts-ignore

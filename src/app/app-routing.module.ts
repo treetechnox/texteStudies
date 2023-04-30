@@ -8,7 +8,7 @@ import {AddSecteurComponent} from './add-secteur/add-secteur.component';
 import {ListSecteursComponent} from "./list-secteur/list-secteurs.component";
 import {EditSecteurComponent} from "./edit-secteur/edit-secteur.component";
 import {AddPhaseComponent} from './add-phase/add-phase.component';
-import {ListPhasesComponent} from './list-phase/list-phase.component';
+import {ListPhaseComponent} from './list-phase/list-phase.component';
 import {AddMinistereComponent} from './add-ministere/add-ministere.component';
 import {ListMinistereComponent} from './list-ministere/list-ministere.component';
 import {AddProjetComponent} from './add-projet/add-projet.component';
@@ -40,7 +40,7 @@ const routes: Routes = [{ path: '', redirectTo : 'login', pathMatch : 'full' },
   { path: 'lesavis', component : ListAvisComponent},
   { path: 'lecorrespondances', component : ListCorrespondanceComponent},
   { path: 'lessecteurs', component : ListSecteursComponent},
-  { path: 'lesphases', component : ListPhasesComponent},
+  { path: 'lesphases', component : ListPhaseComponent},
   { path: 'lesnatures', component : ListNatureComponent},
   { path: 'lesministeres', component : ListMinistereComponent},
   { path: 'poetailministeres', component : PortailMinisteresComponent},

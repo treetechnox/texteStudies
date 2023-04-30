@@ -131,7 +131,7 @@ export class ListMouvementComponent implements OnInit {
   }
 
 
-  onDeleteNature(mouveId:any, phase:Phase) {
+  onDeleteMouvement(mouveId:any, phase:Phase) {
     let txtId = this.texteId ;
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
