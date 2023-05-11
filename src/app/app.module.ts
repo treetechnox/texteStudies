@@ -119,6 +119,9 @@ import { DeleteMouvementDialogComponent } from './delete-mouvement-dialog/delete
 import { DeleteTexteComponent } from './delete-texte/delete-texte.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { MinistereTexteComponent } from './ministere-texte/ministere-texte.component';
+import { AddNotificationComponent } from './add-notification/add-notification.component';
+import {MatBadgeModule} from "@angular/material/badge";
+import { ListNotificationsComponent } from './list-notifications/list-notifications.component';
 
 
 
@@ -184,6 +187,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     DeleteTexteComponent,
     ContactusComponent,
     MinistereTexteComponent,
+    AddNotificationComponent,
+    ListNotificationsComponent,
   ],
     imports: [
         FormsModule,
@@ -279,7 +284,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatNativeDateModule,
         MatPaginatorModule,
         DragDropModule,
-        MatSortModule, TooltipModule
+        MatSortModule, TooltipModule, MatBadgeModule
     ],
   exports: [
     // CDK

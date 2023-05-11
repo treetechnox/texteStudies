@@ -29,6 +29,8 @@ import {RapportJournalierComponent} from "./rapport-journalier/rapport-journalie
 import {PortailMinisteresComponent} from "./portail-ministeres/portail-ministeres.component";
 import {ListCorrespondanceComponent} from "./list-correspondance/list-correspondance.component";
 import {ContactusComponent} from "./contactus/contactus.component";
+import {AddNotificationComponent} from "./add-notification/add-notification.component";
+import {ListNotificationsComponent} from "./list-notifications/list-notifications.component";
 
 
 const externalUrlProvider = new InjectionToken('externalUrlRedirectResolver');
@@ -41,6 +43,7 @@ const routes: Routes = [{ path: '', redirectTo : 'login', pathMatch : 'full' },
   { path: 'lecorrespondances', component : ListCorrespondanceComponent},
   { path: 'lessecteurs', component : ListSecteursComponent},
   { path: 'lesphases', component : ListPhaseComponent},
+  { path: 'lesnotifications', component : ListNotificationsComponent},
   { path: 'lesnatures', component : ListNatureComponent},
   { path: 'lesministeres', component : ListMinistereComponent},
   { path: 'poetailministeres', component : PortailMinisteresComponent},
@@ -57,6 +60,7 @@ const routes: Routes = [{ path: '', redirectTo : 'login', pathMatch : 'full' },
   },
 
   { path: 'lajoutphase', component : AddPhaseComponent},
+  { path: 'lajoutnotification', component : AddNotificationComponent},
   { path: 'lajoutprojet', component : AddProjetComponent},
   { path: 'lajoutnature', component : AddNatureComponent},
   { path: 'lamodificationprojet', component : EditProjetComponent},

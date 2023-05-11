@@ -567,6 +567,13 @@
     "LIBELLEFR": " تسمية المرحلة فرنسي"
   },
 
+  "ADD-NOTIFICATION": {
+    "TITLE": "إضافة إشعار",
+    "SEND": "إبعث رسالة",
+    "MESSAGE": "الرسالة",
+    "BTN-SEND": "إبعث"
+  },
+
   "ADD-MINISTERE": {
     "TITLE": "إضافة وزارة",
     "LIBELLEAR": " تسمية الوزارة عربي",

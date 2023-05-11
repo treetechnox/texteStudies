@@ -124,17 +124,28 @@ button{
 
 .dcnx {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  color: white;
 }
+
 
 .dcnx-elt{
 /*  font-family: Roboto, "Helvetica Neue", sans-serif;*/
   color: white;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   justify-content: center;align-content: center;
+
 }
 
 .dcnx-elt:hover {
-   color: #1E90FF;
+   color: #ffdd5b;
+}
+
+.btn-logout{
+  background-color: rgba(0,0,0,0%);
+  border:none;
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -218,6 +229,7 @@ html, body {
   margin: 0;
   scroll-behavior: smooth;
   transition: 2s;
+  font-family: 'Cairo', sans-serif!important;
 }
 /*
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -346,6 +358,7 @@ mat-card{
 .myflex{
   display: flex;
   justify-content: center;align-content: center;
+  gap: 2px;
 }
 .myflex2{
   display: flex;

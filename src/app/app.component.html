@@ -385,20 +385,15 @@
         </ul>
 
         <div class="d-flex">
-          <span style="margin: 2px;"></span>
-          <button class="dcnx btn btn-outline-light" type="submit"
-                  matTooltip="DECONNEXION"
-                  (click)="onLogout()"
-                  style="background-color: #ee8488;"
-          >
-            <div class="dcnx">
-              <i class="dcnx-elt fa fa-sign-out fa-2x" aria-hidden="true"></i
-              ><span class="dcnx-elt">{{
-              authService.userAuthenticated?.username
-              }}</span>
-            </div>
+          <span style="margin: 2px;"> </span>
+<!--          <button class="dcnx btn btn-outline-light" type="submit"-->
+<!--                  matTooltip="DECONNEXION"-->
+<!--                  (click)="onLogout()"-->
+<!--                  style="background-color: #ee8488;"-->
+<!--          >-->
 
-          </button>
+
+<!--          </button>-->
 
           <select
             style="width: 55px; margin: 5px;"
@@ -410,6 +405,38 @@
               lang
               }}</option>
           </select>
+
+          <div class="dcnx">
+
+
+
+
+            <button class="btn-logout dcnx-elt" (click)="onLogout()">
+              <i class="dcnx-elt fa fa-sign-out fa-2x" aria-hidden="true"></i></button>
+            <span class="dcnx-elt">{{
+              authService.userAuthenticated?.username
+              }}</span>
+
+            <button class="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbarDropdown7"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    class="btn-logout dcnx-elt"><mat-icon matBadge="15" matBadgeColor="warn">mail_outline</mat-icon>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown7">
+              <a class="dropdown-item" [routerLink]="'/lesnotifications'">
+                الرسائل
+                <!--                  {{"NAVBAR.USER.LIST" | translate}}-->
+              </a>
+              <div class="dropdown-divider" style="border-color:white;"></div>
+              <a class="dropdown-item" [routerLink]="'/lajoutnotification'">
+                إضافة رسالة
+<!--                {{"NAVBAR.USER.ADD" | translate}}-->
+              </a>
+            </div>
+          </div>
         </div>
 
       </div>

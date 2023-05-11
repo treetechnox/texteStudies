@@ -9,9 +9,11 @@ import {Secteur} from '../Secteur';
 export class SecteurService {
 
   url:string;
+  url2:string;
   //url1:string;
   constructor(private http:HttpClient) {
     this.url = "http://localhost:8083/secteurs/";
+    this.url2 = "http://localhost:8083/";
     //this.url1 = "http://localhost:8083/secteur";
   }
 
@@ -19,6 +21,11 @@ export class SecteurService {
     console.log(this.url);
     // @ts-ignore
     return this.http.get(this.url);
+  }
+  getAllUsersBySecteurs(secterurId:any):Observable<any[]>{
+    console.log(`${this.url2}utilisateurs/secteur/${secterurId}`);
+    // @ts-ignore
+    return this.http.get(`${this.url2}utilisateurs/secteur/${secterurId}`);///
   }
 
   ///topDesc/mouvement_secteur/{texteId}
