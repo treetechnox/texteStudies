@@ -122,6 +122,7 @@ import { MinistereTexteComponent } from './ministere-texte/ministere-texte.compo
 import { AddNotificationComponent } from './add-notification/add-notification.component';
 import {MatBadgeModule} from "@angular/material/badge";
 import { ListNotificationsComponent } from './list-notifications/list-notifications.component';
+import { AutoriseDialogComponent } from './dialogs/autorise-dialog/autorise-dialog.component';
 
 
 
@@ -189,6 +190,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MinistereTexteComponent,
     AddNotificationComponent,
     ListNotificationsComponent,
+    AutoriseDialogComponent,
   ],
     imports: [
         FormsModule,

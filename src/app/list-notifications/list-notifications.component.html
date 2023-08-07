@@ -1,0 +1,65 @@
+<br>
+<div class="jumbotron mycustom-jumbotron"
+     [ngStyle]="{'direction': app.localStorageItem('lge') === 'fr' ? 'ltr' : 'rtl' }">
+  <br>
+  <div class="text-dark" style=" text-align: center"><span class="entete">LA LISTE DES UTILISATEURS</span></div>
+  <br>
+  <button type="submit" mat-raised-button
+          matTooltip="AJOUTER UNE SALLE"
+          class="btn btn-success" (click)="onAddMessageToASpecificUser()">{{ 'LIST-CANDIDATS.AJOUTER-BUTTON' | translate }}</button>
+
+  <br>
+
+  <mat-form-field>
+    <mat-label>Filtre</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. libelle d'un organisme" #input>
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- id Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <!-- libelle fr Column -->
+      <ng-container matColumnDef="sender">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> SENDER </th>
+        <td mat-cell *matCellDef="let element"> {{element.sender?.username}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="recipient">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> RECIPIENT </th>
+        <td mat-cell *matCellDef="let element"> {{element.recipient?.username}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="message">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> MESSAGE </th>
+        <td mat-cell *matCellDef="let element"> {{element.message}} </td>
+      </ng-container>
+      <ng-container matColumnDef="checkedNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> CHECK NUMBER</th>
+        <td mat-cell *matCellDef="let element"> {{element.checkedNumber}} </td>
+      </ng-container>
+      <ng-container matColumnDef="remainingTime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> REMAINING TIME</th>
+        <td mat-cell *matCellDef="let element"> {{element.remainingTime}} </td>
+      </ng-container>
+      <ng-container matColumnDef="createdDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header=""> CREATED DATE </th>
+        <td mat-cell *matCellDef="let element"> {{element.createdDate | date:'short'}} </td>
+      </ng-container>
+
+<!--      -->
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 25, 100]" showFirstLastButtons></mat-paginator>
+  </div>
+
+</div>

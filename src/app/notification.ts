@@ -4,8 +4,11 @@ export class Notification{
    id!:number;
    message!:string;
    isRead!:boolean;
+   expired!:boolean;
    checkedNumber!:number;
-   createdNate!:Date;
+   createdDate!:Date;
    sender!:User;
    recipient!:User;
+    remainingTime!: string;
+
 }

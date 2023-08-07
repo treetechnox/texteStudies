@@ -103,7 +103,6 @@ export class ListMouvementComponent implements OnInit {
     this.dialog.open(AddMouvementComponent, dialogConfig).afterClosed().subscribe(value => {
       this.getMouvementsByTexteId(this.texteId);
     });
-
   }
 
   applyFilter(event: Event) {

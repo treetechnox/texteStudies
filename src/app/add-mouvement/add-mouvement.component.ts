@@ -20,6 +20,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {AppComponent} from '../app.component';
 import {MouvementMinistere} from '../add-projet/add-projet.component';
 import {DatePipe, formatDate, getLocaleDirection} from '@angular/common';
+import {AutoriseDialogComponent} from "../dialogs/autorise-dialog/autorise-dialog.component";
+import {NotificationService} from "../service/notification.service";
 
 @Component({
   selector: 'app-add-mouvement',
@@ -53,6 +55,8 @@ export class AddMouvementComponent implements OnInit {
   phase: Phase = new Phase();
   //phases: Phase[] = [];
 
+  checkedNumber!: number;
+
   phasesWithParent:Phase[]=[];
   phasesWithoutParent:Phase[]=[];
 
@@ -69,6 +73,8 @@ export class AddMouvementComponent implements OnInit {
 
   submitted = false;
 
+  autorised:boolean=false;
+
   date = new Date((new Date().getTime()));
 
   NotEncoursPhase = [10,11,12,13];
@@ -84,6 +90,7 @@ export class AddMouvementComponent implements OnInit {
               private ministereService:MinistereService,
               private texteService:TexteService,
               private mouvementService: MouvementService,
+              private notificationService:NotificationService,
               public authService:AuthenticationService,@Inject(LOCALE_ID) public locale :string,
               private router: Router, private route: ActivatedRoute, private _adapter: DateAdapter<any>,
               private dialog: MatDialog, private _snackBar: MatSnackBar, public app: AppComponent,
@@ -281,6 +288,7 @@ export class AddMouvementComponent implements OnInit {
   getSelectedPhaseWithoutParent(event: any) {
     console.log(event.value);
 
+
     if(event.value && event.value!== undefined){
       this.globalePhase = true
       this.phaseService.getAllPhasesWithParent(event.value.id).subscribe(value => {
@@ -346,5 +354,33 @@ export class AddMouvementComponent implements OnInit {
 
   getTexte() {
     console.log(this.texte);
+  }
+
+
+  openDialogAutorised(): void {
+    const dialogRef = this.dialog.open(AutoriseDialogComponent, {
+      /*data: { checkedNumber: this.animal},*/
+      height: '400px',
+      width: '600px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.checkedNumber = result;
+      //
+      this.notificationService
+        .getNotificationByRecipientId(this.authService.userAuthenticated?.id)
+        .subscribe(value => {
+          console.log(value);
+          if (value.checkedNumber == this.checkedNumber && !value.expired){
+            console.log('very good');
+
+            this.autorised = true;
+          }else{
+            console.log('faillure');
+          }
+      })
+      console.log(this.checkedNumber,this.autorised)
+    });
   }
 }

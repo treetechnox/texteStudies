@@ -78,6 +78,7 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
   secondFormGroup!: FormGroup;
 
   selsect:Secteur = this.authService.userAuthenticated!.secteur;
+
  sele_phase:Phase = {id: 1, libelleAr: 'بدء المشروع', libelleFr: 'INITIATION DE PROJET', details: ''};
 
 
@@ -127,6 +128,9 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
     this.sele_phase = {id: 1, libelleAr: 'بدء المشروع', libelleFr: 'INITIATION DE PROJET', details: ''};
     this.secteur = this.authService.userAuthenticated!.secteur;
     this.mouvement.datePhase = new Date();
+    if (!this.isAdmin())
+      this.mouvement.secteur = this.selsect;
+
     console.log(this.mouvement.datePhase,this.toFormattedDate(new Date()))
 
   }
@@ -199,7 +203,7 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
     this.ministereMultiFilterCtrl.valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
-        this.filterBanksMulti();
+        this.filterMinistereMulti();
       });
 
   }/** END OF TH ngOnInit() */
@@ -229,7 +233,7 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
       });
   }
 
-  protected filterBanksMulti() {
+  protected filterMinistereMulti() {
     if (!this.ministeres) {
       return;
     }
@@ -414,6 +418,7 @@ export class AddProjetComponent implements OnInit, AfterViewInit, OnDestroy  {
   }
 
   getEvent(f1:any,f2: any) {
+    console.log(this.selsect)
     console.log(f1.valid,f2.valid)
   }
 }

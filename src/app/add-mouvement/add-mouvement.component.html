@@ -44,23 +44,37 @@
     </div>
     <div class="row">
       <div class="col"[ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
-        <mat-form-field class="example-full-width">
-          <mat-label>{{ 'ADD-TEXTE.GLOBAL-PHASE' | translate }}</mat-label>
-          <mat-select required name="phase"
-                      (selectionChange)="getSelectedPhaseWithoutParent($event)"
-                      formControlName="etatGlobalMouvementCtrl"
-          ><!--(ngModelChange)="makeNominat(mouvement.typeMouvement)"--><!-- [(ngModel)]="mouvement.phase"-->
-            <mat-option></mat-option>
-            <mat-option *ngFor="let phs of phasesWithoutParent; let i=index" [value]="phs">
-              <div [ngSwitch]="app.localStorageItem('lge')">
-                <div *ngSwitchCase="'ar'" class="myfilterar">{{phs?.libelleAr}}</div>
-                <div *ngSwitchCase="'fr'" class="myfilterfr">{{phs?.libelleFr}}</div>
-                <div *ngSwitchDefault></div>
+        <div>
+          <mat-form-field class="example-full-width">
+            <mat-label>{{ 'ADD-TEXTE.GLOBAL-PHASE' | translate }}</mat-label>
+            <mat-select required name="phase"
+                        (selectionChange)="getSelectedPhaseWithoutParent($event)"
+                        formControlName="etatGlobalMouvementCtrl"
+            ><!--(ngModelChange)="makeNominat(mouvement.typeMouvement)"--><!-- [(ngModel)]="mouvement.phase"-->
+              <mat-option></mat-option>
+              <div *ngIf="!isAdmin() && !autorised ; else notAdmin">
+                <mat-option><button mat-raised-button (click)="openDialogAutorised()">AUTORISE?</button></mat-option>
+                <mat-option [value]="phasesWithoutParent[0]">
+                  <div [ngSwitch]="app.localStorageItem('lge')">
+                    <div *ngSwitchCase="'ar'" class="myfilterar">{{phasesWithoutParent[0]?.libelleAr}}</div>
+                    <div *ngSwitchCase="'fr'" class="myfilterfr">{{phasesWithoutParent[0]?.libelleFr}}</div>
+                    <div *ngSwitchDefault></div>
+                  </div>
+                </mat-option>
               </div>
-            </mat-option>
-          </mat-select>
-          <mat-error>{{ 'ADD-TEXTE.ERROR-GLOBAL-PHASE' | translate }}</mat-error>
-        </mat-form-field>
+              <ng-template #notAdmin>
+                <mat-option *ngFor="let phs of phasesWithoutParent; let i=index" [value]="phs">
+                  <div [ngSwitch]="app.localStorageItem('lge')">
+                    <div *ngSwitchCase="'ar'" class="myfilterar">{{phs?.libelleAr}}</div>
+                    <div *ngSwitchCase="'fr'" class="myfilterfr">{{phs?.libelleFr}}</div>
+                    <div *ngSwitchDefault></div>
+                  </div>
+                </mat-option>
+              </ng-template>
+            </mat-select>
+            <mat-error>{{ 'ADD-TEXTE.ERROR-GLOBAL-PHASE' | translate }}</mat-error>
+          </mat-form-field>
+        </div>
       </div>
       <div class="col"[ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
         <mat-form-field class="example-full-width">

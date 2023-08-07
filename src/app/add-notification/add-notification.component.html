@@ -1,0 +1,116 @@
+<br>
+<div align=" {{app.localStorageItem('lge') === 'fr' ? 'left' : 'right'}}"
+     class="add-border jumbotron mycustom-jumbotron">
+
+<!--  <button mat-raised-button-->
+<!--          matTooltip="RETOUR"-->
+<!--          class="btn btn-dark"-->
+<!--          [routerLink]="'/lesphases'">-->
+<!--    <i class="fa fa-hand-o-left fa-2x"></i>-->
+<!--  </button>-->
+  <div class="container">
+
+    <div [hidden]="submitted">
+      <br>
+      <form
+        [formGroup]="myformGroup"
+        [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
+        <div class="entete" style="font-size:1.5rem;text-align: center">
+          <span>{{'ADD-NOTIFICATION.TITLE'|translate}}</span>
+        </div>
+
+        <div class="row">
+          <br>
+          <span style="font-size: 1.2rem">{{'ADD-NOTIFICATION.SEND'|translate}}</span>
+          <div class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
+            <mat-form-field class="example-full-width"><!-- -->
+              <mat-label>{{ 'ADD-TEXTE.SECTEUR' | translate }}</mat-label>
+              <mat-select [disabled]="!authService.isAdmin()"
+                          (selectionChange)="setUsers($event.value)"
+                          required name="secteur"
+                          [(ngModel)]="selsect"
+                          formControlName="secteurCtrl">
+                <mat-option></mat-option>
+                <mat-option *ngFor="let sct of secteurs; let i=index" [value]="sct">
+                  <div [ngSwitch]="app.localStorageItem('lge')">
+                    <div *ngSwitchCase="'ar'" class="myfilterar">{{sct?.libelleAr}}</div>
+                    <div *ngSwitchCase="'fr'" class="myfilterfr">{{sct?.libelleFr}}</div>
+                    <div *ngSwitchDefault></div>
+                  </div>
+                </mat-option>
+              </mat-select>
+              <mat-error>{{ 'ADD-TEXTE.ERROR-SECTEUR' | translate }}</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col">
+            <mat-form-field class="example-full-width"><!--  -->
+              <mat-label>{{ 'LIST-USERS.CARD-HEADER' | translate }}</mat-label>
+              <mat-select [disabled]="!authService.isAdmin()" required name="secteur" [(ngModel)]="user"
+                          formControlName="userCtrl">
+                <mat-option></mat-option>
+                <mat-option *ngFor="let usr of users; let i=index" [value]="usr">
+                  {{usr.username}}
+
+                </mat-option>
+              </mat-select>
+              <mat-error>{{ 'ADD-TEXTE.ERROR-SECTEUR' | translate }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col" [ngClass]="app.localStorageItem('lge') === 'fr' ? 'ltr' :'rtl'">
+
+            <div class="form-group" dir="rtl">
+              <mat-form-field class="example-full-width" >
+                <!--<mat-label for="organisme2"></mat-label>-->
+                <textarea matInput type="text"
+                       placeholder="{{'ADD-NOTIFICATION.MESSAGE'|translate}}"
+                       id="message" required="required"
+                          formControlName="messageCtrl"
+                       [(ngModel)]="notification.message" name="message"><!--[ngModelOptions]="{standalone: true}"-->
+                </textarea>
+
+                  <!--class="form-control" --><!--{{'ADD-FONCTION.LIBELLE-AR'|translate}}-->
+              </mat-form-field>
+            </div>
+<!--            <mat-form-field class="example-full-width">-->
+<!--              &lt;!&ndash;<mat-label for="organisme"></mat-label>&ndash;&gt;-->
+<!--              <input matInput type="text"-->
+<!--                     placeholder="{{'ADD-PHASE.LIBELLEFR'|translate}}"-->
+<!--                     [ngModelOptions]="{standalone: true}"-->
+<!--                     id="organisme" required="required" [(ngModel)]="phase.libelleFr"-->
+<!--                     name="organisme" (change)="verifierFonction(phase.libelleFr)">&lt;!&ndash;{{'ADD-FONCTION.LIBELLE-FR'|translate}}&ndash;&gt;&lt;!&ndash;&ndash;&gt;&lt;!&ndash;class="form-control" &ndash;&gt;-->
+<!--            </mat-form-field>-->
+          </div>
+        </div>
+
+        <div *ngIf="!fonctionExist; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>
+          <div class="form-group" >
+            <button type="submit" class="btn btn-success" [disabled]="!user.username || !notification.message "
+                    (click)="onSubmit()" >{{'ADD-FONCTION.BUTTON'|translate}}</button>
+          </div>
+        </ng-template>
+        <ng-template #elseBlock>
+          <div class="alert alert-danger" role="alert">
+            {{'ADD-FONCTION.FONCTION-ERROR'| translate}}
+          </div>
+        </ng-template>
+
+
+
+
+        <!--<button type="submit" class="btn btn-success">AJOUTER MOUVEMENT</button>-->
+      </form>
+    </div>
+
+    <div [hidden]="!submitted">
+      <h4>{{'GENERAL.SUCCES'|translate}}</h4>
+      <!-- <button class="btn btn-success" (click)="newEmployee()">Add</button> -->
+    </div>
+
+  </div>
+</div>
+
+

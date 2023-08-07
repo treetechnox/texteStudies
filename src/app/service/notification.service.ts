@@ -23,6 +23,11 @@ export class NotificationService {
     return this.http.get(`${this.url}`)
   }
 
+  getNotificationByRecipientId(recipientId:any):Observable<any>{
+    console.log(`${this.url}topuser/${recipientId}`);
+    return this.http.get(`${this.url}topuser/${recipientId}`);
+  }
+
   saveNotification(rid: number, sid: number | undefined, notification: Notification):Observable<any>{
     console.log(rid, sid, notification);
     return this.http.post(`${this.url}${rid}/${sid}`,notification);
